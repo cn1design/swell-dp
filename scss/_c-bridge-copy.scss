@@ -1,0 +1,178 @@
+/*
+
+ ブリッジコピー (bridge-copy)
+
+*/
+
+/* ===========================================
+ 波形付き全幅白背景
+=========================================== */
+.dp-bridge-copy-simple {
+    position: relative;
+    // l-container を突破して全幅に広げる
+    text-align: center;
+    z-index: 1;
+
+    // 上部の三角形（セクション背景→白背景の遷移）
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100vw;
+        height: 200px;
+        transform: translateX(-50%);
+    }
+    &::before {
+        background-color: color-mix(in srgb, var(--color_main) 5%, white);
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        z-index: -1;
+
+        @include mq(bp) {
+            height: 50%;
+        }
+    }
+
+    &::after {
+        background-color: #ffffff;
+        z-index: -2;
+
+        @include mq(bp) {
+            height: 100%;
+        }
+    }
+
+    p {
+        display: inline-block;
+        margin: 0;
+        line-height: var(--dp-line-height-medium);
+        letter-spacing: var(--dp-letter-spacing-text);
+        font-size: var(--dp-font-size-title-pc);
+        font-weight: var(--dp-font-weight-heading);
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-title-sp);
+        }
+
+        // ウェーブ下線（最後の p のみ）
+        &:last-child::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 6px;
+            margin: 0 auto;
+            // SVGのdata:URIはCSS変数非対応のため、Figmaの--color_textに対応する値をハードコード
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='8'%3E%3Cpath d='M0 4 Q10 0 20 4 Q30 8 40 4 Q50 0 60 4 Q70 8 80 4' fill='none' stroke='%232d2d2d' stroke-width='4'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+
+            @include mq(sp) {
+                content: none;
+            }
+        }
+    }
+}
+
+/* ===========================================
+ ボーダー＋三角下向き矢印
+=========================================== */
+.dp-bridge-copy {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    p {
+        position: relative;
+        margin: 0;
+        padding: var(--dp-space-element-pc) var(--dp-space-element-pc);
+        background-color: var(--color_main);
+        color: #ffffff;
+        border: 4px solid var(--color_main);
+        border-radius: var(--dp-radius);
+        line-height: var(--dp-line-height-small);
+        text-align: center;
+        letter-spacing: var(--dp-letter-spacing-text);
+        font-size: var(--dp-font-size-title-pc);
+        font-weight: 600;
+
+        @include mq(tb) {
+            padding: var(--dp-space-element-sp) var(--dp-space-inner-pc);
+        }
+
+        @include mq(sp) {
+            letter-spacing: var(--dp-letter-spacing-text);
+            font-size: var(--dp-font-size-title-sp);
+        }
+    }
+
+    // 下向き三角矢印（::afterはborderプロパティで三角形を形成するため例外的に使用）
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -32px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 48px solid transparent;
+        border-right: 48px solid transparent;
+        border-top: 32px solid var(--color_main);
+
+        @include mq(sp) {
+            bottom: -24px;
+            border-left: 32px solid transparent;
+            border-right: 32px solid transparent;
+            border-top: 24px solid var(--color_main);
+        }
+    }
+}
+
+/* ===========================================
+ ドロップシャドウ＋縦線
+=========================================== */
+.dp-bridge-copy--a {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--dp-space-block-pc) var(--dp-space-element-pc);
+    background-color: var(--color_bg);
+    border-radius: var(--dp-radius);
+    box-shadow: var(--dp-shadow);
+    text-align: center;
+    z-index: 2;
+
+    p {
+        font-size: var(--dp-font-size-title-pc);
+        font-weight: var(--dp-font-weight-heading);
+        font-feature-settings: "palt" on;
+        line-height: var(--dp-line-height-small);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        margin: 0;
+
+        @include mq(tb) {
+            font-size: var(--dp-font-size-title-sp);
+        }
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+
+    @include mq(sp) {
+        padding: var(--dp-space-element-sp) calc(var(--dp-space-element-sp) / 2);
+    }
+
+    // 下部に伸びる縦線（|）
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: calc(var(--dp-space-block-pc) * -1);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: var(--dp-space-block-pc);
+        background-color: var(--color_text);
+    }
+}

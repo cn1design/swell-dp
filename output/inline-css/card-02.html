@@ -1,0 +1,107 @@
+<style>
+  /* -------------------------------------------
+   * card-02: カウンター右上＋画像＋見出し＋説明
+   * ------------------------------------------- */
+  .dp-card-counter .swell-block-columns__inner {
+    counter-reset: card-counter;
+  }
+  .dp-card-counter .swell-block-column {
+    counter-increment: card-counter;
+  }
+  .dp-card-counter .swell-block-column::before {
+    content: counter(card-counter, decimal-leading-zero);
+  }
+  
+  .dp-card-sticky-note {
+    position: relative;
+  }
+  .dp-card-sticky-note::before {
+    position: absolute;
+    content: "";
+    top: var(--dp-space-block-pc);
+    left: var(--dp-space-block-pc);
+    transform: none;
+    width: calc(100% + (100vw - 100%) / 2);
+    height: 100%;
+    background-color: var(--color_main_thin);
+    border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+    z-index: -1;
+  }
+  @media screen and (max-width: 768px) {
+    .dp-card-sticky-note::before {
+      top: var(--dp-space-inner-pc);
+      left: var(--dp-space-inner-pc);
+      width: calc(100% + (100vw - 100%) / 2);
+      height: 100%;
+    }
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-sticky-note .swell-block-columns__inner {
+      row-gap: var(--dp-space-element-sp);
+    }
+  }
+  .dp-card-sticky-note .swell-block-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 var(--dp-space-element-pc) var(--dp-space-element-pc);
+    background-color: var(--color_bg);
+    border-radius: var(--dp-radius);
+    box-shadow: var(--dp-shadow);
+  }
+  .dp-card-sticky-note .swell-block-column::before {
+    align-self: flex-start;
+    padding-top: var(--dp-space-inner-pc);
+    border-top: calc(var(--dp-border-width) * 2) solid var(--color_main);
+    line-height: 1;
+    letter-spacing: 0;
+    font-family: var(--dp-font-num);
+    font-size: var(--dp-font-size-title-pc);
+    font-weight: var(--dp-font-weight-heading);
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-sticky-note .swell-block-column::before {
+      margin-bottom: 0;
+    }
+  }
+  .dp-card-sticky-note .swell-block-column > :last-child {
+    margin-bottom: 0;
+  }
+  .dp-card-sticky-note .wp-block-image {
+    margin-bottom: var(--dp-space-element-pc);
+    border-radius: 0;
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-sticky-note .wp-block-image {
+      margin-bottom: var(--dp-space-element-sp);
+    }
+  }
+  .dp-card-sticky-note .wp-block-image img {
+    height: 180px;
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-sticky-note .wp-block-image img {
+      height: 120px;
+    }
+  }
+  .dp-card-sticky-note h3 {
+    margin-bottom: var(--dp-space-inner-pc);
+    font-size: var(--dp-font-size-heading-pc);
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-sticky-note h3 {
+      font-size: var(--dp-font-size-heading-sp);
+    }
+  }
+  
+  /* 選ばれる理由セクション用 英語タイトル調整 */
+  .dp-strength-section .en-title {
+    font-family: var(--dp-font-en);
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+  </style>

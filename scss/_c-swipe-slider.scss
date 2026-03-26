@@ -1,0 +1,115 @@
+/*
+
+ 横スワイプスライダー共通ユーティリティ
+ .js-swipe-slider を付与するだけでスライダー化。
+ JS が条件を満たした場合に .is-slider-active を付与し、スライダーが発動する。
+ - PC（> 959px）: カード4枚以上の時のみ発動
+ - タブレット・SP : 枚数問わず常に発動
+ クラスを外す / 条件を満たさない → swell-block-columns のデフォルトグリッドに復帰。
+
+*/
+
+.js-swipe-slider {
+    // ナビゲーションボタン（is-slider-active 時のみ表示）
+    // position: absolute のオーバーレイとして JS が挿入
+    .dp-slider-nav {
+        display: none;
+    }
+
+    .dp-slider-nav__btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--color_bg);
+        border: 1px solid var(--color_text);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+
+        // SWELL アイコンフォントのサイズ調整
+        [class*="icon-"] {
+            font-size: 14px;
+            line-height: 1;
+            display: block;
+        }
+
+        // 端に到達時 → opacity 0.5（disabled は使わない）
+        &.is-edge {
+            opacity: 0.5;
+        }
+
+        &:not(.is-edge):hover {
+            background: var(--color_text);
+            color: var(--color_bg);
+        }
+    }
+
+    .dp-slider-nav__prev { left: 0; }
+    .dp-slider-nav__next { right: 0; }
+
+    // スライダー発動状態（JS が .is-slider-active を付与）
+    &.is-slider-active {
+        position: relative;
+
+        // スクロールコンテナ化
+        // SWELL の flex/wrap/direction を強制上書き
+        .swell-block-columns__inner {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: var(--dp-space-inner-pc);
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            @include mq(sp) {
+                gap: 16px;
+            }
+        }
+
+        // 各カード: 縮まず・スナップ
+        // SP は 1枚 + 次がちら見えする幅
+        .swell-block-column {
+            flex-shrink: 0 !important;
+            scroll-snap-align: start;
+            margin-bottom: 0 !important;
+
+            @include mq(bp) {
+                width: calc(50% - 8px) !important;
+            }
+
+            @include mq(sp) {
+                width: 85% !important;
+            }
+        }
+
+        // ナビオーバーレイ表示
+        // position: absolute + height: 100% でカードエリアに重ねる
+        // nav は out of flow のため .is-slider-active の高さ = カード高さ
+        .dp-slider-nav {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; // クリックをカードに透過
+
+            // ボタンのみクリック受付
+            .dp-slider-nav__btn {
+                pointer-events: all;
+            }
+        }
+    }
+}

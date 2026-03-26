@@ -1,0 +1,179 @@
+/*
+
+ 1日のスケジュール (schedule)
+
+*/
+
+/* ===========================================
+ .dp-schedule-section
+=========================================== */
+.dp-schedule-section {
+
+    // --- タブUI ---
+    .dp-schedule-tabs {
+        > input[type="radio"] {
+            display: none;
+        }
+    }
+
+    .dp-schedule-tabs__nav {
+        display: flex;
+        margin-bottom: var(--dp-space-element-pc);
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-element-sp);
+        }
+
+        label {
+            flex: 1;
+            padding: 1em;
+            text-align: center;
+            cursor: pointer;
+            background-color: var(--dp-color-sub);
+            font-weight: var(--dp-font-weight-heading);
+            letter-spacing: var(--dp-letter-spacing-text);
+            transition: background-color 0.2s, color 0.2s;
+
+            @include mq(sp) {
+                padding: 0.75em 0.5em;
+                font-size: var(--dp-font-size-explanation);
+            }
+        }
+    }
+
+    // CSS-only タブ切り替え（アクティブ状態）
+    #dp-tab-am:checked ~ .dp-schedule-tabs__nav label[for="dp-tab-am"],
+    #dp-tab-pm:checked ~ .dp-schedule-tabs__nav label[for="dp-tab-pm"],
+    #dp-tab-full:checked ~ .dp-schedule-tabs__nav label[for="dp-tab-full"] {
+        background-color: var(--color_text);
+        color: var(--color_bg);
+    }
+
+    // パネルのデフォルト（非表示）
+    .dp-schedule-panel {
+        display: none;
+    }
+
+    // アクティブパネルの表示
+    #dp-tab-am:checked ~ .dp-schedule-panel--am,
+    #dp-tab-pm:checked ~ .dp-schedule-panel--pm,
+    #dp-tab-full:checked ~ .dp-schedule-panel--full {
+        display: block;
+    }
+
+    // --- タイムライン ---
+    .dp-schedule-list {
+        position: relative;
+        margin: 0;
+
+        // 縦線
+        &::before {
+            content: "";
+            position: absolute;
+            top: 1.5em;
+            bottom: 0;
+            left: 120px;
+            width: 1px;
+            background-color: var(--color_text);
+
+            @include mq(sp) {
+                left: 72px;
+            }
+        }
+    }
+
+    .dp-schedule-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        padding-bottom: var(--dp-space-element-pc);
+        position: relative;
+
+        // ドット（縦線上のマーカー）
+        &::before {
+            content: "";
+            position: absolute;
+            left: 120px;
+            top: 0.5em;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--color_text);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+
+        @include mq(sp) {
+            grid-template-columns: 72px 1fr;
+            padding-bottom: var(--dp-space-element-sp);
+
+            &::before {
+                left: 72px;
+            }
+        }
+    }
+
+    .dp-schedule-row__time {
+        font-family: var(--dp-font-num);
+        font-size: var(--dp-font-size-heading-pc);
+        font-weight: var(--dp-font-weight-heading);
+        text-align: right;
+        padding-right: 1.5rem;
+        line-height: 1.4;
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+            padding-right: 1rem;
+        }
+    }
+
+    .dp-schedule-row__body {
+        padding-left: 1.5rem;
+
+        @include mq(sp) {
+            padding-left: 1rem;
+        }
+    }
+
+    .dp-schedule-row__title {
+        font-size: var(--dp-font-size-heading-pc);
+        font-weight: var(--dp-font-weight-heading);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        line-height: var(--dp-line-height-small);
+        margin-bottom: 0.5em;
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+
+    .dp-schedule-row__text {
+        font-size: var(--dp-font-size-explanation);
+        line-height: var(--dp-line-height-medium);
+        letter-spacing: var(--dp-letter-spacing-text);
+        margin-bottom: 0.5em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .dp-schedule-row__img {
+        margin-top: 1em;
+        width: 60%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        @include mq(sp) {
+            width: 100%;
+        }
+    }
+}

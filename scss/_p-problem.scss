@@ -1,0 +1,88 @@
+/*
+
+ よくある悩みセクション (problem)
+ 【2カラム】左テキスト＋右6枚グリッド＋吹き出し
+
+*/
+
+/* ===========================================
+ .dp-problem-section
+=========================================== */
+.dp-problem-section {
+}
+
+.dp-problem-section-band {
+    position: relative;
+
+    // 背景帯 グレー
+    &::before {
+        content: "";
+        position: absolute;
+        top: 144px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(100vw, 1440px);
+        height: calc(50% + 128px);
+        background-color: var(--color_main_thin);
+        z-index: -1;
+
+        @include mq(ipad) {
+            top: 0;
+            height: 87%;
+        }
+
+        @include mq(sp) {
+            height: 90%;
+        }
+    }
+    .swell-block-fullWide__inner 
+        // l-container直下の最初のwp-block-groupのみ
+        > .wp-block-group:first-child {
+        position: relative;
+        // groupブロックのためdisplayは記述不要
+        align-items: center;
+        gap: var(--dp-space-element-pc);
+        margin-bottom: var(--dp-space-block-pc);
+
+        @include mq(ipad) {
+            flex-direction: column;
+            gap: var(--dp-space-element-sp);
+        }
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-block-sp);
+        }
+
+        // テキストカラム（4割）
+        > :first-child {
+            flex: 0 0 40%;
+            min-width: 0;
+            text-align: left;
+
+            @include mq(ipad) {
+                margin-top: 0;
+                text-align: center;
+            }
+
+            @include mq(sp) {
+                text-align: left;
+            }
+
+            h2 {
+                line-height: 1.4;
+            }
+        }
+
+        // コンテンツカラム（6割）
+        > :last-child {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+}
+
+.dp-problem-section-bottom-nospace {
+    margin-bottom: 0;
+    padding-bottom: 0 !important;
+    background-color: color-mix(in srgb, var(--color_main) 5%, white);
+}

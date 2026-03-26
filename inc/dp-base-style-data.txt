@@ -1,0 +1,444 @@
+<!-- wp:html -->
+<style>
+/* =========================================================
+  ＼ デザインを綺麗に表示するための「おまじない」です ／
+   このブロックは削除せず、ページの先頭に置いておいてください。
+   （中身の文字や数字は変更しなくて大丈夫です！）
+========================================================= */
+/* -------------------------------------------
+ * 1. 共通変数定義（デザインの一括管理）
+ * ------------------------------------------- */
+:root {
+  /* フォント */
+  --dp-font-en: "Roboto", sans-serif;
+  --dp-font-num: "Roboto Condensed", sans-serif;
+  --dp-font-general: "Inter", sans-serif;
+  --dp-font-jp-maru: "Zen Maru Gothic", sans-serif;
+  --dp-font-weight-heading: 500;
+
+  /* フォントサイズ */
+  --dp-font-size-page-title-pc: 48px;
+  --dp-font-size-page-title-sp: 36px;
+  --dp-font-size-title-pc: 40px;
+  --dp-font-size-title-sp: 32px;
+  --dp-font-size-heading-pc: 24px;
+  --dp-font-size-heading-sp: 20px;
+  --dp-font-size-summary: 18px;
+  --dp-font-size-explanation: 14px;
+
+  /* 行間・字間 */
+  --dp-letter-spacing-heading: 0.125em;
+  --dp-letter-spacing-text: 0.03em;
+  --dp-line-height-large: 2;
+  --dp-line-height-medium: 1.6;
+  --dp-line-height-small: 1.4;
+
+  /* 余白 (大・中・小) */
+  --dp-space-block-pc: 4rem;
+  --dp-space-block-sp: 3rem;
+  --dp-space-element-pc: 2.5rem;
+  --dp-space-element-sp: 1.5rem;
+  --dp-space-inner-pc: 1rem;
+  --dp-space-inner-sp: 0.5rem;
+
+  /* 装飾・カラー */
+  --dp-radius: 4px;
+  --dp-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --dp-color-sub: #eeeeee;
+  --dp-border-width: 3px;
+}
+
+/* -------------------------------------------
+ * 2. 厳格なスコープ管理 (SWELLリセット & 汎用クラス)
+ * ------------------------------------------- */
+/* 見出しの標準装飾リセット */
+.dp-wrap h2::before,
+.dp-wrap h2::after,
+.dp-wrap h3::before,
+.dp-wrap h3::after,
+.post_content .dp-wrap h2::before,
+.post_content .dp-wrap h2::after,
+.post_content .dp-wrap h3::before,
+.post_content .dp-wrap h3::after {
+  position: unset;
+  content: none;
+  border: none;
+  background: transparent;
+  width: auto;
+  height: auto;
+  inset: unset;
+}
+
+.dp-wrap h2,
+.dp-wrap h3,
+.post_content .dp-wrap h2,
+.post_content .dp-wrap h3 {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-top: 0;
+}
+
+/* 画像クリック拡大(モーダル)の無効化（リンク付きは除く） */
+.dp-wrap .wp-block-image img,
+.post_content .dp-wrap .wp-block-image img {
+  pointer-events: none;
+}
+.dp-wrap .wp-block-image:has(a) img,
+.post_content .dp-wrap .wp-block-image:has(a) img {
+  pointer-events: auto;
+}
+
+@media screen and (max-width: 959px) {
+  .dp-wrap .wp-block-image img,
+  .post_content .dp-wrap .wp-block-image img {
+    max-width: 500px;
+    width: 100%;
+  }
+}
+
+/* 本文段落 */
+.dp-wrap p,
+.post_content .dp-wrap p {
+  line-height: 1.8;
+  letter-spacing: var(--dp-letter-spacing-text);
+}
+
+/* 汎用テキストクラス */
+.dp-wrap .c-lead,
+.post_content .dp-wrap .c-lead {
+  letter-spacing: var(--dp-letter-spacing-heading);
+  font-size: clamp(18px, 1.2vw, 20px);
+}
+
+.dp-wrap .c-copy,
+.post_content .dp-wrap .c-copy {
+  margin-bottom: calc(var(--dp-space-inner-pc) * 1.25);
+  line-height: var(--dp-line-height-medium);
+  font-size: clamp(18px, 1.2vw, 20px);
+  font-weight: var(--dp-font-weight-heading);
+}
+
+.dp-wrap .c-summary,
+.post_content .dp-wrap .c-summary {
+  line-height: var(--dp-line-height-large);
+  font-size: clamp(16px, 1.2vw, 18px);
+  margin-bottom: var(--dp-space-element-pc);
+}
+
+.dp-wrap .c-pricing-number,
+.post_content .dp-wrap .c-pricing-number {
+  line-height: 1;
+  font-family: var(--dp-font-num);
+  font-weight: var(--dp-font-weight-heading);
+}
+
+.dp-wrap .c-pricing-number span,
+.post_content .dp-wrap .c-pricing-number span {
+  font-feature-settings: "palt" on;
+}
+
+.dp-wrap .c-pricing-number span:first-child,
+.post_content .dp-wrap .c-pricing-number span:first-child {
+  margin-right: 3px;
+}
+
+.dp-wrap .c-term,
+.post_content .dp-wrap .c-term {
+  display: inline-block;
+  max-width: 240px;
+  width: 100%;
+  margin-bottom: calc(var(--dp-space-element-pc) * 0.6);
+  padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-pc);
+  background-color: var(--color_text);
+  color: var(--color_bg);
+  border-radius: calc(var(--dp-radius) / 2);
+  font-weight: var(--dp-font-weight-heading);
+}
+
+.dp-wrap .c-annotation,
+.post_content .dp-wrap .c-annotation {
+  text-align: center;
+  font-size: var(--dp-font-size-explanation);
+}
+
+/* 汎用リストクラス (ul.-list-flex) */
+.dp-wrap ul.-list-flex,
+.post_content .dp-wrap ul.-list-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-left: 0 !important;
+  gap: var(--dp-space-element-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-wrap ul.-list-flex,
+  .post_content .dp-wrap ul.-list-flex {
+    gap: var(--dp-space-element-sp);
+  }
+}
+.dp-wrap ul.-list-flex li,
+.post_content .dp-wrap ul.-list-flex li {
+  list-style: none;
+}
+
+/* 横並び キーワードリスト */
+.dp-wrap ul.-list-flex.list-keyword,
+.post_content .dp-wrap ul.-list-flex.list-keyword {
+  gap: var(--dp-space-inner-pc);
+  margin-bottom: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-wrap ul.-list-flex.list-keyword,
+  .post_content .dp-wrap ul.-list-flex.list-keyword {
+    gap: var(--dp-space-inner-sp);
+  }
+}
+.dp-wrap ul.-list-flex.list-keyword li,
+.post_content .dp-wrap ul.-list-flex.list-keyword li {
+  list-style: none;
+  padding: var(--dp-space-inner-sp) var(--dp-space-inner-pc);
+  background-color: #ffffff;
+  border-radius: var(--dp-radius);
+}
+@media screen and (max-width: 599px) {
+  .dp-wrap ul.-list-flex.list-keyword li,
+  .post_content .dp-wrap ul.-list-flex.list-keyword li {
+    padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-sp);
+  }
+}
+
+/* 横並び ハッシュタグ 余白多め */
+.dp-wrap ul.-list-flex.list-hashtag,
+.post_content .dp-wrap ul.-list-flex.list-hashtag {
+  justify-content: center;
+  gap: var(--dp-space-inner-pc) var(--dp-space-element-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-wrap ul.-list-flex.list-hashtag,
+  .post_content .dp-wrap ul.-list-flex.list-hashtag {
+    flex-direction: column;
+    gap: var(--dp-space-inner-sp);
+  }
+}
+.dp-wrap ul.-list-flex.list-hashtag li,
+.post_content .dp-wrap ul.-list-flex.list-hashtag li {
+  font-size: 1.125rem;
+}
+@media screen and (max-width: 599px) {
+  .dp-wrap ul.-list-flex.list-hashtag li,
+  .post_content .dp-wrap ul.-list-flex.list-hashtag li {
+    font-size: inherit;
+  }
+}
+.dp-wrap ul.-list-flex.list-hashtag li::before,
+.post_content .dp-wrap ul.-list-flex.list-hashtag li::before {
+  content: "＃";
+  left: 0;
+}
+
+/* 表示切替ユーティリティ */
+.-sp {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .-sp {
+    display: block;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .-pc {
+    display: none;
+  }
+  .dp-wrap .c-annotation,
+  .post_content .dp-wrap .c-annotation {
+    text-align: left;
+  }
+  .dp-wrap .c-lead,
+  .post_content .dp-wrap .c-lead {
+    letter-spacing: var(--dp-letter-spacing-text);
+  }
+  .dp-wrap .c-pricing-number,
+  .post_content .dp-wrap .c-pricing-number {
+    margin-bottom: var(--dp-space-inner-sp);
+  }
+  .dp-wrap .c-term,
+  .post_content .dp-wrap .c-term {
+    margin-bottom: calc(var(--dp-space-element-sp) * 0.6);
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .dp-wrap .c-summary,
+  .post_content .dp-wrap .c-summary {
+    margin-bottom: var(--dp-space-element-sp);
+    line-height: var(--dp-line-height-medium);
+    text-align: left;
+  }
+}
+
+/* -------------------------------------------
+ * 3. セクションタイトル共通設定 (.dp-section-title)
+ * ------------------------------------------- */
+/* デフォルト */
+.dp-section-title {
+  margin-bottom: var(--dp-space-element-pc);
+  text-align: center;
+}
+
+.dp-section-title h1 {
+  margin-bottom: var(--dp-space-inner-pc);
+  color: var(--color_text);
+  letter-spacing: var(--dp-letter-spacing-heading);
+  font-size: var(--dp-font-size-page-title-pc);
+  font-weight: var(--dp-font-weight-heading);
+}
+
+.dp-section-title h2 {
+  margin-bottom: var(--dp-space-inner-pc);
+  color: var(--color_text);
+  letter-spacing: var(--dp-letter-spacing-heading);
+  font-size: var(--dp-font-size-title-pc);
+  font-weight: var(--dp-font-weight-heading);
+}
+
+.dp-section-title span {
+  display: inline-block;
+}
+
+.dp-section-title .swl-bg-color {
+  padding: 0 8px 0 clamp(4px, 1.2vw, 10px);
+  border-radius: var(--dp-radius);
+  font-size: 90%;
+  font-family: var(--dp-font-num);
+}
+
+.dp-section-title .en-title {
+  margin-bottom: var(--dp-space-inner-sp);
+  letter-spacing: var(--dp-letter-spacing-heading);
+  font-family: var(--dp-font-en);
+}
+
+/* パターンA: 日本語大＋英語小 */
+.dp-section-title--a h1,
+.dp-section-title--a h2 {
+  font-weight: 600;
+}
+.dp-section-title--a h2 span {
+  line-height: 1;
+}
+
+/* パターンB: 英語大＋日本語小 */
+.dp-section-title--b .en-title {
+  line-height: 1.4;
+  font-weight: 300;
+  font-size: calc(var(--dp-font-size-title-pc) * 1.5);
+}
+.dp-section-title--b h2 {
+  font-weight: 400;
+}
+
+/* パターンC: 左寄せ＋サブタイトルライン */
+.dp-section-title--c {
+  text-align: left;
+}
+.dp-section-title--c .en-title {
+  margin-bottom: 32px;
+  font-size: 20px;
+  font-family: var(--dp-font-en);
+}
+.dp-section-title--c .en-title::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 3px;
+  background: var(--color_text);
+  margin-top: 16px;
+}
+
+/* タイトル レスポンシブ */
+@media screen and (max-width: 599px) {
+  .dp-section-title {
+    justify-content: center;
+    margin-bottom: var(--dp-space-element-sp);
+  }
+  .dp-section-title h1 {
+    line-height: 1.4;
+    letter-spacing: var(--dp-letter-spacing-text);
+    font-size: var(--dp-font-size-page-title-sp);
+  }
+  .dp-section-title h2 {
+    letter-spacing: var(--dp-letter-spacing-text);
+    font-size: var(--dp-font-size-title-sp);
+  }
+  .dp-section-title .en-title {
+    letter-spacing: var(--dp-letter-spacing-text);
+    margin-bottom: var(--dp-space-inner-sp);
+    font-size: 20px;
+  }
+  .dp-section-title--a h2 span {
+    font-size: var(--dp-font-size-heading-pc) !important;
+  }
+  .dp-section-title--b .en-title {
+    font-size: calc(var(--dp-font-size-title-sp) * 1.25);
+  }
+}
+
+/* -------------------------------------------
+ * 4. ボタン共通設定 (.dp-button / .wp-block-buttons)
+ * ------------------------------------------- */
+/* SWELL独自ボタン 共通スタイル */
+.dp-button {
+  margin-bottom: 0;
+}
+.dp-button .swell-block-button__link {
+  min-width: 300px;
+  font-size: var(--dp-font-size-summary);
+  font-weight: var(--dp-font-weight-heading);
+}
+@media screen and (max-width: 599px) {
+  .dp-button .swell-block-button__link {
+    width: 100%;
+  }
+}
+
+/* 角丸レクタングルボタン */
+.button-rectangle .swell-block-button__link {
+  border-radius: var(--dp-radius);
+}
+
+/* 大きめボタン */
+.button-large .swell-block-button__link {
+  padding: var(--dp-space-element-sp) var(--dp-space-element-pc);
+  font-size: var(--dp-font-size-heading-pc);
+  font-weight: var(--dp-font-weight-heading);
+}
+@media screen and (max-width: 599px) {
+  .button-large .swell-block-button__link {
+    padding: var(--dp-space-element-sp) var(--dp-space-inner-pc);
+    font-size: var(--dp-font-size-summary);
+    font-weight: 600;
+  }
+}
+
+/* 背景白抜きボタン */
+.button-white .swell-block-button__link {
+  background-color: var(--color_bg);
+  color: var(--color_main) !important;
+}
+
+/* WP標準ボタン */
+.wp-block-buttons.dp-button-normal {
+  margin-bottom: 0;
+}
+@media screen and (max-width: 599px) {
+  .wp-block-buttons.dp-button-normal {
+    justify-content: center;
+  }
+  .wp-block-buttons.dp-button-normal a {
+    width: 100%;
+  }
+}
+</style>
+<!-- /wp:html -->

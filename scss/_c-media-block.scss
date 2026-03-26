@@ -1,0 +1,587 @@
+/*
+
+ メディアブロック (media-block)
+
+*/
+
+/* ===========================================
+メディア＋テキストセクション
+=========================================== */
+.dp-media-text-section {
+    // --- SP専用画像（セクション直下） ---
+    .swell-block-fullWide__inner > .sp_only {
+        img {
+            border-radius: var(--dp-radius);
+        }
+    }
+
+    // --- SP専用画像（セクション直下） ---
+    .wp-block-image.sp_only {
+        margin-bottom: var(--dp-space-block-sp);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    p,
+    li,
+    .wp-block-list {
+        letter-spacing: var(--dp-letter-spacing-text);
+    }
+    // --- セクションタイトル ---
+    .dp-section-title {
+        margin-bottom: var(--dp-space-element-pc);
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-element-sp);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 0;
+        }
+    }
+
+    // サマリー（セクションタイトル直後の段落）
+    .p-summary {
+        line-height: var(--dp-line-height-large);
+        margin-bottom: var(--dp-space-element-pc);
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-element-sp);
+        }
+    }
+
+    // --- アイコン + 見出し + テキスト（3カラム） ---
+    .card-list-icon-heading-text {
+        margin-bottom: var(--dp-space-element-pc);
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-element-sp);
+        }
+
+        .swell-block-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .wp-block-image {
+            margin-bottom: 0.75em;
+
+            img {
+                width: 3.5em;
+                height: 3.5em;
+                object-fit: contain;
+            }
+        }
+
+        .swell-block-column > p:first-of-type {
+            font-size: 1.25em;
+            font-weight: var(--dp-font-weight-heading);
+            font-family: var(--dp-font-num);
+            line-height: var(--dp-line-height-small);
+            margin-bottom: 0.25em;
+        }
+
+        .swell-block-column > p:last-of-type {
+            font-size: 0.8125rem;
+        }
+    }
+} // /.dp-media-text-section
+
+/* --- キャプションボックス --- */
+.cap_box.caption-sub-color {
+    --capbox_color: var(--color_text);
+
+    .cap_box_ttl {
+        top: 0;
+        left: var(--dp-space-element-pc);
+        padding: var(--dp-space-inner-pc) calc(var(--dp-space-inner-pc) * 2);
+        background-color: var(--color_main);
+        border-radius: calc(var(--dp-radius) / 2);
+
+        @include mq(sp) {
+            left: var(--dp-space-element-sp);
+            padding: var(--dp-space-inner-pc) calc(var(--dp-space-inner-pc) * 1.25);
+        }
+    }
+    .cap_box_ttl span {
+        display: block;
+        line-height: var(--dp-line-height-medium);
+        color: #ffffff;
+        text-align: left;
+        letter-spacing: var(--dp-letter-spacing-text);
+        font-size: 1.125rem;
+        font-weight: var(--dp-font-weight-heading);
+
+        @include mq(sp) {
+            font-size: 1.05rem;
+        }
+    }
+
+    .cap_box_content {
+        margin-top: calc(var(--dp-space-element-pc) * -1);
+        margin-bottom: 0;
+        padding: calc(var(--dp-space-element-pc) * 1.75) var(--dp-space-element-pc) var(--dp-space-element-pc)
+            var(--dp-space-element-pc);
+        background-color: var(--color_bg);
+        border-radius: var(--dp-radius);
+        border: var(--dp-border-width) solid var(--color_main);
+
+        @include mq(sp) {
+            padding: calc(var(--dp-space-element-pc) * 1.5) var(--dp-space-element-sp) var(--dp-space-element-sp)
+                var(--dp-space-element-sp);
+        }
+
+        > p {
+            font-weight: var(--dp-font-weight-heading);
+            margin-bottom: var(--dp-space-inner-pc);
+
+            @include mq(sp) {
+                margin-bottom: var(--dp-space-inner-pc);
+            }
+        }
+    }
+
+    .p-copy {
+        margin-bottom: calc(var(--dp-space-inner-pc) * 1.25);
+        line-height: var(--dp-line-height-medium);
+        letter-spacing: var(--dp-letter-spacing-text);
+        font-size: 1.125rem;
+        font-weight: var(--dp-font-weight-heading);
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-inner-pc);
+            font-size: inherit;
+        }
+    }
+
+    .wp-block-list {
+        margin-bottom: 0;
+
+        li {
+            margin: 0 0 calc(var(--dp-space-inner-pc) / 2);
+
+            @include mq(sp) {
+                margin: 0 0 calc(var(--dp-space-inner-sp) / 2);
+                font-size: 0.875em;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+/* --- メイン2カラム（画像 + テキスト） --- */
+.dp-media-text-block {
+    gap: 3em;
+    align-items: stretch;
+
+    @include mq(sp) {
+        margin-bottom: var(--dp-space-block-sp);
+    }
+
+    // 左カラム：PC専用 画像ブロック
+    .media-block {
+        flex: 0 0 50%;
+        min-width: 0;
+
+        > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            gap: var(--dp-space-element-pc);
+        }
+
+        .wp-block-image {
+            flex: 1;
+            min-height: 0;
+            margin-bottom: 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: var(--dp-radius);
+                object-fit: cover;
+            }
+        }
+    }
+
+    // 右カラム：テキストブロック
+    .text-block {
+        flex: 1;
+        min-width: 0;
+
+        @include mq(bp) {
+            max-width: 540px;
+            margin: 0 auto;
+        }
+    }
+}
+
+/* ===========================================
+連番用：親セクションでカウンター 共通プレーンコード
+※以下、メディアブロックの親要素に設定してください
+=========================================== */
+
+.dp-media-text-block-counter {
+    counter-reset: media-num;
+}
+
+/* ===========================================
+カウンター付きメディアブロック 定番の左右交互 反復想定
+前提：.dp-media-text-block-counter の付与が必要です
+=========================================== */
+
+.dp-media-text-block--a {
+    counter-increment: media-num;
+    position: relative;
+    margin-bottom: calc(var(--dp-space-block-pc) * 2);
+
+    @include mq(tb) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    @include mq(sp) {
+        margin-bottom: var(--dp-space-block-sp);
+    }
+
+    // --- ブロック背景（奇数：左寄せ / 偶数：右寄せ） ---
+    &::before {
+        content: "";
+        position: absolute;
+        top: var(--dp-space-block-pc);
+        left: var(--dp-space-block-pc);
+        transform: none;
+        width: calc(100% + (100vw - 100%) / 2);
+        height: 100%;
+        border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+        background-color: var(--color_main_thin);
+        z-index: -1;
+
+        @include mq(tb) {
+            top: var(--dp-space-element-pc);
+            left: 0;
+        }
+
+        @include mq(sp) {
+            top: var(--dp-space-inner-pc);
+        }
+    }
+
+    // 偶数番目：背景を右寄せ + tb/spで上下逆（画像上・テキスト下）
+    &:has(> .text-block:first-child) {
+        @include mq(tb) {
+            flex-direction: column-reverse;
+        }
+    }
+
+    &:has(> .text-block:first-child)::before {
+        left: auto;
+        right: var(--dp-space-block-pc);
+        border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
+        width: calc(100% + (100vw - 100%) / 2);
+
+        @include mq(tb) {
+            right: 0;
+        }
+    }
+
+    // 左カラム：PC専用 画像ブロック
+    .media-block {
+        min-height: 0;
+        margin-bottom: 0;
+
+        @include mq(tb) {
+            flex: none;
+            max-width: 540px;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            margin: 0 auto;
+
+            .wp-block-image {
+                height: 100%;
+            }
+        }
+
+        @include mq(sp) {
+            width: calc(100% - 40px);
+            height: 240px;
+            overflow: hidden;
+
+            .wp-block-image {
+                height: 100%;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--dp-radius);
+            object-fit: cover;
+        }
+    }
+
+    .text-block {
+        padding-top: 2.25em; // カウンター設置スペース
+
+        @include mq(tb) {
+            margin-top: -4em;
+            padding: 2em var(--dp-space-inner-pc) 2em;
+        }
+
+        @include mq(sp) {
+            margin-top: -1.5em;
+            padding: 0 var(--dp-space-inner-pc) 1.5em;
+        }
+    }
+
+    h3 {
+        position: relative;
+        margin-bottom: var(--dp-space-inner-pc);
+        letter-spacing: var(--dp-letter-spacing-text);
+        font-size: clamp(20px, 1.2vw, 24px);
+        font-weight: 600;
+
+        // --- カウンター ---
+        @at-root .dp-wrap .dp-media-text-block--a h3::before {
+            content: counter(media-num, decimal-leading-zero);
+            display: block;
+            margin-bottom: 0.125em;
+            color: var(--color_main);
+            line-height: 1;
+            font-size: calc(var(--dp-font-size-title-pc) * 1.5);
+            font-weight: 300;
+            font-family: var(--dp-font-num);
+            mix-blend-mode: multiply;
+        }
+    }
+
+    p {
+        margin-bottom: 0;
+        line-height: var(--dp-line-height-medium);
+        letter-spacing: var(--dp-letter-spacing-text);
+    }
+}
+
+/* ===========================================
+テキストブロック中央配置 メディアブロック左右配置 反復なし
+カウンターなし
+=========================================== */
+.dp-media-text-block--b {
+    justify-content: center;
+
+    .text-block {
+        min-width: 480px;
+
+        @include mq(sp) {
+            min-width: 0;
+        }
+    }
+
+    .dp-section-title {
+        justify-content: center;
+    }
+
+    @include mq(sp) {
+        .p-summary {
+            text-align: left;
+        }
+    }
+
+    .media-block {
+        overflow: hidden;
+        border-radius: var(--dp-radius);
+
+        &:first-child {
+            margin-bottom: auto;
+        }
+
+        &:last-child {
+            margin-top: auto;
+        }
+
+        img {
+            height: 660px;
+            object-fit: cover;
+        }
+    }
+}
+
+/* ===========================================
+カウンター付きメディアブロック カウンター縦向き 最右配置 反復想定 
+前提：.dp-media-text-block-counter の付与が必要です
+=========================================== */
+
+.dp-media-text-block--c {
+    counter-increment: section-counter;
+    background-color: var(--color_bg);
+    border-radius: var(--dp-radius);
+    overflow: hidden;
+    margin-bottom: 0;
+
+    // 各行（wp:group layout:flex nowrap）
+    display: flex;
+    align-items: flex-start;
+    gap: var(--dp-space-element-pc);
+    padding: var(--dp-space-element-pc);
+
+    @include mq(bp) {
+        padding: 0 0 var(--dp-space-element-sp);
+    }
+
+    // 区切り線（2行目以降）
+    & + .wp-block-group {
+        border-top: 2px dashed var(--color_main_thin);
+
+        @include mq(bp) {
+            padding-top: var(--dp-space-element-sp);
+        }
+    }
+
+    @include mq(bp) {
+        align-items: stretch;
+        gap: var(--dp-space-element-sp);
+    }
+
+    @include mq(sp) {
+        flex-direction: column;
+        gap: var(--dp-space-inner-sp);
+    }
+
+    // カウンター擬似要素（縦書き REASON 01 等）
+    &::before {
+        content: "REASON " counter(section-counter, decimal-leading-zero);
+        flex-shrink: 0;
+        display: block;
+        align-self: center;
+        width: 22px;
+        writing-mode: vertical-rl;
+        font-family: var(--dp-font-en);
+        font-size: 16px;
+        font-weight: 300;
+        letter-spacing: 0.25em;
+        color: var(--color_text);
+        white-space: nowrap;
+
+        @include mq(sp) {
+            writing-mode: horizontal-tb;
+            width: auto;
+        }
+    }
+
+    // 画像
+    > .wp-block-image {
+        flex-shrink: 0;
+        width: 340px;
+        overflow: hidden;
+        border-radius: var(--dp-radius);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @include mq(bp) {
+            flex: 0 0 30%;
+            aspect-ratio: 4 / 3;
+            width: 100%;
+            height: auto;
+        }
+
+        @include mq(sp) {
+            width: calc(100% - var(--dp-space-element-pc));
+            margin: 0 auto;
+        }
+    }
+
+    // テキストグループ
+    > .wp-block-group {
+        flex: 1;
+        min-width: 0;
+    }
+
+    h3 {
+        font-size: var(--dp-font-size-heading-pc);
+        font-weight: var(--dp-font-weight-heading);
+        margin-bottom: var(--dp-space-inner-pc);
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: var(--dp-space-inner-pc);
+    }
+}
+
+/* ===========================================
+メディア＋テキストセクション
+左:テキスト 右：メディア（画像や動画） スクロール時に固定位置
+=========================================== */
+
+.dp-media-text-section--sticky {
+    height: auto;
+    padding-bottom: clamp(40px, 9vw, 160px) !important;
+
+    @include mq(ipad) {
+        padding-top: 40px !important;
+    }
+
+    .dp-section-title {
+        p {
+            @include mq(sp) {
+                br {
+                    display: none;
+                }
+            }
+        }
+    }
+    @at-root .post_content & h2 {
+        margin-top: 24px;
+        margin-bottom: 24px !important;
+        letter-spacing: clamp(1px, 0.8vw, 3px);
+        font-size: clamp(24px, 3vw, 32px);
+        font-feature-settings: "palt";
+    }
+
+    // リード文
+    .dp-media-text-section--sticky__lead {
+        margin-bottom: clamp(24px, 3.8vw, 48px) !important;
+        letter-spacing: clamp(1px, 0.8vw, 3px);
+        font-size: clamp(16px, 1.6vw, 24px);
+    }
+
+    // 説明文
+    .dp-media-text-section--sticky__explanation {
+        p {
+            margin-bottom: clamp(24px, 3.8vw, 48px) !important;
+            line-height: 2.2;
+            letter-spacing: clamp(1px, 0.8vw, 3px);
+            font-size: clamp(14px, 1.6vw, 18px);
+
+            @include mq(ipad) {
+                line-height: 1.6;
+
+                &:not(.dp-media-text-section--sticky__lead) {
+                    margin-bottom: clamp(20px, 2vw, 24px) !important;
+                    br {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

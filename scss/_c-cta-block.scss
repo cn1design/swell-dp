@@ -1,0 +1,50 @@
+/*
+
+ CTAブロック (cta-block)
+
+*/
+/* ===========================================
+CTAセクション (.dp-cta-section)
+=========================================== */
+.dp-cta-section {
+    // --- 背景コンテナ ---
+    .dp-container {
+        background-color: var(--color_main);
+        border-radius: var(--dp-radius);
+        padding: var(--dp-space-block-pc) var(--dp-space-inner-pc);
+        text-align: center;
+
+        @include mq(sp) {
+            padding: var(--dp-space-block-sp) var(--dp-space-inner-pc);
+        }
+    }
+
+    // --- CTA用タイトル (--a バリアント) ---
+    .dp-section-title--a {
+        margin-bottom: var(--dp-space-element-pc);
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-element-sp);
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: var(--dp-space-inner-sp);
+            font-size: var(--dp-font-size-title-sp);
+            font-weight: var(--dp-font-weight-heading);
+
+            @include mq(sp) {
+                font-size: var(--dp-font-size-heading-sp);
+            }
+        }
+
+        p {
+            color: #fff;
+            font-size: var(--dp-font-size-summary);
+
+            @include mq(sp) {
+                font-size: var(--dp-font-size-explanation);
+            }
+        }
+    }
+} // /.dp-cta-section

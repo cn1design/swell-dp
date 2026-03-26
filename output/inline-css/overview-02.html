@@ -1,0 +1,235 @@
+<style>
+.dp-media-text-section--sticky {
+  height: auto;
+  padding-bottom: clamp(40px, 9vw, 160px) !important;
+}
+@media screen and (max-width: 1024px) {
+  .dp-media-text-section--sticky {
+    padding-top: 40px !important;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-media-text-section--sticky .dp-section-title p br {
+    display: none;
+  }
+}
+.dp-media-text-section--sticky .dp-media-text-section--sticky__lead {
+  margin-bottom: clamp(24px, 3.8vw, 48px) !important;
+  letter-spacing: clamp(1px, 0.8vw, 3px);
+  font-size: clamp(16px, 1.6vw, 24px);
+}
+.dp-media-text-section--sticky .dp-media-text-section--sticky__explanation p {
+  margin-bottom: clamp(24px, 3.8vw, 48px) !important;
+  line-height: 2.2;
+  letter-spacing: clamp(1px, 0.8vw, 3px);
+  font-size: clamp(14px, 1.6vw, 18px);
+}
+@media screen and (max-width: 1024px) {
+  .dp-media-text-section--sticky .dp-media-text-section--sticky__explanation p {
+    line-height: 1.6;
+  }
+  .dp-media-text-section--sticky .dp-media-text-section--sticky__explanation p:not(.dp-media-text-section--sticky__lead) {
+    margin-bottom: clamp(20px, 2vw, 24px) !important;
+  }
+  .dp-media-text-section--sticky .dp-media-text-section--sticky__explanation p:not(.dp-media-text-section--sticky__lead) br {
+    display: none;
+  }
+}
+.fade-animation-wrap > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 64px;
+}
+@media screen and (max-width: 1024px) {
+  .fade-animation-wrap > div {
+    flex-direction: column-reverse;
+    gap: 32px;
+  }
+}
+.fade-animation-wrap > div .text-block {
+  max-width: 640px;
+  width: 50%;
+}
+@media screen and (max-width: 1024px) {
+  .fade-animation-wrap > div .text-block {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+.fade-animation-wrap.align-center > div {
+  align-items: center;
+}
+.fade-image-container {
+  width: 50%;
+}
+@media screen and (max-width: 768px) {
+  .fade-image-container {
+    height: auto;
+  }
+}
+.fade-sticky-inner {
+  position: sticky;
+  top: 15%;
+  width: 100%;
+  height: 70vh;
+}
+@media screen and (max-width: 768px) {
+  .fade-sticky-inner {
+    position: relative;
+    top: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+.fade-sticky-inner figure {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 768px) {
+  .fade-sticky-inner figure {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    height: auto;
+  }
+}
+.fade-sticky-inner figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+@media screen and (max-width: 768px) {
+  .fade-sticky-inner figure img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+.fade-sticky-inner figure.active {
+  opacity: 1;
+}
+.fade-dots {
+  --dot-color: var(--color_text);
+  position: absolute;
+  bottom: -48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+@media screen and (max-width: 768px) {
+  .fade-dots {
+    display: none;
+  }
+}
+.fade-dots span {
+  display: block;
+  height: 1px;
+  width: 33.3333333333%;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 1px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
+}
+.fade-dots span.active {
+  width: 40%;
+  background: var(--dot-color);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const section = document.querySelector(
+    ".dp-media-text-section--sticky-fade-image",
+  );
+  if (!section) return;
+
+  const gallery = section.querySelector("#fadeGallery");
+  const stickyEl = section.querySelector("#fadeStickyInner");
+  const dotsWrap = section.querySelector("#fadeDots");
+  const textBlock = section.querySelector(".text-block");
+  if (!gallery || !stickyEl || !dotsWrap || !textBlock) return;
+
+  const isMobile = () => window.innerWidth <= 768;
+  const figures = stickyEl.querySelectorAll("figure");
+  const TOTAL = figures.length;
+
+  figures.forEach((f) => f.classList.remove("active"));
+
+  if (dotsWrap.querySelectorAll("span").length === 0) {
+    figures.forEach(() => dotsWrap.appendChild(document.createElement("span")));
+  }
+  const dots = dotsWrap.querySelectorAll("span");
+  dots.forEach((d) => d.classList.remove("active"));
+
+  // ★ 各画像の表示比率（合計10）
+  const WEIGHTS = [1.5, 7, 1.5];
+  const TOTAL_W = WEIGHTS.reduce((a, b) => a + b, 0); // 10
+  // 各画像の開始・終了しきい値を事前計算
+  const thresholds = WEIGHTS.reduce((acc, w, i) => {
+    const start = i === 0 ? 0 : acc[i - 1].end;
+    acc.push({ start, end: start + w / TOTAL_W });
+    return acc;
+  }, []);
+  // [{ start:0, end:0.15 }, { start:0.15, end:0.85 }, { start:0.85, end:1 }]
+
+  let currentIndex = -1;
+
+  function syncHeight() {
+    gallery.style.height = isMobile() ? "" : textBlock.offsetHeight + "px";
+  }
+
+  function activate(index) {
+    if (index === currentIndex) return;
+    currentIndex = index;
+    figures.forEach((f, i) => f.classList.toggle("active", i === index));
+    dots.forEach((d, i) => d.classList.toggle("active", i === index));
+  }
+
+  function getIndexFromProgress(progress) {
+    // progressがどのしきい値区間に入るか判定
+    for (let i = 0; i < thresholds.length; i++) {
+      if (progress < thresholds[i].end) return i;
+    }
+    return TOTAL - 1;
+  }
+
+  function onScroll() {
+    if (isMobile()) return;
+
+    const rect = textBlock.getBoundingClientRect();
+    const total = textBlock.offsetHeight - window.innerHeight;
+
+    let progress;
+    if (total <= 0) {
+      const scrollRange = textBlock.offsetHeight + window.innerHeight;
+      progress = Math.max(
+        0,
+        Math.min(1, (-rect.top + window.innerHeight) / scrollRange),
+      );
+    } else {
+      progress = Math.max(0, Math.min(1, -rect.top / total));
+    }
+
+    activate(getIndexFromProgress(progress));
+  }
+
+  syncHeight();
+  if (!isMobile()) activate(0);
+  onScroll();
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", () => {
+    syncHeight();
+    if (!isMobile() && currentIndex === -1) activate(0);
+  });
+});
+</script>

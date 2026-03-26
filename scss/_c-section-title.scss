@@ -1,0 +1,127 @@
+/*
+
+ セクションタイトル (section-title)
+
+*/
+
+/* --- 1. section-title --default (H2) --- */
+.dp-section-title {
+    margin-bottom: var(--dp-space-element-pc);
+    text-align: center;
+
+    @include mq(sp) {
+        justify-content: center;
+        margin-bottom: var(--dp-space-element-sp);
+    }
+
+    // セクションタイトル
+    h1 {
+        margin-bottom: var(--dp-space-inner-pc);
+        color: var(--color_text);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        font-size: var(--dp-font-size-page-title-pc);
+        font-weight: var(--dp-font-weight-heading);
+
+        @include mq(sp) {
+            line-height: 1.4;
+            letter-spacing: var(--dp-letter-spacing-text);
+            font-size: var(--dp-font-size-page-title-sp);
+        }
+    }
+
+    // セクションタイトル
+    h2 {
+        margin-bottom: var(--dp-space-inner-pc);
+        color: var(--color_text);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        font-size: var(--dp-font-size-title-pc);
+        font-weight: var(--dp-font-weight-heading);
+
+        @include mq(sp) {
+            letter-spacing: var(--dp-letter-spacing-text);
+            font-size: var(--dp-font-size-title-sp);
+        }
+    }
+
+    span {
+        display: inline-block;
+    }
+
+    // セクションタイトル背景色の場合
+    .swl-bg-color {
+        padding: 0 8px 0 clamp(4px, 1.2vw, 10px);
+        border-radius: var(--dp-radius);
+        font-size: 90%;
+        font-family: var(--dp-font-num); // 数字用フォント
+    }
+
+    // 英語サブタイトル
+    .en-title {
+        margin-bottom: var(--dp-space-inner-sp);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        font-family: var(--dp-font-en);
+
+        @include mq(sp) {
+            letter-spacing: var(--dp-letter-spacing-text);
+            margin-bottom: var(--dp-space-inner-sp);
+            font-size: 20px;
+        }
+    }
+}
+
+/* --- 2. section-title--a  --- */
+.dp-section-title--a {
+    h1,
+    h2 {
+        font-weight: 600;
+    }
+    .swl-bg-color {
+    }
+}
+
+/* --- 3. section-title--b (英語大＋日本語小) --- */
+.dp-section-title--b {
+    // 英語サブタイトル フォントサイズ大
+    .en-title {
+        line-height: 1.4;
+        letter-spacing: var(--dp-letter-spacing-heading);
+        font-size: calc(var(--dp-font-size-title-pc) * 1.5);
+
+        @include mq(sp) {
+            letter-spacing: var(--dp-letter-spacing-text);
+            font-size: calc(var(--dp-font-size-title-sp) * 1.25);
+        }
+    }
+
+    // 日本語タイトル フォントサイズ小
+    h2 {
+        font-size: var(--dp-font-size-heading-pc);
+        font-weight: 400;
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+
+/* --- 4. section-title--c 固有（左寄せ＋サブタイトルライン） --- */
+.dp-section-title--c {
+    text-align: left;
+
+    // サブタイトル
+    .en-title {
+        margin-bottom: 32px;
+        font-size: 20px;
+        font-family: var(--dp-font-en);
+
+        // サブタイトル下ライン
+        &::after {
+            content: "";
+            display: block;
+            width: 32px;
+            height: 3px;
+            background: var(--color_text);
+            margin-top: 16px;
+        }
+    }
+}

@@ -1,0 +1,54 @@
+/*
+
+ バナーリスト (banner-list)
+
+*/
+
+/* -------------------------------------------
+ * バナーリスト共通
+ * ------------------------------------------- */
+
+.dp-banner-list {
+    // SWELL Block Inserter: バナーリンク
+    .c-bannerLink {
+        // アイコンのアニメーション設定
+        &__title {
+            span {
+                display: inline-block;
+                transition: transform 0.3s ease;
+                // SWELL標準の余白を調整
+                margin-left: 0.5em;
+            }
+        }
+
+        // ホバー時の挙動（親のhoverで子を動かす）
+        &:hover {
+            .c-bannerLink__title span {
+                transform: translateX(5px); // 右方向へスライド（元のコードは-3pxでしたがお好みで）
+            }
+        }
+        &__text {
+            height: auto;
+            width: auto;
+            text-align: left;
+            // 独自変数への差し替え
+            padding: var(--dp-space-element-pc);
+
+            @include mq(sp) {
+                padding: var(--dp-space-element-sp);
+            }
+        }
+
+        p {
+            font-size: var(--dp-font-size-explanation);
+        }
+    }
+
+    /* バナーリストA テキスト左下 */
+    &--a {
+        .c-bannerLink__text {
+            top: auto;
+            bottom: 0;
+        }
+    }
+} // /.dp-banner-list

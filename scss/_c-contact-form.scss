@@ -1,0 +1,197 @@
+/*--------------------------------------------------------
+*
+* contact お問い合わせフォーム
+*
+*--------------------------------------------------------*/
+
+/*ContactForm7カスタマイズ*/
+
+.wpcf7 {
+    max-width: 1023px;
+    margin: 0 auto;
+    padding: 48px;
+
+    @include mq(bp) {
+        padding: 0;
+    }
+    p {
+        text-align: left;
+    }
+    .dp-cf7_container {
+        margin-bottom: 24px;
+    }
+    .cf7_row {
+        display: flex;
+        margin-bottom: 24px;
+
+        @include mq(bp) {
+            flex-direction: column;
+        }
+        // 入力指示タイトル
+        .form-label {
+            width: 30%; //タイトルの幅
+            margin-right: 48px; //各タイトル右余白
+
+            @include mq(bp) {
+                width: 100%;
+                margin-bottom: 8px;
+                margin-right: 0;
+            }
+            //「必須」文字
+            .cf7_req {
+                margin-right: 8px;
+                padding: 2px 5px;
+                border-radius: 3px;
+                background-color: red;
+                color: white;
+                font-size: 12px;
+            }
+            //「任意」文字
+            .cf7_unreq {
+                margin-right: 8px;
+                padding: 2px 5px;
+                border-radius: 3px;
+                background-color: gray;
+                color: white;
+                font-size: 12px;
+            }
+        }
+        // 入力フォーム
+        .response {
+            width: 100%;
+            max-width: 850px;
+            input,
+            textarea {
+                width: 100%;
+            }
+            input,
+            select,
+            textarea {
+                padding: 12px 8px;
+                border-radius: 4px;
+                background-color: #f2f2f2;
+            }
+            &.no-txt {
+                // テキスト以外は幅調整しない
+                span,
+                input {
+                    width: auto;
+                    margin-bottom: 0;
+                }
+            }
+            &.unit {
+                // 単位あり 幅をより狭くする
+                span {
+                    display: inline-block;
+                    &.form-unit {
+                        margin-left: 8px;
+                    }
+                }
+                input {
+                    width: 80px;
+                }
+            }
+            .wpcf7-form-control-wrap {
+                display: block;
+                width: 100%;
+            }
+            // ラジオボタン
+            .wpcf7-list-item {
+                margin-left: 0;
+                margin-right: 16px;
+            }
+            // 日付＋時間帯 横並び
+            .inner-label {
+                display: block;
+                margin-bottom: 4px;
+            }
+            .day-of-week-time {
+                margin-bottom: 12px;
+                // CF7がpタグを自動生成するためpに対してflexを適用
+                p {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin: 0;
+                    // width:100% の上書き
+                    input[type="date"],
+                    select {
+                        width: auto;
+                    }
+
+                    span {
+                        width: auto;
+                    }
+                }
+            }
+            //入力欄
+            input,
+            select,
+            textarea {
+                border: none;
+                font-size: clamp(14px, 2vw, 16px);
+            }
+            p {
+                padding: 0;
+            }
+        }
+    }
+    // 住所
+    .form-address {
+        label,
+        span {
+            display: block;
+            margin-bottom: 8px;
+        }
+        // 入力欄の幅サイズ調整
+        .p-postal-code,
+        #pref {
+            width: 128px;
+        }
+        .postal p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            span {
+                width: 96px !important;
+            }
+        }
+    }
+    // 「送信する」ボタン
+    input.wpcf7-submit {
+        width: 100%;
+        background-color: var(--color_main);
+        border: 0;
+        border-radius: 5px;
+        color: white;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin: 0 auto;
+        padding: 16px;
+    }
+    .cf7_btn {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .wpcf7-spinner {
+        width: 0;
+        margin: 0;
+    }
+    .form-bottom {
+        margin-bottom: 16px;
+        .wpcf7-list-item {
+            margin-left: 0;
+        }
+        p {
+            margin-bottom: 32px;
+            .form-bottom-heading {
+                display: block;
+                font: {
+                    size: clamp(16px, 2vw, 20px);
+                    weight: bold;
+                }
+            }
+        }
+    }
+}

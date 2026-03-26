@@ -1,0 +1,804 @@
+/*
+
+ カード (card)
+
+*/
+
+/* ===========================================
+英語コピー小＋円形画像 or アイコン＋見出し＋テキスト
+=========================================== */
+.dp-card-circle {
+    // 各カラム（カード）の中央揃え
+    .swell-block-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    // 英語コピー小文字
+    .en-copy {
+        margin-bottom: -0.5em;
+        text-align: center;
+        font-size: 0.875rem;
+        font-family: var(--dp-font-en);
+        z-index: 2; // アイコンの背面に潜り込ませる
+    }
+
+    // 画像 or アイコン (白丸の背景)
+    .wp-block-image,
+    i {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        overflow: hidden;
+        margin-bottom: 0;
+        background-color: var(--color_bg);
+        border-radius: 50%;
+
+        &::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            color: var(--color_text);
+        }
+
+        @include mq(sp) {
+            width: 112px;
+            height: 112px;
+            margin-bottom: var(--dp-space-inner-sp);
+        }
+
+        z-index: 1;
+
+        img {
+            width: 96px;
+            height: 100%;
+            object-fit: contain;
+
+            @include mq(tb) {
+                width: 64px;
+            }
+        }
+    }
+
+    // 見出しH3
+    h3 {
+        margin-bottom: calc(var(--dp-space-inner-pc) / 2);
+        font-size: var(--dp-font-size-heading-pc);
+        text-align: center;
+        @include mq(sp) {
+            margin-bottom: calc(var(--dp-space-inner-sp) / 2);
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+
+/* ===========================================
+グレー背景中央寄せ カードリスト下にブリッジコピー用スペース
+=========================================== */
+
+.dp-card-band {
+    position: relative;
+    margin-bottom: var(--dp-space-block-pc);
+
+    @include mq(sp) {
+        margin-bottom: var(--dp-space-block-sp);
+    }
+
+    // 【現場の最適解】背景のグレー帯
+    // absoluteによる固定値（px）の高さを避け、カードリストの中身が増減しても
+    // 自動でキャッチコピーの裏側まで帯が伸びる堅牢な設計。
+    &::before {
+        content: "";
+        position: absolute;
+        top: 96px; // アイコン（120px想定）の半分の位置からスタート
+        left: 50%;
+        transform: translateX(-50%);
+        // 画面幅から余白を引きつつ、PCの最大幅（1120px等）で頭打ちさせる安全な指定
+        width: min(calc(100vw - 32px), 1328px);
+        height: calc(100% + 6em + 80px); // リストの高さ ＋ margin ＋ leadboxの半分
+        background-color: var(--color_main_thin); // カンプに合わせた極薄いグレー（適宜変数へ）
+        border-radius: var(--dp-radius);
+        z-index: -1;
+
+        @include mq(tb) {
+            top: 64px;
+            width: 100vw;
+            height: calc(100% + 4em + 64px); // SP/TB時の調整
+            border-radius: 0;
+        }
+
+        @include mq(sp) {
+            height: calc(100% + 64px);
+        }
+    }
+
+    // 画像 or アイコン (白丸の背景)
+    .wp-block-image,
+    i {
+        margin-bottom: var(--dp-space-inner-pc);
+    }
+}
+
+/* ===========================================
+カウンター基礎コード （配置は別クラスで記述してください）
+=========================================== */
+
+.dp-card-counter {
+    .swell-block-columns__inner {
+        counter-reset: card-counter;
+    }
+    .swell-block-column {
+        counter-increment: card-counter;
+        &::before {
+            content: counter(card-counter, decimal-leading-zero);
+        }
+    }
+}
+
+/* ===========================================
+ 背景＋画像サイズ プレーン状態
+=========================================== */
+.dp-card-plain {
+    .swell-block-column {
+        background-color: #ffffff;
+        border-radius: var(--dp-radius);
+        overflow: hidden;
+    }
+
+    .wp-block-image {
+        margin: 0;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    i {
+        img {
+            width: 64px;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    p {
+        padding: var(--dp-space-inner-pc) var(--dp-space-inner-pc);
+    }
+}
+
+/* ===========================================
+カードリスト中央寄せ
+=========================================== */
+
+.dp-card-center {
+    > .swell-block-columns__inner {
+        justify-content: center;
+    }
+}
+
+/* ===========================================
+ カウンター右上＋画像＋見出し＋説明
+ (前提: .dp-card--counter の付与が必要です)
+=========================================== */
+.dp-card-sticky-note {
+    position: relative;
+
+    // 背景のグレー帯 右下寄せ
+    &::before {
+        position: absolute;
+        content: "";
+        top: var(--dp-space-block-pc);
+        left: var(--dp-space-block-pc);
+        transform: none;
+        width: calc(100% + (100vw - 100%) / 2);
+        height: 100%;
+        background-color: var(--color_main_thin);
+        border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+        z-index: -1;
+
+        @include mq(tb) {
+            top: var(--dp-space-inner-pc);
+            left: var(--dp-space-inner-pc);
+            width: calc(100% + (100vw - 100%) / 2);
+            height: 100%;
+        }
+    }
+
+    .swell-block-columns__inner {
+        @include mq(sp) {
+            row-gap: var(--dp-space-element-sp);
+        }
+    }
+
+    //カードアイテム
+    .swell-block-column {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0 var(--dp-space-element-pc) var(--dp-space-element-pc);
+        background-color: var(--color_bg);
+        border-radius: var(--dp-radius);
+        box-shadow: var(--dp-shadow);
+
+        // カウンター
+        &::before {
+            align-self: flex-start;
+            padding-top: var(--dp-space-inner-pc);
+            border-top: calc(var(--dp-border-width) * 2) solid var(--color_main);
+            line-height: 1;
+            letter-spacing: 0;
+            font-family: var(--dp-font-num);
+            font-size: var(--dp-font-size-title-pc);
+            font-weight: var(--dp-font-weight-heading);
+
+            @include mq(sp) {
+                margin-bottom: 0;
+            }
+        }
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .wp-block-image {
+        margin-bottom: var(--dp-space-element-pc);
+        border-radius: 0;
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-element-sp);
+        }
+
+        img {
+            height: 180px;
+            object-fit: contain;
+
+            @include mq(sp) {
+                height: 120px;
+            }
+        }
+    }
+
+    h3 {
+        margin-bottom: var(--dp-space-inner-pc);
+        font-size: var(--dp-font-size-heading-pc);
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+
+/* ===========================================
+ カウンター中央上＋画像＋見出し＋説明
+ (前提: .dp-card--counter の付与が必要です)
+=========================================== */
+.dp-card-circle-badge {
+    margin-bottom: 0;
+
+    //カードアイテム
+    .swell-block-column {
+        position: relative;
+        background-color: #ffffff;
+        border-radius: var(--dp-radius);
+        padding: 0 0 var(--dp-space-element-pc);
+        box-shadow: var(--dp-shadow);
+        text-align: center;
+        z-index: 1;
+
+        // カウンター
+        &::before {
+            content: counter(card-counter, decimal-leading-zero);
+            position: absolute;
+            top: -1em;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            color: var(--color_text);
+            border-radius: 50%;
+            line-height: 1;
+            font-family: var(--dp-font-num);
+            font-weight: 300;
+            font-size: var(--dp-font-size-title-pc);
+            z-index: 2;
+
+            @include mq(sp) {
+                width: 64px;
+                height: 64px;
+                font-size: var(--dp-font-size-title-sp);
+            }
+        }
+
+        // 画像
+        .wp-block-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            margin: 0 0 1em;
+            border-radius: var(--dp-radius);
+            overflow: hidden;
+            background-color: var(--color_main_thin);
+
+            @include mq(sp) {
+                aspect-ratio: unset;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    // 見出しH3
+    h3 {
+        margin-bottom: calc(var(--dp-space-inner-pc) / 2);
+        font-size: var(--dp-font-size-heading-pc);
+        text-align: center;
+        @include mq(sp) {
+            margin-bottom: calc(var(--dp-space-inner-sp) / 2);
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+/* ===========================================
+   カウンター右上＋画像＋説明 縦線で区切り
+   (前提: .dp-card--counter の付与が必要です)
+=========================================== */
+
+.dp-card-verticle-line {
+    margin-bottom: var(--dp-space-block-pc);
+
+    @include mq(sp) {
+        margin-bottom: var(--dp-space-block-sp);
+    }
+
+    .swell-block-columns__inner {
+        counter-reset: card-counter;
+    }
+
+    .swell-block-column {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        counter-increment: card-counter;
+
+        // バッジ（ISSUE + カウンター番号）擬似要素で生成
+        &::before {
+            content: "ISSUE\A" counter(card-counter, decimal-leading-zero);
+            white-space: pre;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color_text);
+            border-radius: 50%;
+            font-family: var(--dp-font-en);
+            font-size: 13px;
+            font-weight: var(--dp-font-weight-heading);
+            color: var(--color_bg);
+            line-height: 1.2;
+            letter-spacing: 0;
+            text-align: center;
+            z-index: 1;
+        }
+
+        // カード間の縦線（::after で各カラムの右端＝ギャップ中央に配置）
+        &:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: -1.5rem;
+            width: 1px;
+            height: calc(100% - 2rem);
+            background-color: var(--color_text);
+
+            @include mq(bp) {
+                display: none;
+            }
+        }
+
+        // 画像
+        .wp-block-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            margin-bottom: var(--dp-space-inner-pc);
+            padding: 2rem 2rem 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            @include mq(sp) {
+                margin-bottom: var(--dp-space-inner-sp);
+            }
+        }
+
+        // 説明テキスト
+        p {
+            font-size: var(--dp-font-size-summary);
+            line-height: var(--dp-line-height-medium);
+            text-align: center;
+        }
+    }
+}
+
+/* ===========================================
+ カード3つ並び＋円形背景
+=========================================== */
+.dp-card-copy-folder {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+
+    .swell-block-column {
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        line-height: 1.3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--dp-space-element-pc);
+        font-weight: 600;
+        font-feature-settings: "palt" 1;
+
+        // 放射グラデーション（左上に光源）でベベル感を表現
+        background:
+            radial-gradient(ellipse at 38% 32%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 62%),
+            var(--color_main_thin);
+
+        // 外部＋内部 box-shadow でエンボス効果
+        box-shadow:
+            8px 12px 28px rgba(0, 0, 0, 0.13),
+            // 底面ドロップシャドウ
+            -4px -6px 14px rgba(255, 255, 255, 0.9),
+            // 上面ハイライト（浮き上がり）
+            inset 2px 3px 8px rgba(255, 255, 255, 0.55),
+            // 内側上ハイライト
+            inset -2px -3px 8px rgba(0, 0, 0, 0.08); // 内側下シャドウ
+    }
+}
+
+/* ----------------------------------------------
+ dp-card-voice--a （お客様の声カード） 
+ ---------------------------------------------- */
+.dp-card-voice {
+    // Jetpack Rating Star の余白ツメ
+    .wp-block-jetpack-rating-star > span {
+        margin-bottom: 0;
+    }
+    .wp-block-jetpack-rating-star:not(.is-style-outlined) > span {
+        margin-right: 0;
+    }
+
+    .swell-block-column {
+        border-radius: var(--dp-radius);
+        box-shadow: var(--dp-shadow);
+        display: flex;
+        flex-direction: column;
+    }
+
+    // アバター画像（円形）
+    .wp-block-image {
+        flex-shrink: 0;
+        width: 96px;
+        height: 96px;
+        margin: 0;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        @include mq(sp) {
+            width: 72px;
+            height: 72px;
+        }
+    }
+
+    // バルーンブロックの余白リセット
+    .swell-block-balloon {
+        margin-bottom: 0;
+    }
+    // バルーンアイコン背景色
+    .-circle > .c-balloon__iconImg {
+        object-position: top;
+    }
+    // バルーンテキスト行高リセット
+    .c-balloon__text p {
+        line-height: var(--dp-line-height-small);
+    }
+}
+
+/* ----------------------------------------------
+ dp-card-voice--a
+ お客様の声カード 典型例
+ ---------------------------------------------- */
+.dp-card-voice--a {
+    // 個別カード（swell-block-column を起点にすることでカラム追加時も自動適用）
+    .swell-block-column {
+        background: #fff;
+        padding: 32px 40px;
+        gap: 16px;
+
+        @include mq(sp) {
+            padding: 24px 20px;
+        }
+
+        // ヘッダー行（人物アイコン＋プロフィール）
+        .dp-voice-card__row {
+            border-bottom: 1px solid var(--color_text);
+            gap: 24px;
+
+            // WP flex グループの align-items を center に
+            &.is-layout-flex {
+                align-items: center;
+            }
+
+            // 人物アイコン
+            .wp-block-image {
+                flex-shrink: 0;
+                height: 96px;
+                margin: 0;
+
+                img {
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        // プロフィール（評価・名前・職業）
+        .dp-voice-card__profile {
+            p {
+                margin: 0;
+                line-height: var(--dp-line-height-medium);
+                letter-spacing: var(--dp-letter-spacing-text);
+
+                // 職業（最後の p）
+                &:last-child {
+                    font-size: var(--dp-font-size-explanation);
+                }
+            }
+        }
+
+        // カード見出し
+        h3.wp-block-heading {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: var(--dp-line-height-small);
+            letter-spacing: var(--dp-letter-spacing-text);
+            margin: 0;
+        }
+
+        // 感想テキスト
+        > p {
+            font-size: var(--dp-font-size-explanation);
+            line-height: var(--dp-line-height-small);
+            letter-spacing: var(--dp-letter-spacing-text);
+            margin: 0;
+        }
+    }
+}
+
+/* ----------------------------------------------
+ dp-card-voice--b
+ お悩み（見出し＋吹き出し）→ 導入効果カード
+ 吹き出し: wp:loos/balloon ブロック使用
+ ---------------------------------------------- */
+.dp-card-voice--b {
+    // カラム上部にラベル飛び出し分の余白を確保
+    .swell-block-column {
+        padding-top: 1.25em;
+    }
+
+    // 上部ラベル（カード外枠の上中央に半掛け配置）
+    .dp-card-voice__label {
+        align-self: center;
+        position: relative;
+        z-index: 1;
+        margin-bottom: -1.1em;
+        padding: 0.3em 1.25em;
+        background-color: var(--color_text);
+        color: #ffffff;
+        border-radius: 2em;
+        font-size: var(--dp-font-size-explanation);
+        font-weight: var(--dp-font-weight-heading);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        line-height: 1.5;
+        white-space: nowrap;
+    }
+
+    // カード本体（ボーダー枠）
+    .dp-card-voice__body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #ffffff;
+    }
+
+    // カード上部（お悩みエリア）
+    .dp-card-voice__top {
+        position: relative;
+        flex: 1;
+        padding: 2em 1.25rem 0;
+        background-image: linear-gradient(
+            to bottom,
+            var(--dp-color-sub) calc(100% - 16px),
+            transparent calc(100% - 16px)
+        );
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 48px;
+            background: var(--dp-color-sub);
+            clip-path: polygon(100% 0, 0 0, 0 100%);
+        }
+    }
+
+    // お悩み見出し
+    .dp-card-voice__heading {
+        margin-bottom: var(--dp-space-inner-pc);
+        font-size: 18px;
+        line-height: var(--dp-line-height-medium);
+
+        @include mq(ipad) {
+            font-size: 16px;
+        }
+    }
+
+    // 区切り線（wp:separator）
+    .dp-card-voice__divider {
+        border-top: 1px solid var(--dp-color-sub);
+        margin: 0;
+        opacity: 1;
+    }
+
+    // カード下部（導入効果エリア）
+    .dp-card-voice__bottom {
+        padding: 1.25rem;
+
+        > p {
+            margin: 0;
+            font-size: var(--dp-font-size-explanation);
+            line-height: var(--dp-line-height-large);
+        }
+    }
+
+    // 導入効果ラベル行（見出し両脇ボーダー: ── 導入効果 ──）
+    // is-layout-flex が display:flex を担う。::before/::after が flex アイテムとして挿入される
+    .dp-card-voice__effect-label {
+        justify-content: center;
+        align-items: center;
+        gap: 0.6em;
+        margin-bottom: var(--dp-space-inner-pc);
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            flex: 0.1;
+            height: 1px;
+            background-color: var(--color_text);
+        }
+    }
+
+    // 導入効果見出し
+    .dp-card-voice__effect-title {
+        margin: 0;
+        font-size: var(--dp-font-size-heading-pc);
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+
+/* ----------------------------------------------
+ dp-card-voice--c
+ アイコン＋ラベル＋見出し＋感想テキストカード
+ Figma: group_row / label_profile / label_role
+ ---------------------------------------------- */
+.dp-card-voice--c {
+    // 個別カード
+    .swell-block-column {
+        background: #fff;
+        border-radius: var(--dp-radius);
+        padding: 32px 40px;
+        gap: 16px;
+
+        @include mq(sp) {
+            padding: 24px 20px;
+        }
+    }
+
+    // ヘッダー行（アバター＋プロフィール）
+    .group_row {
+        gap: 24px;
+
+        &.is-layout-flex {
+            align-items: center;
+        }
+    }
+
+    // プロフィール列（ラベル＋見出し）
+    .label_profile {
+        flex: 1;
+        gap: 8px;
+    }
+
+    // 属性ラベル（40代男性 など）
+    .label_role {
+        display: inline-block;
+        width: 100%;
+        padding: 0.1em 0.75em;
+        background-color: var(--color_main);
+        color: #fff;
+        font-size: var(--dp-font-size-explanation);
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: var(--dp-letter-spacing-text);
+        line-height: var(--dp-line-height-medium);
+        margin: 0;
+    }
+
+    // アイコンボーダー
+    .wp-block-image {
+        border: 1px solid var(--color_text);
+        border-radius: 50%;
+        background-color: var(--color_bg);
+    }
+
+    // 一言見出し
+    h3.wp-block-heading {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: var(--dp-line-height-small);
+        letter-spacing: var(--dp-letter-spacing-text);
+        margin: 0;
+    }
+
+    // 感想テキスト
+    .swell-block-column > p {
+        font-size: var(--dp-font-size-explanation);
+        line-height: var(--dp-line-height-medium);
+        letter-spacing: var(--dp-letter-spacing-text);
+        margin: 0;
+    }
+}

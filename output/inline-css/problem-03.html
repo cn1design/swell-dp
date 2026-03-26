@@ -1,0 +1,156 @@
+<style>
+.dp-card-counter .swell-block-columns__inner {
+  counter-reset: card-counter;
+}
+.dp-card-counter .swell-block-column {
+  counter-increment: card-counter;
+}
+.dp-card-counter .swell-block-column::before {
+  content: counter(card-counter, decimal-leading-zero);
+}
+.dp-card-center > .swell-block-columns__inner {
+  justify-content: center;
+}
+.dp-card-verticle-line {
+  margin-bottom: var(--dp-space-block-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-card-verticle-line {
+    margin-bottom: var(--dp-space-block-sp);
+  }
+}
+.dp-card-verticle-line .swell-block-columns__inner {
+  counter-reset: card-counter;
+}
+.dp-card-verticle-line .swell-block-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  counter-increment: card-counter;
+}
+.dp-card-verticle-line .swell-block-column::before {
+  content: "ISSUE\a" counter(card-counter, decimal-leading-zero);
+  white-space: pre;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color_text);
+  border-radius: 50%;
+  font-family: var(--dp-font-en);
+  font-size: 13px;
+  font-weight: var(--dp-font-weight-heading);
+  color: var(--color_bg);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+  z-index: 1;
+}
+.dp-card-verticle-line .swell-block-column:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -1.5rem;
+  width: 1px;
+  height: calc(100% - 2rem);
+  background-color: var(--color_text);
+}
+@media screen and (max-width: 959px) {
+  .dp-card-verticle-line .swell-block-column:not(:last-child)::after {
+    display: none;
+  }
+}
+.dp-card-verticle-line .swell-block-column .wp-block-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  margin-bottom: var(--dp-space-inner-pc);
+  padding: 2rem 2rem 0;
+}
+.dp-card-verticle-line .swell-block-column .wp-block-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width: 599px) {
+  .dp-card-verticle-line .swell-block-column .wp-block-image {
+    margin-bottom: var(--dp-space-inner-sp);
+  }
+}
+.dp-card-verticle-line .swell-block-column p {
+  font-size: var(--dp-font-size-summary);
+  line-height: var(--dp-line-height-medium);
+  text-align: center;
+}
+.dp-bridge-copy-simple {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+.dp-bridge-copy-simple::before, .dp-bridge-copy-simple::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 200px;
+  transform: translateX(-50%);
+}
+.dp-bridge-copy-simple::before {
+  background-color: var(--color_main_thin);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: -1;
+}
+@media screen and (max-width: 959px) {
+  .dp-bridge-copy-simple::before {
+    height: 50%;
+  }
+}
+.dp-bridge-copy-simple::after {
+  background-color: #ffffff;
+  z-index: -2;
+}
+@media screen and (max-width: 959px) {
+  .dp-bridge-copy-simple::after {
+    height: 100%;
+  }
+}
+.dp-bridge-copy-simple p {
+  display: inline-block;
+  margin: 0;
+  line-height: var(--dp-line-height-medium);
+  letter-spacing: var(--dp-letter-spacing-text);
+  font-size: var(--dp-font-size-title-pc);
+  font-weight: var(--dp-font-weight-heading);
+}
+@media screen and (max-width: 599px) {
+  .dp-bridge-copy-simple p {
+    font-size: var(--dp-font-size-title-sp);
+  }
+}
+.dp-bridge-copy-simple p:last-child::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 6px;
+  margin: 0 auto;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='8'%3E%3Cpath d='M0 4 Q10 0 20 4 Q30 8 40 4 Q50 0 60 4 Q70 8 80 4' fill='none' stroke='%232d2d2d' stroke-width='4'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
+@media screen and (max-width: 599px) {
+  .dp-bridge-copy-simple p:last-child::after {
+    content: none;
+  }
+}
+.dp-problem-section-bottom-nospace {
+  margin-bottom: 0;
+  padding-bottom: 0 !important;
+}
+</style>

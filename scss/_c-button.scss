@@ -1,0 +1,66 @@
+/*
+
+ ボタン (button)
+
+*/
+
+/* ===========================================
+SWELL独自ボタン
+=========================================== */
+/* 共通スタイル */
+.dp-button {
+    margin-bottom: 0;
+
+    .swell-block-button__link {
+        min-width: 300px;
+        font-size: var(--dp-font-size-summary);
+        font-weight: var(--dp-font-weight-heading);
+
+        @include mq(sp) {
+            width: 100%;
+        }
+    }
+}
+
+/* 角丸レクタングルボタン */
+.button-rectangle .swell-block-button__link {
+    border-radius: var(--dp-radius);
+}
+
+/* 大きめボタン */
+.button-large .swell-block-button__link {
+    padding: var(--dp-space-element-sp) var(--dp-space-element-pc);
+    font-size: var(--dp-font-size-heading-pc);
+    font-weight: var(--dp-font-weight-heading);
+
+    @include mq(sp) {
+        padding: var(--dp-space-element-sp) var(--dp-space-inner-pc);
+        font-size: var(--dp-font-size-summary);
+        font-weight: 600;
+    }
+}
+
+/* 背景白抜きボタン */
+.button-white .swell-block-button__link {
+    background-color: var(--color_bg);
+    color: var(--color_main) !important;
+}
+
+/* ===========================================
+WP標準ボタン
+=========================================== */
+.wp-block-buttons {
+    &.dp-button-normal {
+        margin-bottom: 0;
+
+        @include mq(sp) {
+            justify-content: center;
+        }
+
+        a {
+            @include mq(sp) {
+                width: 100%;
+            }
+        }
+    }
+}

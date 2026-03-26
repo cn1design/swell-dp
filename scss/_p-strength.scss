@@ -1,0 +1,59 @@
+/*
+
+ 私たちの強み (strength)
+
+*/
+
+/* ===========================================
+ .dp-strength-section
+=========================================== */
+.dp-strength-section {
+
+    // カラムコンテナ上部余白
+    .swell-block-columns {
+        margin-top: var(--dp-space-element-pc);
+
+        @include mq(sp) {
+            margin-top: var(--dp-space-element-sp);
+        }
+    }
+
+    // 各カード（wp:loos/column に直接付与）
+    .dp-strength-card {
+        background-color: var(--color_bg);
+        border-radius: var(--dp-radius);
+        box-shadow: var(--dp-shadow);
+        overflow: hidden;
+
+        h3 {
+            padding: var(--dp-space-inner-pc) var(--dp-space-inner-pc) 0;
+            font-size: var(--dp-font-size-heading-pc);
+            letter-spacing: var(--dp-letter-spacing-heading);
+            text-align: center;
+
+            @include mq(sp) {
+                font-size: var(--dp-font-size-heading-sp);
+            }
+        }
+
+        .wp-block-image {
+            margin: var(--dp-space-inner-pc) 0 0;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        p {
+            padding: var(--dp-space-inner-pc);
+            margin-bottom: 0;
+            font-size: var(--dp-font-size-explanation);
+            line-height: var(--dp-line-height-medium);
+        }
+    }
+}

@@ -1,0 +1,119 @@
+/* =========================================================
+   dp-help: DP詳細ページ ヘルプUI
+   スコープ: .single-design_pattern（詳細ページのbodyクラス）
+========================================================= */
+
+.single-design_pattern {
+
+    .dp-help-area {
+        margin-top: 2.5rem;
+    }
+
+    // ---- 専用ガイド ----
+    .dp-help-specific {
+        margin-bottom: 1.5rem;
+    }
+
+    .dp-help-title {
+        font-size: var(--dp-font-size-heading-sp);
+        font-weight: var(--dp-font-weight-heading);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--dp-color-sub);
+    }
+
+    .dp-help-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .dp-help-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 1rem;
+        background-color: var(--dp-color-sub);
+        border-radius: var(--dp-radius);
+
+        @include mq(tb) {
+            gap: 0.5rem;
+        }
+
+        // メディア（動画・画像）がある場合は横並び
+        &:has(.dp-help-item__media) {
+            grid-template-columns: 220px 1fr;
+            align-items: start;
+
+            @include mq(tb) {
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+
+    .dp-help-item__media {
+        // 動画・画像の共通制御
+        video,
+        img {
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: calc(var(--dp-radius) / 2);
+
+            @include mq(tb) {
+                max-height: 160px;
+            }
+        }
+    }
+
+    .dp-help-item__content {
+        h4 {
+            font-size: var(--dp-font-size-explanation);
+            font-weight: var(--dp-font-weight-heading);
+            letter-spacing: var(--dp-letter-spacing-heading);
+            margin-bottom: 0.375rem;
+        }
+
+        p {
+            font-size: var(--dp-font-size-explanation);
+            line-height: var(--dp-line-height-medium);
+            color: var(--color_text);
+            margin: 0;
+        }
+    }
+
+    // ---- 共通ガイド（SWELLアコーディオン） ----
+    .dp-help-common {
+        // SWELLアコーディオンのクラス構造に準拠し、見た目のみ調整
+        &.swell-block-accordion {
+            border: 1px solid var(--dp-color-sub);
+            border-radius: var(--dp-radius);
+            overflow: hidden;
+        }
+
+        .swell-block-accordion__head {
+            font-size: var(--dp-font-size-explanation);
+            font-weight: var(--dp-font-weight-heading);
+            background-color: var(--dp-color-sub);
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+
+            span {
+                letter-spacing: var(--dp-letter-spacing-heading);
+            }
+        }
+
+        .swell-block-accordion__body {
+            padding: 1rem;
+            font-size: var(--dp-font-size-explanation);
+        }
+    }
+
+}

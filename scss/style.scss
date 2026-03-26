@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/*!
+    Template: swell
+    Theme Name: SWELL CHILD
+    Theme URI: https://swell-theme.com/
+    Description: SWELLの子テーマ
+    Version: 1.0.0
+    Author: LOOS WEB STUDIO
+    Author URI: https://loos-web-studio.com/
+
+    License: GNU General Public License
+    License URI: http://www.gnu.org/licenses/gpl.html
+
+    //キャッシュ削除用URL
+    https://purge.jsdelivr.net/gh/cn1design/swell-code-snippets@main/swell_child/style.css
+*/
+
+/*--------------------------------------------------------
+* Breakpoints / Media Query
+--------------------------------------------------------*/
+@use "sass:map";
+$breakpoints: (
+    ipad: 1024px,
+    bp: 959px,
+    tb: 768px,
+    sp: 599px
+);
+
+$num-family: "Roboto", "Noto Sans JP", sans-serif !default;
+
+@mixin mq($key) {
+    $bp: map.get($breakpoints, $key);
+
+    @if $bp == null {
+        @error "Unknown breakpoint `#{$key}`. Available: #{map.keys($breakpoints)}";
+    }
+
+    @media screen and (max-width: $bp) {
+        @content;
+    }
+}
+
+/*--------------------------------------------------------
+投稿以外のページに適用
+--------------------------------------------------------*/
+:not(.single-post) .p-toc {
+    display: none;
+}
+/*--------------------------------------------------------
+デザインパターン関連ページ
+--------------------------------------------------------*/
+
+/* タグ（パターン名・ジャンル）のカラー変数 */
+:root {
+    --dp-tag-section-bg: #ebf2ff;
+    --dp-tag-section-color: #3b70db;
+    --dp-tag-industry-bg: #fcdb4c;
+    --dp-tag-industry-color: #464645;
+}
+
+.post-type-archive-design_pattern,
+.single-design_pattern {
+    // サイドバーがオンの場合、コンテンツを非フレックス
+    @media (min-width: 960px) {
+        &.-sidebar-on .l-content {
+            display: block;
+        }
+    }
+    // サイドバーを非表示
+    .l-sidebar {
+        display: none !important;
+    }
+
+    // フル幅化
+    @include mq(bp) {
+        .l-contentsWrap {
+            display: block;
+        }
+        .l-main {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+/*--------------------------------------------------------
+  * ショートコードタグ
+  --------------------------------------------------------*/
+.block-part-wrap p,
+.block-part-wrap br {
+    display: none;
+}
+
+/*--------------------------------------------------------
+  * mainタグ
+  --------------------------------------------------------*/
+.site-main {
+    overflow: hidden;
+}
+
+/* 非表示 レスポンシブデザイン */
+.-sp {
+    display: none;
+
+    @include mq(tb) {
+        display: block;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+}
+
+.-pc {
+    @include mq(tb) {
+        display: none;
+    }
+}
+
+/* ... (以下、同様のルールで各セクションを変換) ... */
+
+/* 非表示 スピナー */
+.wpcf7-spinner {
+    display: none;
+}
+
+/*--------------------------------------------------------
+分割セクション CPT用
+--------------------------------------------------------*/
+@import "design-patterns"; /* デザインパターン用 */
+@import "cpt-single"; /* CPT singleページ用 */
+@import "design-patterns"; /* デザインパターン一覧 */

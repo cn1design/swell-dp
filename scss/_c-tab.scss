@@ -1,0 +1,69 @@
+/*
+
+ タブブロック (tab)
+
+ 【実装ルール】
+ - ブロック: TYPE-L（wp:loos/tab）対応
+ - dp-tab / dp-tab-balloon はフルワイドではなく wp:loos/tab 要素に直接付与する
+ - is-style-balloon の標準機能（追加実装不要）:
+     クリックで吹き出しカラー変更 / 吹き出しの尻尾（テール）表示
+ - 追加実装対象: フォントサイズ・タブタイトルのpadding（要調整）
+ - 新規バリアントはこのファイル末尾に追記すること
+
+*/
+
+/* --- dp-tab: タブブロック共通ベーススタイル --- */
+.dp-tab {
+  // タブナビゲーション
+  .c-tab__nav {
+    justify-content: center;
+    gap: var(--dp-space-inner-pc);
+
+    @include mq(sp) {
+      flex-wrap: wrap;
+      gap: var(--dp-space-inner-sp);
+    }
+  }
+
+  // タブコンテンツアイテム（各タブのコンテンツ外枠）
+  .c-tabBody {
+    margin-bottom: 0;
+    &__item {
+      background-color: white;
+      border-radius: var(--dp-radius);
+      padding: var(--dp-space-element-pc); // 2.5rem ≈ 40px
+
+      @include mq(sp) {
+        padding: var(--dp-space-inner-pc);
+        border-radius: var(--dp-radius);
+      }
+    }
+  }
+}
+
+/* --- dp-tab-balloon: 吹き出しタブバリアント ---
+   is-style-balloon と同一要素に付与して使用
+   フォントサイズ・padding を調整（要実装ごとに確認） */
+.dp-tab-balloon {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; // タブタイトルとタブコンテンツの間隔
+
+  // タブタイトルボタン ※paddingは要調整
+  .c-tabList__button {
+    padding: var(--dp-space-element-sp) var(--dp-space-element-pc); // 上下 1.5rem / 左右 2.5rem
+    border-radius: var(--dp-radius);
+    font-size: var(--dp-font-size-heading-sp); // 20px
+    font-weight: 600;
+
+    @include mq(bp) {
+      padding: var(--dp-space-inner-pc) var(--dp-space-element-sp);
+    }
+
+    @include mq(sp) {
+      min-width: 0;
+      font-size: inherit; // 16px
+      padding: var(--dp-space-inner-pc);
+    }
+  }
+}

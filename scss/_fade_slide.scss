@@ -1,0 +1,37 @@
+/*
+
+ フェードスライダー (fade-slide)
+ ※ fade-slide.js と連動
+
+*/
+
+/* ===========================================
+ .dp-fade-slider
+ wp:group の flex を上書きして Grid でスタック
+=========================================== */
+.dp-fade-slider {
+    // SWELLのflex(is-row)を上書きしてGridを強制
+    display: grid !important;
+    flex: 0 0 60%; // 親がflex行レイアウトの場合の幅指定（TYPE-H等）
+
+    // 画像を同じマス目にスタック（重ねる）
+    .wp-block-image {
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+        z-index: 1;
+        margin: 0;
+    }
+
+    // JS初期化後：アクティブ画像のみ表示
+    &.is-initialized .wp-block-image.is-active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    // JS読み込み前：1枚目のみ表示（チラつき防止）
+    &:not(.is-initialized) .wp-block-image:first-of-type {
+        opacity: 1;
+    }
+}

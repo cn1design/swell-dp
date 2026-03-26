@@ -1,0 +1,17 @@
+{
+  "name": "swell-child-theme",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:css && npm run build:dp",
+    "dev": "npm run watch:all:poll",
+    "doctor": "node ./scripts/doctor.mjs",
+    "build:css": "sass --no-source-map scss/style.scss:style.css",
+    "build:dp": "sass --no-source-map scss/dp-style.scss:dp-style.css",
+    "watch:css": "sass --watch --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css",
+    "watch:css:poll": "sass --watch --poll --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css",
+    "watch:all:poll": "sass --watch --poll --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

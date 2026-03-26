@@ -1,0 +1,327 @@
+/*
+
+ overview-01 見出し+説明３つ縦並び (OVERVIEWページ)
+
+*/
+
+/*--------------------------------------------------------
+
+ overview-01 タイトル縦向き 見出し+説明３つ縦並び
+
+ --------------------------------------------------------*/
+
+.dp-overview-section {
+    position: relative;
+    // overflow: hidden;
+    padding-top: 96px !important;
+    background-color: transparent;
+    transition: background-color 0.6s ease;
+    will-change: background-color; // 描画の最適化
+
+    @include mq(sp) {
+        margin-top: -160px;
+    }
+
+    // スクロール連動で背景変更
+    &.is-active {
+        background-color: var(--color_main);
+        * {
+            color: white !important ;
+        }
+    }
+
+    > div {
+        padding: 0 16px;
+    }
+
+    // 親要素（.section-about > div に相当）は
+    // position: relative; が効いている前提です
+
+    .media-block {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 1512px;
+        height: 100%;
+        pointer-events: none; // 重要: これがないと画像が手前に来てテキストがクリックできなくなります
+
+        // WPブロックのデフォルト余白リセット
+        figure {
+            position: absolute;
+            margin: 0;
+            opacity: 0.2; // 以前のコードより
+            line-height: 0; // 画像下の隙間対策
+
+            img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+
+                @include mq(sp) {
+                    height: 180px;
+                    object-fit: cover;
+                }
+            }
+
+            // --- 1枚目 ---
+            // 旧: 5% 0 / 510px
+            &:nth-child(1) {
+                top: 0;
+                left: 5%;
+                width: 460px;
+
+                @include mq(ipad) {
+                    width: 380px;
+                    left: 0;
+                }
+                @include mq(bp) {
+                    width: 280px;
+                    left: 0;
+                }
+                @include mq(sp) {
+                    width: 130px;
+                    left: 0;
+                }
+            }
+
+            // --- 2枚目 ---
+            // 旧: 95% 15% / 442px
+            &:nth-child(2) {
+                top: 15%;
+                right: 5%; // 95%なので右から5%
+                width: 530px;
+
+                @include mq(ipad) {
+                    width: 374px;
+                    top: 15%;
+                    right: 5%;
+                }
+                @include mq(bp) {
+                    width: 314px;
+                    top: 20%;
+                    right: 5%;
+                }
+                @include mq(sp) {
+                    width: 180px;
+                    top: 15%;
+                    right: 0;
+                }
+            }
+
+            // --- 3枚目 ---
+            // 旧: 100% 70% / 466px
+            &:nth-child(3) {
+                top: 60%;
+                right: 0; // 100%なので右端
+                width: 520px;
+
+                @include mq(ipad) {
+                    width: 378px;
+                    top: 78%;
+                    right: 12%;
+                }
+                @include mq(bp) {
+                    width: 318px;
+                    top: 78%;
+                    right: 5%;
+                }
+                @include mq(sp) {
+                    width: 160px;
+                    top: 55%;
+                    right: 5%;
+                }
+            }
+
+            // --- 4枚目 ---
+            // 旧: 7% 50% / 466px
+            &:nth-child(4) {
+                top: 35%;
+                left: 7%;
+                width: 420px;
+
+                @include mq(ipad) {
+                    width: 398px;
+                    top: 50%;
+                    left: 7%;
+                }
+                @include mq(bp) {
+                    width: 328px;
+                    top: 50%;
+                    left: 5%;
+                }
+                @include mq(sp) {
+                    width: 160px;
+                    top: 35%;
+                    left: 5%;
+                }
+            }
+
+            // --- 5枚目 ---
+            // 旧: 5% 100% / 525px
+            &:nth-child(5) {
+                bottom: 80px; // 100%なので下端
+                left: 5%;
+                width: 480px;
+
+                @include mq(ipad) {
+                    width: 380px;
+                    left: 0;
+                }
+                @include mq(bp) {
+                    width: 330px;
+                }
+                @include mq(sp) {
+                    width: 200px;
+                }
+            }
+        }
+    }
+
+    .text-block {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        z-index: 1;
+
+        @include mq(ipad) {
+            max-width: 640px;
+        }
+
+        // コンテンツの親要素
+        > div {
+            display: flex;
+            gap: 48px;
+
+            @include mq(sp) {
+                flex-direction: column;
+            }
+        }
+    }
+    // 見出しグループ
+    .sticky-heading {
+        position: sticky;
+        top: 128px;
+        align-self: flex-start;
+        max-width: 110px;
+        width: 100%;
+        writing-mode: vertical-rl;
+
+        @include mq(sp) {
+            position: relative;
+            top: 0;
+            align-self: auto;
+            max-width: 100%;
+            writing-mode: horizontal-tb;
+        }
+
+        h2 {
+            height: max-content;
+            margin-right: 16px;
+            margin-bottom: 16px;
+            line-height: 1;
+            text-indent: -3px;
+            text-align: left;
+            letter-spacing: clamp(2px, 0.2vw, 4px);
+            font-size: clamp(32px, 3.5vw, 48px);
+
+            @include mq(sp) {
+                margin-right: 0;
+                line-height: 1.2;
+
+                br {
+                    display: none;
+                }
+            }
+        }
+
+        .en-title {
+            text-align: left;
+        }
+    }
+
+    // コンテンツエリア
+    .text-content {
+        max-width: 570px;
+        margin-left: auto;
+
+        @include mq(sp) {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .content-item {
+            margin-bottom: 308px;
+
+            @include mq(sp) {
+                margin-bottom: 96px;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            h3 {
+                display: inline-block;
+                margin-bottom: 32px;
+                padding-bottom: 32px;
+                line-height: 1;
+                letter-spacing: 8px;
+                font-size: clamp(24px, 3vw, 32px);
+                font-weight: bold;
+
+                @include mq(sp) {
+                    margin-bottom: 16px;
+                    padding-bottom: 16px;
+                    line-height: 1.4;
+                    letter-spacing: 2px;
+                }
+
+                .large-font {
+                    font-size: clamp(36px, 6vw, 64px);
+                    font-weight: bold;
+                    font-family: var(--font_num);
+                }
+            }
+
+            p {
+                margin: 0;
+                line-height: 1.6;
+                letter-spacing: clamp(2px, 1vw, 6px);
+                font-size: clamp(16px, 2vw, 20px);
+
+                @include mq(sp) {
+                    letter-spacing: 1px;
+                    br {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    // overview-02 タイトル横向き中央 見出し+説明３つ縦並び
+    &.overview-02 {
+        .dp-section-title {
+            margin-bottom: 128px;
+
+            @include mq(sp) {
+                margin-bottom: 64px;
+            }
+        }
+
+        .text-block > div {
+            flex-direction: column;
+            gap: 24px;
+        }
+        .text-content {
+            max-width: 640px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+    }
+}

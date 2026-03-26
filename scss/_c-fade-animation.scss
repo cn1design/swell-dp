@@ -1,0 +1,191 @@
+/*
+
+ フェードインアニメーション
+
+*/
+
+/*--------------------------------------------------------
+
+  PC： スクロール時に固定位置になる動画
+  ※ ovserver-fadeIn.js でスクロール時にフェードインアニメーションを実行
+
+ --------------------------------------------------------*/
+.fade-animation-wrap > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 64px;
+
+    @include mq(ipad) {
+        flex-direction: column-reverse;
+        gap: 32px;
+    }
+
+    .text-block {
+        max-width: 640px;
+        width: 50%;
+
+        @include mq(ipad) {
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+}
+
+/* 縦中央寄せ */
+.fade-animation-wrap.align-center > div {
+    align-items: center;
+}
+
+/* ビデオコンテナ */
+.fade-video-container {
+    position: sticky;
+    top: 13%;
+    right: 0;
+    max-width: 720px;
+    width: 50%;
+    height: 75vh;
+
+    @include mq(ipad) {
+        position: relative;
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+    }
+
+    // ビデオ
+    video {
+        --fade-ms: 600ms;
+
+        transition: opacity 0.3 ease; // CSS変数でフェード時間を設定可能
+        will-change: opacity;
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+}
+
+/* ビデオアクティブ */
+video.is-active {
+    opacity: 1;
+}
+
+/*--------------------------------------------------------
+
+  スクロール連動で固定画像3枚フェード切り替え
+  ※ fade-scroll.js でスクロール時にフェードインアニメーシュを実行
+
+ --------------------------------------------------------*/
+
+.fade-image-container {
+    width: 50%;
+
+    @include mq(tb) {
+        height: auto;
+    }
+}
+
+.fade-sticky-inner {
+    position: sticky;
+    top: 15%; /* 上からの固定位置（必要に応じて調整） */
+    width: 100%;
+    height: 70vh;
+
+    @include mq(tb) {
+        position: relative;
+        top: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+.fade-sticky-inner figure {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mq(tb) {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        height: auto;
+    }
+}
+
+.fade-sticky-inner figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    @include mq(tb) {
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+.fade-sticky-inner figure.active {
+    opacity: 1;
+}
+
+/* ドットインジケーター */
+.fade-dots {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+.fade-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    transition:
+        background 0.3s,
+        transform 0.3s;
+    display: block;
+}
+
+/* ドットインジケーター メインカラー */
+.fade-dots {
+    --dot-color: var(--color_text);
+
+    position: absolute;
+    bottom: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+
+    @include mq(tb) {
+        display: none;
+    }
+
+    span {
+        display: block;
+        height: 1px;
+        width: calc(100% / 3);
+        background: rgba(255, 255, 255, 0.35);
+        border-radius: 1px;
+        transition:
+            width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            background 0.4s ease;
+
+        &.active {
+            width: calc(100% / 3 * 1.2); // アクティブ時に伸びる
+            background: var(--dot-color);
+        }
+    }
+}

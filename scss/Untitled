@@ -1,0 +1,85 @@
+/* ===========================================
+   カウンター右上＋画像＋説明 縦線で区切り
+   (前提: .dp-card--counter の付与が必要です)
+=========================================== */
+
+.dp-card-verticle-line {
+  .swell-block-columns__inner {
+    counter-reset: card-counter;
+  }
+
+  .swell-block-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    counter-increment: card-counter;
+
+    // カード間の縦線セパレーター
+    & + .swell-block-column {
+      border-left: 1px solid var(--color_text);
+
+      @include mq(sp) {
+        border-left: none;
+        border-top: 1px solid var(--color_text);
+        padding-top: var(--dp-space-element-sp);
+      }
+    }
+
+    // バッジ（ISSUE + カウンター番号）擬似要素で生成
+    &::before {
+      content: "ISSUE\A" counter(card-counter, decimal-leading-zero);
+      white-space: pre;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color_text);
+      border-radius: 50%;
+      font-family: var(--dp-font-en);
+      font-size: 11px;
+      font-weight: var(--dp-font-weight-heading);
+      color: var(--color_bg);
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-align: center;
+      z-index: 1;
+
+      @include mq(sp) {
+        width: 48px;
+        height: 48px;
+        font-size: 10px;
+      }
+    }
+
+    // 画像
+    .wp-block-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      margin-bottom: var(--dp-space-inner-pc);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      @include mq(sp) {
+        margin-bottom: var(--dp-space-inner-sp);
+      }
+    }
+
+    // 説明テキスト
+    p {
+      font-size: var(--dp-font-size-explanation);
+      line-height: var(--dp-line-height-medium);
+      text-align: center;
+    }
+  }
+}

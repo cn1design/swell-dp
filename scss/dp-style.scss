@@ -1,0 +1,325 @@
+@charset "UTF-8";
+@use "sass:map";
+/*!
+    Template: swell
+    Theme Name: SWELL CHILD
+    Theme URI: https://swell-theme.com/
+    Description: SWELLの子テーマ
+    Version: 1.0.0
+*/
+
+/* =========================================================
+   SWELL Design Pattern (DP) Base Style
+   - SWELLのカスタマイザー（GUI）設定を尊重するハイブリッド設計
+   - 投稿ページへの影響を完全に遮断する厳格なスコープ管理
+========================================================= */
+
+$breakpoints: (
+    ipad: 1024px,
+    bp: 959px,
+    tb: 768px,
+    sp: 599px
+);
+
+$num-family: "Roboto", "Noto Sans JP", sans-serif !default;
+
+@mixin mq($key) {
+    $bp: map.get($breakpoints, $key);
+
+    @if $bp == null {
+        @error "Unknown breakpoint `#{$key}`. Available: #{map.keys($breakpoints)}";
+    }
+
+    @media screen and (max-width: $bp) {
+        @content;
+    }
+}
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Zen+Maru+Gothic&display=swap");
+
+/* -------------------------------------------
+ * 1. DP専用 変数定義（CSS Custom Properties）
+ * ------------------------------------------- */
+:root {
+    --dp-font-jp-maru: "Zen Maru Gothic", sans-serif; // 日本語用丸ゴシック
+    --dp-font-en: "Roboto", sans-serif; // 英字用
+    --dp-font-num: "Roboto Condensed", sans-serif; // 数字用
+    --dp-font-general: "Inter", sans-serif; // 一般テキスト用
+
+    // 余白（Spacing System）- フォーマル/カジュアルの調整軸
+    --dp-space-block-pc: 4rem;
+    --dp-space-block-sp: 3rem;
+    --dp-space-element-pc: 2.5rem;
+    --dp-space-element-sp: 1.5rem;
+    --dp-space-inner-pc: 1rem;
+    --dp-space-inner-sp: 0.5rem;
+
+    // 字間（Tracking）
+    --dp-letter-spacing-heading: 0.125em;
+    --dp-letter-spacing-text: 0.03em;
+
+    // 行間
+    --dp-line-height-large: 2;
+    --dp-line-height-medium: 1.6;
+    --dp-line-height-small: 1.4;
+
+    // UIコンポーネント（SaaS/クリニカル感の演出）
+    --dp-radius: 4px; // シャープな角丸
+    --dp-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); // 薄く上品な影
+    --dp-color-sub: var(--color_gray); // サブ背景色
+    --dp-border-width: 3px; // ボーダー幅
+
+    // フォントサイズ
+    --dp-font-size-page-title-pc: 48px;
+    --dp-font-size-page-title-sp: 36px;
+    --dp-font-size-title-pc: 40px;
+    --dp-font-size-title-sp: 32px;
+    --dp-font-size-heading-pc: 24px;
+    --dp-font-size-heading-sp: 20px;
+    --dp-font-size-summary: 18px;
+    --dp-font-size-explanation: 14px;
+
+    // フォントウェイト
+    --dp-font-weight-heading: 500;
+}
+
+/* -------------------------------------------
+ * 2. 厳格なスコープ管理（DP用テンプレート限定）
+ * ------------------------------------------- */
+.dp-wrap,
+.post_content .dp-wrap {
+    // 見出し（H2, H3）の装飾リセット（※ // に変更）
+    h2,
+    h3 {
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin-top: 0;
+
+        &::before,
+        &::after {
+            position: unset;
+            content: none;
+            border: none;
+            background: transparent;
+            width: auto;
+            height: auto;
+            inset: unset;
+        }
+    }
+
+    h3 {
+        font-size: var(--dp-font-size-heading-pc);
+    }
+
+    // 画像ブロックのモーダル機能（拡大）を無効化（※ // に変更）
+    .wp-block-image {
+        img {
+            pointer-events: none;
+
+            @include mq(bp) {
+                max-width: 500px;
+                width: 100%;
+            }
+        }
+    }
+
+    p {
+        line-height: 1.8;
+        letter-spacing: var(--dp-letter-spacing-text);
+    }
+
+    // リンク付き画像の場合はクリックを許可（※ // に変更）
+    .wp-block-image:has(a) img {
+        pointer-events: auto;
+    }
+
+    // 主にセクションタイトル直後 1行のリードテキストで使用
+    .c-lead {
+        letter-spacing: var(--dp-letter-spacing-heading);
+        font-size: clamp(18px, 1.2vw, 20px);
+
+        @include mq(sp) {
+            letter-spacing: var(--dp-letter-spacing-text);
+        }
+    }
+
+    // 主にキャプション内で使用
+    .c-copy {
+        margin-bottom: calc(var(--dp-space-inner-pc) * 1.25);
+        line-height: var(--dp-line-height-medium);
+        font-size: clamp(18px, 1.2vw, 20px);
+        font-weight: var(--dp-font-weight-heading);
+    }
+
+    // 主にセクションタイトル直後 複数行の概要テキストで使用
+    .c-summary {
+        margin-bottom: var(--dp-space-element-pc);
+        line-height: var(--dp-line-height-large);
+        font-size: clamp(16px, 1.2vw, 18px);
+
+        @include mq(sp) {
+            margin-bottom: var(--dp-space-element-sp);
+            line-height: var(--dp-line-height-medium);
+            text-align: left;
+        }
+    }
+
+    // --- 料金 例: ¥123,456（税込） ---
+    .c-pricing-number {
+        line-height: 1;
+        font-family: var(--dp-font-num);
+        font-weight: var(--dp-font-weight-heading);
+
+        span {
+            font-feature-settings: "palt" on;
+
+            &:first-child {
+                margin-right: 3px;
+            }
+        }
+
+        @include mq(sp) {
+            margin-bottom: calc(var(--dp-space-inner-sp));
+        }
+    }
+
+    // --- サポート期間バッジ ---
+    .c-term {
+        display: inline-block;
+        max-width: 240px;
+        width: 100%;
+        margin-bottom: calc(var(--dp-space-element-pc) * 0.6);
+        padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-pc);
+        background-color: var(--color_text);
+        color: var(--color_bg);
+        border-radius: calc(var(--dp-radius) / 2);
+        font-weight: var(--dp-font-weight-heading);
+
+        @include mq(sp) {
+            margin-bottom: calc(var(--dp-space-element-sp) * 0.6);
+        }
+    }
+
+    // --- 注釈 ---
+    .c-annotation {
+        text-align: center;
+        font-size: var(--dp-font-size-explanation);
+
+        @include mq(tb) {
+            text-align: left;
+        }
+    }
+
+    /* 横並び リスト */
+    ul.-list-flex {
+        justify-content: flex-start;
+        padding-left: 0 !important;
+        gap: var(--dp-space-element-pc);
+
+        @include mq(sp) {
+            gap: var(--dp-space-element-sp);
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* 横並び キーワードリスト */
+        &.list-keyword {
+            gap: var(--dp-space-inner-pc);
+            margin-bottom: var(--dp-space-inner-pc);
+
+            @include mq(sp) {
+                gap: var(--dp-space-inner-sp);
+            }
+
+            li {
+                list-style: none;
+                padding: var(--dp-space-inner-sp) var(--dp-space-inner-pc);
+                background-color: #ffffff;
+                border-radius: var(--dp-radius);
+
+                @include mq(sp) {
+                    padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-sp);
+                }
+            }
+        }
+
+        /* 横並び ハッシュタグ 余白多め */
+        &.list-hashtag {
+            justify-content: center;
+            gap: var(--dp-space-inner-pc) var(--dp-space-element-pc);
+
+            @include mq(sp) {
+                flex-direction: column;
+                gap: var(--dp-space-inner-sp);
+            }
+
+            li {
+                font-size: 1.125rem;
+
+                @include mq(sp) {
+                    font-size: inherit;
+                }
+
+                &::before {
+                    content: "＃";
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+
+/*--------------------------------------------------------
+ mainタグ
+--------------------------------------------------------*/
+
+/* 非表示 レスポンシブデザイン */
+.-sp {
+    display: none;
+
+    @include mq(tb) {
+        display: block;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+}
+
+.-pc {
+    @include mq(tb) {
+        display: none;
+    }
+}
+
+/*--------------------------------------------------------
+分割セクション デザインパターン
+--------------------------------------------------------*/
+@import "c-section-title"; /* セクションタイトル */
+@import "c-list"; /* リスト */
+@import "c-button"; /* ボタン */
+@import "c-card-list"; /* カードリスト */
+@import "c-media-block"; /* メディアブロック */
+@import "c-step-list"; /* ステップ */
+@import "p-overview"; /* 概要・コンセプト */
+@import "c-header-nav"; /* ヘッダーナビゲーション */
+@import "p-main-visual"; /* メインビジュアル */
+@import "c-split-column"; /* 4:6分割カラム */
+@import "c-bridge-copy"; /* ブリッジコピー */
+@import "p-problem"; /* よくある悩み */
+@import "p-solution"; /* ソリューション */
+@import "p-strength"; /* ストレングス */
+@import "c-pricing-table"; /* 料金表 */
+@import "c-faq"; /* FAQ */
+@import "c-post-list"; /* 投稿セクション */
+@import "c-banner-list"; /* バナーリスト */
+@import "c-cta-block"; /* CTAブロック */
+@import "c-fade-animation"; /* フェードインアニメーション */
+@import "p-schedule"; /* スケジュール */
+@import "p-voice"; /* お客様の声 */
+@import "c-swipe-slider"; /* 横スワイプスライダー */
+@import "dp-help"; /* DP詳細ページ ヘルプUI */
+@import "c-tab"; /* タブブロック */
+@import "c-contact-form"; /* お問い合わせフォーム */
+@import "c-footer"; /* フッター */
