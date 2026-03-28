@@ -118,7 +118,6 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
             pointer-events: none;
 
             @include mq(bp) {
-                max-width: 500px;
                 width: 100%;
             }
         }
@@ -321,5 +320,6 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "c-swipe-slider"; /* 横スワイプスライダー */
 @import "dp-help"; /* DP詳細ページ ヘルプUI */
 @import "c-tab"; /* タブブロック */
+@import "c-table"; /* テーブル */
 @import "c-contact-form"; /* お問い合わせフォーム */
 @import "c-footer"; /* フッター */

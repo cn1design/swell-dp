@@ -1,0 +1,65 @@
+<!-- wp:html -->
+<style>
+/* dp-lp-hero: LP用メインビジュアル 最外郭フルワイドクラス */
+.dp-lp-hero {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 720px;
+}
+.dp-lp-hero > div {
+  position: static;
+  width: 100%;
+}
+.dp-lp-hero .wp-block-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+  overflow: hidden;
+}
+.dp-lp-hero .wp-block-image img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dp-hero--a: タイトル＋スライダー（SWELL標準メインビジュアル） */
+.dp-hero--a > div {
+  align-items: flex-start;
+}
+
+/* dp-hero-title: 共通タイトルグループ */
+.dp-hero-title > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* dp-hero-title--a */
+.dp-hero-title--a {
+  z-index: 1;
+}
+.dp-hero-title--a > div {
+  align-items: flex-start;
+}
+.dp-hero-title--a > div > .wp-block-group:first-child p {
+  margin-bottom: var(--dp-space-element-pc);
+  font-size: var(--dp-font-size-page-title-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-hero-title--a > div > .wp-block-group:first-child p {
+    margin-bottom: var(--dp-space-element-sp);
+    font-size: var(--dp-font-size-page-title-sp);
+  }
+}
+.dp-hero-title--a > div > .wp-block-group:last-child p {
+  margin-bottom: var(--dp-space-inner-pc);
+  font-size: var(--dp-font-size-summary);
+}
+.dp-hero-title--a .swl-bg-color {
+  text-indent: 20px;
+  border-radius: var(--dp-radius);
+}
+</style>
+<!-- /wp:html -->

@@ -1,0 +1,152 @@
+<!-- wp:html -->
+<style>
+/* dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA */
+.dp-cta--a .swell-block-columns__inner {
+  gap: 0;
+  align-items: stretch;
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-columns__inner {
+    flex-direction: column;
+  }
+}
+.dp-cta--a .swell-block-column {
+  flex: 0 0 50%;
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-column {
+    flex: 1;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(1) .wp-block-image {
+  height: 100%;
+  margin: 0;
+}
+.dp-cta--a .swell-block-column:nth-child(1) .wp-block-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-column:nth-child(1) .wp-block-image img {
+    height: 400px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(1) .wp-block-image img {
+    height: 300px;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) {
+  background-color: var(--color_main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--dp-space-block-pc) var(--dp-space-element-pc);
+  gap: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-column:nth-child(2) {
+    padding: var(--dp-space-element-pc);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) {
+    padding: var(--dp-space-block-sp) var(--dp-space-inner-sp);
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) * {
+  color: white;
+}
+.dp-cta--a .swell-block-column:nth-child(2) h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.dp-cta--a .swell-block-column:nth-child(2) > p:nth-of-type(1) {
+  font-size: clamp(16px, 2vw, var(--dp-font-size-explanation));
+  margin-bottom: 0;
+}
+.dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner {
+  gap: var(--dp-space-inner-sp);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner p {
+  display: inline-block;
+  border: 2px solid white;
+  border-radius: 99px;
+  padding: 8px 24px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner p {
+    font-size: 16px;
+    padding: 6px 16px;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) .swell-block-button {
+  width: 100%;
+  max-width: 400px;
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .swell-block-button {
+    max-width: 300px;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) .swell-block-button__link * {
+  color: var(--color_main);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other {
+  align-items: center;
+  gap: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .cta-other {
+    gap: var(--dp-space-inner-sp);
+    flex-wrap: wrap !important;
+    justify-content: center;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other a {
+  color: white;
+  text-decoration: none;
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(1) {
+  font-family: var(--dp-font-num);
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: var(--dp-line-height-small);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(1) span {
+  height: 0.75em;
+  font-size: var(--swl-fz--huge);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2) {
+  position: relative;
+  padding-left: var(--dp-space-inner-pc);
+  margin-bottom: 0;
+  line-height: var(--dp-line-height-small);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5%;
+  height: 90%;
+  border-left: 1px solid var(--dp-color-sub);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2) {
+    padding-left: 0;
+    font-size: 16px;
+  }
+  .dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2)::before {
+    display: none;
+  }
+}
+</style>
+<!-- /wp:html -->

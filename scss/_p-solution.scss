@@ -6,3 +6,15 @@
 
 .dp-solution-section {
 }
+
+// 解決画像ブロック（solution-01）
+.dp-solution-section__img {
+    max-width: 100%;
+}
+
+// SPで左右カラムを逆順表示（solution-02）
+@media (max-width: 767px) {
+    .dp-sp-reverse-column .swell-block-columns__inner {
+        flex-direction: column-reverse;
+    }
+}

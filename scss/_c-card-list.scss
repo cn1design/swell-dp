@@ -802,3 +802,26 @@
         margin: 0;
     }
 }
+
+/* ===========================================
+特徴キーワード: 角丸ボーダー
+=========================================== */
+.dp-card-rounded-corner {
+    gap: var(--dp-space-inner-sp);
+
+    p {
+        display: inline-block;
+        border: 2px solid;
+        border-radius: 99px;
+        padding: 8px 24px;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 0;
+        line-height: 1.6;
+
+        @include mq(sp) {
+            font-size: 16px;
+            padding: 6px 16px;
+        }
+    }
+}

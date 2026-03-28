@@ -48,3 +48,160 @@ CTAセクション (.dp-cta-section)
         }
     }
 } // /.dp-cta-section
+
+/* -------------------------------------------
+ * dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA
+ * loos/columns に付与 / 左列:画像 / 右列:テキスト+ボタン
+ * ------------------------------------------- */
+.dp-cta--a {
+    // カラム間ギャップ無し・等高
+    .swell-block-columns__inner {
+        gap: 0;
+        align-items: stretch;
+
+        @include mq(bp) {
+            flex-direction: column;
+        }
+    }
+
+    // カラム共通リセット
+    .swell-block-column {
+        flex: 0 0 50%;
+
+        @include mq(bp) {
+            flex: 1;
+        }
+    }
+
+    // 左列（1列目）: 画像カバーフィット
+    .swell-block-column:nth-child(1) {
+        .wp-block-image {
+            height: 100%;
+            margin: 0;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+
+                @include mq(bp) {
+                    height: 400px;
+                }
+
+                @include mq(sp) {
+                    height: 300px;
+                }
+            }
+        }
+    }
+
+    // 右列（2列目）: メインカラー背景・コンテンツ
+    .swell-block-column:nth-child(2) {
+        background-color: var(--color_main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: var(--dp-space-block-pc) var(--dp-space-element-pc);
+        gap: var(--dp-space-inner-pc);
+
+        @include mq(bp) {
+            padding: var(--dp-space-element-pc);
+        }
+
+        @include mq(sp) {
+            padding: var(--dp-space-block-sp) var(--dp-space-inner-sp);
+        }
+
+        // 全テキスト白
+        * {
+            color: white;
+        }
+
+        // メインコピー
+        h2 {
+            font-size: clamp(28px, 3vw, 40px);
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        // 1つ目 p: 概要テキスト2行
+        > p:nth-of-type(1) {
+            font-size: clamp(16px, 2vw, var(--dp-font-size-explanation));
+            margin-bottom: 0;
+        }
+
+        // CTAボタン
+        .swell-block-button {
+            width: 100%;
+            max-width: 400px;
+
+            @include mq(sp) {
+                max-width: 300px;
+            }
+
+            &__link {
+                * {
+                    color: var(--color_main);
+                }
+            }
+        }
+
+        // 電話・チャット グループ
+        .cta-other {
+            align-items: center;
+            gap: var(--dp-space-inner-pc);
+
+            @include mq(sp) {
+                gap: var(--dp-space-inner-sp);
+                flex-wrap: wrap !important;
+                justify-content: center;
+            }
+
+            a {
+                color: white;
+                text-decoration: none;
+            }
+
+            // 電話番号
+            p:nth-of-type(1) {
+                font-family: var(--dp-font-num);
+                font-weight: 700;
+                margin-bottom: 0;
+                line-height: var(--dp-line-height-small);
+
+                span {
+                    height: 0.75em;
+                    font-size: var(--swl-fz--huge);
+                }
+            }
+
+            // チャット（縦線セパレーター + テキスト）
+            p:nth-of-type(2) {
+                position: relative;
+                padding-left: var(--dp-space-inner-pc);
+                margin-bottom: 0;
+                line-height: var(--dp-line-height-small);
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 5%;
+                    height: 90%;
+                    border-left: 1px solid var(--dp-color-sub);
+                }
+
+                @include mq(sp) {
+                    padding-left: 0;
+                    font-size: 16px;
+
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -585,3 +585,52 @@
         }
     }
 }
+
+/* ===========================================
+メディアブロックを伸ばす
+=========================================== */
+.dp-media-text-block--stretch {
+    .wp-block-image {
+        display: flex;
+        height: 100%;
+
+        figure {
+            display: flex;
+
+            img {
+                object-fit: cover;
+            }
+        }
+    }
+
+    // Googleマップ
+    iframe {
+        height: 100%; //ブロック高さに合わせる
+
+        @include mq(sp) {
+            height: 400px;
+        }
+    }
+}
+
+/* ===========================================
+メディアブロックを反転 SWELL標準ブレイクポイントに準拠
+=========================================== */
+
+/* bp: 959px */
+@include mq(bp) {
+    .dp-reverse--bp {
+        > div {
+            flex-direction: column-reverse;
+        }
+    }
+}
+
+/* sp: 599px */
+@include mq(sp) {
+    .dp-reverse--sp {
+        > div {
+            flex-direction: column-reverse;
+        }
+    }
+}

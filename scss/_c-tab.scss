@@ -29,7 +29,7 @@
   .c-tabBody {
     margin-bottom: 0;
     &__item {
-      background-color: white;
+      background-color: #ffffff;
       border-radius: var(--dp-radius);
       padding: var(--dp-space-element-pc); // 2.5rem ≈ 40px
 
@@ -38,6 +38,13 @@
         border-radius: var(--dp-radius);
       }
     }
+  }
+}
+
+/* --- dp-tab-card: タブボディ内 2カラムカードレイアウト --- */
+.dp-tab-card {
+  .swell-block-column:first-child {
+    flex: 0 0 clamp(120px, 25%, 200px);
   }
 }
 

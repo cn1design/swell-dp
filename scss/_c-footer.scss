@@ -15,7 +15,7 @@
         padding: 48px 0 80px !important;
     }
 
-    /* フッター メインコンテンツ ロゴ・ナビゲーション */
+    // フッター メインコンテンツ ロゴ・ナビゲーション
     &__foot {
         padding: 96px 0;
 
@@ -24,7 +24,7 @@
         }
     }
 
-    /* 2カラム */
+    // 2カラム
     .l-container {
         display: flex;
         justify-content: space-between;
@@ -41,7 +41,7 @@
         }
     }
 
-    // 住所コンテナ
+    // 左カラム: ロゴ・住所
     .footer-address {
         display: flex;
         flex-direction: column;
@@ -74,20 +74,33 @@
         }
     }
 
-    .c-iconList__item:not(.-line) {
-        display: none;
+    .c-iconList {
+        margin-bottom: 0;
+
+        &__item:not(.-line) {
+            display: none;
+        }
+        &__item.-line {
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: auto;
+                height: 100%;
+            }
+            .icon-line {
+                &:before {
+                    color: white !important;
+                    font-size: 24px;
+                    background-color: #33d410 !important;
+                    padding: 4px;
+                    border-radius: 4px;
+                }
+            }
+        }
     }
 
-    // LINEアイコンのスタイル フッター限定
-    .icon-line:before {
-        color: white !important;
-        font-size: 24px;
-        background-color: #33d410 !important;
-        padding: 4px;
-        border-radius: 4px;
-    }
-
-    /* ===== 右カラム: ナビゲーション ===== */
+    // 右カラム: ナビゲーション
     .footer-nav-wrap {
         display: flex;
         flex-direction: column;
@@ -97,9 +110,41 @@
         @include mq(bp) {
             align-items: center;
         }
+
+        nav ul li {
+            a {
+                position: relative;
+                transition: 0.3s ease-in-out;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: var(--color_main);
+                    border-radius: 4px;
+                    opacity: 0;
+                    transition: 0.3s ease-in-out;
+                    transform: translateY(4px);
+                }
+
+                &:hover {
+                    color: inherit;
+                    text-decoration: none;
+                    opacity: 1;
+
+                    &::before {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+            }
+        }
     }
 
-    /* 1段目ナビ */
+    // 1段目ナビ
     .footer-first-nav {
         ul.l-footer__nav {
             display: flex;
@@ -116,13 +161,8 @@
             }
 
             > li {
-                > a {
+                a {
                     position: relative;
-                    display: inline;
-                    white-space: nowrap;
-                    font-size: 17px;
-                    font-weight: 500;
-                    text-transform: uppercase;
                     transition: 0.3s ease-in-out;
 
                     &::before {
@@ -132,23 +172,20 @@
                         bottom: 0;
                         width: 100%;
                         height: 2px;
-                        background-color: white;
+                        background-color: var(--color_main);
                         border-radius: 4px;
                         opacity: 0;
                         transition: 0.3s ease-in-out;
                         transform: translateY(4px);
                     }
-
-                    &:hover {
-                        color: inherit;
-                        text-decoration: none;
-                        opacity: 1;
-
-                        &::before {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
+                }
+                > a {
+                    display: inline;
+                    white-space: nowrap;
+                    font-size: 17px;
+                    font-weight: 500;
+                    text-transform: uppercase;
+                    transition: 0.3s ease-in-out;
                 }
 
                 a,
@@ -176,7 +213,7 @@
         }
     }
 
-    /* 2段目ナビ（重要事項・プライバシーポリシー等） */
+    // 2段目ナビ（重要事項・プライバシーポリシー等）
     .footer-secondary-nav {
         ul.l-footer__nav-secondary {
             display: flex;
@@ -207,18 +244,20 @@
         }
     }
 
-    /* コピーライト */
+    // コピーライト
     .copyright {
         display: flex;
         justify-content: center;
-        margin-top: 0;
+        max-width: 1200px;
+        width: calc(100% - 96px);
+        margin: 0 auto;
         line-height: 1;
         font-size: 14px;
         border-top: 1px solid #d9d9d9;
-        padding-top: 40px;
+        padding: 40px 16px 0;
 
         @include mq(sp) {
-            padding: 40px 16px 0;
+            width: calc(100% - 32px);
         }
     }
 }

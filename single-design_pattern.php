@@ -62,18 +62,44 @@ while ( have_posts() ) : the_post();
             </div>
             <?php endif; ?>
 
-            <!-- ===== コピーボタン ===== -->
+            <!-- ===== コピーボタン + スマホいいねボタン ===== -->
+            <?php
+            $like_count = (int) get_post_meta( $post_id, '_dp_like_count', true );
+            ?>
             <?php if ( $raw_block_code ) : ?>
             <p class="dp-copy-hint">＼ご自身のSWELLテーマの編集画面にコピペ／</p>
-            <button type="button" class="dp-single__copy-area dp-copy-btn"
-                data-code="<?php echo htmlspecialchars( $raw_block_code, ENT_QUOTES, 'UTF-8' ); ?>">
-                <svg class="dp-copy-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                        d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />
-                </svg>
-                <span class="dp-copy-text">ブロックコードをコピーする</span>
-            </button>
+            <div class="dp-copy-actions">
+                <button type="button" class="dp-like-inline"
+                    data-post-id="<?php echo esc_attr( $post_id ); ?>"
+                    data-like-count="<?php echo esc_attr( $like_count ); ?>"
+                    aria-label="いいね" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+                <button type="button" class="dp-single__copy-area dp-copy-btn"
+                    data-code="<?php echo htmlspecialchars( $raw_block_code, ENT_QUOTES, 'UTF-8' ); ?>">
+                    <svg class="dp-copy-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                    <span class="dp-copy-text">ブロックコードをコピーする</span>
+                </button>
+            </div>
             <?php endif; ?>
+
+            <!-- PC固定いいねボタン（.dp-like-fixed は960px以上のみ表示） -->
+            <div class="dp-like-fixed">
+                <button type="button" class="dp-like-fixed__btn"
+                    data-post-id="<?php echo esc_attr( $post_id ); ?>"
+                    data-like-count="<?php echo esc_attr( $like_count ); ?>"
+                    aria-label="いいね" aria-pressed="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="dp-like-fixed__count"<?php echo $like_count <= 0 ? ' hidden' : ''; ?>><?php echo $like_count > 0 ? esc_html( $like_count ) : ''; ?></span>
+                </button>
+            </div>
 
             <!-- ===== ヘルプエリア ===== -->
             <?php
@@ -104,7 +130,8 @@ while ( have_posts() ) : the_post();
                         ?>
                         <li class="dp-help-item">
                             <?php if ( $media ) : ?>
-                            <div class="dp-help-item__media"><?php echo $media; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+                            <div class="dp-help-item__media">
+                                <?php echo $media; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
                             <?php endif; ?>
                             <div class="dp-help-item__content">
                                 <h4><?php echo $title; ?></h4>
@@ -145,7 +172,7 @@ while ( have_posts() ) : the_post();
                     <span class="dp-nav-title"><?php echo esc_html( get_the_title( $prev->ID ) ); ?></span>
                 </a>
                 <?php endif; ?>
-                <a href="<?php echo esc_url( get_post_type_archive_link( 'design_pattern' ) ); ?>"
+                <a href="<?php echo esc_url( home_url( '/design-patterns-standard/' ) ); ?>"
                     class="dp-nav-btn dp-nav-btn--archive">
                     一覧に戻る
                 </a>

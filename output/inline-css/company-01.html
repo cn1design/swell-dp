@@ -1,0 +1,69 @@
+<!-- wp:html -->
+<style>
+/* dp-media-text-block--stretch: メディアブロックを伸ばす */
+.dp-media-text-block--stretch .wp-block-image {
+  display: flex;
+  height: 100%;
+}
+.dp-media-text-block--stretch .wp-block-image figure {
+  display: flex;
+}
+.dp-media-text-block--stretch .wp-block-image figure img {
+  object-fit: cover;
+}
+.dp-media-text-block--stretch iframe {
+  height: 100%;
+}
+@media screen and (max-width: 599px) {
+  .dp-media-text-block--stretch iframe {
+    height: 400px;
+  }
+}
+
+/* dp-reverse--bp: メディアブロックを反転（959px） */
+@media screen and (max-width: 959px) {
+  .dp-reverse--bp > div {
+    flex-direction: column-reverse;
+  }
+}
+
+/* dp-table--a: テーブルスタイル */
+.dp-table--a table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dp-table--a th,
+.dp-table--a td {
+  padding: 24px 8px;
+  vertical-align: top;
+  border-top: none;
+  border-bottom: 1px solid #d9d9d9;
+  text-align: left;
+  font-weight: normal;
+}
+@media screen and (max-width: 599px) {
+  .dp-table--a th,
+  .dp-table--a td {
+    padding: 20px 8px;
+    font-size: 14px;
+  }
+}
+.dp-table--a tr:first-child th,
+.dp-table--a tr:first-child td {
+  padding-top: 0;
+}
+.dp-table--a th {
+  border-bottom-color: #888888;
+  white-space: nowrap;
+  padding-right: 16px;
+}
+.dp-table--a td {
+  padding-left: 16px;
+}
+@media screen and (max-width: 599px) {
+  .dp-table--a td {
+    padding-left: 8px;
+  }
+}
+</style>
+<!-- /wp:html -->

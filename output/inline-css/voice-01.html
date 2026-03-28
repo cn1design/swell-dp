@@ -1,0 +1,241 @@
+<!-- wp:html -->
+<style>
+/* dp-card-voice: お客様の声カード 共通 */
+.dp-card-voice .wp-block-jetpack-rating-star > span {
+  margin-bottom: 0;
+}
+.dp-card-voice .wp-block-jetpack-rating-star:not(.is-style-outlined) > span {
+  margin-right: 0;
+}
+.dp-card-voice .swell-block-column {
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow);
+  display: flex;
+  flex-direction: column;
+}
+.dp-card-voice .wp-block-image {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  margin: 0;
+  overflow: hidden;
+}
+.dp-card-voice .wp-block-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+@media screen and (max-width: 599px) {
+  .dp-card-voice .wp-block-image {
+    width: 72px;
+    height: 72px;
+  }
+}
+.dp-card-voice .swell-block-balloon {
+  margin-bottom: 0;
+}
+.dp-card-voice .-circle > .c-balloon__iconImg {
+  object-position: top;
+}
+.dp-card-voice .c-balloon__text p {
+  line-height: var(--dp-line-height-small);
+}
+
+/* dp-card-voice--a: お客様の声カード 典型例 */
+.dp-card-voice--a .swell-block-column {
+  background: #fff;
+  padding: 32px 40px;
+  gap: 16px;
+}
+@media screen and (max-width: 599px) {
+  .dp-card-voice--a .swell-block-column {
+    padding: 24px 20px;
+  }
+}
+.dp-card-voice--a .swell-block-column .dp-voice-card__row {
+  border-bottom: 1px solid var(--color_text);
+  gap: 24px;
+}
+.dp-card-voice--a .swell-block-column .dp-voice-card__row.is-layout-flex {
+  align-items: center;
+}
+.dp-card-voice--a .swell-block-column .dp-voice-card__row .wp-block-image {
+  flex-shrink: 0;
+  height: 96px;
+  margin: 0;
+}
+.dp-card-voice--a .swell-block-column .dp-voice-card__row .wp-block-image img {
+  height: 100%;
+  object-fit: contain;
+}
+.dp-card-voice--a .swell-block-column .dp-voice-card__profile p {
+  margin: 0;
+  line-height: var(--dp-line-height-medium);
+  letter-spacing: var(--dp-letter-spacing-text);
+}
+.dp-card-voice--a .swell-block-column .dp-voice-card__profile p:last-child {
+  font-size: var(--dp-font-size-explanation);
+}
+.dp-card-voice--a .swell-block-column h3.wp-block-heading {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: var(--dp-line-height-small);
+  letter-spacing: var(--dp-letter-spacing-text);
+  margin: 0;
+}
+.dp-card-voice--a .swell-block-column > p {
+  font-size: var(--dp-font-size-explanation);
+  line-height: var(--dp-line-height-small);
+  letter-spacing: var(--dp-letter-spacing-text);
+  margin: 0;
+}
+
+/* js-swipe-slider: 横スワイプスライダー */
+.js-swipe-slider .dp-slider-nav {
+  display: none;
+}
+.js-swipe-slider .dp-slider-nav__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color_bg);
+  border: 1px solid var(--color_text);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+.js-swipe-slider .dp-slider-nav__btn [class*=icon-] {
+  font-size: 14px;
+  line-height: 1;
+  display: block;
+}
+.js-swipe-slider .dp-slider-nav__btn.is-edge {
+  opacity: 0.5;
+}
+.js-swipe-slider .dp-slider-nav__btn:not(.is-edge):hover {
+  background: var(--color_text);
+  color: var(--color_bg);
+}
+.js-swipe-slider .dp-slider-nav__prev {
+  left: 0;
+}
+.js-swipe-slider .dp-slider-nav__next {
+  right: 0;
+}
+.js-swipe-slider.is-slider-active {
+  position: relative;
+}
+.js-swipe-slider.is-slider-active .swell-block-columns__inner {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: var(--dp-space-inner-pc);
+  scrollbar-width: none;
+}
+.js-swipe-slider.is-slider-active .swell-block-columns__inner::-webkit-scrollbar {
+  display: none;
+}
+@media screen and (max-width: 599px) {
+  .js-swipe-slider.is-slider-active .swell-block-columns__inner {
+    gap: 16px;
+  }
+}
+.js-swipe-slider.is-slider-active .swell-block-column {
+  flex-shrink: 0 !important;
+  scroll-snap-align: start;
+  margin-bottom: 0 !important;
+}
+@media screen and (max-width: 959px) {
+  .js-swipe-slider.is-slider-active .swell-block-column {
+    width: calc(50% - 8px) !important;
+  }
+}
+@media screen and (max-width: 599px) {
+  .js-swipe-slider.is-slider-active .swell-block-column {
+    width: 85% !important;
+  }
+}
+.js-swipe-slider.is-slider-active .dp-slider-nav {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.js-swipe-slider.is-slider-active .dp-slider-nav .dp-slider-nav__btn {
+  pointer-events: all;
+}
+</style>
+<script>
+(function () {
+  'use strict';
+  var BP_PC = 959;
+  function initSlider(slider) {
+    var inner = slider.querySelector('.swell-block-columns__inner');
+    var columns = slider.querySelectorAll('.swell-block-column');
+    if (!inner || columns.length < 2) return;
+    var nav = document.createElement('div');
+    nav.className = 'dp-slider-nav';
+    var prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
+    prevBtn.setAttribute('aria-label', '前へ');
+    var prevIcon = document.createElement('span');
+    prevIcon.className = 'icon-chevron-left';
+    prevIcon.setAttribute('aria-hidden', 'true');
+    prevBtn.appendChild(prevIcon);
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
+    nextBtn.setAttribute('aria-label', '次へ');
+    var nextIcon = document.createElement('span');
+    nextIcon.className = 'icon-chevron-right';
+    nextIcon.setAttribute('aria-hidden', 'true');
+    nextBtn.appendChild(nextIcon);
+    nav.appendChild(prevBtn);
+    nav.appendChild(nextBtn);
+    slider.appendChild(nav);
+    function shouldActivate() {
+      if (window.innerWidth <= BP_PC) return true;
+      return columns.length >= 4;
+    }
+    function getScrollAmount() {
+      var cols = inner.querySelectorAll('.swell-block-column');
+      if (cols.length < 2) return inner.clientWidth;
+      var r0 = cols[0].getBoundingClientRect();
+      var r1 = cols[1].getBoundingClientRect();
+      return Math.abs(r1.left - r0.left);
+    }
+    function updateButtons() {
+      var atStart = inner.scrollLeft <= 1;
+      var atEnd = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
+      prevBtn.classList.toggle('is-edge', atStart);
+      nextBtn.classList.toggle('is-edge', atEnd);
+    }
+    function activate() { slider.classList.add('is-slider-active'); updateButtons(); }
+    function deactivate() { slider.classList.remove('is-slider-active'); inner.scrollLeft = 0; }
+    function refresh() { shouldActivate() ? activate() : deactivate(); }
+    prevBtn.addEventListener('click', function () { inner.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }); });
+    nextBtn.addEventListener('click', function () { inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); });
+    inner.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', refresh, { passive: true });
+    refresh();
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.js-swipe-slider').forEach(initSlider);
+  });
+})();
+</script>
+<!-- /wp:html -->

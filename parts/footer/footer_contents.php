@@ -5,9 +5,6 @@ if (!defined('ABSPATH')) exit;
 
 <div class="l-footer__inner">
 
-    <!-- ブログパーツ：フッター直前コンテンツ（全ページ共通） -->
-    <?php echo do_shortcode('[blog_parts id="5546"]'); ?>
-
     <?php SWELL_Theme::get_parts('parts/footer/foot_widget'); ?>
 
     <div class="l-footer__foot">
@@ -18,7 +15,7 @@ if (!defined('ABSPATH')) exit;
                 <div class="footer-address__logo-wrap">
                     <!-- ロゴ（ヘッダーロゴ流用: SWELLカスタマイザー > ロゴ設定と共通） -->
                     <div class="footer-logo">
-                        <?php echo SWELL_PARTS::head_logo(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                        <?php echo SWELL_PARTS::head_logo(); ?>
                     </div>
                     <!-- SNS アイコン（LINEなど: SWELLカスタマイザーで設定） -->
                     <?php
@@ -34,8 +31,13 @@ if (!defined('ABSPATH')) exit;
                     endif;
                     ?>
                 </div>
-                <!-- 住所・TEL/FAX: ブログパーツ（id="387"）で管理 -->
-                <?php echo do_shortcode('[blog_parts id="387"]'); ?>
+                <!-- 住所・TEL/FAX: カスタマイザー > フッター設定（子テーマ）で設定 -->
+                <?php
+                $bp_address = (int) get_theme_mod( 'child_bp_footer_address', 0 );
+                if ( $bp_address > 0 ) :
+                    echo do_shortcode( '[blog_parts id="' . $bp_address . '"]' );
+                endif;
+                ?>
             </div>
 
             <!-- ===== 右カラム: ナビゲーション ===== -->

@@ -1,0 +1,54 @@
+/* ===========================================
+   テーブル (table)
+   【実装ルール】
+   - ブロック: wp:table（ブロックインサーター）
+   - is-style-simple と組み合わせて使用
+   - th幅はSWELLエディタの「1列目の幅」（swlCell1Width）で設定
+   - フォントサイズはSWELLエディタの「文字サイズ」（swlFz）で設定
+   - このファイルはテーブルタグ（table / th / td）のデザインのみ記述
+   - 新規バリアントはこのファイル末尾に追記すること
+=========================================== */
+
+// --- dp-table--a: シンプルボーダーボトムテーブル ---
+.dp-table--a {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 24px 8px;
+        vertical-align: top;
+        border-top: none;
+        border-bottom: 1px solid #d9d9d9;
+        text-align: left;
+        font-weight: normal;
+
+        @include mq(sp) {
+            padding: 20px 8px;
+            font-size: 14px;
+        }
+    }
+
+    tr:first-child {
+        th,
+        td {
+            padding-top: 0;
+        }
+    }
+
+    th {
+        border-bottom-color: #888888;
+        white-space: nowrap;
+        padding-right: 16px;
+    }
+
+    td {
+        padding-left: 16px;
+
+        @include mq(sp) {
+            padding-left: 8px;
+        }
+    }
+}

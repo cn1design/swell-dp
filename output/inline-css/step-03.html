@@ -1,0 +1,81 @@
+<!-- wp:html -->
+<style>
+/* dp-step-list: ステップリスト共通 */
+.dp-step-list .swell-block-step__title {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* dp-step-list--c: 縦タイムライン型（スモール・時間軸） */
+.dp-step-list--c {
+  display: flex;
+  flex-direction: column;
+  max-width: 768px;
+  margin: 0 auto;
+}
+.dp-step-list--c .swell-block-step__item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: var(--dp-space-element-sp);
+  padding-bottom: var(--dp-space-element-pc);
+  position: relative;
+}
+@media screen and (max-width: 599px) {
+  .dp-step-list--c .swell-block-step__item {
+    grid-template-columns: 64px 1fr;
+    column-gap: var(--dp-space-inner-pc);
+    padding-bottom: var(--dp-space-element-sp);
+  }
+}
+.dp-step-list--c .swell-block-step__item:last-child {
+  padding-bottom: 0;
+}
+.dp-step-list--c .swell-block-step__item::before {
+  content: none !important;
+}
+.dp-step-list--c .swell-block-step__item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 32px;
+  left: 101px;
+  height: calc(100% - 32px);
+  border-left: 1px solid var(--color_text);
+}
+@media screen and (max-width: 599px) {
+  .dp-step-list--c .swell-block-step__item:not(:last-child)::after {
+    top: 32px;
+    left: 71px;
+    height: calc(100% - 32px);
+  }
+}
+.dp-step-list--c .swell-block-step__number {
+  font-family: var(--dp-font-num);
+}
+.dp-step-list--c .swell-block-step__number::after {
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 500;
+  line-height: 1;
+}
+.dp-step-list--c .swell-block-step__number .__shape {
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  background-color: var(--color_bg);
+  z-index: 1;
+}
+@media screen and (max-width: 599px) {
+  .dp-step-list--c .swell-block-step__number .__shape {
+    top: 8px;
+    right: 0;
+  }
+}
+.dp-step-list--c .swell-block-step__body {
+  grid-column: 2;
+  grid-row: 2;
+}
+.dp-step-list--c .swell-block-step__body .wp-block-image {
+  margin-bottom: var(--dp-space-inner-pc);
+}
+</style>
+<!-- /wp:html -->

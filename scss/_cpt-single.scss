@@ -122,6 +122,13 @@
             opacity 0.15s;
     }
 
+    // dp-copy-actions内（いいねボタンと横並び）：パディング・マージンを調整
+    .dp-copy-actions .dp-single__copy-area.dp-copy-btn {
+        padding: 16px 12px;
+        margin-bottom: 0;
+        font-size: clamp(15px, 1.2vw, 18px);
+    }
+
     .dp-single__copy-area.dp-copy-btn:hover {
         opacity: 0.9;
     }
@@ -173,7 +180,7 @@
 
     // ナビゲーション
     .dp-single__nav {
-        border-top: 1px solid #e8e8e8;
+        border-top: none;
         padding: 48px 0;
     }
 

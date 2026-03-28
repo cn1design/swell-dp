@@ -42,7 +42,7 @@ SWELL独自ボタン
 
 /* 背景白抜きボタン */
 .button-white .swell-block-button__link {
-    background-color: var(--color_bg);
+    background: var(--color_bg);
     color: var(--color_main) !important;
 }
 

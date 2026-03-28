@@ -106,6 +106,24 @@ add_action('wp_enqueue_scripts', function() {
 		);
 	}
 
+	// いいねボタン（アーカイブ + 標準構成 + シングル）
+	if (
+		is_post_type_archive( 'design_pattern' ) ||
+		is_page_template( 'page-design_pattern_standard.php' ) ||
+		( is_singular( 'design_pattern' ) )
+	) {
+		wp_enqueue_script(
+			'child-dp-like',
+			get_stylesheet_directory_uri() . '/javascript/dp-like.js',
+			[],
+			filemtime( get_stylesheet_directory() . '/javascript/dp-like.js' ),
+			true
+		);
+		wp_localize_script( 'child-dp-like', 'dpLikeSettings', [
+			'apiUrl' => rest_url( 'dp/v1/like' ),
+		] );
+	}
+
 }, 11);
 
 //WordPressで自動更新メール通知を無効化 / fuunctions.php
@@ -114,11 +132,56 @@ add_filter( 'auto_plugin_update_send_email', '__return_false' );
 require_once get_stylesheet_directory() . '/inc/design-patterns.php';
 require_once get_stylesheet_directory() . '/inc/dp-base-css-data.php';
 require_once get_stylesheet_directory() . '/inc/dp-tips-data.php';
+require_once get_stylesheet_directory() . '/inc/customizer.php';
 
 /* フッター サブナビ（重要事項説明書・利用契約書・プライバシーポリシー等）*/
 add_action('init', function() {
     register_nav_menu('footer_secondary_menu', 'フッター サブナビ');
 });
+
+/* =====================================================
+ * いいね REST API（design_pattern 専用・認証不要）
+ * ===================================================== */
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'dp/v1', '/like', [
+        'methods'             => 'POST',
+        'callback'            => 'dp_handle_like',
+        'permission_callback' => '__return_true',
+        'args'                => [
+            'post_id' => [
+                'required'          => true,
+                'validate_callback' => function ( $v ) { return is_numeric( $v ) && $v > 0; },
+                'sanitize_callback' => 'absint',
+            ],
+            'action' => [
+                'required'          => true,
+                'validate_callback' => function ( $v ) { return in_array( $v, [ 'like', 'unlike' ], true ); },
+            ],
+        ],
+    ] );
+} );
+
+function dp_handle_like( WP_REST_Request $request ) {
+    $post_id = $request->get_param( 'post_id' );
+    $action  = $request->get_param( 'action' );
+
+    if ( get_post_type( $post_id ) !== 'design_pattern' ) {
+        return new WP_Error( 'invalid_post', 'Invalid post type', [ 'status' => 400 ] );
+    }
+
+    $count = (int) get_post_meta( $post_id, '_dp_like_count', true );
+    $count = ( $action === 'like' ) ? $count + 1 : max( 0, $count - 1 );
+    update_post_meta( $post_id, '_dp_like_count', $count );
+
+    return rest_ensure_response( [ 'count' => $count ] );
+}
+
+/* =====================================================
+ * ブログパーツ ID 定数
+ * 移植先WPでは、管理画面 > ブログパーツ で確認して値を更新する
+ * ===================================================== */
+define( 'BP_FOOTER_ADDRESS',    387  ); // フッター 住所・TEL/FAX
+define( 'BP_FOOTER_BEFORE',     5546 ); // フッター直前コンテンツ（全ページ共通）
 
 /* ======================================================== */
 

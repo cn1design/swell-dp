@@ -88,8 +88,7 @@
 }
 @media screen and (max-width: 959px) {
   .dp-wrap .wp-block-image img,
-.post_content .dp-wrap .wp-block-image img {
-    max-width: 500px;
+  .post_content .dp-wrap .wp-block-image img {
     width: 100%;
   }
 }
@@ -109,7 +108,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap .c-lead,
-.post_content .dp-wrap .c-lead {
+  .post_content .dp-wrap .c-lead {
     letter-spacing: var(--dp-letter-spacing-text);
   }
 }
@@ -128,7 +127,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap .c-summary,
-.post_content .dp-wrap .c-summary {
+  .post_content .dp-wrap .c-summary {
     margin-bottom: var(--dp-space-element-sp);
     line-height: var(--dp-line-height-medium);
     text-align: left;
@@ -150,7 +149,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap .c-pricing-number,
-.post_content .dp-wrap .c-pricing-number {
+  .post_content .dp-wrap .c-pricing-number {
     margin-bottom: calc(var(--dp-space-inner-sp));
   }
 }
@@ -168,7 +167,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap .c-term,
-.post_content .dp-wrap .c-term {
+  .post_content .dp-wrap .c-term {
     margin-bottom: calc(var(--dp-space-element-sp) * 0.6);
   }
 }
@@ -179,7 +178,7 @@
 }
 @media screen and (max-width: 768px) {
   .dp-wrap .c-annotation,
-.post_content .dp-wrap .c-annotation {
+  .post_content .dp-wrap .c-annotation {
     text-align: left;
   }
 }
@@ -193,7 +192,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex,
-.post_content .dp-wrap ul.-list-flex {
+  .post_content .dp-wrap ul.-list-flex {
     gap: var(--dp-space-element-sp);
   }
 }
@@ -208,7 +207,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex.list-keyword,
-.post_content .dp-wrap ul.-list-flex.list-keyword {
+  .post_content .dp-wrap ul.-list-flex.list-keyword {
     gap: var(--dp-space-inner-sp);
   }
 }
@@ -221,7 +220,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex.list-keyword li,
-.post_content .dp-wrap ul.-list-flex.list-keyword li {
+  .post_content .dp-wrap ul.-list-flex.list-keyword li {
     padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-sp);
   }
 }
@@ -232,7 +231,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex.list-hashtag,
-.post_content .dp-wrap ul.-list-flex.list-hashtag {
+  .post_content .dp-wrap ul.-list-flex.list-hashtag {
     flex-direction: column;
     gap: var(--dp-space-inner-sp);
   }
@@ -243,7 +242,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex.list-hashtag li,
-.post_content .dp-wrap ul.-list-flex.list-hashtag li {
+  .post_content .dp-wrap ul.-list-flex.list-hashtag li {
     font-size: inherit;
   }
 }
@@ -284,13 +283,13 @@
 */
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-  margin-bottom: var(--dp-space-element-pc);
+  margin-bottom: var(--dp-space-block-pc);
   text-align: center;
 }
 @media screen and (max-width: 599px) {
   .dp-section-title {
     justify-content: center;
-    margin-bottom: var(--dp-space-element-sp);
+    margin-bottom: var(--dp-space-block-sp);
   }
 }
 .dp-section-title h1 {
@@ -329,13 +328,15 @@
   font-size: 90%;
   font-family: var(--dp-font-num);
 }
-.dp-section-title .en-title {
+.dp-section-title .en-title,
+.dp-section-title .dp-section-title__en {
   margin-bottom: var(--dp-space-inner-sp);
   letter-spacing: var(--dp-letter-spacing-heading);
   font-family: var(--dp-font-en);
 }
 @media screen and (max-width: 599px) {
-  .dp-section-title .en-title {
+  .dp-section-title .en-title,
+  .dp-section-title .dp-section-title__en {
     letter-spacing: var(--dp-letter-spacing-text);
     margin-bottom: var(--dp-space-inner-sp);
     font-size: 20px;
@@ -497,7 +498,7 @@ SWELL独自ボタン
 
 /* 背景白抜きボタン */
 .button-white .swell-block-button__link {
-  background-color: var(--color_bg);
+  background: var(--color_bg);
   color: var(--color_main) !important;
 }
 
@@ -561,7 +562,7 @@ WP標準ボタン
 }
 @media screen and (max-width: 599px) {
   .dp-card-circle .wp-block-image,
-.dp-card-circle i {
+  .dp-card-circle i {
     width: 112px;
     height: 112px;
     margin-bottom: var(--dp-space-inner-sp);
@@ -571,12 +572,11 @@ WP標準ボタン
 .dp-card-circle i img {
   width: 96px;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 @media screen and (max-width: 768px) {
   .dp-card-circle .wp-block-image img,
-.dp-card-circle i img {
+  .dp-card-circle i img {
     width: 64px;
   }
 }
@@ -664,14 +664,12 @@ WP標準ボタン
 .dp-card-plain .wp-block-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .dp-card-plain i img {
   width: 64px;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .dp-card-plain p {
   padding: var(--dp-space-inner-pc) var(--dp-space-inner-pc);
@@ -755,8 +753,7 @@ WP標準ボタン
 }
 .dp-card-sticky-note .wp-block-image img {
   height: 180px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 @media screen and (max-width: 599px) {
   .dp-card-sticky-note .wp-block-image img {
@@ -833,8 +830,7 @@ WP標準ボタン
 .dp-card-circle-badge .swell-block-column .wp-block-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .dp-card-circle-badge h3 {
   margin-bottom: calc(var(--dp-space-inner-pc) / 2);
@@ -917,8 +913,7 @@ WP標準ボタン
 .dp-card-verticle-line .swell-block-column .wp-block-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 @media screen and (max-width: 599px) {
   .dp-card-verticle-line .swell-block-column .wp-block-image {
@@ -980,10 +975,8 @@ WP標準ボタン
 .dp-card-voice .wp-block-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: top;
-     object-position: top;
+  object-fit: cover;
+  object-position: top;
 }
 @media screen and (max-width: 599px) {
   .dp-card-voice .wp-block-image {
@@ -995,8 +988,7 @@ WP標準ボタン
   margin-bottom: 0;
 }
 .dp-card-voice .-circle > .c-balloon__iconImg {
-  -o-object-position: top;
-     object-position: top;
+  object-position: top;
 }
 .dp-card-voice .c-balloon__text p {
   line-height: var(--dp-line-height-small);
@@ -1030,8 +1022,7 @@ WP標準ボタン
 }
 .dp-card-voice--a .swell-block-column .dp-voice-card__row .wp-block-image img {
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .dp-card-voice--a .swell-block-column .dp-voice-card__profile p {
   margin: 0;
@@ -1101,8 +1092,7 @@ WP標準ボタン
   width: 100%;
   height: 48px;
   background: var(--dp-color-sub);
-  -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
-          clip-path: polygon(100% 0, 0 0, 0 100%);
+  clip-path: polygon(100% 0, 0 0, 0 100%);
 }
 .dp-card-voice--b .dp-card-voice__heading {
   margin-bottom: var(--dp-space-inner-pc);
@@ -1272,8 +1262,7 @@ WP標準ボタン
 .dp-media-text-section .card-list-icon-heading-text .wp-block-image img {
   width: 3.5em;
   height: 3.5em;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .dp-media-text-section .card-list-icon-heading-text .swell-block-column > p:first-of-type {
   font-size: 1.25em;
@@ -1398,8 +1387,7 @@ WP標準ボタン
   width: 100%;
   height: 100%;
   border-radius: var(--dp-radius);
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .dp-media-text-block .text-block {
   flex: 1;
@@ -1511,8 +1499,7 @@ WP標準ボタン
   width: 100%;
   height: 100%;
   border-radius: var(--dp-radius);
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .dp-media-text-block--a .text-block {
   padding-top: 2.25em;
@@ -1589,8 +1576,7 @@ WP標準ボタン
 }
 .dp-media-text-block--b .media-block img {
   height: 660px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 /* ===========================================
@@ -1662,8 +1648,7 @@ WP標準ボタン
 .dp-media-text-block--c > .wp-block-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 @media screen and (max-width: 959px) {
   .dp-media-text-block--c > .wp-block-image {
@@ -1748,6 +1733,43 @@ WP標準ボタン
   }
 }
 
+/* ===========================================
+メディアブロックを伸ばす
+=========================================== */
+.dp-media-text-block--stretch .wp-block-image {
+  display: flex;
+  height: 100%;
+}
+.dp-media-text-block--stretch .wp-block-image figure {
+  display: flex;
+}
+.dp-media-text-block--stretch .wp-block-image figure img {
+  object-fit: cover;
+}
+.dp-media-text-block--stretch iframe {
+  height: 100%;
+}
+@media screen and (max-width: 599px) {
+  .dp-media-text-block--stretch iframe {
+    height: 400px;
+  }
+}
+
+/* ===========================================
+メディアブロックを反転 SWELL標準ブレイクポイントに準拠
+=========================================== */
+/* bp: 959px */
+@media screen and (max-width: 959px) {
+  .dp-reverse--bp > div {
+    flex-direction: column-reverse;
+  }
+}
+/* sp: 599px */
+@media screen and (max-width: 599px) {
+  .dp-reverse--sp > div {
+    flex-direction: column-reverse;
+  }
+}
 /* メディアブロック */
 /* ===========================================
    ステップ (step) - DP Optimized
@@ -1884,8 +1906,7 @@ WP標準ボタン
 .dp-step-list--a .swell-block-step__body .wp-block-image img {
   width: 7em;
   height: 7em;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 @media screen and (max-width: 599px) {
   .dp-step-list--a .swell-block-step__body .wp-block-image img {
@@ -1929,8 +1950,7 @@ WP標準ボタン
   display: grid !important;
   grid-template-columns: 96px 1fr;
   grid-template-rows: auto auto;
-  -moz-column-gap: 64px;
-       column-gap: 64px;
+  column-gap: 64px;
   padding-left: 0;
   padding-bottom: var(--dp-space-block-pc);
   position: relative;
@@ -1938,8 +1958,7 @@ WP標準ボタン
 @media screen and (max-width: 599px) {
   .dp-step-list--b .swell-block-step__item {
     grid-template-columns: 64px 1fr;
-    -moz-column-gap: var(--dp-space-inner-pc);
-         column-gap: var(--dp-space-inner-pc);
+    column-gap: var(--dp-space-inner-pc);
     padding-bottom: var(--dp-space-element-sp);
   }
 }
@@ -2048,16 +2067,14 @@ WP標準ボタン
   display: grid;
   grid-template-columns: 110px 1fr;
   grid-template-rows: auto auto;
-  -moz-column-gap: var(--dp-space-element-sp);
-       column-gap: var(--dp-space-element-sp);
+  column-gap: var(--dp-space-element-sp);
   padding-bottom: var(--dp-space-element-pc);
   position: relative;
 }
 @media screen and (max-width: 599px) {
   .dp-step-list--c .swell-block-step__item {
     grid-template-columns: 64px 1fr;
-    -moz-column-gap: var(--dp-space-inner-pc);
-         column-gap: var(--dp-space-inner-pc);
+    column-gap: var(--dp-space-inner-pc);
     padding-bottom: var(--dp-space-element-sp);
   }
 }
@@ -2162,14 +2179,12 @@ WP標準ボタン
 .dp-overview-section .media-block figure img {
   width: 100%;
   height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 @media screen and (max-width: 599px) {
   .dp-overview-section .media-block figure img {
     height: 180px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
 }
 .dp-overview-section .media-block figure:nth-child(1) {
@@ -2315,7 +2330,6 @@ WP標準ボタン
   }
 }
 .dp-overview-section .sticky-heading {
-  position: -webkit-sticky;
   position: sticky;
   top: 128px;
   align-self: flex-start;
@@ -2333,8 +2347,6 @@ WP標準ボタン
   }
 }
 .dp-overview-section .sticky-heading h2 {
-  height: -webkit-max-content;
-  height: -moz-max-content;
   height: max-content;
   margin-right: 16px;
   margin-bottom: 16px;
@@ -2468,7 +2480,7 @@ WP標準ボタン
 .c-gnav > .menu-item:nth-last-child(2) a .ttl, .c-gnav > .menu-item:last-child a .ttl,
 .c-listMenu > .menu-item:nth-last-child(2) a .ttl,
 .c-listMenu > .menu-item:last-child a .ttl {
-  font-weight: var(--dp-font-weight-heading);
+  font-weight: 600;
 }
 .c-gnav > .menu-item:nth-last-child(2) a i, .c-gnav > .menu-item:last-child a i,
 .c-listMenu > .menu-item:nth-last-child(2) a i,
@@ -2495,7 +2507,7 @@ WP標準ボタン
 }
 @media screen and (max-width: 599px) {
   .c-gnav > .menu-item:nth-last-child(2) a,
-.c-listMenu > .menu-item:nth-last-child(2) a {
+  .c-listMenu > .menu-item:nth-last-child(2) a {
     padding: 10px 20px;
     font-size: var(--dp-font-size-explanation);
   }
@@ -2579,8 +2591,7 @@ LP用メインビジュアル
 }
 .dp-lp-hero .wp-block-image img {
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 /*--------------------------------------------------------
@@ -2869,8 +2880,7 @@ LP用メインビジュアル
 .hero .hero-model img {
   max-width: 100%;
   height: auto;
-  -webkit-animation: float 6s ease-in-out infinite;
-          animation: float 6s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 .hero__content-bottom > div {
@@ -2913,18 +2923,6 @@ LP用メインビジュアル
   transform: scale(1.02);
 }
 
-@-webkit-keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -2958,16 +2956,14 @@ LP用メインビジュアル
   background-repeat: no-repeat;
   background-position: center;
   opacity: 1;
-  -webkit-animation: float 6s ease-in-out infinite;
-          animation: float 6s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 .object-content .object-circle.one {
   top: 80px;
   left: -24px;
   background-image: url("../images/object/img_object_01.svg");
-  -webkit-animation-delay: 0s;
-          animation-delay: 0s;
+  animation-delay: 0s;
 }
 
 .object-content .object-circle.two {
@@ -2976,16 +2972,14 @@ LP用メインビジュアル
   bottom: 96px;
   right: -24px;
   background-image: url("../images/object/img_object_02.svg");
-  -webkit-animation-delay: 2s;
-          animation-delay: 2s;
+  animation-delay: 2s;
 }
 
 .object-content .object-circle.three {
   top: 200px;
   left: -24px;
   background-image: url("../images/object/img_object_03.svg");
-  -webkit-animation-delay: 0s;
-          animation-delay: 0s;
+  animation-delay: 0s;
 }
 
 .object-content .object-circle.four {
@@ -2994,16 +2988,14 @@ LP用メインビジュアル
   bottom: 0;
   right: -24px;
   background-image: url("../images/object/img_object_04.svg");
-  -webkit-animation-delay: 2s;
-          animation-delay: 2s;
+  animation-delay: 2s;
 }
 
 .object-content .object-circle.five {
   top: 0;
   left: -24px;
   background-image: url("../images/object/img_object_03.svg");
-  -webkit-animation-delay: 0s;
-          animation-delay: 0s;
+  animation-delay: 0s;
 }
 
 .object-content .object-circle.six {
@@ -3012,8 +3004,7 @@ LP用メインビジュアル
   top: -80px;
   right: -24px;
   background-image: url("../images/object/img_object_04.svg");
-  -webkit-animation-delay: 2s;
-          animation-delay: 2s;
+  animation-delay: 2s;
 }
 @media screen and (max-width: 768px) {
   .object-content .object-circle.six {
@@ -3136,8 +3127,7 @@ LP用メインビジュアル
 .hero-split .wp-block-group.hero-media.dp-fade-slider .wp-block-image img {
   height: 100%;
   aspect-ratio: 7/6;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: var(--dp-radius);
 }
 .hero-split .wp-block-group.hero-media.dp-fade-slider.is-initialized .wp-block-image.is-active {
@@ -3217,8 +3207,7 @@ LP用メインビジュアル
 }
 .dp-bridge-copy-simple::before {
   background-color: color-mix(in srgb, var(--color_main) 5%, white);
-  -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
-          clip-path: polygon(0 0, 100% 0, 50% 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
   z-index: -1;
 }
 @media screen and (max-width: 959px) {
@@ -3455,6 +3444,15 @@ LP用メインビジュアル
  * 解決できること セクション
  * スコープ: .dp-solution-section
  */
+.dp-solution-section__img {
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  .dp-sp-reverse-column .swell-block-columns__inner {
+    flex-direction: column-reverse;
+  }
+}
 /* ソリューション */
 /*
 
@@ -3498,8 +3496,7 @@ LP用メインビジュアル
 .dp-strength-section .dp-strength-card .wp-block-image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .dp-strength-section .dp-strength-card p {
   padding: var(--dp-space-inner-pc);
@@ -3768,6 +3765,158 @@ CTAセクション (.dp-cta-section)
   }
 }
 
+/* -------------------------------------------
+ * dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA
+ * loos/columns に付与 / 左列:画像 / 右列:テキスト+ボタン
+ * ------------------------------------------- */
+.dp-cta--a .swell-block-columns__inner {
+  gap: 0;
+  align-items: stretch;
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-columns__inner {
+    flex-direction: column;
+  }
+}
+.dp-cta--a .swell-block-column {
+  flex: 0 0 50%;
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-column {
+    flex: 1;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(1) .wp-block-image {
+  height: 100%;
+  margin: 0;
+}
+.dp-cta--a .swell-block-column:nth-child(1) .wp-block-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-column:nth-child(1) .wp-block-image img {
+    height: 400px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(1) .wp-block-image img {
+    height: 300px;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) {
+  background-color: var(--color_main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--dp-space-block-pc) var(--dp-space-element-pc);
+  gap: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--a .swell-block-column:nth-child(2) {
+    padding: var(--dp-space-element-pc);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) {
+    padding: var(--dp-space-block-sp) var(--dp-space-inner-sp);
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) * {
+  color: white;
+}
+.dp-cta--a .swell-block-column:nth-child(2) h2 {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.dp-cta--a .swell-block-column:nth-child(2) > p:nth-of-type(1) {
+  font-size: clamp(16px, 2vw, var(--dp-font-size-explanation));
+  margin-bottom: 0;
+}
+.dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner {
+  gap: var(--dp-space-inner-sp);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner p {
+  display: inline-block;
+  border: 2px solid white;
+  border-radius: 99px;
+  padding: 8px 24px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner p {
+    font-size: 16px;
+    padding: 6px 16px;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) .swell-block-button {
+  width: 100%;
+  max-width: 400px;
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .swell-block-button {
+    max-width: 300px;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) .swell-block-button__link * {
+  color: var(--color_main);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other {
+  align-items: center;
+  gap: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .cta-other {
+    gap: var(--dp-space-inner-sp);
+    flex-wrap: wrap !important;
+    justify-content: center;
+  }
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other a {
+  color: white;
+  text-decoration: none;
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(1) {
+  font-family: var(--dp-font-num);
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: var(--dp-line-height-small);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(1) span {
+  height: 0.75em;
+  font-size: var(--swl-fz--huge);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2) {
+  position: relative;
+  padding-left: var(--dp-space-inner-pc);
+  margin-bottom: 0;
+  line-height: var(--dp-line-height-small);
+}
+.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5%;
+  height: 90%;
+  border-left: 1px solid var(--dp-color-sub);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2) {
+    padding-left: 0;
+    font-size: 16px;
+  }
+  .dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2)::before {
+    display: none;
+  }
+}
+
 /* CTAブロック */
 /*
 
@@ -3801,14 +3950,15 @@ CTAセクション (.dp-cta-section)
     max-width: 100%;
     width: 100%;
   }
-} /* 縦中央寄せ */
+}
+
+/* 縦中央寄せ */
 .fade-animation-wrap.align-center > div {
   align-items: center;
 }
 
 /* ビデオコンテナ */
 .fade-video-container {
-  position: -webkit-sticky;
   position: sticky;
   top: 13%;
   right: 0;
@@ -3830,8 +3980,7 @@ CTAセクション (.dp-cta-section)
   will-change: opacity;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -3857,7 +4006,6 @@ video.is-active {
 }
 
 .fade-sticky-inner {
-  position: -webkit-sticky;
   position: sticky;
   top: 15%; /* 上からの固定位置（必要に応じて調整） */
   width: 100%;
@@ -3895,14 +4043,12 @@ video.is-active {
 .fade-sticky-inner figure img {
   width: 100%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 @media screen and (max-width: 768px) {
   .fade-sticky-inner figure img {
     height: auto;
-    -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
 }
 
@@ -4109,8 +4255,7 @@ video.is-active {
 .dp-schedule-section .dp-schedule-row__img img {
   width: 100%;
   height: auto;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 @media screen and (max-width: 599px) {
   .dp-schedule-section .dp-schedule-row__img {
@@ -4277,13 +4422,12 @@ video.is-active {
   width: 100%;
   height: auto;
   max-height: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: calc(var(--dp-radius) / 2);
 }
 @media screen and (max-width: 768px) {
   .single-design_pattern .dp-help-item__media video,
-.single-design_pattern .dp-help-item__media img {
+  .single-design_pattern .dp-help-item__media img {
     max-height: 160px;
   }
 }
@@ -4348,7 +4492,7 @@ video.is-active {
   margin-bottom: 0;
 }
 .dp-tab .c-tabBody__item {
-  background-color: white;
+  background-color: #ffffff;
   border-radius: var(--dp-radius);
   padding: var(--dp-space-element-pc);
 }
@@ -4357,6 +4501,11 @@ video.is-active {
     padding: var(--dp-space-inner-pc);
     border-radius: var(--dp-radius);
   }
+}
+
+/* --- dp-tab-card: タブボディ内 2カラムカードレイアウト --- */
+.dp-tab-card .swell-block-column:first-child {
+  flex: 0 0 clamp(120px, 25%, 200px);
 }
 
 /* --- dp-tab-balloon: 吹き出しタブバリアント ---
@@ -4387,6 +4536,55 @@ video.is-active {
 }
 
 /* タブブロック */
+/* ===========================================
+   テーブル (table)
+   【実装ルール】
+   - ブロック: wp:table（ブロックインサーター）
+   - is-style-simple と組み合わせて使用
+   - th幅はSWELLエディタの「1列目の幅」（swlCell1Width）で設定
+   - フォントサイズはSWELLエディタの「文字サイズ」（swlFz）で設定
+   - このファイルはテーブルタグ（table / th / td）のデザインのみ記述
+   - 新規バリアントはこのファイル末尾に追記すること
+=========================================== */
+.dp-table--a table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dp-table--a th,
+.dp-table--a td {
+  padding: 24px 8px;
+  vertical-align: top;
+  border-top: none;
+  border-bottom: 1px solid #d9d9d9;
+  text-align: left;
+  font-weight: normal;
+}
+@media screen and (max-width: 599px) {
+  .dp-table--a th,
+  .dp-table--a td {
+    padding: 20px 8px;
+    font-size: 14px;
+  }
+}
+.dp-table--a tr:first-child th,
+.dp-table--a tr:first-child td {
+  padding-top: 0;
+}
+.dp-table--a th {
+  border-bottom-color: #888888;
+  white-space: nowrap;
+  padding-right: 16px;
+}
+.dp-table--a td {
+  padding-left: 16px;
+}
+@media screen and (max-width: 599px) {
+  .dp-table--a td {
+    padding-left: 8px;
+  }
+}
+
+/* テーブル */
 /*--------------------------------------------------------
 *
 * contact お問い合わせフォーム
@@ -4574,12 +4772,6 @@ video.is-active {
   width: 100%;
   margin-top: 0;
   padding: 128px 0 96px !important;
-  /* フッター メインコンテンツ ロゴ・ナビゲーション */
-  /* 2カラム */
-  /* ===== 右カラム: ナビゲーション ===== */
-  /* 1段目ナビ */
-  /* 2段目ナビ（重要事項・プライバシーポリシー等） */
-  /* コピーライト */
 }
 @media screen and (max-width: 599px) {
   .l-footer {
@@ -4638,10 +4830,20 @@ video.is-active {
     width: 140px;
   }
 }
+.l-footer .c-iconList {
+  margin-bottom: 0;
+}
 .l-footer .c-iconList__item:not(.-line) {
   display: none;
 }
-.l-footer .icon-line:before {
+.l-footer .c-iconList__item.-line a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+}
+.l-footer .c-iconList__item.-line .icon-line:before {
   color: white !important;
   font-size: 24px;
   background-color: #33d410 !important;
@@ -4659,6 +4861,32 @@ video.is-active {
     align-items: center;
   }
 }
+.l-footer .footer-nav-wrap nav ul li a {
+  position: relative;
+  transition: 0.3s ease-in-out;
+}
+.l-footer .footer-nav-wrap nav ul li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color_main);
+  border-radius: 4px;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  transform: translateY(4px);
+}
+.l-footer .footer-nav-wrap nav ul li a:hover {
+  color: inherit;
+  text-decoration: none;
+  opacity: 1;
+}
+.l-footer .footer-nav-wrap nav ul li a:hover::before {
+  opacity: 1;
+  transform: translateY(0);
+}
 .l-footer .footer-first-nav ul.l-footer__nav {
   display: flex;
   justify-content: flex-end;
@@ -4674,8 +4902,24 @@ video.is-active {
     justify-content: center;
   }
 }
-.l-footer .footer-first-nav ul.l-footer__nav > li > a {
+.l-footer .footer-first-nav ul.l-footer__nav > li a {
   position: relative;
+  transition: 0.3s ease-in-out;
+}
+.l-footer .footer-first-nav ul.l-footer__nav > li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color_main);
+  border-radius: 4px;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  transform: translateY(4px);
+}
+.l-footer .footer-first-nav ul.l-footer__nav > li > a {
   display: inline;
   white-space: nowrap;
   font-size: 17px;
@@ -4683,35 +4927,11 @@ video.is-active {
   text-transform: uppercase;
   transition: 0.3s ease-in-out;
 }
-.l-footer .footer-first-nav ul.l-footer__nav > li > a::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background-color: white;
-  border-radius: 4px;
-  opacity: 0;
-  transition: 0.3s ease-in-out;
-  transform: translateY(4px);
-}
-.l-footer .footer-first-nav ul.l-footer__nav > li > a:hover {
-  color: inherit;
-  text-decoration: none;
-  opacity: 1;
-}
-.l-footer .footer-first-nav ul.l-footer__nav > li > a:hover::before {
-  opacity: 1;
-  transform: translateY(0);
-}
 .l-footer .footer-first-nav ul.l-footer__nav > li a, .l-footer .footer-first-nav ul.l-footer__nav > li:first-child a {
   padding: 0;
   border: none !important;
 }
 .l-footer .footer-first-nav .l-footer__nav {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 0;
 }
@@ -4749,24 +4969,17 @@ video.is-active {
 .l-footer .copyright {
   display: flex;
   justify-content: center;
-  margin-top: 0;
+  max-width: 1200px;
+  width: calc(100% - 96px);
+  margin: 0 auto;
   line-height: 1;
   font-size: 14px;
   border-top: 1px solid #d9d9d9;
-  padding-top: 40px;
+  padding: 40px 16px 0;
 }
 @media screen and (max-width: 599px) {
   .l-footer .copyright {
-    padding: 40px 16px 0;
-  }
-}
-
-@-webkit-keyframes lineAnime {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 100%;
+    width: calc(100% - 32px);
   }
 }
 
@@ -4779,4 +4992,3 @@ video.is-active {
   }
 }
 /* フッター */
-/*# sourceMappingURL=dp-style.css.map */

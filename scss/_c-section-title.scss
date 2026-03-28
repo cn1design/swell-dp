@@ -6,12 +6,12 @@
 
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-    margin-bottom: var(--dp-space-element-pc);
+    margin-bottom: var(--dp-space-block-pc);
     text-align: center;
 
     @include mq(sp) {
         justify-content: center;
-        margin-bottom: var(--dp-space-element-sp);
+        margin-bottom: var(--dp-space-block-sp);
     }
 
     // セクションタイトル
@@ -56,7 +56,8 @@
     }
 
     // 英語サブタイトル
-    .en-title {
+    .en-title,
+    .dp-section-title__en {
         margin-bottom: var(--dp-space-inner-sp);
         letter-spacing: var(--dp-letter-spacing-heading);
         font-family: var(--dp-font-en);

@@ -1,0 +1,59 @@
+<!-- wp:html -->
+<style>
+/* dp-tab: タブブロック共通ベーススタイル */
+.dp-tab .c-tab__nav {
+  justify-content: center;
+  gap: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-tab .c-tab__nav {
+    flex-wrap: wrap;
+    gap: var(--dp-space-inner-sp);
+  }
+}
+.dp-tab .c-tabBody {
+  margin-bottom: 0;
+}
+.dp-tab .c-tabBody__item {
+  background-color: #ffffff;
+  border-radius: var(--dp-radius);
+  padding: var(--dp-space-element-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-tab .c-tabBody__item {
+    padding: var(--dp-space-inner-pc);
+    border-radius: var(--dp-radius);
+  }
+}
+
+/* dp-tab-balloon: 吹き出しタブバリアント */
+.dp-tab-balloon {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.dp-tab-balloon .c-tabList__button {
+  padding: var(--dp-space-element-sp) var(--dp-space-element-pc);
+  border-radius: var(--dp-radius);
+  font-size: var(--dp-font-size-heading-sp);
+  font-weight: 600;
+}
+@media screen and (max-width: 959px) {
+  .dp-tab-balloon .c-tabList__button {
+    padding: var(--dp-space-inner-pc) var(--dp-space-element-sp);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-tab-balloon .c-tabList__button {
+    min-width: 0;
+    font-size: inherit;
+    padding: var(--dp-space-inner-pc);
+  }
+}
+
+/* dp-tab-card: タブボディ内 2カラムカードレイアウト */
+.dp-tab-card .swell-block-column:first-child {
+  flex: 0 0 clamp(120px, 25%, 200px);
+}
+</style>
+<!-- /wp:html -->
