@@ -12,7 +12,7 @@ $section_order = [
     'problem'     => '悩み・問題',
     'solution'    => '解決できること',
     'strength'    => '選ばれる理由',
-    'results'     => '実績',
+    'works'       => '実績',
     'voice'       => 'お客様の声',
     'compare'     => '比較表',
     'pricing'     => '料金プラン',
@@ -156,12 +156,15 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
                                 <?php $like_count = (int) get_post_meta( $post_id, '_dp_like_count', true ); ?>
                                 <button type="button" class="pl-like-btn"
                                     data-post-id="<?php echo esc_attr( $post_id ); ?>"
-                                    data-like-count="<?php echo esc_attr( $like_count ); ?>"
-                                    aria-label="いいね" aria-pressed="false">
+                                    data-like-count="<?php echo esc_attr( $like_count ); ?>" aria-label="いいね"
+                                    aria-pressed="false">
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        <path
+                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                                            fill="none" stroke="currentColor" stroke-width="2" />
                                     </svg>
-                                    <span class="pl-like-count"<?php echo $like_count <= 0 ? ' hidden' : ''; ?>><?php echo $like_count > 0 ? esc_html( $like_count ) : ''; ?></span>
+                                    <span class="pl-like-count"
+                                        <?php echo $like_count <= 0 ? ' hidden' : ''; ?>><?php echo $like_count > 0 ? esc_html( $like_count ) : ''; ?></span>
                                 </button>
                             </div>
 
@@ -310,7 +313,7 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
                 section.style.position = 'relative';
             }
 
-            const topPx    = grid.offsetTop + 'px';
+            const topPx = grid.offsetTop + 'px';
             const heightPx = (grid.offsetHeight - 24) + 'px';
 
             // 右矢印
@@ -320,7 +323,7 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
                 '<button class="pl-scroll-hint__arrow" aria-label="右にスクロール" tabindex="-1">' +
                 '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
                 '</button>';
-            hintRight.style.top    = topPx;
+            hintRight.style.top = topPx;
             hintRight.style.height = heightPx;
 
             // 左矢印（初期は非表示）
@@ -330,7 +333,7 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
                 '<button class="pl-scroll-hint__arrow" aria-label="左にスクロール" tabindex="-1">' +
                 '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>' +
                 '</button>';
-            hintLeft.style.top    = topPx;
+            hintLeft.style.top = topPx;
             hintLeft.style.height = heightPx;
 
             section.appendChild(hintRight);
@@ -339,16 +342,22 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
             const cardWidth = () => grid.querySelector('.pl-card')?.offsetWidth ?? 280;
 
             hintRight.querySelector('.pl-scroll-hint__arrow').addEventListener('click', () => {
-                grid.scrollBy({ left: cardWidth() + 24, behavior: 'smooth' });
+                grid.scrollBy({
+                    left: cardWidth() + 24,
+                    behavior: 'smooth'
+                });
             });
             hintLeft.querySelector('.pl-scroll-hint__arrow').addEventListener('click', () => {
-                grid.scrollBy({ left: -(cardWidth() + 24), behavior: 'smooth' });
+                grid.scrollBy({
+                    left: -(cardWidth() + 24),
+                    behavior: 'smooth'
+                });
             });
 
             // スクロール位置に応じて矢印を表示/非表示
             const updateArrows = () => {
                 const atStart = grid.scrollLeft <= 0;
-                const atEnd   = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1;
+                const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1;
                 hintLeft.classList.toggle('is-hidden', atStart);
                 hintRight.classList.toggle('is-hidden', atEnd);
             };

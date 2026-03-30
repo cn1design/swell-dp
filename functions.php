@@ -38,6 +38,14 @@ add_action('wp_enqueue_scripts', function() {
 	);
 
 	wp_enqueue_script(
+		'child-dp-works-slider',
+		get_stylesheet_directory_uri() . '/javascript/dp-works-slider.js',
+		[],
+		filemtime( get_stylesheet_directory() . '/javascript/dp-works-slider.js' ),
+		true
+	);
+
+	wp_enqueue_script(
 		'child-fade-scroll',
 		get_stylesheet_directory_uri() . '/javascript/fade-scroll.js',
 		[],

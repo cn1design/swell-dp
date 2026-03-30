@@ -2,32 +2,32 @@
   'use strict';
 
   // SCSS の $breakpoints.bp と合わせる
-  var BP_PC = 959;
+  const BP_PC = 959;
 
   function initSlider(slider) {
-    var inner = slider.querySelector('.swell-block-columns__inner');
-    var columns = slider.querySelectorAll('.swell-block-column');
+    const inner = slider.querySelector('.swell-block-columns__inner');
+    const columns = slider.querySelectorAll('.swell-block-column');
     if (!inner || columns.length < 2) return;
 
     // ナビゲーションボタン生成
     // position: absolute でカードエリアに重ねるため height: 100% のオーバーレイとして挿入
-    var nav = document.createElement('div');
+    const nav = document.createElement('div');
     nav.className = 'dp-slider-nav';
 
-    var prevBtn = document.createElement('button');
+    const prevBtn = document.createElement('button');
     prevBtn.type = 'button';
     prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
     prevBtn.setAttribute('aria-label', '前へ');
-    var prevIcon = document.createElement('span');
+    const prevIcon = document.createElement('span');
     prevIcon.className = 'icon-chevron-left';
     prevIcon.setAttribute('aria-hidden', 'true');
     prevBtn.appendChild(prevIcon);
 
-    var nextBtn = document.createElement('button');
+    const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
     nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
     nextBtn.setAttribute('aria-label', '次へ');
-    var nextIcon = document.createElement('span');
+    const nextIcon = document.createElement('span');
     nextIcon.className = 'icon-chevron-right';
     nextIcon.setAttribute('aria-hidden', 'true');
     nextBtn.appendChild(nextIcon);
@@ -45,17 +45,17 @@
 
     // 1スクロール量 = 隣カラムの左端差分（実測値）
     function getScrollAmount() {
-      var cols = inner.querySelectorAll('.swell-block-column');
+      const cols = inner.querySelectorAll('.swell-block-column');
       if (cols.length < 2) return inner.clientWidth;
-      var r0 = cols[0].getBoundingClientRect();
-      var r1 = cols[1].getBoundingClientRect();
+      const r0 = cols[0].getBoundingClientRect();
+      const r1 = cols[1].getBoundingClientRect();
       return Math.abs(r1.left - r0.left);
     }
 
     // disabled 廃止 → .is-edge クラスで opacity 制御
     function updateButtons() {
-      var atStart = inner.scrollLeft <= 1;
-      var atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
+      const atStart = inner.scrollLeft <= 1;
+      const atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
       prevBtn.classList.toggle('is-edge', atStart);
       nextBtn.classList.toggle('is-edge', atEnd);
     }

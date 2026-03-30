@@ -1,0 +1,323 @@
+/*
+
+ お客様の声カード (card-voice)
+
+*/
+
+/* ----------------------------------------------
+ dp-card-voice 共通
+ ---------------------------------------------- */
+.dp-card-voice {
+    // Jetpack Rating Star の余白ツメ
+    .wp-block-jetpack-rating-star > span {
+        margin-bottom: 0;
+    }
+    .wp-block-jetpack-rating-star:not(.is-style-outlined) > span {
+        margin-right: 0;
+    }
+
+    .swell-block-column {
+        border-radius: var(--dp-radius);
+        box-shadow: var(--dp-shadow);
+        display: flex;
+        flex-direction: column;
+    }
+
+    // アバター画像（円形）
+    .wp-block-image {
+        flex-shrink: 0;
+        width: 96px;
+        height: 96px;
+        margin: 0;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        @include mq(sp) {
+            width: 72px;
+            height: 72px;
+        }
+    }
+
+    // バルーンブロックの余白リセット
+    .swell-block-balloon {
+        margin-bottom: 0;
+    }
+    // バルーンアイコン背景色
+    .-circle > .c-balloon__iconImg {
+        object-position: top;
+    }
+    // バルーンテキスト行高リセット
+    .c-balloon__text p {
+        line-height: var(--dp-line-height-small);
+    }
+}
+
+/* ----------------------------------------------
+ dp-card-voice--a
+ お客様の声カード 典型例
+ ---------------------------------------------- */
+.dp-card-voice--a {
+    // 個別カード（swell-block-column を起点にすることでカラム追加時も自動適用）
+    .swell-block-column {
+        background: #fff;
+        padding: 32px 40px;
+        gap: 16px;
+
+        @include mq(sp) {
+            padding: 24px 20px;
+        }
+
+        // ヘッダー行（人物アイコン＋プロフィール）
+        .dp-voice-card__row {
+            border-bottom: 1px solid var(--color_text);
+            gap: 24px;
+
+            // WP flex グループの align-items を center に
+            &.is-layout-flex {
+                align-items: center;
+            }
+
+            // 人物アイコン
+            .wp-block-image {
+                flex-shrink: 0;
+                height: 96px;
+                margin: 0;
+
+                img {
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        // プロフィール（評価・名前・職業）
+        .dp-voice-card__profile {
+            p {
+                margin: 0;
+                line-height: var(--dp-line-height-medium);
+                letter-spacing: var(--dp-letter-spacing-text);
+
+                // 職業（最後の p）
+                &:last-child {
+                    font-size: var(--dp-font-size-explanation);
+                }
+            }
+        }
+
+        // カード見出し
+        h3.wp-block-heading {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: var(--dp-line-height-small);
+            letter-spacing: var(--dp-letter-spacing-text);
+            margin: 0;
+        }
+
+        // 感想テキスト
+        > p {
+            font-size: var(--dp-font-size-explanation);
+            line-height: var(--dp-line-height-small);
+            letter-spacing: var(--dp-letter-spacing-text);
+            margin: 0;
+        }
+    }
+}
+
+/* ----------------------------------------------
+ dp-card-voice--b
+ お悩み（見出し＋吹き出し）→ 導入効果カード
+ 吹き出し: wp:loos/balloon ブロック使用
+ ---------------------------------------------- */
+.dp-card-voice--b {
+    // カラム上部にラベル飛び出し分の余白を確保
+    .swell-block-column {
+        padding-top: 1.25em;
+    }
+
+    // 上部ラベル（カード外枠の上中央に半掛け配置）
+    .dp-card-voice__label {
+        align-self: center;
+        position: relative;
+        z-index: 1;
+        margin-bottom: -1.1em;
+        padding: 0.3em 1.25em;
+        background-color: var(--color_text);
+        color: #ffffff;
+        border-radius: 2em;
+        font-size: var(--dp-font-size-explanation);
+        font-weight: var(--dp-font-weight-heading);
+        letter-spacing: var(--dp-letter-spacing-heading);
+        line-height: 1.5;
+        white-space: nowrap;
+    }
+
+    // カード本体（ボーダー枠）
+    .dp-card-voice__body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #ffffff;
+    }
+
+    // カード上部（お悩みエリア）
+    .dp-card-voice__top {
+        position: relative;
+        flex: 1;
+        padding: 2em 1.25rem 0;
+        background-image: linear-gradient(
+            to bottom,
+            var(--dp-color-sub) calc(100% - 16px),
+            transparent calc(100% - 16px)
+        );
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 48px;
+            background: var(--dp-color-sub);
+            clip-path: polygon(100% 0, 0 0, 0 100%);
+        }
+    }
+
+    // お悩み見出し
+    .dp-card-voice__heading {
+        margin-bottom: var(--dp-space-inner-pc);
+        font-size: 18px;
+        line-height: var(--dp-line-height-medium);
+
+        @include mq(ipad) {
+            font-size: 16px;
+        }
+    }
+
+    // 区切り線（wp:separator）
+    .dp-card-voice__divider {
+        border-top: 1px solid var(--dp-color-sub);
+        margin: 0;
+        opacity: 1;
+    }
+
+    // カード下部（導入効果エリア）
+    .dp-card-voice__bottom {
+        padding: 1.25rem;
+
+        > p {
+            margin: 0;
+            font-size: var(--dp-font-size-explanation);
+            line-height: var(--dp-line-height-large);
+        }
+    }
+
+    // 導入効果ラベル行（見出し両脇ボーダー: ── 導入効果 ──）
+    // is-layout-flex が display:flex を担う。::before/::after が flex アイテムとして挿入される
+    .dp-card-voice__effect-label {
+        justify-content: center;
+        align-items: center;
+        gap: 0.6em;
+        margin-bottom: var(--dp-space-inner-pc);
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            flex: 0.1;
+            height: 1px;
+            background-color: var(--color_text);
+        }
+    }
+
+    // 導入効果見出し
+    .dp-card-voice__effect-title {
+        margin: 0;
+        font-size: var(--dp-font-size-heading-pc);
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+
+/* ----------------------------------------------
+ dp-card-voice--c
+ アイコン＋ラベル＋見出し＋感想テキストカード
+ Figma: group_row / label_profile / label_role
+ ---------------------------------------------- */
+.dp-card-voice--c {
+    // 個別カード
+    .swell-block-column {
+        background: #fff;
+        border-radius: var(--dp-radius);
+        padding: 32px 40px;
+        gap: 16px;
+
+        @include mq(sp) {
+            padding: 24px 20px;
+        }
+    }
+
+    // ヘッダー行（アバター＋プロフィール）
+    .group_row {
+        gap: 24px;
+
+        &.is-layout-flex {
+            align-items: center;
+        }
+    }
+
+    // プロフィール列（ラベル＋見出し）
+    .label_profile {
+        flex: 1;
+        gap: 8px;
+    }
+
+    // 属性ラベル（40代男性 など）
+    .label_role {
+        display: inline-block;
+        width: 100%;
+        padding: 0.1em 0.75em;
+        background-color: var(--color_main);
+        color: #fff;
+        font-size: var(--dp-font-size-explanation);
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: var(--dp-letter-spacing-text);
+        line-height: var(--dp-line-height-medium);
+        margin: 0;
+    }
+
+    // アイコンボーダー
+    .wp-block-image {
+        border: 1px solid var(--color_text);
+        border-radius: 50%;
+        background-color: var(--color_bg);
+    }
+
+    // 一言見出し
+    h3.wp-block-heading {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: var(--dp-line-height-small);
+        letter-spacing: var(--dp-letter-spacing-text);
+        margin: 0;
+    }
+
+    // 感想テキスト
+    .swell-block-column > p {
+        font-size: var(--dp-font-size-explanation);
+        line-height: var(--dp-line-height-medium);
+        letter-spacing: var(--dp-letter-spacing-text);
+        margin: 0;
+    }
+}

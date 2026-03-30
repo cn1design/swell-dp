@@ -55,7 +55,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
     --dp-space-inner-sp: 0.5rem;
 
     // 字間（Tracking）
-    --dp-letter-spacing-heading: 0.125em;
+    --dp-letter-spacing-heading: 0.1em;
     --dp-letter-spacing-text: 0.03em;
 
     // 行間
@@ -136,7 +136,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
     // 主にセクションタイトル直後 1行のリードテキストで使用
     .c-lead {
         letter-spacing: var(--dp-letter-spacing-heading);
-        font-size: clamp(18px, 1.2vw, 20px);
+        font-size: clamp(16px, 1.2vw, 20px);
 
         @include mq(sp) {
             letter-spacing: var(--dp-letter-spacing-text);
@@ -299,6 +299,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "c-list"; /* リスト */
 @import "c-button"; /* ボタン */
 @import "c-card-list"; /* カードリスト */
+@import "c-card-voice"; /* お客様の声カード */
 @import "c-media-block"; /* メディアブロック */
 @import "c-step-list"; /* ステップ */
 @import "p-overview"; /* 概要・コンセプト */

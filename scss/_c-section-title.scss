@@ -64,7 +64,7 @@
 
         @include mq(sp) {
             letter-spacing: var(--dp-letter-spacing-text);
-            margin-bottom: var(--dp-space-inner-sp);
+            margin-bottom: 0;
             font-size: 20px;
         }
     }
@@ -104,7 +104,6 @@
         }
     }
 }
-
 /* --- 4. section-title--c 固有（左寄せ＋サブタイトルライン） --- */
 .dp-section-title--c {
     text-align: left;
@@ -123,6 +122,129 @@
             height: 3px;
             background: var(--color_text);
             margin-top: 16px;
+        }
+    }
+}
+
+/* --- 5. section-title--d 左右イラスト＋背景スライドテキスト --- */
+@keyframes dp-bg-text-slide {
+    from {
+        transform: translateY(-50%) translateX(0);
+    }
+    to {
+        transform: translateY(-50%) translateX(-50%);
+    }
+}
+
+.dp-section-title--d {
+    position: relative;
+    max-width: var(--article_size);
+    margin-inline: auto;
+
+    // 背景スライドテキスト（2スパンでシームレスループ）
+    .bg-text-slide-loop {
+        position: absolute;
+        top: 48px;
+        left: calc(50% - 50vw);
+        margin-left: 0 !important;
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+        max-width: none !important;
+        animation: dp-bg-text-slide 64s linear infinite;
+
+        p {
+            flex-shrink: 0;
+            margin: 0;
+            font-family: var(--dp-font-en);
+            font-size: clamp(128px, 22vw, 290px);
+            font-weight: bold;
+            color: var(--color_main_thin);
+            letter-spacing: 0.05em;
+            mix-blend-mode: overlay;
+            padding-right: 1em;
+        }
+    }
+
+    // メインタイトル + 左右イラスト
+    .main-title-side-icon {
+        position: relative;
+        justify-content: center; //エディタの中央配置の設定が切れた場合の対策
+        padding-top: 24px; // 左右イラスト見切れ防止の上余白
+        z-index: 1;
+
+        // 左右イラスト: 絶対配置（中央タイトルグループの左右8px外側）
+        > .wp-block-image {
+            position: absolute;
+            bottom: 0;
+            pointer-events: none;
+            width: 192px;
+            height: 192px;
+
+            @include mq(sp) {
+                bottom: -8px;
+                width: 96px;
+                height: 96px;
+            }
+
+            img {
+                display: block;
+                height: 192px;
+                width: auto;
+
+                @include mq(sp) {
+                    height: 96px;
+                }
+            }
+
+            &:first-child {
+                left: 0;
+
+                @include mq(bp) {
+                    left: -32px;
+                }
+
+                @include mq(sp) {
+                    left: -56px;
+                }
+
+                img {
+                    margin-left: auto;
+                }
+            }
+            &:last-child {
+                right: 0;
+
+                @include mq(bp) {
+                    right: -32px;
+                }
+
+                @include mq(sp) {
+                    right: -56px;
+                }
+            }
+        }
+
+        // 中央タイトルグループ（en-title上・h2下）
+        > .wp-block-group {
+            position: relative;
+            z-index: 1; //左右イラストより前面に配置
+        }
+
+        @include mq(sp) {
+            > .wp-block-image img {
+            }
+
+            > .wp-block-group {
+            }
+        }
+    }
+
+    .c-lead {
+        @include mq(bp) {
+            text-align: left;
         }
     }
 }

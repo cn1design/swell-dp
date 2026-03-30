@@ -5,14 +5,14 @@
  * CSS の is-initialized / is-active クラスと連動。
  */
 document.addEventListener('DOMContentLoaded', function () {
-  var INTERVAL = 4000; // 切り替え間隔（ms）
+  const INTERVAL = 4000; // 切り替え間隔（ms）
 
   document.querySelectorAll('.dp-fade-slider').forEach(function (slider) {
-    var images = slider.querySelectorAll('.wp-block-image');
+    const images = slider.querySelectorAll('.wp-block-image');
     if (images.length < 2) return;
 
     // 初期化
-    var currentIndex = 0;
+    let currentIndex = 0;
     images[currentIndex].classList.add('is-active');
     slider.classList.add('is-initialized');
 
