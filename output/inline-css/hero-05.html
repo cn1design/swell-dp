@@ -1,65 +1,127 @@
 <!-- wp:html -->
 <style>
-/* dp-lp-hero: LP用メインビジュアル 最外郭フルワイドクラス */
-.dp-lp-hero {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 720px;
-}
-.dp-lp-hero > div {
-  position: static;
-  width: 100%;
-}
-.dp-lp-hero .wp-block-image {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  border-radius: var(--dp-radius) 0 0 var(--dp-radius);
-  overflow: hidden;
-}
-.dp-lp-hero .wp-block-image img {
-  height: 100%;
-  object-fit: cover;
-}
-
-/* dp-hero--a: タイトル＋スライダー（SWELL標準メインビジュアル） */
-.dp-hero--a > div {
-  align-items: flex-start;
-}
-
-/* dp-hero-title: 共通タイトルグループ */
+/* dp-hero-title */
 .dp-hero-title > div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* dp-hero-title--a */
-.dp-hero-title--a {
-  z-index: 1;
+/* dp-lp-hero */
+.dp-lp-hero {
+  display: flex;
+  height: 100vh;
+  max-height: 800px;
+  min-height: 600px;
 }
-.dp-hero-title--a > div {
-  align-items: flex-start;
+.dp-lp-hero > div {
+  position: static;
+  width: 100%;
 }
-.dp-hero-title--a > div > .wp-block-group:first-child p {
-  margin-bottom: var(--dp-space-element-pc);
-  font-size: var(--dp-font-size-page-title-pc);
-}
+
+/* dp-lp-hero--a */
 @media screen and (max-width: 599px) {
-  .dp-hero-title--a > div > .wp-block-group:first-child p {
-    margin-bottom: var(--dp-space-element-sp);
-    font-size: var(--dp-font-size-page-title-sp);
+  .dp-lp-hero--a {
+    height: auto;
+    max-height: none;
+    min-height: 0;
   }
 }
-.dp-hero-title--a > div > .wp-block-group:last-child p {
+.dp-lp-hero--a::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(50% - 96px);
+  background-color: var(--color_bg);
+}
+.dp-lp-hero--a > div {
+  display: flex;
+  align-items: flex-end;
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--a > div {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+}
+
+/* dp-lp-hero-title--a */
+.dp-lp-hero--a .dp-lp-hero-title--a {
+  position: relative;
+  z-index: 1;
+}
+.dp-lp-hero--a .dp-lp-hero-title--a > div {
+  align-items: flex-start;
+}
+.dp-lp-hero--a .dp-lp-hero-title--a > div h1 {
+  margin-bottom: var(--dp-space-inner-pc);
+  font-size: calc(var(--dp-font-size-page-title-pc) * 1.25);
+}
+@media screen and (max-width: 959px) {
+  .dp-lp-hero--a .dp-lp-hero-title--a > div h1 {
+    font-size: var(--dp-font-size-page-title-pc);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--a .dp-lp-hero-title--a > div h1 {
+    margin-bottom: var(--dp-space-inner-sp);
+    font-size: 32px;
+  }
+}
+.dp-lp-hero--a .dp-lp-hero-title--a > div > .wp-block-group:last-child p {
   margin-bottom: var(--dp-space-inner-pc);
   font-size: var(--dp-font-size-summary);
 }
-.dp-hero-title--a .swl-bg-color {
-  text-indent: 20px;
+.dp-lp-hero--a .dp-lp-hero-title--a .swl-bg-color {
+  padding: 0 var(--dp-space-inner-pc);
   border-radius: var(--dp-radius);
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--a .dp-lp-hero-title--a .swl-bg-color {
+    display: inline-block;
+    padding: 0 var(--dp-space-inner-sp);
+  }
+}
+.dp-lp-hero--a .dp-lp-hero-title--a .swl-bg-color:not(:last-child) {
+  margin-bottom: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--a .dp-lp-hero-title--a .swl-bg-color:not(:last-child) {
+    margin-bottom: var(--dp-space-inner-sp);
+  }
+}
+
+/* メインビジュアル画像 */
+.dp-lp-hero--a .wp-block-image {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: calc(50% + 440px);
+  height: calc(100% - 96px);
+  border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+  overflow: hidden;
+}
+@media screen and (max-width: 959px) {
+  .dp-lp-hero--a .wp-block-image {
+    width: calc(100% - 128px);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--a .wp-block-image {
+    position: relative;
+    top: 0;
+    transform: unset;
+    width: calc(100% + var(--swl-fw_inner_pad, 0));
+    height: 380px;
+  }
+}
+.dp-lp-hero--a .wp-block-image img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
 }
 </style>
 <!-- /wp:html -->

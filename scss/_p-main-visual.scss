@@ -29,29 +29,14 @@ LP用メインビジュアル
 /* 共通: SWELL機能のLP(専用ページ)用の最外郭フルワイドクラス */
 .dp-lp-hero {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 720px;
+    height: 100vh;
+    max-height: 800px;
+    min-height: 600px;
 
     // 画像配置を画面端に合わせるため、デフォルトのrelativeからstaticに変更
     > div {
         position: static;
         width: 100%;
-    }
-
-    // 画像配置
-    .wp-block-image {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        border-radius: var(--dp-radius) 0 0 var(--dp-radius);
-        overflow: hidden;
-
-        img {
-            height: 100%;
-            object-fit: cover;
-        }
     }
 }
 
@@ -61,43 +46,115 @@ LP用メインビジュアル
 
  --------------------------------------------------------*/
 
-.dp-hero--a {
-    > div {
-        align-items: flex-start;
+.dp-lp-hero--a {
+    @include mq(sp) {
+        height: auto;
+        max-height: none;
+        min-height: 0;
     }
-}
 
-.dp-hero-title--a {
-    z-index: 1;
+    // 背景色 縦2分割
+    &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(50% - 96px);
+        background-color: var(--color_bg);
+    }
+
     > div {
-        align-items: flex-start;
+        display: flex;
+        align-items: flex-end; //下寄せ
 
-        // タイトルグループ
-        > .wp-block-group:first-child {
-            p {
-                margin-bottom: var(--dp-space-element-pc);
-                font-size: var(--dp-font-size-page-title-pc);
+        @include mq(sp) {
+            flex-direction: column-reverse; //縦並び上下反転
+            align-items: flex-start; //左寄せ
+        }
+    }
+
+    // タイトルグループ
+    .dp-lp-hero-title--a {
+        position: relative;
+        z-index: 1;
+
+        > div {
+            align-items: flex-start;
+
+            // タイトルグループ
+            h1 {
+                margin-bottom: var(--dp-space-inner-pc);
+                font-size: calc(var(--dp-font-size-page-title-pc) * 1.25);
+
+                @include mq(bp) {
+                    font-size: var(--dp-font-size-page-title-pc);
+                }
 
                 @include mq(sp) {
-                    margin-bottom: var(--dp-space-element-sp);
-                    font-size: var(--dp-font-size-page-title-sp);
+                    font-size: 32px;
+                }
+            }
+
+            // コピーグループ
+            > .wp-block-group:last-child {
+                p {
+                    margin-bottom: var(--dp-space-inner-pc);
+                    font-size: var(--dp-font-size-summary);
                 }
             }
         }
 
-        // コピーグループ
-        > .wp-block-group:last-child {
-            p {
+        // 背景色の角丸 インデント調整
+        .swl-bg-color {
+            display: inline-block;
+            padding: 0 var(--dp-space-inner-pc);
+            border-radius: var(--dp-radius);
+
+            @include mq(sp) {
+                padding: 0 var(--dp-space-inner-sp);
+            }
+
+            &:not(:last-child) {
                 margin-bottom: var(--dp-space-inner-pc);
-                font-size: var(--dp-font-size-summary);
+
+                @include mq(sp) {
+                    margin-bottom: var(--dp-space-inner-sp);
+                }
             }
         }
     }
 
-    // 背景色の角丸 インデント調整
-    .swl-bg-color {
-        text-indent: 20px;
-        border-radius: var(--dp-radius);
+    // メインビジュアル画像
+    .wp-block-image {
+        //絶対配置で右寄せ
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%); //上下中央寄せ
+        width: calc(50% + 440px);
+        height: calc(100% - 96px); //上下余白48px
+        border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+        overflow: hidden;
+
+        @include mq(bp) {
+            width: calc(100% - 128px);
+        }
+
+        @include mq(sp) {
+            // 相対配置
+            position: relative;
+            top: 0;
+            transform: unset;
+            width: calc(100% + var(--swl-fw_inner_pad, 0));
+            height: 380px;
+        }
+
+        img {
+            width: 100vw; //フルワイド表示
+            height: 100%;
+            object-fit: cover;
+        }
     }
 }
 

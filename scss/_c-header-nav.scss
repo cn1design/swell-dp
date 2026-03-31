@@ -4,93 +4,42 @@
 
 */
 
+// .c-gnav {
+//     li:not(:last-child) {
+//         margin-right: 8px;
+//     }
+//     li:last-child {
+//         margin-left: 8px;
+//     }
+// }
+
 /* --- ヘッダーCTAボタン (.icon-bubble) --- */
+.dp-header-cta {
+    gap: 16px;
 
-.c-gnav {
-    li:not(:last-child) {
-        margin-right: 8px;
-    }
-    li:last-child {
-        margin-left: 8px;
-    }
-}
-.c-gnav,
-.c-listMenu {
-    // ボタンコピー右寄せアイコン
-    > .menu-item {
-        &:nth-last-child(2),
-        &:last-child {
-            a {
-                display: inline-flex;
-                align-items: center;
-                transition: opacity 0.3s ease;
-
-                &:hover {
-                    opacity: 0.9;
-                }
-
-                &:after {
-                    content: none;
-                }
-
-                .ttl {
-                    font-weight: 600;
-                }
-
-                i {
-                    margin-right: 4px;
-                }
-            }
-        }
-        &:nth-last-child(2) {
-            display: flex;
-            align-items: center;
-            a {
-                justify-content: center;
-                gap: 0.5em;
-                height: auto;
-                padding: 14px 32px;
-                // background-color: var(--color_main);
-                background-color: #06c755;
-                color: #fff !important;
-                border-radius: var(--dp-radius);
-                box-shadow: var(--dp-shadow);
-                text-decoration: none;
-                white-space: nowrap;
-
-                @include mq(sp) {
-                    padding: 10px 20px;
-                    font-size: var(--dp-font-size-explanation);
-                }
-            }
-        }
-
-        &:last-child {
-            a {
-                padding: 0;
-                font-family: var(--dp-font-en);
-                > span {
-                    font-size: 18px;
-                }
-                .phone-number {
-                    display: block;
-                    margin-top: 6px;
-                    text-align: right;
-                    font-size: 13px;
-                    font-feature-settings: "palt" on;
-                }
+    .dp-line-buttom {
+        a {
+            transition:
+                box-shadow 0.3s ease,
+                transform 0.3s ease;
+            // ホバー時にシャドウが少し小さくなり、ボタンが上に2px移動
+            &:hover {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transform: translateY(-2px);
             }
         }
     }
-}
 
-.c-listMenu > .menu-item:last-child {
-    margin-top: 16px !important;
-    a {
-        justify-content: center;
-        width: 100%;
-        &:before {
-            content: none;
+    .dp-phone-button {
+        a {
+            padding: 0;
+            border: none;
+            text-align: right;
+
+            &:hover {
+                opacity: 0.7;
+            }
+            transition: opacity 0.3s ease;
         }
     }
 }
