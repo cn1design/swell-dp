@@ -265,13 +265,20 @@
         font-family: var(--dp-font-num);
         position: relative;
         z-index: 1;
-        margin-bottom: 0;
+        margin-left: auto; // 右寄せ
+        margin-bottom: 0; // 下余白なし
 
         @include mq(sp) {
             width: 64px;
             height: 64px;
         }
 
+        // 小円形を非表示
+        .__shape {
+            display: none;
+        }
+
+        // ナンバーラベル
         .__label {
             font-family: var(--dp-font-en);
             font-size: 10px;

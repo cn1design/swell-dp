@@ -2352,6 +2352,7 @@ Works スライダー（center mode, 1.2 slides visible）
   font-family: var(--dp-font-num);
   position: relative;
   z-index: 1;
+  margin-left: auto;
   margin-bottom: 0;
 }
 @media screen and (max-width: 599px) {
@@ -2359,6 +2360,9 @@ Works スライダー（center mode, 1.2 slides visible）
     width: 64px;
     height: 64px;
   }
+}
+.dp-step-list--b .swell-block-step__number .__shape {
+  display: none;
 }
 .dp-step-list--b .swell-block-step__number .__label {
   font-family: var(--dp-font-en);
