@@ -329,7 +329,7 @@
             height: auto;
             aspect-ratio: 1;
             margin: 0 0 1em;
-            border-radius: var(--dp-radius);
+            border-radius: var(--dp-radius) var(--dp-radius) 0 0;
             overflow: hidden;
             background-color: var(--color_main_thin);
 
@@ -345,15 +345,21 @@
         }
     }
 
+    .wp-block-group {
+        padding: 0 var(--dp-space-inner-pc);
+    }
+
     // 見出しH3
     h3 {
         margin-bottom: calc(var(--dp-space-inner-pc) / 2);
-        font-size: var(--dp-font-size-heading-pc);
         text-align: center;
         @include mq(sp) {
             margin-bottom: calc(var(--dp-space-inner-sp) / 2);
-            font-size: var(--dp-font-size-heading-sp);
         }
+    }
+
+    p {
+        font-size: clamp(14px, 1.2vw, var(--dp-font-size-summary));
     }
 }
 /* ===========================================
@@ -554,6 +560,50 @@
         > .wp-block-group p {
             font-size: 0.75rem;
             padding: 0.4em 0.15em;
+        }
+    }
+}
+
+/* ===========================================
+ カードリスト　見出し白背景付き（中央寄せ）＋画像＋説明
+=========================================== */
+.dp-card-title-bg-center {
+    .swell-block-column {
+        position: relative;
+        padding-top: 24px; // h3ラベル分の上余白
+    }
+
+    h3 {
+        // 画像上端に浮かぶ中央ラベル
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        width: max-content;
+        min-width: 256px;
+        max-width: calc(100% - 32px);
+        padding: var(--dp-space-inner-pc);
+        background-color: #ffffff;
+        border-radius: var(--dp-radius);
+        box-shadow: var(--dp-shadow);
+        font-size: clamp(18px, 2vw, 20px);
+        text-align: center;
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+            padding: var(--dp-space-inner-sp);
+        }
+    }
+
+    .wp-block-image {
+        border-radius: calc(var(--dp-radius) * 2);
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
         }
     }
 }

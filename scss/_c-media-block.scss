@@ -774,7 +774,10 @@ Works スライダー（center mode, 1.2 slides visible）
         border: 1px solid var(--color_text);
         border-radius: 50%;
         cursor: pointer;
-        transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+        transition:
+            background-color 0.15s,
+            color 0.15s,
+            opacity 0.15s;
 
         [class*="icon-"] {
             font-size: 14px;
@@ -792,8 +795,12 @@ Works スライダー（center mode, 1.2 slides visible）
         }
     }
 
-    .dp-slider-nav__prev { left: 0; }
-    .dp-slider-nav__next { right: 0; }
+    .dp-slider-nav__prev {
+        left: 0;
+    }
+    .dp-slider-nav__next {
+        right: 0;
+    }
 }
 
 // JSが特定したinner containerに付与するクラス（SWELL/Gutenberg inner wrapper対策）

@@ -33,7 +33,9 @@
       "WebSearch",
       "mcp__notebooklm__setup_auth",
       "mcp__nano-banana__generate_image",
-      "mcp__notebooklm__list_notebooks"
+      "mcp__notebooklm__list_notebooks",
+      "mcp__notebooklm__get_health",
+      "mcp__notebooklm__add_notebook"
     ]
   }
 }

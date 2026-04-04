@@ -18,6 +18,7 @@ $section_order = [
     'pricing'     => '料金プラン',
     'step'        => 'ご利用の流れ',
     'faq'         => 'よくある質問',
+    'news'        => 'お知らせ',
     'company'     => '会社概要',
     'contact'     => 'お問い合わせ',
     'cta'         => 'CTAボタン',

@@ -9,10 +9,10 @@ CTAセクション (.dp-cta-section)
 .dp-cta-section {
     // --- 背景コンテナ ---
     .dp-container {
+        // メインカラー背景
         background-color: var(--color_main);
         border-radius: var(--dp-radius);
         padding: var(--dp-space-block-pc) var(--dp-space-inner-pc);
-        text-align: center;
 
         @include mq(sp) {
             padding: var(--dp-space-block-sp) var(--dp-space-inner-pc);
@@ -28,7 +28,7 @@ CTAセクション (.dp-cta-section)
         }
 
         h2 {
-            color: #fff;
+            color: #ffffff;
             margin-bottom: var(--dp-space-inner-sp);
             font-size: var(--dp-font-size-title-sp);
             font-weight: var(--dp-font-weight-heading);
@@ -39,7 +39,7 @@ CTAセクション (.dp-cta-section)
         }
 
         p {
-            color: #fff;
+            color: #ffffff;
             font-size: var(--dp-font-size-summary);
 
             @include mq(sp) {
@@ -147,59 +147,113 @@ CTAセクション (.dp-cta-section)
                 }
             }
         }
+    }
+}
 
-        // 電話・チャット グループ
-        .cta-other {
-            align-items: center;
-            gap: var(--dp-space-inner-pc);
+// 電話・チャット 横並びグループ
+.dp-cta-other {
+    justify-content: center;
+    align-items: center;
+    gap: var(--dp-space-inner-pc);
+
+    @include mq(sp) {
+        gap: var(--dp-space-inner-sp);
+        flex-wrap: wrap !important;
+        justify-content: center;
+    }
+
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    // 電話番号
+    p:nth-of-type(1) {
+        font-family: var(--dp-font-num);
+        font-weight: 700;
+        margin-bottom: 0;
+        line-height: var(--dp-line-height-small);
+        transition: transform 0.3s ease;
+
+        span {
+            height: 0.75em;
+            font-size: var(--swl-fz--huge);
+        }
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+    }
+
+    // チャット（縦線セパレーター + テキスト）
+    .swell-block-button,
+    p:nth-of-type(2) {
+        position: relative;
+        padding-left: var(--dp-space-inner-pc);
+        margin-bottom: 0;
+        line-height: var(--dp-line-height-small);
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5%;
+            height: 90%;
+            border-left: 1px solid #ffffff;
+            opacity: 0.6;
+        }
+
+        @include mq(sp) {
+            padding-left: 0;
+            font-size: 16px;
+
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+.dp-cta--b {
+    // 電話・チャット 横並びグループ
+    .dp-cta-other {
+        gap: var(--dp-space-element-pc);
+
+        @include mq(bp) {
+            flex-direction: column;
+        }
+
+        // 電話番号
+        p:nth-of-type(1) {
+            text-align: right;
+            line-height: 0.7;
+            font-size: var(--dp-font-size-title-pc);
+
+            @include mq(bp) {
+                text-align: center;
+            }
 
             @include mq(sp) {
-                gap: var(--dp-space-inner-sp);
-                flex-wrap: wrap !important;
-                justify-content: center;
+                font-size: var(--dp-font-size-title-sp);
             }
 
-            a {
-                color: white;
-                text-decoration: none;
+            .swl-inline-icon {
+                font-size: 1em;
             }
+        }
 
-            // 電話番号
-            p:nth-of-type(1) {
-                font-family: var(--dp-font-num);
-                font-weight: 700;
-                margin-bottom: 0;
-                line-height: var(--dp-line-height-small);
+        // SWELLボタン
+        .swell-block-button {
+            width: 100%;
+            max-width: 360px;
+            padding-left: var(--dp-space-element-pc);
 
-                span {
-                    height: 0.75em;
-                    font-size: var(--swl-fz--huge);
-                }
-            }
-
-            // チャット（縦線セパレーター + テキスト）
-            p:nth-of-type(2) {
-                position: relative;
-                padding-left: var(--dp-space-inner-pc);
-                margin-bottom: 0;
-                line-height: var(--dp-line-height-small);
+            @include mq(bp) {
+                max-width: 300px;
+                padding-left: 0;
 
                 &::before {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    top: 5%;
-                    height: 90%;
-                    border-left: 1px solid var(--dp-color-sub);
-                }
-
-                @include mq(sp) {
-                    padding-left: 0;
-                    font-size: 16px;
-
-                    &::before {
-                        display: none;
-                    }
+                    content: none;
                 }
             }
         }

@@ -22,6 +22,20 @@ SWELL独自ボタン
     }
 }
 
+/* 右矢印ボタン ホバー時に右移動アニメーション */
+.dp-button-right-arrow {
+    .swell-block-button__link {
+        padding: 0.75em 1em;
+    }
+    .-right {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover .-right {
+        transform: translateX(5px);
+    }
+}
+
 /* 角丸レクタングルボタン */
 .button-rectangle .swell-block-button__link {
     border-radius: var(--dp-radius);

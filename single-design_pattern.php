@@ -32,13 +32,13 @@ while ( have_posts() ) : the_post();
                     <div class="dp-tags">
                         <?php if ( $sections && ! is_wp_error( $sections ) ) :
                         foreach ( $sections as $term ) : ?>
-                        <a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="dp-tag pl-tag--section">
+                        <a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="dp-tag pl-tag">
                             <?php echo esc_html( $term->name ); ?>
                         </a>
                         <?php endforeach; endif; ?>
                         <?php if ( $industries && ! is_wp_error( $industries ) ) :
                         foreach ( $industries as $term ) : ?>
-                        <a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="dp-tag pl-tag--industry">
+                        <a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="dp-tag pl-tag">
                             <?php echo esc_html( $term->name ); ?>
                         </a>
                         <?php endforeach; endif; ?>
@@ -69,12 +69,12 @@ while ( have_posts() ) : the_post();
             <?php if ( $raw_block_code ) : ?>
             <p class="dp-copy-hint">＼ご自身のSWELLテーマの編集画面にコピペ／</p>
             <div class="dp-copy-actions">
-                <button type="button" class="dp-like-inline"
-                    data-post-id="<?php echo esc_attr( $post_id ); ?>"
-                    data-like-count="<?php echo esc_attr( $like_count ); ?>"
-                    aria-label="いいね" aria-pressed="false">
+                <button type="button" class="dp-like-inline" data-post-id="<?php echo esc_attr( $post_id ); ?>"
+                    data-like-count="<?php echo esc_attr( $like_count ); ?>" aria-label="いいね" aria-pressed="false">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                            fill="none" stroke="currentColor" stroke-width="2" />
                     </svg>
                 </button>
                 <button type="button" class="dp-single__copy-area dp-copy-btn"
@@ -90,14 +90,15 @@ while ( have_posts() ) : the_post();
 
             <!-- PC固定いいねボタン（.dp-like-fixed は960px以上のみ表示） -->
             <div class="dp-like-fixed">
-                <button type="button" class="dp-like-fixed__btn"
-                    data-post-id="<?php echo esc_attr( $post_id ); ?>"
-                    data-like-count="<?php echo esc_attr( $like_count ); ?>"
-                    aria-label="いいね" aria-pressed="false">
+                <button type="button" class="dp-like-fixed__btn" data-post-id="<?php echo esc_attr( $post_id ); ?>"
+                    data-like-count="<?php echo esc_attr( $like_count ); ?>" aria-label="いいね" aria-pressed="false">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                            fill="none" stroke="currentColor" stroke-width="2" />
                     </svg>
-                    <span class="dp-like-fixed__count"<?php echo $like_count <= 0 ? ' hidden' : ''; ?>><?php echo $like_count > 0 ? esc_html( $like_count ) : ''; ?></span>
+                    <span class="dp-like-fixed__count"
+                        <?php echo $like_count <= 0 ? ' hidden' : ''; ?>><?php echo $like_count > 0 ? esc_html( $like_count ) : ''; ?></span>
                 </button>
             </div>
 

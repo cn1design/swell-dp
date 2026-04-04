@@ -14,68 +14,38 @@
  * 子テーマでのファイルの読み込み
  */
 add_action('wp_enqueue_scripts', function() {
-	
+
 	$timestamp = date( 'Ymdgis', filemtime( get_stylesheet_directory() . '/style.css' ) );
 	wp_enqueue_style( 'child_style', get_stylesheet_directory_uri() .'/style.css', [], $timestamp );
 
-	$dp_css = get_stylesheet_directory() . '/dp-style.css';
-	if ( file_exists( $dp_css ) ) {
-		wp_enqueue_style(
-			'swell-dp-style',
-			get_stylesheet_directory_uri() . '/dp-style.css',
-			array('main_style'),
-			filemtime( $dp_css )
-		);
+	// dp-style.css と デザインJS はプラグイン（swell-dp）が管理。
+	// プラグイン未使用時（ローカル開発・テスト）のみ子テーマから読み込む。
+	if ( ! defined( 'SWELL_DP_VERSION' ) ) {
+		$dp_css = get_stylesheet_directory() . '/dp-style.css';
+		if ( file_exists( $dp_css ) ) {
+			wp_enqueue_style(
+				'swell-dp-style',
+				get_stylesheet_directory_uri() . '/dp-style.css',
+				[ 'main_style' ],
+				filemtime( $dp_css )
+			);
+		}
+		$fallback_js = [
+			'child-dp-swipe-slider'  => 'dp-swipe-slider.js',
+			'child-dp-works-slider'  => 'dp-works-slider.js',
+			'child-fade-scroll'      => 'fade-scroll.js',
+			'child-observer-fadeIn'  => 'observer-fadeIn.js',
+			'child-fade-slide'       => 'fade-slide.js',
+		];
+		foreach ( $fallback_js as $handle => $file ) {
+			$path = get_stylesheet_directory() . '/javascript/' . $file;
+			if ( file_exists( $path ) ) {
+				wp_enqueue_script( $handle, get_stylesheet_directory_uri() . '/javascript/' . $file, [], filemtime( $path ), true );
+			}
+		}
 	}
 
-	/* その他の読み込みファイルはこの下に記述 */
-	wp_enqueue_script(
-		'child-dp-swipe-slider',
-		get_stylesheet_directory_uri() . '/javascript/dp-swipe-slider.js',
-		[],
-		filemtime( get_stylesheet_directory() . '/javascript/dp-swipe-slider.js' ),
-		true
-	);
-
-	wp_enqueue_script(
-		'child-dp-works-slider',
-		get_stylesheet_directory_uri() . '/javascript/dp-works-slider.js',
-		[],
-		filemtime( get_stylesheet_directory() . '/javascript/dp-works-slider.js' ),
-		true
-	);
-
-	wp_enqueue_script(
-		'child-fade-scroll',
-		get_stylesheet_directory_uri() . '/javascript/fade-scroll.js',
-		[],
-		filemtime( get_stylesheet_directory() . '/javascript/fade-scroll.js' ),
-		true
-	);
-
-	wp_enqueue_script(
-		'child-observer-fadeIn',
-		get_stylesheet_directory_uri() . '/javascript/observer-fadeIn.js',
-		[],
-		filemtime( get_stylesheet_directory() . '/javascript/observer-fadeIn.js' ),
-		true
-	);
-
-	wp_enqueue_script(
-		'child-cpt',
-		get_stylesheet_directory_uri() . '/javascript/cpt.js',
-		[],
-		filemtime( get_stylesheet_directory() . '/javascript/cpt.js' ),
-		true
-	);
-
-	wp_enqueue_script(
-		'child-fade-slide',
-		get_stylesheet_directory_uri() . '/javascript/fade-slide.js',
-		[],
-		filemtime( get_stylesheet_directory() . '/javascript/fade-slide.js' ),
-		true
-	);
+	// DP ライブラリ専用スクリプト（プラグイン化の対象外）
 
 	// デザインパターン一覧アーカイブ専用
 	if ( is_post_type_archive( 'design_pattern' ) ) {
@@ -142,10 +112,20 @@ require_once get_stylesheet_directory() . '/inc/dp-base-css-data.php';
 require_once get_stylesheet_directory() . '/inc/dp-tips-data.php';
 require_once get_stylesheet_directory() . '/inc/customizer.php';
 
-/* フッター サブナビ（重要事項説明書・利用契約書・プライバシーポリシー等）*/
-add_action('init', function() {
-    register_nav_menu('footer_secondary_menu', 'フッター サブナビ');
-});
+// フッター サブナビは swell-dp プラグインの includes/menus.php で登録
+
+/* フッター 右カスタムウィジェットエリア */
+add_action( 'widgets_init', function () {
+    register_sidebar( [
+        'name'          => 'フッター 右カスタムエリア',
+        'id'            => 'footer_nav_right',
+        'description'   => 'フッターナビ右側に表示されるカスタムエリアです。カスタムHTMLやナビゲーションメニューウィジェットを追加できます。',
+        'before_widget' => '<div id="%1$s" class="footer-nav-right__widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<p class="footer-nav-right__title">',
+        'after_title'   => '</p>',
+    ] );
+} );
 
 /* =====================================================
  * いいね REST API（design_pattern 専用・認証不要）
@@ -183,13 +163,6 @@ function dp_handle_like( WP_REST_Request $request ) {
 
     return rest_ensure_response( [ 'count' => $count ] );
 }
-
-/* =====================================================
- * ブログパーツ ID 定数
- * 移植先WPでは、管理画面 > ブログパーツ で確認して値を更新する
- * ===================================================== */
-define( 'BP_FOOTER_ADDRESS',    387  ); // フッター 住所・TEL/FAX
-define( 'BP_FOOTER_BEFORE',     5546 ); // フッター直前コンテンツ（全ページ共通）
 
 /* ======================================================== */
 

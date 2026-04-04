@@ -1,0 +1,122 @@
+.-type-thumb .p-postList__link,
+.p-postList__thumb {
+    border-radius: var(--dp-radius);
+}
+.dp-news-section {
+    // カテゴリーリンク一覧
+    .c-listMenu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--dp-space-inner-pc);
+
+        @include mq(sp) {
+            gap: var(--dp-space-inner-sp);
+            justify-content: flex-start;
+        }
+
+        li {
+            list-style: none;
+        }
+        a {
+            border-bottom: none;
+            transition: background-color 0.3s ease;
+            &:hover {
+                background-color: transparent;
+                padding: 0.75em 1em 0.75em 1.75em !important;
+            }
+        }
+    }
+
+    // カテゴリーリンク a の ::after アンダーライン（hover時：opacity 100% + 上にスライド）
+    .c-listMenu a {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--color_text);
+            opacity: 0.5;
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        &:hover::after {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+    }
+}
+
+.dp-news-section--b {
+    // 投稿リスト
+    .p-postList {
+        border-top: none;
+
+        // 投稿本文
+        &__body {
+            display: flex;
+            gap: var(--dp-space-inner-pc);
+
+            @include mq(sp) {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        // 投稿タイトル
+        &__link {
+            padding-top: 1.5em;
+            padding-bottom: 1.5em;
+            padding-right: 2.5em;
+
+            // 矢印アイコン
+            &::before {
+                position: absolute;
+                top: 50%;
+                right: 1em;
+                transform: translate(0px, -50%);
+                content: "\e921";
+                line-height: 1;
+                transition: transform 0.3s ease;
+                font-weight: bold;
+                font-family: "icomoon" !important;
+            }
+
+            &:hover {
+                background: transparent;
+                opacity: 0.8;
+                &::before {
+                    transform: translate(5px, -50%);
+                }
+            }
+        }
+
+        // 投稿日時
+        &__meta {
+            margin-bottom: 0;
+            font-size: 1em;
+        }
+
+        // 投稿タイトルのフォントを太く
+        &__title {
+            font-size: clamp(1em, 1vw, 1.1em);
+            font-weight: var(--dp-font-weight-heading);
+        }
+
+        // 投稿日時のフォントを太く
+        .u-thin {
+            opacity: 1;
+        }
+
+        // 投稿日時のアイコンを非表示
+        .icon-posted::before {
+            content: none;
+        }
+    }
+}

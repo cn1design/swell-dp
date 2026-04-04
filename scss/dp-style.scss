@@ -35,7 +35,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
     }
 }
 /* Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Zen+Maru+Gothic&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap");
 
 /* -------------------------------------------
  * 1. DP専用 変数定義（CSS Custom Properties）
@@ -312,7 +312,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "p-strength"; /* ストレングス */
 @import "c-pricing-table"; /* 料金表 */
 @import "c-faq"; /* FAQ */
-@import "c-post-list"; /* 投稿セクション */
+@import "c-news-list"; /* 投稿セクション */
 @import "c-banner-list"; /* バナーリスト */
 @import "c-cta-block"; /* CTAブロック */
 @import "c-fade-animation"; /* フェードインアニメーション */
@@ -324,3 +324,4 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "c-table"; /* テーブル */
 @import "c-contact-form"; /* お問い合わせフォーム */
 @import "c-footer"; /* フッター */
+@import "p-page-title"; /* 固定ページ タイトルエリア */
