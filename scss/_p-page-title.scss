@@ -1,11 +1,101 @@
 // =============================================================
 // 固定ページ タイトルエリア デザインパターン
 // カスタマイザー「固定ページ タイトルエリア」で切替
-// body に .dp-ttl--{a|b|c|d} が付与される
+// body に .dp-ttl--{a|b|c|d} が付与される（noneの場合は付与なし）
 // =============================================================
 
-// --- デザインA（デフォルト） ---
-// SWELLのデフォルト表示に準ずる（スタイル追加なし）
+/* =============================================
+ * Pattern A: タイトル中央配置
+ * 余白 上160px / 下48px
+ * サブタイトル縦並び・両端ダッシュ非表示
+ * ============================================= */
+.dp-ttl--a {
+
+    #top_title_area {
+        position: relative;
+        overflow: hidden;
+        padding-top: 160px;
+        padding-bottom: 48px;
+        text-align: center;
+
+        @include mq(sp) {
+            padding-top: 80px;
+            padding-bottom: 32px;
+        }
+
+        // 背景装飾（左下・右上のペイント風テクスチャ）
+        // 画像パスはサイトごとに差し替え：url("../images/bg_paint.png")
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: 616px;
+            height: 454px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+
+            @include mq(bp) {
+                width: 360px;
+                height: 265px;
+            }
+
+            @include mq(sp) {
+                width: 220px;
+                height: 162px;
+            }
+        }
+
+        // 左下
+        &::before {
+            left: -142px;
+            bottom: 0;
+            opacity: 0.5;
+            transform: rotate(180deg);
+            // background-image: url("../images/bg_paint.png");
+
+            @include mq(bp) {
+                left: -80px;
+            }
+        }
+
+        // 右上
+        &::after {
+            right: -142px;
+            top: 0;
+            opacity: 0.3;
+            transform: rotate(-165deg);
+            // background-image: url("../images/bg_paint.png");
+
+            @include mq(bp) {
+                right: -80px;
+            }
+        }
+    }
+
+    // タイトル（h1）
+    .c-pageTitle__title {
+        position: relative;
+        z-index: 1;
+    }
+
+    // サブタイトル: 縦並び・両端ダッシュ非表示
+    .c-pageTitle__subTitle {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+
+        // SWELLが出力する両端の「-」spanを非表示
+        > span:first-child,
+        > span:last-child {
+            display: none;
+        }
+    }
+}
 
 // --- デザインB ---
 .dp-ttl--b {
