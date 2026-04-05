@@ -1,0 +1,40 @@
+<!-- wp:html -->
+<style>
+/* dp-card-title-bg-center: 見出し白背景付き（中央寄せ）＋画像＋説明 */
+.dp-card-title-bg-center .swell-block-column {
+  position: relative;
+  padding-top: 24px;
+}
+.dp-card-title-bg-center h3 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: max-content;
+  min-width: 256px;
+  max-width: calc(100% - 32px);
+  padding: var(--dp-space-inner-pc);
+  background-color: #ffffff;
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow);
+  font-size: clamp(18px, 2vw, 20px);
+  text-align: center;
+}
+@media screen and (max-width: 599px) {
+  .dp-card-title-bg-center h3 {
+    font-size: var(--dp-font-size-heading-sp);
+    padding: var(--dp-space-inner-sp);
+  }
+}
+.dp-card-title-bg-center .wp-block-image {
+  border-radius: calc(var(--dp-radius) * 2);
+  overflow: hidden;
+}
+.dp-card-title-bg-center .wp-block-image img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+</style>
+<!-- /wp:html -->

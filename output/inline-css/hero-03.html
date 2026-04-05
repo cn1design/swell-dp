@@ -1,0 +1,92 @@
+<!-- wp:html -->
+<style>
+/* hero-split: テキスト左＋画像右 / SP縦並び */
+.hero-split .hero-title-group {
+  height: 100%;
+}
+.hero-split .hero-title-group > div {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 32px;
+}
+@media screen and (max-width: 959px) {
+  .hero-split .hero-title-group > div {
+    flex-direction: column-reverse;
+  }
+}
+.hero-split .text-block {
+  flex: 1;
+  position: relative;
+}
+.hero-split h1,
+.hero-split .title-copy {
+  margin-bottom: var(--dp-space-element-pc);
+}
+.hero-split h1 {
+  margin-bottom: var(--dp-space-element-sp);
+  line-height: var(--dp-line-height-small);
+  letter-spacing: var(--dp-letter-spacing-heading);
+  font-size: var(--dp-font-size-page-title-pc);
+  font-weight: var(--dp-font-weight-heading);
+  font-feature-settings: "palt";
+}
+@media screen and (max-width: 959px) {
+  .hero-split h1 {
+    font-size: var(--dp-font-size-title-pc);
+  }
+}
+@media screen and (max-width: 599px) {
+  .hero-split h1 {
+    font-size: var(--dp-font-size-title-sp);
+  }
+}
+.hero-split .title-copy {
+  letter-spacing: var(--dp-letter-spacing-text);
+}
+.hero-split .title-copy-main {
+  font-size: var(--dp-font-size-summary);
+}
+/* フェードスライダー画像グループ */
+.hero-split .wp-block-group.hero-media.dp-fade-slider {
+  display: grid !important;
+  flex: 0 0 52%;
+  margin-bottom: 0;
+}
+.hero-split .wp-block-group.hero-media.dp-fade-slider .wp-block-image {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  z-index: 1;
+  margin: 0;
+}
+.hero-split .wp-block-group.hero-media.dp-fade-slider .wp-block-image img {
+  height: 100%;
+  aspect-ratio: 7/6;
+  object-fit: cover;
+  border-radius: var(--dp-radius);
+}
+.hero-split .wp-block-group.hero-media.dp-fade-slider.is-initialized .wp-block-image.is-active {
+  opacity: 1;
+  z-index: 2;
+}
+.hero-split .wp-block-group.hero-media.dp-fade-slider:not(.is-initialized) .wp-block-image:first-of-type {
+  opacity: 1;
+}
+@media screen and (max-width: 959px) {
+  .hero-split .wp-block-group.hero-media.dp-fade-slider {
+    flex: 0 0 100%;
+  }
+  .hero-split .wp-block-group.hero-media.dp-fade-slider .wp-block-image img {
+    height: 500px;
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 599px) {
+  .hero-split .wp-block-group.hero-media.dp-fade-slider .wp-block-image img {
+    height: 300px;
+  }
+}
+</style>
+<!-- /wp:html -->

@@ -1,0 +1,176 @@
+<!-- wp:html -->
+<style>
+/* dp-lp-hero: LP用メインビジュアル 基底 */
+.dp-lp-hero {
+  display: flex;
+  height: 100vh;
+  max-height: 800px;
+  min-height: 600px;
+}
+.dp-lp-hero > div {
+  position: static;
+  width: 100%;
+}
+.dp-lp-hero h1 {
+  margin-bottom: var(--dp-space-inner-pc);
+  font-size: calc(var(--dp-font-size-page-title-pc) * 1.1);
+}
+@media screen and (max-width: 959px) {
+  .dp-lp-hero h1 {
+    font-size: var(--dp-font-size-page-title-pc);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero h1 {
+    font-size: 32px;
+  }
+}
+.dp-lp-hero .swl-bg-color {
+  display: inline-block;
+  padding: 0 var(--dp-space-inner-pc);
+  border-radius: var(--dp-radius);
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero .swl-bg-color {
+    padding: 0 var(--dp-space-inner-sp);
+  }
+}
+.dp-lp-hero .swl-bg-color:not(:last-child) {
+  margin-bottom: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero .swl-bg-color:not(:last-child) {
+    margin-bottom: var(--dp-space-inner-sp);
+  }
+}
+.dp-lp-hero .title-copy-main {
+  margin-bottom: var(--dp-space-inner-pc);
+  font-size: var(--dp-font-size-heading-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero .title-copy-main {
+    font-size: var(--dp-font-size-heading-sp);
+  }
+}
+/* dp-lp-hero--b: 背景2枚画像＋中央タイトル＋左右イラスト */
+@media screen and (max-width: 959px) {
+  .dp-lp-hero--b {
+    justify-content: center;
+    max-height: 960px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--b {
+    max-height: 720px;
+  }
+}
+.dp-lp-hero--b .swell-block-fullWide__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 3em;
+}
+@media screen and (max-width: 959px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner {
+    justify-content: center;
+    padding-bottom: 0;
+  }
+}
+/* 背景画像2枚グループ（2番目のwp-block-group） */
+.dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) {
+  position: absolute;
+  top: 0;
+  max-width: calc(100vw - var(--swl-pad_container, 0));
+  height: 100%;
+  gap: var(--dp-space-inner-pc);
+  z-index: 0;
+}
+@media screen and (max-width: 959px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) {
+    flex-direction: column;
+    gap: var(--dp-space-inner-pc);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) {
+    max-width: calc(100vw - 2em);
+  }
+}
+.dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) .wp-block-image {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--dp-radius);
+  margin: 0;
+}
+@media screen and (max-width: 959px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) .wp-block-image {
+    width: 100%;
+    height: 500px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) .wp-block-image {
+    border-radius: 12px;
+  }
+}
+.dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) .wp-block-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* 左右イラストグループ（3番目のwp-block-group） */
+.dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) {
+  position: absolute;
+  bottom: -96px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(var(--container_size, 0px) + var(--swl-pad_container, 0px) * 2);
+  width: 100%;
+  z-index: 1;
+  pointer-events: none;
+  margin: 0;
+}
+.dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) img {
+  width: 128px;
+  height: auto;
+}
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) img {
+    width: 96px;
+  }
+}
+.dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) :nth-child(1 of .wp-block-image) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) :nth-child(2 of .wp-block-image) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+/* タイトルグループ */
+.dp-lp-hero--b .hero-title-group {
+  position: relative;
+  z-index: 2;
+  padding: 0 1em;
+  text-align: center;
+}
+.dp-lp-hero--b .hero-title-group > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dp-lp-hero--b .hero-title-group .title-copy-main {
+  letter-spacing: var(--dp-letter-spacing-heading);
+  -webkit-text-stroke: 4px #fff;
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+  paint-order: stroke fill;
+}
+</style>
+<!-- /wp:html -->
