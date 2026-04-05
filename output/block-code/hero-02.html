@@ -1,0 +1,215 @@
+<!-- wp:loos/full-wide {"bgOpacity":0,"contentSize":"container","metadata":{"patternName":"core/block/661","name":"MV｜左テキスト＋右画像（シンプル）"},"className":"hero-split dp-wrap"} -->
+<div class="swell-block-fullWide pc-py-60 sp-py-40 alignfull hero-split dp-wrap"><div class="swell-block-fullWide__inner l-container"><!-- wp:group {"metadata":{"name":"MVコンテンツ"},"className":"hero-title-group","layout":{"type":"constrained"}} -->
+<div class="wp-block-group hero-title-group"><!-- wp:group {"metadata":{"name":"タイトルグループ"},"className":"text-block dp-section-title dp-section-title\u002d\u002da","layout":{"type":"constrained"}} -->
+<div class="wp-block-group text-block dp-section-title dp-section-title--a"><!-- wp:paragraph {"align":"left","className":"en-title"} -->
+<p class="has-text-align-left en-title">サブコピーを入れても段落ごと消してもOK</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"textAlign":"left"} -->
+<h2 class="wp-block-heading has-text-align-left">ここにページタイトル<br>最大2行までにする。</h2>
+<!-- /wp:heading -->
+
+<!-- wp:group {"className":"title-copy","layout":{"type":"constrained"}} -->
+<div class="wp-block-group title-copy"><!-- wp:paragraph {"align":"left","className":"title-copy-main"} -->
+<p class="has-text-align-left title-copy-main">ここにタイトル情報補完のメインコピーを入れる</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"align":"left","className":"title-copy-sub"} -->
+<p class="has-text-align-left title-copy-sub">概要やタイトル補足を追加し、<br>改行はShiftキー＋Enterキーで調整</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:loos/button {"hrefUrl":"#line_url","isNewTab":true,"btnAlign":"left","iconName":"LsChat","width":"320px","btnSize":"custom","className":"dp-button button-rectangle is-style-btn_normal"} -->
+<div class="swell-block-button -size-custom dp-button button-rectangle is-style-btn_normal" style="--the-width:320px" data-align="left"><a href="#line_url" target="_blank" rel="noopener noreferrer" class="swell-block-button__link" data-has-icon="1"><svg class="__icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 48 48"><path d="M24 3.6c-12.2 0-22 9-22 20 0 4.3 1.5 8.2 4 11.5l-2 8.1c-.2.8.6 1.5 1.4 1.1l7.8-3.4c3.2 1.6 6.9 2.6 10.8 2.6 12.2 0 22-9 22-20S36.2 3.6 24 3.6z"></path></svg><span>LINEで無料相談</span></a></div>
+<!-- /wp:loos/button --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"metadata":{"name":"スライダー（フェード）"},"className":"hero-media dp-fade-slider","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group hero-media dp-fade-slider"><!-- wp:image {"id":1268,"sizeSlug":"large","linkDestination":"none","className":"is-style-default"} -->
+<figure class="wp-block-image size-large is-style-default"><img src="http://localhost:10054/wp-content/uploads/2026/03/no_image_01-1024x692.webp" alt="" class="wp-image-1268"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1269,"sizeSlug":"large","linkDestination":"none","className":"is-style-default"} -->
+<figure class="wp-block-image size-large is-style-default"><img src="http://localhost:10054/wp-content/uploads/2026/03/no_image_02-1024x692.webp" alt="" class="wp-image-1269"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1270,"sizeSlug":"large","linkDestination":"none","className":"is-style-default"} -->
+<figure class="wp-block-image size-large is-style-default"><img src="http://localhost:10054/wp-content/uploads/2026/03/no_image_03-1024x692.webp" alt="" class="wp-image-1270"/></figure>
+<!-- /wp:image --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div></div>
+<!-- /wp:loos/full-wide -->
+
+<!-- wp:html -->
+<style>
+  /* -------------------------------------------
+   * hero-text-01 (フェードスライダー付き)
+   * ------------------------------------------- */
+  .dp-button {
+    margin-bottom: 0;
+  }
+  .dp-button .swell-block-button__link {
+    min-width: 300px;
+    font-size: var(--dp-font-size-summary);
+    font-weight: var(--dp-font-weight-heading);
+  }
+  @media screen and (max-width: 599px) {
+    .dp-button .swell-block-button__link {
+      width: 100%;
+    }
+  }
+  .button-rectangle .swell-block-button__link {
+    border-radius: var(--dp-radius);
+  }
+  
+  .hero-split .hero-title-group {
+    height: 100%;
+  }
+  .hero-split .hero-title-group > div {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 32px;
+  }
+  @media screen and (max-width: 959px) {
+    .hero-split .hero-title-group > div {
+      flex-direction: column-reverse;
+    }
+  }
+  .hero-split .text-block {
+    flex: 1;
+    position: relative;
+  }
+  .hero-split h1,
+  .hero-split .title-copy {
+    margin-bottom: var(--dp-space-element-pc);
+  }
+  .hero-split .en-title {
+    margin-bottom: var(--dp-space-inner-pc);
+    letter-spacing: var(--dp-letter-spacing-text);
+  }
+  @media screen and (max-width: 599px) {
+    .hero-split .en-title {
+      letter-spacing: var(--dp-letter-spacing-text);
+      font-size: var(--dp-font-size-explanation);
+    }
+  }
+  .hero-split h1 {
+    margin-bottom: var(--dp-space-element-sp);
+    line-height: var(--dp-line-height-small);
+    letter-spacing: var(--dp-letter-spacing-heading);
+    font-size: var(--dp-font-size-page-title);
+    font-weight: var(--dp-font-weight-heading);
+    font-feature-settings: "palt";
+  }
+  @media screen and (max-width: 959px) {
+    .hero-split h1 {
+      font-size: var(--dp-font-size-title-pc);
+    }
+  }
+  @media screen and (max-width: 599px) {
+    .hero-split h1 {
+      font-size: var(--dp-font-size-title-sp);
+    }
+  }
+  .hero-split .title-copy {
+    letter-spacing: var(--dp-letter-spacing-text);
+  }
+  .hero-split .title-copy-main {
+    font-size: var(--dp-font-size-summary);
+  }
+  .hero-split .wp-block-group.hero-media {
+    flex: 0 0 52%;
+    margin-bottom: 0;
+  }
+  .hero-split .wp-block-group.hero-media img {
+    height: 100%;
+    aspect-ratio: 7/6;
+    object-fit: cover;
+    border-radius: var(--dp-radius);
+  }
+  @media screen and (max-width: 959px) {
+    .hero-split .wp-block-group.hero-media {
+      flex: 0 0 100%;
+    }
+    .hero-split .wp-block-group.hero-media img {
+      height: 500px;
+      width: 100vw;
+    }
+  }
+  @media screen and (max-width: 599px) {
+    .hero-split .wp-block-group.hero-media img {
+      height: 300px;
+    }
+  }
+  .hero-split.hero-split--b .hero-title-group > div {
+    gap: 0;
+  }
+  @media screen and (max-width: 959px) {
+    .hero-split.hero-split--b .text-block {
+      max-width: 600px;
+      margin-top: -128px;
+      margin-left: 32px;
+      padding: 48px 32px;
+      background-color: var(--color_bg);
+      border-radius: var(--dp-radius);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .hero-split.hero-split--b .text-block {
+      max-width: 100%;
+      margin-top: -48px;
+      border-radius: var(--dp-radius) 0 0 0;
+    }
+  }
+  @media screen and (max-width: 599px) {
+    .hero-split.hero-split--b .text-block {
+      margin-top: -32px;
+      margin-left: 16px;
+      padding: 24px 0 0 24px;
+    }
+  }
+  
+  /* フェードスライダー機能 */
+  .wp-block-group.dp-fade-slider {
+    display: grid !important;
+  }
+  .wp-block-group.dp-fade-slider .wp-block-image {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    z-index: 1;
+    margin: 0;
+  }
+  .wp-block-group.dp-fade-slider.is-initialized .wp-block-image.is-active {
+    opacity: 1;
+    z-index: 2;
+  }
+  .wp-block-group.dp-fade-slider:not(.is-initialized) .wp-block-image:first-of-type {
+    opacity: 1;
+  }
+  </style>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sliders = document.querySelectorAll('.dp-fade-slider');
+    sliders.forEach(function(slider) {
+      const images = slider.querySelectorAll('.wp-block-image');
+      if (images.length < 2) return;
+      
+      // 初期化
+      slider.classList.add('is-initialized');
+      let currentIndex = 0;
+      images[currentIndex].classList.add('is-active');
+      
+      // 4秒ごとにフェード切り替え
+      setInterval(function() {
+        images[currentIndex].classList.remove('is-active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('is-active');
+      }, 4000);
+    });
+  });
+  </script>
+<!-- /wp:html -->

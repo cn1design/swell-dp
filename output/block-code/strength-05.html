@@ -1,0 +1,149 @@
+<!-- wp:loos/full-wide {"bgOpacity":0,"contentSize":"container","metadata":{"categories":["columns"],"patternName":"core/block/849","name":"アイコンカード｜３枚並び"},"className":"dp-wrap dp-card\u002d\u002dcounter dp-card\u002d\u002dc"} -->
+<div class="swell-block-fullWide pc-py-60 sp-py-40 alignfull dp-wrap dp-card--counter dp-card--c"><div class="swell-block-fullWide__inner l-container"><!-- wp:group {"className":"dp-section-title dp-section-title\u002d\u002da","layout":{"type":"constrained"}} -->
+<div class="wp-block-group dp-section-title dp-section-title--a"><!-- wp:paragraph {"className":"en-title"} -->
+<p class="en-title">（English Title English Title）</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"className":"u-mb-ctrl u-mb-20"} -->
+<h2 class="wp-block-heading u-mb-ctrl u-mb-20">選ばれる<span class="swl-fz u-fz-xl"><strong>3</strong></span>つの理由</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:loos/columns {"colPC":"3","margin":{"x":"3.5rem","y":"5rem"},"className":"dp-card-counter dp-card-circle-badge"} -->
+<div class="swell-block-columns dp-card-counter dp-card-circle-badge" style="--clmn-w--pc:33.33%;--swl-clmn-mrgn--x:3.5rem;--swl-clmn-mrgn--y:5rem"><div class="swell-block-columns__inner"><!-- wp:loos/column -->
+<div class="swell-block-column swl-has-mb--s"><!-- wp:image {"id":1034,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="http://localhost:10054/wp-content/uploads/2026/03/no-image_dammy.webp" alt="" class="wp-image-1034"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:group {"className":"u-mb-ctrl u-mb-0","layout":{"type":"constrained"}} -->
+<div class="wp-block-group u-mb-ctrl u-mb-0"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">ここに見出しH3</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","className":"u-mb-ctrl u-mb-0"} -->
+<p class="has-text-align-center u-mb-ctrl u-mb-0">ここに2行程度の文字数で<strong>[pcbr]</strong>概要をまとめると一貫性がでます。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:loos/column -->
+
+<!-- wp:loos/column -->
+<div class="swell-block-column swl-has-mb--s"><!-- wp:image {"id":1034,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="http://localhost:10054/wp-content/uploads/2026/03/no-image_dammy.webp" alt="" class="wp-image-1034"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:group {"className":"u-mb-ctrl u-mb-0","layout":{"type":"constrained"}} -->
+<div class="wp-block-group u-mb-ctrl u-mb-0"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">ここに見出しH3</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","className":"u-mb-ctrl u-mb-0"} -->
+<p class="has-text-align-center u-mb-ctrl u-mb-0">ここに2行程度の文字数で[pcbr]概要をまとめると一貫性がでます。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:loos/column -->
+
+<!-- wp:loos/column -->
+<div class="swell-block-column swl-has-mb--s"><!-- wp:image {"id":1034,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="http://localhost:10054/wp-content/uploads/2026/03/no-image_dammy.webp" alt="" class="wp-image-1034"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:group {"className":"u-mb-ctrl u-mb-0","layout":{"type":"constrained"}} -->
+<div class="wp-block-group u-mb-ctrl u-mb-0"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">ここに見出しH3</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","className":"u-mb-ctrl u-mb-0"} -->
+<p class="has-text-align-center u-mb-ctrl u-mb-0">ここに2行程度の文字数で[pcbr]概要をまとめると一貫性がでます。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:loos/column --></div></div>
+<!-- /wp:loos/columns --></div></div>
+<!-- /wp:loos/full-wide -->
+
+<!-- wp:html -->
+<style>
+  /* -------------------------------------------
+   * card-03
+   * ------------------------------------------- */
+  .dp-card-counter .swell-block-columns__inner {
+    counter-reset: card-counter;
+  }
+  .dp-card-counter .swell-block-column {
+    counter-increment: card-counter;
+  }
+  .dp-card-counter .swell-block-column::before {
+    content: counter(card-counter, decimal-leading-zero);
+  }
+  
+  .dp-card-circle-badge {
+    margin-bottom: 0;
+  }
+  .dp-card-circle-badge .swell-block-column {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: var(--dp-radius);
+    padding: 0 0 var(--dp-space-element-pc);
+    box-shadow: var(--dp-shadow);
+    text-align: center;
+    z-index: 1;
+  }
+  .dp-card-circle-badge .swell-block-column::before {
+    content: counter(card-counter, decimal-leading-zero);
+    position: absolute;
+    top: -1em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: var(--color_text);
+    border-radius: 50%;
+    line-height: 1;
+    font-family: var(--dp-font-num);
+    font-weight: 300;
+    font-size: var(--dp-font-size-title-pc);
+    z-index: 2;
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-circle-badge .swell-block-column::before {
+      width: 64px;
+      height: 64px;
+      font-size: var(--dp-font-size-title-sp);
+    }
+  }
+  .dp-card-circle-badge .swell-block-column .wp-block-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 0 1em;
+    border-radius: var(--dp-radius) var(--dp-radius) 0 0;
+    overflow: hidden;
+    background-color: var(--color_main_thin);
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-circle-badge .swell-block-column .wp-block-image {
+      aspect-ratio: unset;
+    }
+  }
+  .dp-card-circle-badge .swell-block-column .wp-block-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .dp-card-circle-badge h3 {
+    margin-bottom: calc(var(--dp-space-inner-pc) / 2);
+    font-size: var(--dp-font-size-heading-pc);
+    font-weight: var(--dp-font-weight-heading);
+    text-align: center;
+  }
+  @media screen and (max-width: 599px) {
+    .dp-card-circle-badge h3 {
+      margin-bottom: calc(var(--dp-space-inner-sp) / 2);
+      font-size: var(--dp-font-size-heading-sp);
+    }
+  }
+  </style>
+<!-- /wp:html -->
