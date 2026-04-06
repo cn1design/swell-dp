@@ -7,7 +7,7 @@
     "doctor": "node ./scripts/doctor.mjs",
     "build:css": "sass --no-source-map scss/style.scss:style.css",
     "build:patterns": "cp output/block-code/*.html ../../plugins/swell-dp/patterns/ && cp output/manifest.json ../../plugins/swell-dp/patterns/",
-    "build:dp": "sass --no-source-map scss/dp-style.scss:dp-style.css && npm run build:patterns && cp dp-style.css ../../plugins/swell-dp/assets/css/dp-style.css",
+    "build:dp": "sass --no-source-map scss/dp-style.scss:dp-style.css && npm run build:patterns && cp dp-style.css ../../plugins/swell-dp/assets/css/dp-style.css && cp javascript/dp-page-title.js ../../plugins/swell-dp/assets/js/dp-page-title.js",
     "watch:css": "sass --watch --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css",
     "watch:css:poll": "sass --watch --poll --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css",
     "watch:all:poll": "node scripts/watch-dp.mjs"
