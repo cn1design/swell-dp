@@ -84,6 +84,17 @@ add_action('wp_enqueue_scripts', function() {
 		);
 	}
 
+	// ページタイトルパターン（固定ページかつパターン適用時のみ）
+	if ( is_page() && ! is_front_page() && get_theme_mod( 'dp_page_title_style', 'none' ) !== 'none' ) {
+		wp_enqueue_script(
+			'child-dp-page-title',
+			get_stylesheet_directory_uri() . '/javascript/dp-page-title.js',
+			[],
+			filemtime( get_stylesheet_directory() . '/javascript/dp-page-title.js' ),
+			true
+		);
+	}
+
 	// いいねボタン（アーカイブ + 標準構成 + シングル）
 	if (
 		is_post_type_archive( 'design_pattern' ) ||

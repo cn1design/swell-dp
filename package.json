@@ -10,7 +10,7 @@
     "build:dp": "sass --no-source-map scss/dp-style.scss:dp-style.css && npm run build:patterns && cp dp-style.css ../../plugins/swell-dp/assets/css/dp-style.css",
     "watch:css": "sass --watch --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css",
     "watch:css:poll": "sass --watch --poll --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css",
-    "watch:all:poll": "sass --watch --poll --no-source-map scss/style.scss:style.css scss/dp-style.scss:dp-style.css"
+    "watch:all:poll": "node scripts/watch-dp.mjs"
   },
   "devDependencies": {
     "sass": "^1.77.0"

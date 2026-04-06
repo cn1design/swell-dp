@@ -10,17 +10,21 @@
  * サブタイトル縦並び・両端ダッシュ非表示
  * ============================================= */
 .dp-ttl--a {
-
-    #top_title_area {
+    .l-topTitleArea {
         position: relative;
-        overflow: hidden;
-        padding-top: 160px;
-        padding-bottom: 48px;
+        overflow: visible;
+        padding-top: 6em;
+        padding-bottom: 6em;
         text-align: center;
 
         @include mq(sp) {
-            padding-top: 80px;
-            padding-bottom: 32px;
+            padding-top: 4em;
+            padding-bottom: 4em;
+        }
+
+        // アイキャッチ画像
+        &__img {
+            display: none; // 非表示
         }
 
         // 背景装飾（左下・右上のペイント風テクスチャ）
@@ -40,59 +44,62 @@
                 width: 360px;
                 height: 265px;
             }
-
-            @include mq(sp) {
-                width: 220px;
-                height: 162px;
-            }
         }
 
         // 左下
         &::before {
-            left: -142px;
-            bottom: 0;
-            opacity: 0.5;
+            left: -208px;
+            bottom: -160px;
             transform: rotate(180deg);
             // background-image: url("../images/bg_paint.png");
-
-            @include mq(bp) {
-                left: -80px;
-            }
         }
 
         // 右上
         &::after {
-            right: -142px;
-            top: 0;
-            opacity: 0.3;
+            right: -208px;
+            top: -160px;
             transform: rotate(-165deg);
             // background-image: url("../images/bg_paint.png");
+        }
 
-            @include mq(bp) {
-                right: -80px;
-            }
+        &__body {
+            text-shadow: none;
         }
     }
 
     // タイトル（h1）
-    .c-pageTitle__title {
+    .c-pageTitle {
         position: relative;
         z-index: 1;
-    }
+        color: var(--color_main);
+        font-size: var(--dp-font-size-page-title-pc);
 
-    // サブタイトル: 縦並び・両端ダッシュ非表示
-    .c-pageTitle__subTitle {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
+        @include mq(sp) {
+            font-size: var(--dp-font-size-page-title-sp);
+        }
 
-        // SWELLが出力する両端の「-」spanを非表示
-        > span:first-child,
-        > span:last-child {
-            display: none;
+        // サブタイトル: 縦並び・両端ダッシュ非表示
+        &__subTitle {
+            position: relative;
+            top: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            margin: 0.25em auto 0;
+            padding: 0;
+            opacity: 1;
+            font-size: var(--dp-font-size-heading-pc);
+            font-style: normal;
+
+            @include mq(sp) {
+                font-size: var(--dp-font-size-heading-sp);
+            }
+
+            // 「–」はSWELL親テーマのPHPでテキストとして出力されるためCSS非表示不可
+            // JS実行後に visible に切り替える（チラつき防止）
+            visibility: hidden;
         }
     }
 }
