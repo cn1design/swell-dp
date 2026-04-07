@@ -6,11 +6,12 @@
 
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-    margin-bottom: var(--dp-space-inner-pc);
+    margin-bottom: var(--dp-space-block-pc);
     text-align: center;
 
     @include mq(sp) {
         justify-content: center;
+        margin-bottom: var(--dp-space-block-sp);
     }
 
     // セクションタイトル
@@ -78,8 +79,6 @@
     h1,
     h2 {
         font-weight: 600;
-    }
-    .swl-bg-color {
     }
 }
 

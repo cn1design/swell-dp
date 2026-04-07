@@ -251,12 +251,13 @@
 */
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-  margin-bottom: var(--dp-space-inner-pc);
+  margin-bottom: var(--dp-space-block-pc);
   text-align: center;
 }
 @media screen and (max-width: 599px) {
   .dp-section-title {
     justify-content: center;
+    margin-bottom: var(--dp-space-block-sp);
   }
 }
 .dp-section-title h1 {
@@ -319,6 +320,7 @@
 .dp-section-title--a h2 {
   font-weight: 600;
 }
+
 /* --- 3. section-title--b (英語大＋日本語小) --- */
 .dp-section-title--b .en-title {
   line-height: 1.4;
@@ -5849,22 +5851,76 @@ video.is-active {
     width: 180px;
   }
 }
-.dp-wrap .wp-block-image.dp-stretch-image {
+.dp-wrap .dp-stretch-image {
   height: 100%;
 }
-.dp-wrap .wp-block-image.dp-stretch-image img {
+.dp-wrap .dp-stretch-image img {
   height: 100%;
   object-fit: cover;
 }
 @media screen and (max-width: 959px) {
-  .dp-wrap .wp-block-image.dp-stretch-image {
+  .dp-wrap .dp-stretch-image {
     height: 400px;
   }
 }
 @media screen and (max-width: 599px) {
-  .dp-wrap .wp-block-image.dp-stretch-image {
+  .dp-wrap .dp-stretch-image {
     height: 256px;
   }
 }
 
 /* 背面イラスト */
+/*
+ 背景装飾テクスチャ (dp-deco)
+
+ セクションの対角に背景オブジェクトを配置するユーティリティ。
+ background-image はカスタマイザー追加CSSまたは page-title-style.php で差し込む。
+
+ 【付与クラス】
+   dp-deco--tr … 右上に配置（::after）
+   dp-deco--bl … 左下に配置（::before）
+
+ 【カスタマイザー追加CSS コピペテンプレート】
+   .dp-deco--tr::after { background-image: url("画像URL"); }
+   .dp-deco--bl::before { background-image: url("画像URL"); }
+*/
+.dp-deco--tr::after,
+.dp-deco--bl::before {
+  content: "";
+  position: absolute;
+  width: 616px;
+  height: 454px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+@media screen and (max-width: 959px) {
+  .dp-deco--tr::after,
+  .dp-deco--bl::before {
+    width: 360px;
+    height: 265px;
+  }
+}
+
+.dp-deco--tr {
+  position: relative;
+  overflow: hidden;
+}
+.dp-deco--tr::after {
+  top: -160px;
+  right: -208px;
+  transform: rotate(-165deg);
+}
+
+.dp-deco--bl {
+  position: relative;
+  overflow: hidden;
+}
+.dp-deco--bl::before {
+  bottom: -160px;
+  left: -208px;
+  transform: rotate(180deg);
+}
+
+/* 背景装飾テクスチャ */
