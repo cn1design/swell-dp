@@ -2,49 +2,66 @@
  背景装飾テクスチャ (dp-deco)
 
  セクションの対角に背景オブジェクトを配置するユーティリティ。
- background-image はカスタマイザー追加CSSまたは page-title-style.php で差し込む。
+ overflow: hidden なし → 上下セクションに自然に侵食するデザイン。
+ position: relative は .dp-wrap が担うため不要。
+ background-image はカスタマイザー追加CSSで差し込む。
 
- 【付与クラス】
-   dp-deco--tr … 右上に配置（::after）
-   dp-deco--bl … 左下に配置（::before）
+ 【付与クラス（dp-wrap と同一要素に付与）】
+   dp-deco--tr   … 右上に配置（::after）
+   dp-deco--bl   … 左下に配置（::before）
+   dp-deco--full … セクション全面背景（::before）
 
  【カスタマイザー追加CSS コピペテンプレート】
-   .dp-deco--tr::after { background-image: url("画像URL"); }
-   .dp-deco--bl::before { background-image: url("画像URL"); }
+   .dp-deco--tr::after   { background-image: url("画像URL"); }
+   .dp-deco--bl::before  { background-image: url("画像URL"); }
+   .dp-deco--full::before { background-image: url("画像URL"); }
 */
 
-// 共通スタイル
-.dp-deco--tr::after,
-.dp-deco--bl::before {
-    content: "";
-    position: absolute;
-    width: 616px;
-    height: 454px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    pointer-events: none;
-    mix-blend-mode: multiply;
+.dp-wrap {
 
-    @include mq(bp) {
-        width: 360px;
-        height: 265px;
+    // 共通スタイル
+    &.dp-deco--tr::after,
+    &.dp-deco--bl::before {
+        content: "";
+        position: absolute;
+        width: 616px;
+        height: 454px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        pointer-events: none;
+        mix-blend-mode: multiply;
+
+        @include mq(bp) {
+            width: 360px;
+            height: 265px;
+        }
     }
-}
 
-// 右上
-.dp-deco--tr {
-    &::after {
+    // 右上
+    &.dp-deco--tr::after {
         top: -160px;
         right: -208px;
         transform: rotate(-165deg);
     }
-}
 
-// 左下
-.dp-deco--bl {
-    &::before {
+    // 左下
+    &.dp-deco--bl::before {
         bottom: -160px;
         left: -208px;
         transform: rotate(180deg);
+    }
+
+    // 全面背景
+    &.dp-deco--full::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        pointer-events: none;
+        mix-blend-mode: multiply;
     }
 }
