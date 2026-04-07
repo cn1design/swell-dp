@@ -5672,7 +5672,7 @@ video.is-active {
  * サブタイトル縦並び・両端ダッシュ非表示
  * ============================================= */
 .dp-ttl--a .l-topTitleArea,
-.home .l-topTitleArea {
+.blog .l-topTitleArea {
   position: relative;
   overflow: visible;
   padding-top: 6em;
@@ -5681,18 +5681,18 @@ video.is-active {
 }
 @media screen and (max-width: 599px) {
   .dp-ttl--a .l-topTitleArea,
-  .home .l-topTitleArea {
+  .blog .l-topTitleArea {
     padding-top: 4em;
     padding-bottom: 4em;
   }
 }
 .dp-ttl--a .l-topTitleArea__img,
-.home .l-topTitleArea__img {
+.blog .l-topTitleArea__img {
   display: none;
 }
 .dp-ttl--a .l-topTitleArea::before, .dp-ttl--a .l-topTitleArea::after,
-.home .l-topTitleArea::before,
-.home .l-topTitleArea::after {
+.blog .l-topTitleArea::before,
+.blog .l-topTitleArea::after {
   content: "";
   position: absolute;
   width: 616px;
@@ -5704,30 +5704,30 @@ video.is-active {
 }
 @media screen and (max-width: 959px) {
   .dp-ttl--a .l-topTitleArea::before, .dp-ttl--a .l-topTitleArea::after,
-  .home .l-topTitleArea::before,
-  .home .l-topTitleArea::after {
+  .blog .l-topTitleArea::before,
+  .blog .l-topTitleArea::after {
     width: 360px;
     height: 265px;
   }
 }
 .dp-ttl--a .l-topTitleArea::before,
-.home .l-topTitleArea::before {
+.blog .l-topTitleArea::before {
   left: -208px;
   bottom: -160px;
   transform: rotate(180deg);
 }
 .dp-ttl--a .l-topTitleArea::after,
-.home .l-topTitleArea::after {
+.blog .l-topTitleArea::after {
   right: -208px;
   top: -160px;
   transform: rotate(-165deg);
 }
 .dp-ttl--a .l-topTitleArea__body,
-.home .l-topTitleArea__body {
+.blog .l-topTitleArea__body {
   text-shadow: none;
 }
 .dp-ttl--a .c-pageTitle,
-.home .c-pageTitle {
+.blog .c-pageTitle {
   position: relative;
   z-index: 1;
   color: var(--color_main);
@@ -5735,12 +5735,12 @@ video.is-active {
 }
 @media screen and (max-width: 599px) {
   .dp-ttl--a .c-pageTitle,
-  .home .c-pageTitle {
+  .blog .c-pageTitle {
     font-size: var(--dp-font-size-page-title-sp);
   }
 }
 .dp-ttl--a .c-pageTitle__subTitle,
-.home .c-pageTitle__subTitle {
+.blog .c-pageTitle__subTitle {
   position: relative;
   top: 0;
   z-index: 1;
@@ -5756,12 +5756,12 @@ video.is-active {
 }
 @media screen and (max-width: 599px) {
   .dp-ttl--a .c-pageTitle__subTitle,
-  .home .c-pageTitle__subTitle {
+  .blog .c-pageTitle__subTitle {
     font-size: var(--dp-font-size-heading-sp);
   }
 }
 .dp-ttl--a .c-pageTitle__subTitle,
-.home .c-pageTitle__subTitle {
+.blog .c-pageTitle__subTitle {
   visibility: hidden;
 }
 

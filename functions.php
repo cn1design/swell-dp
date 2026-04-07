@@ -123,35 +123,8 @@ require_once get_stylesheet_directory() . '/inc/dp-base-css-data.php';
 require_once get_stylesheet_directory() . '/inc/dp-tips-data.php';
 require_once get_stylesheet_directory() . '/inc/customizer.php';
 
-// フッター サブナビは swell-dp プラグインの includes/menus.php で登録
-
-/* フッター 右カスタムウィジェットエリア */
-add_action( 'widgets_init', function () {
-    register_sidebar( [
-        'name'          => 'フッター 右カスタムエリア',
-        'id'            => 'footer_nav_right',
-        'description'   => 'フッターメニューの最後の<li>として挿入されます。カスタムHTMLやナビゲーションメニューウィジェットを追加できます。',
-        'before_widget' => '<div id="%1$s" class="footer-nav-right__widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<p class="footer-nav-right__title">',
-        'after_title'   => '</p>',
-    ] );
-} );
-
-/* フッターメニュー（footer_menu）の末尾に footer_nav_right ウィジェットを<li>として注入 */
-add_filter( 'wp_nav_menu_items', function ( $items, $args ) {
-    if ( ! isset( $args->theme_location ) || $args->theme_location !== 'footer_menu' ) {
-        return $items;
-    }
-    if ( ! is_active_sidebar( 'footer_nav_right' ) ) {
-        return $items;
-    }
-    ob_start();
-    dynamic_sidebar( 'footer_nav_right' );
-    $widget_html = ob_get_clean();
-    $items .= '<li class="menu-item footer-nav-right">' . $widget_html . '</li>';
-    return $items;
-}, 10, 2 );
+// フッター サブナビ・右カスタムウィジェット・フッター設定は
+// swell-dp プラグイン（includes/menus.php, footer-widget.php, customizer.php）で管理
 
 /* =====================================================
  * いいね REST API（design_pattern 専用・認証不要）
