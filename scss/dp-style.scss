@@ -21,8 +21,6 @@ $breakpoints: (
     sp: 599px
 );
 
-$num-family: "Roboto", "Noto Sans JP", sans-serif !default;
-
 @mixin mq($key) {
     $bp: map.get($breakpoints, $key);
 
@@ -34,12 +32,24 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
         @content;
     }
 }
+@mixin heading-reset {
+    margin: 0 0 var(--dp-space-inner-pc);
+    padding: 0;
+    border: none;
+
+    &::before {
+        content: none;
+    }
+}
+
 /* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap");
 
+$num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 /* -------------------------------------------
  * 1. DP専用 変数定義（CSS Custom Properties）
  * ------------------------------------------- */
+
 :root {
     --dp-font-jp-maru: "Zen Maru Gothic", sans-serif; // 日本語用丸ゴシック
     --dp-font-en: "Roboto", sans-serif; // 英字用
@@ -86,15 +96,15 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 /* -------------------------------------------
  * 2. 厳格なスコープ管理（DP用テンプレート限定）
  * ------------------------------------------- */
-.dp-wrap,
-.post_content .dp-wrap {
-    // 見出し（H2, H3）の装飾リセット（※ // に変更）
+
+.dp-wrap {
+    // 見出し（H2, H3）の装飾リセット
+    // :where() で詳細度を 0 に下げ、コンポーネント側クラスが常に上書きできるようにする
+    // heading-reset ミックスインを適用することで、パターン側での個別記述が不要になる
     h2,
     h3 {
-        border: none;
+        @include heading-reset;
         background: transparent;
-        padding: 0;
-        margin-top: 0;
 
         &::before,
         &::after {
@@ -210,7 +220,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
         }
     }
 
-    /* 横並び リスト */
+    // 横並び リスト
     ul.-list-flex {
         justify-content: flex-start;
         padding-left: 0 !important;
@@ -245,7 +255,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
             }
         }
 
-        /* 横並び ハッシュタグ 余白多め */
+        // 横並び ハッシュタグ 余白多め
         &.list-hashtag {
             justify-content: center;
             gap: var(--dp-space-inner-pc) var(--dp-space-element-pc);
@@ -325,3 +335,4 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "c-contact-form"; /* お問い合わせフォーム */
 @import "c-footer"; /* フッター */
 @import "p-page-title"; /* 固定ページ タイトルエリア */
+@import "c-illust"; /* 背面イラスト */

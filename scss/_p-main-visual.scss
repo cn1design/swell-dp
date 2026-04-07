@@ -30,7 +30,7 @@ LP用メインビジュアル
 .dp-lp-hero {
     display: flex;
     height: 100vh;
-    max-height: 800px;
+    max-height: 700px;
     min-height: 600px;
 
     // 画像配置を画面端に合わせるため、デフォルトのrelativeからstaticに変更
@@ -172,6 +172,8 @@ LP用メインビジュアル
  背景: 左右2枚画像 / 中央タイトル / 右下イラスト
  -------------------------------------------*/
 .dp-lp-hero--b {
+    padding-bottom: 4em !important;
+
     @include mq(bp) {
         justify-content: center;
         max-height: 960px;
@@ -252,11 +254,11 @@ LP用メインビジュアル
             margin: 0;
 
             img {
-                width: 128px;
-                height: auto;
+                width: auto;
+                height: 256px;
 
                 @include mq(sp) {
-                    width: 96px;
+                    height: 128px;
                 }
             }
 

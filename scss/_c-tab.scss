@@ -14,8 +14,8 @@
 
 /* --- dp-tab: タブブロック共通ベーススタイル --- */
 .dp-tab {
-  // タブナビゲーション
-  .c-tab__nav {
+  // タブナビゲーション（現行SWELL: .c-tabList）
+  .c-tabList {
     justify-content: center;
     gap: var(--dp-space-inner-pc);
 
@@ -28,16 +28,6 @@
   // タブコンテンツアイテム（各タブのコンテンツ外枠）
   .c-tabBody {
     margin-bottom: 0;
-    &__item {
-      background-color: #ffffff;
-      border-radius: var(--dp-radius);
-      padding: var(--dp-space-element-pc); // 2.5rem ≈ 40px
-
-      @include mq(sp) {
-        padding: var(--dp-space-inner-pc);
-        border-radius: var(--dp-radius);
-      }
-    }
   }
 }
 

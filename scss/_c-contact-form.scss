@@ -110,13 +110,14 @@
                 // CF7がpタグを自動生成するためpに対してflexを適用
                 p {
                     display: flex;
-                    align-items: center;
+                    align-items: stretch;
                     gap: 8px;
                     margin: 0;
                     // width:100% の上書き
                     input[type="date"],
                     select {
                         width: auto;
+                        height: 100%;
                     }
 
                     span {
@@ -136,6 +137,15 @@
             }
         }
     }
+
+    // 横並び日時選択
+    .date-time-row {
+        display: flex;
+        align-items: center;
+        gap: var(--dp-space-inner-pc);
+        margin-bottom: var(--dp-space-inner-pc);
+    }
+
     // 住所
     .form-address {
         label,

@@ -43,7 +43,7 @@ if (!defined('ABSPATH')) exit;
             <!-- ===== 右カラム: ナビゲーション ===== -->
             <div class="footer-nav-wrap<?php if ( is_active_sidebar( 'footer_nav_right' ) ) echo ' has-right-widget'; ?>">
 
-                <!-- 1段目: メインナビ -->
+                <!-- 1段目: メインナビ（最右ウィジェットはfilterで<li>として注入） -->
                 <nav class="footer-first-nav">
                     <?php wp_nav_menu([
                         'container'      => false,
@@ -69,14 +69,6 @@ if (!defined('ABSPATH')) exit;
                 </nav>
 
             </div>
-
-            <!-- ===== 最右カラム: カスタムウィジェットエリア ===== -->
-            <!-- 外観 > ウィジェット > フッター 右カスタムエリア で管理 -->
-            <?php if ( is_active_sidebar( 'footer_nav_right' ) ) : ?>
-            <div class="footer-nav-right">
-                <?php dynamic_sidebar( 'footer_nav_right' ); ?>
-            </div>
-            <?php endif; ?>
 
         </div>
     </div>

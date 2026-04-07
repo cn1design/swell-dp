@@ -21,6 +21,10 @@
         box-shadow: var(--dp-shadow);
         display: flex;
         flex-direction: column;
+
+        > .wp-block-group {
+            margin-bottom: 0;
+        }
     }
 
     // アバター画像（円形）
@@ -42,6 +46,10 @@
             width: 72px;
             height: 72px;
         }
+    }
+
+    h3 {
+        @include heading-reset;
     }
 
     // バルーンブロックの余白リセット
@@ -319,5 +327,19 @@
         line-height: var(--dp-line-height-medium);
         letter-spacing: var(--dp-letter-spacing-text);
         margin: 0;
+    }
+}
+
+// voiceスライダー: BP(959px)初期アイテムを左端ピッタリではなく fullWide 内側余白分オフセット
+.dp-card-voice.js-swipe-slider.is-slider-active {
+    @include mq(bp) {
+        .swell-block-columns__inner {
+            margin-left: 0;
+            scroll-padding-left: var(--swl-fw_inner_pad, 0);
+        }
+
+        .swell-block-column {
+            margin: 0;
+        }
     }
 }

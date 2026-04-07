@@ -13,6 +13,9 @@
   display: flex;
   flex-direction: column;
 }
+.dp-card-voice .swell-block-column > .wp-block-group {
+  margin-bottom: 0;
+}
 .dp-card-voice .wp-block-image {
   flex-shrink: 0;
   width: 96px;
@@ -171,6 +174,9 @@
 .js-swipe-slider .dp-slider-nav__next {
   right: 0;
 }
+.js-swipe-slider .dp-slider-dots {
+    display: none;
+}
 .js-swipe-slider.is-slider-active {
   position: relative;
 }
@@ -217,64 +223,209 @@
   pointer-events: none;
 }
 .js-swipe-slider.is-slider-active .dp-slider-nav .dp-slider-nav__btn {
-  pointer-events: all;
+    pointer-events: all;
+}
+@media screen and (max-width: 959px) {
+    .js-swipe-slider.is-slider-active .dp-slider-nav {
+        display: none;
+    }
+}
+.js-swipe-slider.is-slider-active .dp-slider-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: var(--dp-space-element-sp);
+}
+.dp-slider-dot {
+    width: 48px;
+    height: 4px;
+    border-radius: 10px;
+    background-color: #cccccc;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.dp-slider-dot.is-active {
+    background-color: var(--color_main);
+}
+.dp-slider-dot::before {
+    content: "";
+    display: block;
+    height: 20px;
+    transform: translateY(-8px);
+}
+
+/* voice スライダー BP補正 */
+@media screen and (max-width: 959px) {
+    .dp-card-voice.js-swipe-slider.is-slider-active .swell-block-columns__inner {
+        margin-left: 0;
+        scroll-padding-left: var(--swl-fw_inner_pad, 0);
+    }
+    .dp-card-voice.js-swipe-slider.is-slider-active .swell-block-column {
+        margin: 0;
+    }
 }
 </style>
 <script>
 (function () {
   'use strict';
-  var BP_PC = 959;
+
+  const BP_PC = 959;
+
   function initSlider(slider) {
-    var inner = slider.querySelector('.swell-block-columns__inner');
-    var columns = slider.querySelectorAll('.swell-block-column');
+    const inner = slider.querySelector('.swell-block-columns__inner');
+    const columns = slider.querySelectorAll('.swell-block-column');
     if (!inner || columns.length < 2) return;
-    var nav = document.createElement('div');
+    if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
+
+    const nav = document.createElement('div');
     nav.className = 'dp-slider-nav';
-    var prevBtn = document.createElement('button');
+
+    const prevBtn = document.createElement('button');
     prevBtn.type = 'button';
     prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
     prevBtn.setAttribute('aria-label', '前へ');
-    var prevIcon = document.createElement('span');
+    const prevIcon = document.createElement('span');
     prevIcon.className = 'icon-chevron-left';
     prevIcon.setAttribute('aria-hidden', 'true');
     prevBtn.appendChild(prevIcon);
-    var nextBtn = document.createElement('button');
+
+    const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
     nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
     nextBtn.setAttribute('aria-label', '次へ');
-    var nextIcon = document.createElement('span');
+    const nextIcon = document.createElement('span');
     nextIcon.className = 'icon-chevron-right';
     nextIcon.setAttribute('aria-hidden', 'true');
     nextBtn.appendChild(nextIcon);
+
     nav.appendChild(prevBtn);
     nav.appendChild(nextBtn);
     slider.appendChild(nav);
+
+    const dotsWrap = document.createElement('div');
+    dotsWrap.className = 'dp-slider-dots';
+    dotsWrap.setAttribute('role', 'tablist');
+    dotsWrap.setAttribute('aria-label', 'スライダーナビゲーション');
+    slider.appendChild(dotsWrap);
+
+    let dotItems = [];
+    let currentPageCount = 0;
+
     function shouldActivate() {
       if (window.innerWidth <= BP_PC) return true;
       return columns.length >= 4;
     }
+
     function getScrollAmount() {
-      var cols = inner.querySelectorAll('.swell-block-column');
+      const cols = inner.querySelectorAll('.swell-block-column');
       if (cols.length < 2) return inner.clientWidth;
-      var r0 = cols[0].getBoundingClientRect();
-      var r1 = cols[1].getBoundingClientRect();
+      const r0 = cols[0].getBoundingClientRect();
+      const r1 = cols[1].getBoundingClientRect();
       return Math.abs(r1.left - r0.left);
     }
+
+    function getPageCount() {
+      const amount = getScrollAmount();
+      if (amount === 0) return 1;
+      const maxScroll = inner.scrollWidth - inner.clientWidth;
+      if (maxScroll <= 0) return 1;
+      return Math.round(maxScroll / amount) + 1;
+    }
+
+    function getCurrentIndex() {
+      const amount = getScrollAmount();
+      if (amount === 0) return 0;
+      return Math.round(inner.scrollLeft / amount);
+    }
+
+    function scrollToIndex(index) {
+      const amount = getScrollAmount();
+      inner.scrollTo({ left: amount * index, behavior: 'smooth' });
+    }
+
+    function rebuildDots() {
+      const pageCount = getPageCount();
+      if (pageCount === currentPageCount) return;
+
+      currentPageCount = pageCount;
+      dotsWrap.innerHTML = '';
+      dotItems = [];
+
+      for (var i = 0; i < pageCount; i++) {
+        (function (index) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'dp-slider-dot' + (index === 0 ? ' is-active' : '');
+          dot.setAttribute('role', 'tab');
+          dot.setAttribute('aria-label', (index + 1) + 'ページ目');
+          dot.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+          dot.addEventListener('click', function () {
+            scrollToIndex(index);
+          });
+          dotsWrap.appendChild(dot);
+          dotItems.push(dot);
+        })(i);
+      }
+    }
+
     function updateButtons() {
-      var atStart = inner.scrollLeft <= 1;
-      var atEnd = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
+      const atStart = inner.scrollLeft <= 1;
+      const atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
       prevBtn.classList.toggle('is-edge', atStart);
       nextBtn.classList.toggle('is-edge', atEnd);
     }
-    function activate() { slider.classList.add('is-slider-active'); updateButtons(); }
-    function deactivate() { slider.classList.remove('is-slider-active'); inner.scrollLeft = 0; }
-    function refresh() { shouldActivate() ? activate() : deactivate(); }
-    prevBtn.addEventListener('click', function () { inner.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }); });
-    nextBtn.addEventListener('click', function () { inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); });
-    inner.addEventListener('scroll', updateButtons, { passive: true });
+
+    function updateDots() {
+      const current = getCurrentIndex();
+      dotItems.forEach(function (dot, i) {
+        const active = i === current;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
+    function activate() {
+      slider.classList.add('is-slider-active');
+      requestAnimationFrame(function () {
+        rebuildDots();
+        updateButtons();
+        updateDots();
+      });
+    }
+
+    function deactivate() {
+      slider.classList.remove('is-slider-active');
+      inner.scrollLeft = 0;
+      currentPageCount = 0;
+      dotsWrap.innerHTML = '';
+      dotItems = [];
+    }
+
+    function refresh() {
+      shouldActivate() ? activate() : deactivate();
+    }
+
+    prevBtn.addEventListener('click', function () {
+      inner.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', function () {
+      inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+
+    inner.addEventListener('scroll', function () {
+      updateButtons();
+      updateDots();
+    }, { passive: true });
+
     window.addEventListener('resize', refresh, { passive: true });
+
     refresh();
   }
+
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.js-swipe-slider').forEach(initSlider);
   });

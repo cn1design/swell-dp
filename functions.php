@@ -69,6 +69,17 @@ add_action('wp_enqueue_scripts', function() {
 		);
 	}
 
+	// コピーボタン（シングルページ）
+	if ( is_singular( 'design_pattern' ) ) {
+		wp_enqueue_script(
+			'child-dp-cpt',
+			get_stylesheet_directory_uri() . '/javascript/cpt.js',
+			[],
+			filemtime( get_stylesheet_directory() . '/javascript/cpt.js' ),
+			true
+		);
+	}
+
 	// コピーボタン サンバーストアニメーション（アーカイブ + 標準構成 + シングル）
 	if (
 		is_post_type_archive( 'design_pattern' ) ||
@@ -119,13 +130,28 @@ add_action( 'widgets_init', function () {
     register_sidebar( [
         'name'          => 'フッター 右カスタムエリア',
         'id'            => 'footer_nav_right',
-        'description'   => 'フッターナビ右側に表示されるカスタムエリアです。カスタムHTMLやナビゲーションメニューウィジェットを追加できます。',
+        'description'   => 'フッターメニューの最後の<li>として挿入されます。カスタムHTMLやナビゲーションメニューウィジェットを追加できます。',
         'before_widget' => '<div id="%1$s" class="footer-nav-right__widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<p class="footer-nav-right__title">',
         'after_title'   => '</p>',
     ] );
 } );
+
+/* フッターメニュー（footer_menu）の末尾に footer_nav_right ウィジェットを<li>として注入 */
+add_filter( 'wp_nav_menu_items', function ( $items, $args ) {
+    if ( ! isset( $args->theme_location ) || $args->theme_location !== 'footer_menu' ) {
+        return $items;
+    }
+    if ( ! is_active_sidebar( 'footer_nav_right' ) ) {
+        return $items;
+    }
+    ob_start();
+    dynamic_sidebar( 'footer_nav_right' );
+    $widget_html = ob_get_clean();
+    $items .= '<li class="menu-item footer-nav-right">' . $widget_html . '</li>';
+    return $items;
+}, 10, 2 );
 
 /* =====================================================
  * いいね REST API（design_pattern 専用・認証不要）

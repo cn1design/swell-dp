@@ -8,9 +8,9 @@
     const inner = slider.querySelector('.swell-block-columns__inner');
     const columns = slider.querySelectorAll('.swell-block-column');
     if (!inner || columns.length < 2) return;
+    if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
 
     // ナビゲーションボタン生成
-    // position: absolute でカードエリアに重ねるため height: 100% のオーバーレイとして挿入
     const nav = document.createElement('div');
     nav.className = 'dp-slider-nav';
 
@@ -36,8 +36,17 @@
     nav.appendChild(nextBtn);
     slider.appendChild(nav);
 
+    // ページネーションバーコンテナ（ドットはactivate時に動的生成）
+    const dotsWrap = document.createElement('div');
+    dotsWrap.className = 'dp-slider-dots';
+    dotsWrap.setAttribute('role', 'tablist');
+    dotsWrap.setAttribute('aria-label', 'スライダーナビゲーション');
+    slider.appendChild(dotsWrap);
+
+    let dotItems = [];
+    let currentPageCount = 0;
+
     // PC（> BP_PC）かつカード4枚以上の場合のみスライダー発動
-    // タブレット・SP は枚数問わず常に発動
     function shouldActivate() {
       if (window.innerWidth <= BP_PC) return true;
       return columns.length >= 4;
@@ -52,7 +61,55 @@
       return Math.abs(r1.left - r0.left);
     }
 
-    // disabled 廃止 → .is-edge クラスで opacity 制御
+    // 必要なページ数 = 実際にスクロールできる回数 + 1
+    // 「maxScrollLeft / scrollAmount」 で何ステップ動けるかを算出
+    function getPageCount() {
+      const amount = getScrollAmount();
+      if (amount === 0) return 1;
+      const maxScroll = inner.scrollWidth - inner.clientWidth;
+      if (maxScroll <= 0) return 1;
+      return Math.round(maxScroll / amount) + 1;
+    }
+
+    // 現在表示中のインデックス
+    function getCurrentIndex() {
+      const amount = getScrollAmount();
+      if (amount === 0) return 0;
+      return Math.round(inner.scrollLeft / amount);
+    }
+
+    // 指定インデックスのカードへスクロール
+    function scrollToIndex(index) {
+      const amount = getScrollAmount();
+      inner.scrollTo({ left: amount * index, behavior: 'smooth' });
+    }
+
+    // ページ数が変わった場合のみドットを再生成
+    function rebuildDots() {
+      const pageCount = getPageCount();
+      if (pageCount === currentPageCount) return;
+
+      currentPageCount = pageCount;
+      dotsWrap.innerHTML = '';
+      dotItems = [];
+
+      for (var i = 0; i < pageCount; i++) {
+        (function (index) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'dp-slider-dot' + (index === 0 ? ' is-active' : '');
+          dot.setAttribute('role', 'tab');
+          dot.setAttribute('aria-label', (index + 1) + 'ページ目');
+          dot.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+          dot.addEventListener('click', function () {
+            scrollToIndex(index);
+          });
+          dotsWrap.appendChild(dot);
+          dotItems.push(dot);
+        })(i);
+      }
+    }
+
     function updateButtons() {
       const atStart = inner.scrollLeft <= 1;
       const atEnd   = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1;
@@ -60,14 +117,31 @@
       nextBtn.classList.toggle('is-edge', atEnd);
     }
 
+    function updateDots() {
+      const current = getCurrentIndex();
+      dotItems.forEach(function (dot, i) {
+        const active = i === current;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
     function activate() {
       slider.classList.add('is-slider-active');
-      updateButtons();
+      // レイアウト確定後に計測（requestAnimationFrame で1フレーム待つ）
+      requestAnimationFrame(function () {
+        rebuildDots();
+        updateButtons();
+        updateDots();
+      });
     }
 
     function deactivate() {
       slider.classList.remove('is-slider-active');
       inner.scrollLeft = 0;
+      currentPageCount = 0;
+      dotsWrap.innerHTML = '';
+      dotItems = [];
     }
 
     function refresh() {
@@ -82,7 +156,11 @@
       inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     });
 
-    inner.addEventListener('scroll', updateButtons, { passive: true });
+    inner.addEventListener('scroll', function () {
+      updateButtons();
+      updateDots();
+    }, { passive: true });
+
     window.addEventListener('resize', refresh, { passive: true });
 
     refresh();

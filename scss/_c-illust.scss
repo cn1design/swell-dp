@@ -1,0 +1,128 @@
+/*
+
+ 背面イラスト (dp-illust)
+
+ 【パターン1: SWELLリッチカラム】
+   wp:loos/column の className に dp-illust-wrap を付与
+   → swell-block-column が containing block になる
+
+ 【パターン2: wp:group 単体】
+   wp:group の className に dp-illust-wrap を付与
+   → wp-block-group が containing block になる
+
+ 【共通: イラスト画像の付与クラス】
+   dp-illust           … 背面絶対配置の基底（必須）
+   dp-illust--tl/tr/bl/br … 配置バリアント（必須）
+   dp-illust--s/m/l    … サイズバリアント（任意）
+
+ 【z-index 設計】
+   isolation: isolate でスタッキングコンテキストを閉じ込める。
+   イラストに z-index: -1 を付与することで、
+   前面画像（通常フロー）がクラス追加なしで自然に前面になる。
+
+*/
+
+.dp-wrap {
+  // コンテナ（swell-block-column or wp-block-group に付与）
+  .dp-illust-wrap {
+    position: relative;
+    isolation: isolate; // スタッキングコンテキストを閉じ込める
+  }
+
+  // 背面イラスト（wp-block-image に付与）
+  .dp-illust {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    margin: 0;
+
+    img {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+
+      @include mq(sp) {
+        width: 120px;
+      }
+    }
+  }
+
+  // 配置バリアント
+  .dp-illust--tl {
+    top: -56px;
+    left: -80px;
+  }
+  .dp-illust--tr {
+    top: -192px;
+    right: 24px;
+  }
+  .dp-illust--bl {
+    bottom: 0;
+    left: 0;
+  }
+  .dp-illust--br {
+    bottom: -56px;
+    right: -80px;
+  }
+
+  @include mq(bp) {
+    .dp-illust--tl {
+      top: -40px;
+      left: -64px;
+    }
+    .dp-illust--tr {
+      top: auto;
+      bottom: -128px;
+      right: 0;
+    }
+    .dp-illust--bl {
+      bottom: 0;
+      left: 0;
+    }
+    .dp-illust--br {
+      bottom: -40px;
+      right: -64px;
+    }
+  }
+
+  // サイズバリアント
+  .dp-illust--s {
+    width: 100px;
+  }
+  .dp-illust--m {
+    width: 180px;
+  }
+  .dp-illust--l {
+    width: 260px;
+  }
+
+  @include mq(bp) {
+    .dp-illust--s {
+      width: 72px;
+    }
+    .dp-illust--m {
+      width: 120px;
+    }
+    .dp-illust--l {
+      width: 180px;
+    }
+  }
+
+  // 前面画像をコンテナ高さいっぱいに引き伸ばす（wp-block-image に付与）
+  .wp-block-image.dp-stretch-image {
+    height: 100%;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @include mq(bp) {
+      height: 400px;
+    }
+
+    @include mq(sp) {
+      height: 256px;
+    }
+  }
+}

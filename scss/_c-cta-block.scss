@@ -173,6 +173,7 @@ CTAセクション (.dp-cta-section)
         font-weight: 700;
         margin-bottom: 0;
         line-height: var(--dp-line-height-small);
+        letter-spacing: 0;
         transition: transform 0.3s ease;
 
         span {
@@ -215,6 +216,8 @@ CTAセクション (.dp-cta-section)
 }
 
 .dp-cta--b {
+    position: relative;
+
     // 電話・チャット 横並びグループ
     .dp-cta-other {
         gap: var(--dp-space-element-pc);
@@ -227,14 +230,10 @@ CTAセクション (.dp-cta-section)
         p:nth-of-type(1) {
             text-align: right;
             line-height: 0.7;
-            font-size: var(--dp-font-size-title-pc);
+            font-size: calc(var(--dp-font-size-title-pc) * 0.9);
 
             @include mq(bp) {
                 text-align: center;
-            }
-
-            @include mq(sp) {
-                font-size: var(--dp-font-size-title-sp);
             }
 
             .swl-inline-icon {
@@ -256,6 +255,37 @@ CTAセクション (.dp-cta-section)
                     content: none;
                 }
             }
+        }
+    }
+
+    //人物画像
+    .wp-block-image:last-child {
+        position: absolute;
+        bottom: 0;
+        left: -16px;
+        width: auto;
+        height: calc(100% - 48px);
+        margin-bottom: 0;
+        z-index: 1;
+
+        @include mq(sp) {
+            left: -24px;
+            height: 50%;
+        }
+
+        img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+    }
+}
+
+// スライダーアクティブ時: 初期アイテムを中央配置・次アイテムを右端に見せる
+.js-swipe-slider.is-slider-active {
+    @include mq(bp) {
+        .swell-block-column {
+            width: 95% !important;
         }
     }
 }

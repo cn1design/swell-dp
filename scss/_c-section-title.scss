@@ -6,12 +6,11 @@
 
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-    margin-bottom: var(--dp-space-block-pc);
+    margin-bottom: var(--dp-space-inner-pc);
     text-align: center;
 
     @include mq(sp) {
         justify-content: center;
-        margin-bottom: var(--dp-space-block-sp);
     }
 
     // セクションタイトル
@@ -21,6 +20,7 @@
         letter-spacing: var(--dp-letter-spacing-heading);
         font-size: var(--dp-font-size-page-title-pc);
         font-weight: var(--dp-font-weight-heading);
+        font-family: var(--dp-font-jp-maru);
 
         @include mq(sp) {
             line-height: 1.4;
@@ -31,8 +31,11 @@
 
     // セクションタイトル
     h2 {
-        margin-bottom: var(--dp-space-inner-pc);
+        margin: 0 0 var(--dp-space-inner-pc);
+        padding: 0;
+        background: transparent;
         color: var(--color_text);
+        border: none;
         letter-spacing: var(--dp-letter-spacing-heading);
         font-size: var(--dp-font-size-title-pc);
         font-weight: var(--dp-font-weight-heading);

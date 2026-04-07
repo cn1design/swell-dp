@@ -1,13 +1,87 @@
 <!-- wp:html -->
 <style>
-/* solution-02: 解決 2カラム / SP列順逆転 */
-.dp-solution-section__img {
-  max-width: 100%;
+/* illust: 背面イラスト */
+.dp-wrap .dp-illust-wrap {
+    position: relative;
+    isolation: isolate;
 }
-@media (max-width: 767px) {
-  .dp-sp-reverse-column .swell-block-columns__inner {
-    flex-direction: column-reverse;
-  }
+.dp-wrap .dp-illust {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    margin: 0;
+}
+.dp-wrap .dp-illust img {
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+}
+@media screen and (max-width: 599px) {
+    .dp-wrap .dp-illust img {
+        width: 120px;
+    }
+}
+.dp-wrap .dp-illust--tl {
+    top: -56px;
+    left: -80px;
+}
+.dp-wrap .dp-illust--tr {
+    top: -192px;
+    right: 24px;
+}
+.dp-wrap .dp-illust--bl {
+    bottom: 0;
+    left: 0;
+}
+.dp-wrap .dp-illust--br {
+    bottom: -56px;
+    right: -80px;
+}
+@media screen and (max-width: 959px) {
+    .dp-wrap .dp-illust--tl {
+        top: -40px;
+        left: -64px;
+    }
+    .dp-wrap .dp-illust--tr {
+        top: auto;
+        bottom: -128px;
+        right: 0;
+    }
+    .dp-wrap .dp-illust--bl {
+        bottom: 0;
+        left: 0;
+    }
+    .dp-wrap .dp-illust--br {
+        bottom: -40px;
+        right: -64px;
+    }
+}
+.dp-wrap .dp-illust--s { width: 100px; }
+.dp-wrap .dp-illust--m { width: 180px; }
+.dp-wrap .dp-illust--l { width: 260px; }
+@media screen and (max-width: 959px) {
+    .dp-wrap .dp-illust--s { width: 72px; }
+    .dp-wrap .dp-illust--m { width: 120px; }
+    .dp-wrap .dp-illust--l { width: 180px; }
+}
+
+/* stretch-image: 前面画像をコンテナ高さいっぱいに引き伸ばす */
+.dp-wrap .wp-block-image.dp-stretch-image {
+    height: 100%;
+}
+.dp-wrap .wp-block-image.dp-stretch-image img {
+    height: 100%;
+    object-fit: cover;
+}
+@media screen and (max-width: 959px) {
+    .dp-wrap .wp-block-image.dp-stretch-image {
+        height: 400px;
+    }
+}
+@media screen and (max-width: 599px) {
+    .dp-wrap .wp-block-image.dp-stretch-image {
+        height: 256px;
+    }
 }
 </style>
 <!-- /wp:html -->

@@ -4,18 +4,30 @@
 
 */
 
-// .c-gnav {
-//     li:not(:last-child) {
-//         margin-right: 8px;
-//     }
-//     li:last-child {
-//         margin-left: 8px;
-//     }
-// }
+/* ヘッダーの最大幅を1440pxに調整 */
+.-series .l-header__inner,
+.l-footer .l-container,
+.l-footer .copyright {
+    max-width: calc(1512px + calc(var(--swl-pad_container, 0px) * 2));
+}
+
+/* ヘッダーナビゲーションの高さ調整 */
+.c-gnavWrap {
+    margin: auto 0; // 上下中央寄せ
+
+    .c-gnav {
+        height: 48px;
+    }
+}
 
 /* --- ヘッダーCTAボタン (.icon-bubble) --- */
 .dp-header-cta {
     gap: 16px;
+
+    @include mq(bp) {
+        justify-content: center;
+        align-items: center;
+    }
 
     .dp-line-buttom {
         a {
@@ -35,11 +47,59 @@
             padding: 0;
             border: none;
             text-align: right;
+            transition: opacity 0.3s ease;
 
             &:hover {
                 opacity: 0.7;
             }
-            transition: opacity 0.3s ease;
+
+            strong {
+                font-size: clamp(16px, 2vw, var(--dp-font-size-heading-pc));
+
+                @include mq(bp) {
+                    font-size: var(--dp-font-size-heading-pc);
+                }
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
         }
     }
+}
+
+.dp-vertical-right-ja {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @include mq(bp) {
+        position: relative;
+        top: auto;
+        transform: none;
+    }
+
+    a {
+        writing-mode: vertical-rl;
+        height: auto;
+        padding: 1.5em 1em;
+        text-orientation: upright;
+        letter-spacing: 0.1em;
+        border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+
+        @include mq(bp) {
+            writing-mode: horizontal-tb;
+            border-radius: var(--dp-radius);
+            padding: 8px 16px;
+        }
+    }
+
+    .swl-inline-icon {
+        margin-bottom: 0.25em;
+    }
+}
+
+// ヘッダーCTAボタンを非表示
+.l-fixHeader .dp-line-buttom {
+    display: none;
 }
