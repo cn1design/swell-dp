@@ -157,6 +157,11 @@ LP用メインビジュアル
             transform: unset;
             width: calc(100% + var(--swl-fw_inner_pad, 0));
             height: 380px;
+
+            // 100vw はSWELL CSS変数の初期化前にレイアウトシフトが発生するため上書き
+            img {
+                width: 100%;
+            }
         }
 
         img {

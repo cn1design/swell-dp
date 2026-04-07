@@ -10,6 +10,26 @@
   ※ ovserver-fadeIn.js でスクロール時にフェードインアニメーションを実行
 
  --------------------------------------------------------*/
+/*--------------------------------------------------------
+  スクロールフェードイン（汎用）
+  js-fade         … 個別要素に付与
+  js-fade-section … 親に付与 → 直下子要素を自動フェード
+--------------------------------------------------------*/
+// body.js-fade-ready 配下のみ適用（エディタはJSが動かないため非表示にならない）
+body.js-fade-ready .js-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    will-change: opacity, transform;
+}
+body.js-fade-ready .js-fade.is-fade-in {
+    opacity: 1;
+    transform: none;
+}
+
+/*--------------------------------------------------------
+  PC： スクロール時に固定位置になる動画
+--------------------------------------------------------*/
 .fade-animation-wrap > div {
     display: flex;
     justify-content: space-between;

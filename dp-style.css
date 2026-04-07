@@ -3078,6 +3078,9 @@ LP用メインビジュアル
     width: calc(100% + var(--swl-fw_inner_pad, 0));
     height: 380px;
   }
+  .dp-lp-hero--a .wp-block-image img {
+    width: 100%;
+  }
 }
 .dp-lp-hero--a .wp-block-image img {
   width: 100vw;
@@ -4581,6 +4584,26 @@ CTAセクション (.dp-cta-section)
   ※ ovserver-fadeIn.js でスクロール時にフェードインアニメーションを実行
 
  --------------------------------------------------------*/
+/*--------------------------------------------------------
+  スクロールフェードイン（汎用）
+  js-fade         … 個別要素に付与
+  js-fade-section … 親に付与 → 直下子要素を自動フェード
+--------------------------------------------------------*/
+body.js-fade-ready .js-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+body.js-fade-ready .js-fade.is-fade-in {
+  opacity: 1;
+  transform: none;
+}
+
+/*--------------------------------------------------------
+  PC： スクロール時に固定位置になる動画
+--------------------------------------------------------*/
 .fade-animation-wrap > div {
   display: flex;
   justify-content: space-between;
@@ -5268,7 +5291,7 @@ video.is-active {
 *--------------------------------------------------------*/
 /*ContactForm7カスタマイズ*/
 .wpcf7 {
-  max-width: 1023px;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 48px;
 }
@@ -5330,7 +5353,7 @@ video.is-active {
 .wpcf7 .cf7_row .response input,
 .wpcf7 .cf7_row .response select,
 .wpcf7 .cf7_row .response textarea {
-  padding: 12px 8px;
+  padding: 12px;
   border-radius: 4px;
   background-color: #f2f2f2;
 }
@@ -5391,6 +5414,11 @@ video.is-active {
   align-items: center;
   gap: var(--dp-space-inner-pc);
   margin-bottom: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 959px) {
+  .wpcf7 .date-time-row input {
+    padding: 0 12px !important;
+  }
 }
 .wpcf7 .form-address label,
 .wpcf7 .form-address span {
