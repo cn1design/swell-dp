@@ -33,9 +33,6 @@
 
 // 右上
 .dp-deco--tr {
-    position: relative;
-    overflow: hidden;
-
     &::after {
         top: -160px;
         right: -208px;
@@ -45,9 +42,6 @@
 
 // 左下
 .dp-deco--bl {
-    position: relative;
-    overflow: hidden;
-
     &::before {
         bottom: -160px;
         left: -208px;

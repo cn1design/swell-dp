@@ -5903,20 +5903,12 @@ video.is-active {
   }
 }
 
-.dp-deco--tr {
-  position: relative;
-  overflow: hidden;
-}
 .dp-deco--tr::after {
   top: -160px;
   right: -208px;
   transform: rotate(-165deg);
 }
 
-.dp-deco--bl {
-  position: relative;
-  overflow: hidden;
-}
 .dp-deco--bl::before {
   bottom: -160px;
   left: -208px;
