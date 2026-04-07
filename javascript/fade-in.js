@@ -13,7 +13,13 @@
 
   function observe(el, delay) {
     if (delay) el.style.transitionDelay = delay + 's';
-    observer.observe(el);
+    // ダブルRAFで opacity:0 を確実に描画してから監視開始
+    // （即座に observe すると is-fade-in が付く前に描画されず transition が見えない）
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        observer.observe(el);
+      });
+    });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
