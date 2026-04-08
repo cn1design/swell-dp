@@ -36,6 +36,9 @@ add_action('wp_enqueue_scripts', function() {
 			'child-fade-scroll'      => 'fade-scroll.js',
 			'child-observer-fadeIn'  => 'observer-fadeIn.js',
 			'child-fade-slide'       => 'fade-slide.js',
+			'child-fade-in'          => 'fade-in.js',
+			'child-dp-vertical-cta'  => 'dp-vertical-cta.js',
+			'child-loading'          => 'loading.js',
 		];
 		foreach ( $fallback_js as $handle => $file ) {
 			$path = get_stylesheet_directory() . '/javascript/' . $file;

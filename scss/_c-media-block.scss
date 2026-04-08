@@ -607,7 +607,7 @@
     iframe {
         height: 100%; //ブロック高さに合わせる
 
-        @include mq(sp) {
+        @include mq(bp) {
             height: 400px;
         }
     }

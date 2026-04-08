@@ -74,11 +74,24 @@
     transform: translateY(-50%);
     z-index: 100;
     width: 72px; // 縦書きボタンの幅を明示（未指定だとテキスト幅基準で崩れる）
+    transition: transform 0.4s ease; // フッター回避スライドアウト用
+
+    // フッターが viewport に入ったら右へ退避（JS: dp-vertical-cta.js が付与）
+    &.is-footer-hidden {
+        transform: translateY(-50%) translateX(100%);
+    }
 
     @include mq(bp) {
         position: relative;
         top: auto;
         transform: none;
+        width: auto;
+        transition: none; // SP は fixed でないため不要
+
+        // SP では is-footer-hidden を無効化
+        &.is-footer-hidden {
+            transform: none;
+        }
     }
 
     a {
@@ -98,6 +111,10 @@
 
     .swl-inline-icon {
         margin-bottom: 0.25em;
+
+        @include mq(bp) {
+            margin-bottom: 0;
+        }
     }
 }
 

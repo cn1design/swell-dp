@@ -1,0 +1,115 @@
+/*
+
+ ローディング + ヒーロー入場アニメーション
+
+ 【仕組み】
+   1. PHP wp_head(priority:1) が <html class="dp-before-load"> をインラインJS で付与（FOUC防止）
+   2. オーバーレイが画面を覆いながらローディング表示
+   3. window.load + 最低表示時間経過 → loading.js が dp-before-load を外し dp-loaded を付与
+   4. CSS transitionが走りヘッダー・コンテンツがスライドフェードイン
+
+ 【ブロックへのクラス付与】
+   dp-enter-left  … 左ブロックに付与（左→右スライドフェードイン）
+   dp-enter-right … 右ブロックに付与（右→左スライドフェードイン）
+   dp-enter-up    … 下から上スライドフェードイン（その他コンテンツ用）
+
+*/
+
+// =====================================================
+// ローディングオーバーレイ
+// =====================================================
+#dp-loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: var(--color_bg, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease;
+
+    &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+// スピナー
+.dp-loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(0, 0, 0, 0.08);
+    border-top-color: var(--color_main, #333);
+    border-radius: 50%;
+    animation: dp-spin 0.8s linear infinite;
+}
+
+@keyframes dp-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// =====================================================
+// ヒーロー入場アニメーション: 初期非表示
+// html.dp-before-load スコープ → JS 無効時は一切適用されない（安全）
+// =====================================================
+html.dp-before-load {
+    // ヘッダー: 上からスライドイン
+    .l-header {
+        opacity: 0;
+        transform: translateY(-24px);
+    }
+
+    // 左ブロック: 左から
+    .dp-enter-left {
+        opacity: 0;
+        transform: translateX(-32px);
+    }
+
+    // 右ブロック: 右から
+    .dp-enter-right {
+        opacity: 0;
+        transform: translateX(32px);
+    }
+
+    // 下からフェードアップ（その他要素用）
+    .dp-enter-up {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+}
+
+// =====================================================
+// ヒーロー入場アニメーション: transition 実行
+// html.dp-loaded 付与で全要素が一斉にアニメーション開始
+// =====================================================
+html.dp-loaded {
+    // ヘッダー: 最初に登場（delay なし）
+    .l-header {
+        opacity: 1;
+        transform: none;
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    // コンテンツ: ヘッダーの後（0.2s 遅延）
+    .dp-enter-left,
+    .dp-enter-right {
+        opacity: 1;
+        transform: none;
+        transition:
+            opacity 0.8s ease 0.2s,
+            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
+    }
+
+    // その他コンテンツ: さらに後（0.35s 遅延）
+    .dp-enter-up {
+        opacity: 1;
+        transform: none;
+        transition:
+            opacity 0.8s ease 0.35s,
+            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s;
+    }
+}
