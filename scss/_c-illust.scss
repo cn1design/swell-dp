@@ -107,22 +107,4 @@
       width: 180px;
     }
   }
-
-  // 前面画像をコンテナ高さいっぱいに引き伸ばす（wp-block-image に付与）
-  .dp-stretch-image {
-    height: 100%;
-
-    img {
-      height: 100%;
-      object-fit: cover;
-    }
-
-    @include mq(bp) {
-      height: 400px;
-    }
-
-    @include mq(sp) {
-      height: 256px;
-    }
-  }
 }

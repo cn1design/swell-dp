@@ -49,7 +49,7 @@ LP用メインビジュアル
         }
 
         @include mq(sp) {
-            font-size: 32px;
+            font-size: 2em;
         }
     }
 
@@ -60,7 +60,7 @@ LP用メインビジュアル
         border-radius: var(--dp-radius);
 
         @include mq(sp) {
-            padding: 0 var(--dp-space-inner-sp);
+            padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-sp);
         }
 
         &:not(:last-child) {
@@ -181,11 +181,13 @@ LP用メインビジュアル
 
     @include mq(bp) {
         justify-content: center;
-        max-height: 960px;
+        max-height: 900px;
     }
 
     @include mq(sp) {
-        max-height: 720px;
+        max-height: 500px;
+        min-height: 400px;
+        padding-bottom: 1em !important;
     }
 
     // フルワイドinner: 相対配置（padding は親のpc-py-60で確保済み・inner側は不要）
@@ -206,8 +208,10 @@ LP用メインビジュアル
         & :nth-child(2 of .wp-block-group) {
             position: absolute;
             top: 0;
-            max-width: calc(100vw - var(--swl-pad_container, 0));
+            left: 24px;
+            right: 24px;
             height: 100%;
+            display: flex;
             gap: var(--dp-space-inner-pc);
             z-index: 0;
 
@@ -217,7 +221,8 @@ LP用メインビジュアル
             }
 
             @include mq(sp) {
-                max-width: calc(100vw - 2em);
+                left: 16px;
+                right: 16px;
             }
 
             // 各画像（flex: 1 で等分・SWELLエディタのflex設定と連動）
@@ -272,11 +277,19 @@ LP用メインビジュアル
                 position: absolute;
                 bottom: 0;
                 left: 0;
+
+                @include mq(sp) {
+                    bottom: 40px;
+                }
             }
             & :nth-child(2 of .wp-block-image) {
                 position: absolute;
                 bottom: 0;
                 right: 0;
+
+                @include mq(sp) {
+                    bottom: 40px;
+                }
             }
         }
     }
@@ -285,7 +298,6 @@ LP用メインビジュアル
     .hero-title-group {
         position: relative;
         z-index: 2;
-        padding: 0 1em;
         text-align: center;
 
         > div {

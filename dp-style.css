@@ -1987,6 +1987,19 @@ WP標準ボタン
   }
 }
 
+.dp-stretch-image {
+  height: 100%;
+}
+.dp-stretch-image img {
+  height: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width: 599px) {
+  .dp-stretch-image {
+    height: 256px;
+  }
+}
+
 /* ===========================================
 メディアブロックを反転 SWELL標準ブレイクポイントに準拠
 =========================================== */
@@ -2900,6 +2913,8 @@ Works スライダー（center mode, 1.2 slides visible）
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 100;
+  width: 72px;
 }
 @media screen and (max-width: 959px) {
   .dp-vertical-right-ja {
@@ -2982,7 +2997,7 @@ LP用メインビジュアル
 }
 @media screen and (max-width: 599px) {
   .dp-lp-hero h1 {
-    font-size: 32px;
+    font-size: 2em;
   }
 }
 .dp-lp-hero .swl-bg-color {
@@ -2992,7 +3007,7 @@ LP用メインビジュアル
 }
 @media screen and (max-width: 599px) {
   .dp-lp-hero .swl-bg-color {
-    padding: 0 var(--dp-space-inner-sp);
+    padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-sp);
   }
 }
 .dp-lp-hero .swl-bg-color:not(:last-child) {
@@ -3098,12 +3113,14 @@ LP用メインビジュアル
 @media screen and (max-width: 959px) {
   .dp-lp-hero--b {
     justify-content: center;
-    max-height: 960px;
+    max-height: 900px;
   }
 }
 @media screen and (max-width: 599px) {
   .dp-lp-hero--b {
-    max-height: 720px;
+    max-height: 500px;
+    min-height: 400px;
+    padding-bottom: 1em !important;
   }
 }
 .dp-lp-hero--b .swell-block-fullWide__inner {
@@ -3123,8 +3140,10 @@ LP用メインビジュアル
 .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) {
   position: absolute;
   top: 0;
-  max-width: calc(100vw - var(--swl-pad_container, 0));
+  left: 24px;
+  right: 24px;
   height: 100%;
+  display: flex;
   gap: var(--dp-space-inner-pc);
   z-index: 0;
 }
@@ -3136,7 +3155,8 @@ LP用メインビジュアル
 }
 @media screen and (max-width: 599px) {
   .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) {
-    max-width: calc(100vw - 2em);
+    left: 16px;
+    right: 16px;
   }
 }
 .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(2 of .wp-block-group) .wp-block-image {
@@ -3188,15 +3208,24 @@ LP用メインビジュアル
   bottom: 0;
   left: 0;
 }
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) :nth-child(1 of .wp-block-image) {
+    bottom: 40px;
+  }
+}
 .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) :nth-child(2 of .wp-block-image) {
   position: absolute;
   bottom: 0;
   right: 0;
 }
+@media screen and (max-width: 599px) {
+  .dp-lp-hero--b .swell-block-fullWide__inner :nth-child(3 of .wp-block-group) :nth-child(2 of .wp-block-image) {
+    bottom: 40px;
+  }
+}
 .dp-lp-hero--b .hero-title-group {
   position: relative;
   z-index: 2;
-  padding: 0 1em;
   text-align: center;
 }
 .dp-lp-hero--b .hero-title-group > div {
@@ -5609,7 +5638,7 @@ video.is-active {
   justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px 32px;
+  gap: 16px 32px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -5879,23 +5908,6 @@ video.is-active {
     width: 180px;
   }
 }
-.dp-wrap .dp-stretch-image {
-  height: 100%;
-}
-.dp-wrap .dp-stretch-image img {
-  height: 100%;
-  object-fit: cover;
-}
-@media screen and (max-width: 959px) {
-  .dp-wrap .dp-stretch-image {
-    height: 400px;
-  }
-}
-@media screen and (max-width: 599px) {
-  .dp-wrap .dp-stretch-image {
-    height: 256px;
-  }
-}
 
 /* 背面イラスト */
 /*
@@ -5942,7 +5954,8 @@ video.is-active {
   left: -208px;
   transform: rotate(180deg);
 }
-.dp-wrap.dp-deco--full::before {
+
+.dp-deco--full::before {
   content: "";
   position: absolute;
   inset: 0;
