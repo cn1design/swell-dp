@@ -2866,6 +2866,11 @@ Works スライダー（center mode, 1.2 slides visible）
   max-width: calc(1512px + var(--swl-pad_container, 0px) * 2);
 }
 
+/* ヘッダー背景透明化 */
+.l-header {
+  background: transparent;
+}
+
 /* ヘッダーナビゲーションの高さ調整 */
 .c-gnavWrap {
   margin: auto 0;
@@ -2943,7 +2948,7 @@ Works スライダー（center mode, 1.2 slides visible）
 @media screen and (max-width: 959px) {
   .dp-vertical-right-ja a {
     writing-mode: horizontal-tb;
-    border-radius: var(--dp-radius);
+    border-radius: calc(var(--dp-radius) * 0.5);
     padding: 8px 16px;
   }
 }
@@ -6030,7 +6035,7 @@ video.is-active {
 }
 html.dp-before-load .l-header {
   opacity: 0;
-  transform: translateY(-24px);
+  transform: translateY(-100%);
 }
 html.dp-before-load .dp-enter-left {
   opacity: 0;
@@ -6048,7 +6053,7 @@ html.dp-before-load .dp-enter-up {
 html.dp-loaded .l-header {
   opacity: 1;
   transform: none;
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 html.dp-loaded .dp-enter-left,
 html.dp-loaded .dp-enter-right {
