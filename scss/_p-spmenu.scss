@@ -1,0 +1,305 @@
+/*
+
+ ドロワーメニュー リッチデザインパターン
+
+ 【仕組み】
+   カスタマイザー「ドロワーメニュー デザイン」で選択
+   → body に dp-spmenu--{a|b} を付与
+   → SWELLのデフォルト .p-spMenu__inner（width:88vw）をフルスクリーンに上書き
+
+ 【SWELLの開閉制御】
+   html[data-spmenu="opened"] .p-spMenu__inner { transform: translateX(0) }
+   html[data-spmenu="closed"] … 各パターンの初期transform を適用
+
+ 【ウィジェットエリア】
+   ロゴ → SWELL カスタマイザー「SPメニュータイトル」で設定
+   CTA・電話番号・SNS → 「フッター 右カスタムエリア」等のウィジェットで設定
+
+*/
+
+// =============================================
+// 共通: フルスクリーン化 + 開閉アニメーション上書き
+// =============================================
+body.dp-spmenu--a,
+body.dp-spmenu--b {
+    // パネル幅: 88vw → 100%
+    .p-spMenu__inner {
+        width: 100% !important;
+        box-shadow: none !important;
+        padding-top: 0 !important; // SWELLのロゴ分paddingをリセット
+    }
+
+    // 閉じた状態: 88vw → 100% に合わせてtransformを上書き
+    .p-spMenu.-right .p-spMenu__inner {
+        transform: translateX(100%) !important;
+    }
+    .p-spMenu.-left .p-spMenu__inner {
+        transform: translateX(-100%) !important;
+    }
+
+    // オーバーレイ: 全画面のため不要
+    .p-spMenu__overlay {
+        display: none !important;
+    }
+}
+
+// 開いた状態: SWELL の [data-spmenu=opened] より高い優先度で確保
+html[data-spmenu=opened] {
+    body.dp-spmenu--a,
+    body.dp-spmenu--b {
+        .p-spMenu__inner {
+            transform: translateX(0) !important;
+        }
+    }
+}
+
+// =============================================
+// Pattern A: フルスクリーン・中央配置・装飾図形
+// =============================================
+body.dp-spmenu--a {
+
+    // 背景: SWELLのカスタマイザー背景色(::before)を隠して白地に
+    .p-spMenu__inner {
+        background: #fff;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        height: 100vh !important;
+        overflow-y: auto !important;
+        position: relative;
+        padding: 80px 24px 48px !important;
+        box-sizing: border-box;
+
+        &::before {
+            background: transparent !important; // SWELLのbg色レイヤーを無効化
+        }
+
+        // 装飾図形: 左下・右上
+        // 画像URL は spmenu-style.php が wp_head でインラインCSS出力
+        // クラス名: .dp-spmenu--a .p-spMenu__inner::after（右上）/ ::before（左下）
+        // ※ SWELLが::beforeを背景色に使うため 装飾は独立した疑似要素で分離
+    }
+
+    // 装飾図形レイヤー（::after: 右上 / JavaScript非依存の疑似要素で実装）
+    // 両コーナー用に data-* 属性のある別要素を使う代わりに
+    // ::before（背景色）を透明化し、独自の絶対配置divを使わず
+    // spmenu-style.php からインラインCSSで以下を出力:
+    //   .dp-spmenu-deco::before { left/bottom } .dp-spmenu-deco::after { right/top }
+    .dp-spmenu-deco {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background-repeat: no-repeat;
+            background-size: contain;
+
+            @include mq(sp) {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        // 左下: 画像を180°回転
+        &::before {
+            bottom: -60px;
+            left: -60px;
+            transform: rotate(180deg);
+
+            @include mq(sp) {
+                bottom: -40px;
+                left: -40px;
+            }
+        }
+
+        // 右上: 通常向き
+        &::after {
+            top: -60px;
+            right: -60px;
+
+            @include mq(sp) {
+                top: -40px;
+                right: -40px;
+            }
+        }
+    }
+
+    // 閉じるボタン: 右上・円形ダーク
+    .p-spMenu__closeBtn {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        left: auto !important;
+        width: 48px !important;
+        height: 48px !important;
+        z-index: 10;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        .c-iconBtn {
+            width: 48px !important;
+            height: 48px !important;
+            min-width: 48px;
+            background: var(--color_main, #333) !important;
+            border-radius: 50% !important;
+            color: #fff !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    // メニュー本体
+    .p-spMenu__body {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 560px;
+        height: auto !important;
+        overflow-y: visible !important;
+        padding: 0 !important;
+    }
+
+    // SPメニュータイトル（ロゴ等）
+    .c-widget__title.-spmenu {
+        margin-bottom: 2em;
+        text-align: center;
+    }
+
+    .p-spMenu__nav {
+        width: 100%;
+        margin-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    // ナビ: 中央配置・大きめ太字・区切り線なし
+    .c-spnav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+
+        > li {
+            border: none !important;
+
+            > a {
+                justify-content: center !important;
+                text-align: center;
+                font-size: clamp(18px, 4vw, 24px) !important;
+                font-weight: 700 !important;
+                padding: 0.65em 1em !important;
+                letter-spacing: 0.05em;
+            }
+        }
+    }
+
+    .p-spMenu__bottom {
+        margin-top: 2em !important;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+// =============================================
+// Pattern B: フルスクリーン・左揃え・ボーダー区切り
+// =============================================
+body.dp-spmenu--b {
+
+    .p-spMenu__inner {
+        display: flex !important;
+        flex-direction: column;
+        min-height: 100vh;
+        height: 100vh !important;
+        overflow-y: auto !important;
+        background: #f5f0e8 !important;
+
+        // SWELLのカスタマイザー背景色レイヤーを非表示
+        &::before {
+            display: none !important;
+        }
+    }
+
+    // 閉じるボタン: 右上・シンプル
+    .p-spMenu__closeBtn {
+        position: absolute !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: auto !important;
+        width: 64px !important;
+        height: 64px !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+
+        .c-iconBtn {
+            background: transparent !important;
+            color: var(--color_text, #333) !important;
+            font-size: 20px;
+        }
+    }
+
+    // メニュー本体
+    .p-spMenu__body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: auto !important;
+        overflow-y: visible !important;
+        padding: 0 !important;
+    }
+
+    // SPメニュータイトル（ロゴ）: ヘッダーバー化
+    .c-widget__title.-spmenu {
+        min-height: 64px;
+        padding: 12px 72px 12px 24px !important; // 右側にcloseBtn分のスペース
+        margin: 0 0 0 0 !important;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        box-sizing: border-box;
+    }
+
+    .p-spMenu__nav {
+        margin-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    // ナビ: 左揃え・ボーダー区切り
+    .c-spnav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        > li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+
+            > a {
+                padding: 1.1em 24px !important;
+                font-size: 17px !important;
+                font-weight: 700 !important;
+                justify-content: space-between !important;
+                letter-spacing: 0.03em;
+            }
+        }
+    }
+
+    .p-spMenu__bottom {
+        margin-top: 0 !important;
+        padding: 2em 24px !important;
+        text-align: center;
+    }
+}

@@ -104,12 +104,51 @@ html.dp-loaded {
             transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
     }
 
-    // その他コンテンツ: さらに後（0.35s 遅延）
+    // その他コンテンツ: オーバーレイ消滅後（0.5s 遅延）に開始
+    // delay を 0.5s にしてオーバーレイのフェードアウト完了後にアニメーション開始
     .dp-enter-up {
         opacity: 1;
         transform: none;
         transition:
-            opacity 0.8s ease 0.35s,
-            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s;
+            opacity 1.0s ease 0.5s,
+            transform 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    }
+}
+
+// =====================================================
+// スクロールアニメーション（ローディング無し時）
+// html.dp-scroll-ready → fade-in.js が付与（dp-before-load 未設定ページ）
+// =====================================================
+html.dp-scroll-ready {
+    .dp-enter-left {
+        opacity: 0;
+        transform: translateX(-32px);
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .dp-enter-right {
+        opacity: 0;
+        transform: translateX(32px);
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .dp-enter-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+            opacity 1.0s ease,
+            transform 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    // IntersectionObserver が is-visible を付与したら表示
+    .dp-enter-left.is-visible,
+    .dp-enter-right.is-visible,
+    .dp-enter-up.is-visible {
+        opacity: 1;
+        transform: none;
     }
 }

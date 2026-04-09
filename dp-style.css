@@ -6073,7 +6073,29 @@ html.dp-loaded .dp-enter-right {
 html.dp-loaded .dp-enter-up {
   opacity: 1;
   transform: none;
-  transition: opacity 0.8s ease 0.35s, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s;
+  transition: opacity 1s ease 0.5s, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+}
+
+html.dp-scroll-ready .dp-enter-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+html.dp-scroll-ready .dp-enter-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+html.dp-scroll-ready .dp-enter-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+html.dp-scroll-ready .dp-enter-left.is-visible,
+html.dp-scroll-ready .dp-enter-right.is-visible,
+html.dp-scroll-ready .dp-enter-up.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* ローディング + 入場アニメーション */
@@ -6561,3 +6583,241 @@ body.dp-cart-is-open .l-fixHeader {
 }
 
 /* LPビルダー（カート式一括コピー） */
+/*
+
+ ドロワーメニュー リッチデザインパターン
+
+ 【仕組み】
+   カスタマイザー「ドロワーメニュー デザイン」で選択
+   → body に dp-spmenu--{a|b} を付与
+   → SWELLのデフォルト .p-spMenu__inner（width:88vw）をフルスクリーンに上書き
+
+ 【SWELLの開閉制御】
+   html[data-spmenu="opened"] .p-spMenu__inner { transform: translateX(0) }
+   html[data-spmenu="closed"] … 各パターンの初期transform を適用
+
+ 【ウィジェットエリア】
+   ロゴ → SWELL カスタマイザー「SPメニュータイトル」で設定
+   CTA・電話番号・SNS → 「フッター 右カスタムエリア」等のウィジェットで設定
+
+*/
+body.dp-spmenu--a .p-spMenu__inner,
+body.dp-spmenu--b .p-spMenu__inner {
+  width: 100% !important;
+  box-shadow: none !important;
+  padding-top: 0 !important;
+}
+body.dp-spmenu--a .p-spMenu.-right .p-spMenu__inner,
+body.dp-spmenu--b .p-spMenu.-right .p-spMenu__inner {
+  transform: translateX(100%) !important;
+}
+body.dp-spmenu--a .p-spMenu.-left .p-spMenu__inner,
+body.dp-spmenu--b .p-spMenu.-left .p-spMenu__inner {
+  transform: translateX(-100%) !important;
+}
+body.dp-spmenu--a .p-spMenu__overlay,
+body.dp-spmenu--b .p-spMenu__overlay {
+  display: none !important;
+}
+
+html[data-spmenu=opened] body.dp-spmenu--a .p-spMenu__inner,
+html[data-spmenu=opened] body.dp-spmenu--b .p-spMenu__inner {
+  transform: translateX(0) !important;
+}
+
+body.dp-spmenu--a .p-spMenu__inner {
+  background: #fff;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  position: relative;
+  padding: 80px 24px 48px !important;
+  box-sizing: border-box;
+}
+body.dp-spmenu--a .p-spMenu__inner::before {
+  background: transparent !important;
+}
+body.dp-spmenu--a .dp-spmenu-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+body.dp-spmenu--a .dp-spmenu-deco::before, body.dp-spmenu--a .dp-spmenu-deco::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+@media screen and (max-width: 599px) {
+  body.dp-spmenu--a .dp-spmenu-deco::before, body.dp-spmenu--a .dp-spmenu-deco::after {
+    width: 200px;
+    height: 200px;
+  }
+}
+body.dp-spmenu--a .dp-spmenu-deco::before {
+  bottom: -60px;
+  left: -60px;
+  transform: rotate(180deg);
+}
+@media screen and (max-width: 599px) {
+  body.dp-spmenu--a .dp-spmenu-deco::before {
+    bottom: -40px;
+    left: -40px;
+  }
+}
+body.dp-spmenu--a .dp-spmenu-deco::after {
+  top: -60px;
+  right: -60px;
+}
+@media screen and (max-width: 599px) {
+  body.dp-spmenu--a .dp-spmenu-deco::after {
+    top: -40px;
+    right: -40px;
+  }
+}
+body.dp-spmenu--a .p-spMenu__closeBtn {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  left: auto !important;
+  width: 48px !important;
+  height: 48px !important;
+  z-index: 10;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+body.dp-spmenu--a .p-spMenu__closeBtn .c-iconBtn {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px;
+  background: var(--color_main, #333) !important;
+  border-radius: 50% !important;
+  color: #fff !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+body.dp-spmenu--a .p-spMenu__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 560px;
+  height: auto !important;
+  overflow-y: visible !important;
+  padding: 0 !important;
+}
+body.dp-spmenu--a .c-widget__title.-spmenu {
+  margin-bottom: 2em;
+  text-align: center;
+}
+body.dp-spmenu--a .p-spMenu__nav {
+  width: 100%;
+  margin-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+body.dp-spmenu--a .c-spnav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+body.dp-spmenu--a .c-spnav > li {
+  border: none !important;
+}
+body.dp-spmenu--a .c-spnav > li > a {
+  justify-content: center !important;
+  text-align: center;
+  font-size: clamp(18px, 4vw, 24px) !important;
+  font-weight: 700 !important;
+  padding: 0.65em 1em !important;
+  letter-spacing: 0.05em;
+}
+body.dp-spmenu--a .p-spMenu__bottom {
+  margin-top: 2em !important;
+  width: 100%;
+  text-align: center;
+}
+
+body.dp-spmenu--b .p-spMenu__inner {
+  display: flex !important;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  background: #f5f0e8 !important;
+}
+body.dp-spmenu--b .p-spMenu__inner::before {
+  display: none !important;
+}
+body.dp-spmenu--b .p-spMenu__closeBtn {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  width: 64px !important;
+  height: 64px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+body.dp-spmenu--b .p-spMenu__closeBtn .c-iconBtn {
+  background: transparent !important;
+  color: var(--color_text, #333) !important;
+  font-size: 20px;
+}
+body.dp-spmenu--b .p-spMenu__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: auto !important;
+  overflow-y: visible !important;
+  padding: 0 !important;
+}
+body.dp-spmenu--b .c-widget__title.-spmenu {
+  min-height: 64px;
+  padding: 12px 72px 12px 24px !important;
+  margin: 0 0 0 0 !important;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+body.dp-spmenu--b .p-spMenu__nav {
+  margin-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+body.dp-spmenu--b .c-spnav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+body.dp-spmenu--b .c-spnav > li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+body.dp-spmenu--b .c-spnav > li > a {
+  padding: 1.1em 24px !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  justify-content: space-between !important;
+  letter-spacing: 0.03em;
+}
+body.dp-spmenu--b .p-spMenu__bottom {
+  margin-top: 0 !important;
+  padding: 2em 24px !important;
+  text-align: center;
+}
+
+/* ドロワーメニュー デザインパターン */

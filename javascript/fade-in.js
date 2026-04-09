@@ -40,5 +40,32 @@
       });
     });
 
+    // =====================================================
+    // dp-enter-* スクロールアニメーション（ローディング無し時）
+    // dp-before-load が付いていないページ（ローディング無効 or 対象外ページ）で
+    // dp-enter-up / dp-enter-left / dp-enter-right をスクロール監視で表示する
+    // =====================================================
+    var html = document.documentElement;
+    if (!html.classList.contains('dp-before-load') && !html.classList.contains('dp-loaded')) {
+      html.classList.add('dp-scroll-ready');
+
+      var enterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          enterObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.dp-enter-up, .dp-enter-left, .dp-enter-right').forEach(function (el) {
+        // ダブルRAFで初期 opacity:0 を確実に描画してから監視開始
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            enterObserver.observe(el);
+          });
+        });
+      });
+    }
+
   });
 })();
