@@ -6601,31 +6601,74 @@ body.dp-cart-is-open .l-fixHeader {
    CTA・電話番号・SNS → 「フッター 右カスタムエリア」等のウィジェットで設定
 
 */
-body.dp-spmenu--a .p-spMenu__inner,
-body.dp-spmenu--b .p-spMenu__inner {
+#body_wrap.dp-spmenu--a .p-spMenu__inner,
+#body_wrap.dp-spmenu--b .p-spMenu__inner {
   width: 100% !important;
   box-shadow: none !important;
   padding-top: 0 !important;
 }
-body.dp-spmenu--a .p-spMenu.-right .p-spMenu__inner,
-body.dp-spmenu--b .p-spMenu.-right .p-spMenu__inner {
-  transform: translateX(100%) !important;
-}
-body.dp-spmenu--a .p-spMenu.-left .p-spMenu__inner,
-body.dp-spmenu--b .p-spMenu.-left .p-spMenu__inner {
-  transform: translateX(-100%) !important;
-}
-body.dp-spmenu--a .p-spMenu__overlay,
-body.dp-spmenu--b .p-spMenu__overlay {
+#body_wrap.dp-spmenu--a .p-spMenu__overlay,
+#body_wrap.dp-spmenu--b .p-spMenu__overlay {
   display: none !important;
 }
 
-html[data-spmenu=opened] body.dp-spmenu--a .p-spMenu__inner,
-html[data-spmenu=opened] body.dp-spmenu--b .p-spMenu__inner {
-  transform: translateX(0) !important;
+html:not([data-spmenu=opened]) #body_wrap.dp-spmenu--a .p-spMenu.-right .p-spMenu__inner,
+html:not([data-spmenu=opened]) #body_wrap.dp-spmenu--b .p-spMenu.-right .p-spMenu__inner {
+  transform: translateX(100%);
+}
+html:not([data-spmenu=opened]) #body_wrap.dp-spmenu--a .p-spMenu.-left .p-spMenu__inner,
+html:not([data-spmenu=opened]) #body_wrap.dp-spmenu--b .p-spMenu.-left .p-spMenu__inner {
+  transform: translateX(-100%);
 }
 
-body.dp-spmenu--a .p-spMenu__inner {
+@keyframes dp-nav-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li,
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li {
+  animation: dp-nav-item-in 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(1),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(1) {
+  animation-delay: 0.25s;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(2),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(2) {
+  animation-delay: 0.31s;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(3),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(3) {
+  animation-delay: 0.37s;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(4),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(4) {
+  animation-delay: 0.43s;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(5),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(5) {
+  animation-delay: 0.49s;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(6),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(6) {
+  animation-delay: 0.55s;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(7),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(7) {
+  animation-delay: 0.61s;
+}
+html[data-spmenu=opened] #body_wrap.dp-spmenu--a .c-spnav > li:nth-child(8),
+html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(8) {
+  animation-delay: 0.67s;
+}
+
+#body_wrap.dp-spmenu--a .p-spMenu__inner {
   background: #fff;
   display: flex !important;
   flex-direction: column;
@@ -6638,17 +6681,17 @@ body.dp-spmenu--a .p-spMenu__inner {
   padding: 80px 24px 48px !important;
   box-sizing: border-box;
 }
-body.dp-spmenu--a .p-spMenu__inner::before {
+#body_wrap.dp-spmenu--a .p-spMenu__inner::before {
   background: transparent !important;
 }
-body.dp-spmenu--a .dp-spmenu-deco {
+#body_wrap.dp-spmenu--a .dp-spmenu-deco {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
 }
-body.dp-spmenu--a .dp-spmenu-deco::before, body.dp-spmenu--a .dp-spmenu-deco::after {
+#body_wrap.dp-spmenu--a .dp-spmenu-deco::before, #body_wrap.dp-spmenu--a .dp-spmenu-deco::after {
   content: "";
   position: absolute;
   width: 320px;
@@ -6657,33 +6700,33 @@ body.dp-spmenu--a .dp-spmenu-deco::before, body.dp-spmenu--a .dp-spmenu-deco::af
   background-size: contain;
 }
 @media screen and (max-width: 599px) {
-  body.dp-spmenu--a .dp-spmenu-deco::before, body.dp-spmenu--a .dp-spmenu-deco::after {
+  #body_wrap.dp-spmenu--a .dp-spmenu-deco::before, #body_wrap.dp-spmenu--a .dp-spmenu-deco::after {
     width: 200px;
     height: 200px;
   }
 }
-body.dp-spmenu--a .dp-spmenu-deco::before {
+#body_wrap.dp-spmenu--a .dp-spmenu-deco::before {
   bottom: -60px;
   left: -60px;
   transform: rotate(180deg);
 }
 @media screen and (max-width: 599px) {
-  body.dp-spmenu--a .dp-spmenu-deco::before {
+  #body_wrap.dp-spmenu--a .dp-spmenu-deco::before {
     bottom: -40px;
     left: -40px;
   }
 }
-body.dp-spmenu--a .dp-spmenu-deco::after {
+#body_wrap.dp-spmenu--a .dp-spmenu-deco::after {
   top: -60px;
   right: -60px;
 }
 @media screen and (max-width: 599px) {
-  body.dp-spmenu--a .dp-spmenu-deco::after {
+  #body_wrap.dp-spmenu--a .dp-spmenu-deco::after {
     top: -40px;
     right: -40px;
   }
 }
-body.dp-spmenu--a .p-spMenu__closeBtn {
+#body_wrap.dp-spmenu--a .p-spMenu__closeBtn {
   position: absolute !important;
   top: 20px !important;
   right: 20px !important;
@@ -6695,7 +6738,7 @@ body.dp-spmenu--a .p-spMenu__closeBtn {
   align-items: center;
   justify-content: center;
 }
-body.dp-spmenu--a .p-spMenu__closeBtn .c-iconBtn {
+#body_wrap.dp-spmenu--a .p-spMenu__closeBtn .c-iconBtn {
   width: 48px !important;
   height: 48px !important;
   min-width: 48px;
@@ -6706,7 +6749,7 @@ body.dp-spmenu--a .p-spMenu__closeBtn .c-iconBtn {
   align-items: center;
   justify-content: center;
 }
-body.dp-spmenu--a .p-spMenu__body {
+#body_wrap.dp-spmenu--a .p-spMenu__body {
   position: relative;
   z-index: 1;
   display: flex;
@@ -6718,25 +6761,25 @@ body.dp-spmenu--a .p-spMenu__body {
   overflow-y: visible !important;
   padding: 0 !important;
 }
-body.dp-spmenu--a .c-widget__title.-spmenu {
+#body_wrap.dp-spmenu--a .c-widget__title.-spmenu {
   margin-bottom: 2em;
   text-align: center;
 }
-body.dp-spmenu--a .p-spMenu__nav {
+#body_wrap.dp-spmenu--a .p-spMenu__nav {
   width: 100%;
   margin-top: 0 !important;
   padding-bottom: 0 !important;
 }
-body.dp-spmenu--a .c-spnav {
+#body_wrap.dp-spmenu--a .c-spnav {
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
 }
-body.dp-spmenu--a .c-spnav > li {
+#body_wrap.dp-spmenu--a .c-spnav > li {
   border: none !important;
 }
-body.dp-spmenu--a .c-spnav > li > a {
+#body_wrap.dp-spmenu--a .c-spnav > li > a {
   justify-content: center !important;
   text-align: center;
   font-size: clamp(18px, 4vw, 24px) !important;
@@ -6744,13 +6787,13 @@ body.dp-spmenu--a .c-spnav > li > a {
   padding: 0.65em 1em !important;
   letter-spacing: 0.05em;
 }
-body.dp-spmenu--a .p-spMenu__bottom {
+#body_wrap.dp-spmenu--a .p-spMenu__bottom {
   margin-top: 2em !important;
   width: 100%;
   text-align: center;
 }
 
-body.dp-spmenu--b .p-spMenu__inner {
+#body_wrap.dp-spmenu--b .p-spMenu__inner {
   display: flex !important;
   flex-direction: column;
   min-height: 100vh;
@@ -6758,10 +6801,10 @@ body.dp-spmenu--b .p-spMenu__inner {
   overflow-y: auto !important;
   background: #f5f0e8 !important;
 }
-body.dp-spmenu--b .p-spMenu__inner::before {
+#body_wrap.dp-spmenu--b .p-spMenu__inner::before {
   display: none !important;
 }
-body.dp-spmenu--b .p-spMenu__closeBtn {
+#body_wrap.dp-spmenu--b .p-spMenu__closeBtn {
   position: absolute !important;
   top: 0 !important;
   right: 0 !important;
@@ -6773,12 +6816,12 @@ body.dp-spmenu--b .p-spMenu__closeBtn {
   justify-content: center;
   z-index: 10;
 }
-body.dp-spmenu--b .p-spMenu__closeBtn .c-iconBtn {
+#body_wrap.dp-spmenu--b .p-spMenu__closeBtn .c-iconBtn {
   background: transparent !important;
   color: var(--color_text, #333) !important;
   font-size: 20px;
 }
-body.dp-spmenu--b .p-spMenu__body {
+#body_wrap.dp-spmenu--b .p-spMenu__body {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -6786,7 +6829,7 @@ body.dp-spmenu--b .p-spMenu__body {
   overflow-y: visible !important;
   padding: 0 !important;
 }
-body.dp-spmenu--b .c-widget__title.-spmenu {
+#body_wrap.dp-spmenu--b .c-widget__title.-spmenu {
   min-height: 64px;
   padding: 12px 72px 12px 24px !important;
   margin: 0 0 0 0 !important;
@@ -6795,26 +6838,26 @@ body.dp-spmenu--b .c-widget__title.-spmenu {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
 }
-body.dp-spmenu--b .p-spMenu__nav {
+#body_wrap.dp-spmenu--b .p-spMenu__nav {
   margin-top: 0 !important;
   padding-bottom: 0 !important;
 }
-body.dp-spmenu--b .c-spnav {
+#body_wrap.dp-spmenu--b .c-spnav {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-body.dp-spmenu--b .c-spnav > li {
+#body_wrap.dp-spmenu--b .c-spnav > li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
-body.dp-spmenu--b .c-spnav > li > a {
+#body_wrap.dp-spmenu--b .c-spnav > li > a {
   padding: 1.1em 24px !important;
   font-size: 17px !important;
   font-weight: 700 !important;
   justify-content: space-between !important;
   letter-spacing: 0.03em;
 }
-body.dp-spmenu--b .p-spMenu__bottom {
+#body_wrap.dp-spmenu--b .p-spMenu__bottom {
   margin-top: 0 !important;
   padding: 2em 24px !important;
   text-align: center;

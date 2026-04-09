@@ -18,23 +18,15 @@
 */
 
 // =============================================
-// 共通: フルスクリーン化 + 開閉アニメーション上書き
+// 共通: フルスクリーン化
 // =============================================
-body.dp-spmenu--a,
-body.dp-spmenu--b {
+#body_wrap.dp-spmenu--a,
+#body_wrap.dp-spmenu--b {
     // パネル幅: 88vw → 100%
     .p-spMenu__inner {
         width: 100% !important;
         box-shadow: none !important;
         padding-top: 0 !important; // SWELLのロゴ分paddingをリセット
-    }
-
-    // 閉じた状態: 88vw → 100% に合わせてtransformを上書き
-    .p-spMenu.-right .p-spMenu__inner {
-        transform: translateX(100%) !important;
-    }
-    .p-spMenu.-left .p-spMenu__inner {
-        transform: translateX(-100%) !important;
     }
 
     // オーバーレイ: 全画面のため不要
@@ -43,20 +35,56 @@ body.dp-spmenu--b {
     }
 }
 
-// 開いた状態: SWELL の [data-spmenu=opened] より高い優先度で確保
-html[data-spmenu=opened] {
-    body.dp-spmenu--a,
-    body.dp-spmenu--b {
-        .p-spMenu__inner {
-            transform: translateX(0) !important;
+// 閉じた状態のtransform: :not([opened]) スコープで !important 競合を完全回避
+// SWELLデフォルトの 88vw を 100% に上書きするが、開いた状態には干渉しない
+html:not([data-spmenu=opened]) {
+    #body_wrap.dp-spmenu--a,
+    #body_wrap.dp-spmenu--b {
+        .p-spMenu.-right .p-spMenu__inner {
+            transform: translateX(100%);
         }
+        .p-spMenu.-left .p-spMenu__inner {
+            transform: translateX(-100%);
+        }
+    }
+}
+// 開いた状態: SWELL標準の html[data-spmenu=opened] .p-spMenu__inner { transform: translateX(0) } に委ねる
+
+// =============================================
+// ナビアイテム入場アニメーション（共通）
+// =============================================
+@keyframes dp-nav-item-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+html[data-spmenu=opened] {
+    #body_wrap.dp-spmenu--a .c-spnav > li,
+    #body_wrap.dp-spmenu--b .c-spnav > li {
+        animation: dp-nav-item-in 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+        // ドロワーのスライドイン（約0.3s）完了後から時差アニメーション
+        &:nth-child(1) { animation-delay: 0.25s; }
+        &:nth-child(2) { animation-delay: 0.31s; }
+        &:nth-child(3) { animation-delay: 0.37s; }
+        &:nth-child(4) { animation-delay: 0.43s; }
+        &:nth-child(5) { animation-delay: 0.49s; }
+        &:nth-child(6) { animation-delay: 0.55s; }
+        &:nth-child(7) { animation-delay: 0.61s; }
+        &:nth-child(8) { animation-delay: 0.67s; }
     }
 }
 
 // =============================================
 // Pattern A: フルスクリーン・中央配置・装飾図形
 // =============================================
-body.dp-spmenu--a {
+#body_wrap.dp-spmenu--a {
 
     // 背景: SWELLのカスタマイザー背景色(::before)を隠して白地に
     .p-spMenu__inner {
@@ -216,7 +244,7 @@ body.dp-spmenu--a {
 // =============================================
 // Pattern B: フルスクリーン・左揃え・ボーダー区切り
 // =============================================
-body.dp-spmenu--b {
+#body_wrap.dp-spmenu--b {
 
     .p-spMenu__inner {
         display: flex !important;
