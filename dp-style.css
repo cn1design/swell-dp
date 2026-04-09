@@ -2927,14 +2927,7 @@ Works スライダー（center mode, 1.2 slides visible）
 }
 @media screen and (max-width: 959px) {
   .dp-vertical-right-ja {
-    position: relative;
-    top: auto;
-    transform: none;
-    width: auto;
-    transition: none;
-  }
-  .dp-vertical-right-ja.is-footer-hidden {
-    transform: none;
+    display: none;
   }
 }
 .dp-vertical-right-ja a {
@@ -2958,6 +2951,22 @@ Works スライダー（center mode, 1.2 slides visible）
 @media screen and (max-width: 959px) {
   .dp-vertical-right-ja .swl-inline-icon {
     margin-bottom: 0;
+  }
+}
+
+.editor-styles-wrapper .dp-vertical-right-ja {
+  position: relative;
+  top: auto;
+  right: auto;
+  transform: none;
+  width: auto;
+  display: block;
+}
+
+/* ヘッダーCTAボタンのアイコンのスペース調整 */
+@media screen and (max-width: 959px) {
+  .swl-inline-icon {
+    margin-right: 0.25em;
   }
 }
 
@@ -6068,3 +6077,456 @@ html.dp-loaded .dp-enter-up {
 }
 
 /* ローディング + 入場アニメーション */
+/*
+
+ LPビルダー（カート式一括コピー）
+ カードチェックボックス / フローティングトリガー / カートドロワー
+
+*/
+/* =========================================================
+ * チェックボックス（カードサムネイル左上 / position: absolute）
+ * .pl-card-thumb は既に position: relative のため追加不要
+ * ========================================================= */
+.pl-card-select {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+.pl-card-select__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.pl-card-select__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.pl-card-select__mark::after {
+  content: "";
+  display: none;
+  width: 5px;
+  height: 10px;
+  border-right: 2.5px solid #fff;
+  border-bottom: 2.5px solid #fff;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.pl-card-select__input:checked + .pl-card-select__mark {
+  background: var(--color_main, #333);
+  border-color: var(--color_main, #333);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+.pl-card-select__input:checked + .pl-card-select__mark::after {
+  display: block;
+}
+.pl-card-select:hover .pl-card-select__mark {
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.pl-card.is-selected .pl-card-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--color_main, #333);
+  border-radius: var(--pl-radius, 4px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* =========================================================
+ * フローティングトリガーボタン
+ * PC: 右下固定ピル（SWELLページトップボタンの上）
+ * SP: 幅いっぱいの固定バー（見つけやすさ優先）
+ * ========================================================= */
+.dp-cart-trigger {
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px 10px 12px;
+  background: var(--color_main, #333);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.dp-cart-trigger:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+.dp-cart-trigger svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.dp-cart-trigger__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background: #fff;
+  color: var(--color_main, #333);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+.dp-cart-trigger__count[data-count="0"] {
+  display: none;
+}
+@media screen and (max-width: 959px) {
+  .dp-cart-trigger {
+    right: auto;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: calc(100% - 0px);
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 15px;
+    gap: 8px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
+  }
+  .dp-cart-trigger:hover {
+    transform: translateX(-50%);
+  }
+  .dp-cart-trigger__label {
+    display: block;
+  }
+  .dp-cart-trigger__count[data-count="0"] {
+    display: none;
+  }
+}
+
+/* =========================================================
+ * オーバーレイ（ドロワー開放時の背面）
+ * ========================================================= */
+.dp-cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 299;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.dp-cart-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =========================================================
+ * カートドロワー本体
+ * PC: 右スライドイン / SP: 下スライドアップ
+ * ========================================================= */
+.dp-cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 360px;
+  height: 100%;
+  background: var(--pl-surface, #fff);
+  box-shadow: -4px 0 32px rgba(0, 0, 0, 0.16);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(110%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.dp-cart-drawer.is-open {
+  transform: translateX(0);
+}
+@media screen and (max-width: 959px) {
+  .dp-cart-drawer {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80vh;
+    max-height: 80dvh;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.16);
+    transform: translateY(110%);
+  }
+  .dp-cart-drawer.is-open {
+    transform: translateY(0);
+  }
+}
+.dp-cart-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--pl-border, #e2e2de);
+  flex-shrink: 0;
+}
+.dp-cart-drawer__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color_text, #333);
+}
+.dp-cart-drawer__title svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+.dp-cart-drawer__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background: var(--color_main, #333);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+.dp-cart-drawer__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--color_text-sub, #6b6b6b);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+.dp-cart-drawer__close:hover {
+  background: var(--pl-bg, #f5f5f3);
+}
+.dp-cart-drawer__close svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* =========================================================
+ * 全解除ボタン（ドロワーヘッダー内）
+ * ========================================================= */
+.dp-cart-clear-btn {
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid var(--pl-border, #e2e2de);
+  background: transparent;
+  color: var(--color_text-sub, #6b6b6b);
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 4px;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.dp-cart-clear-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.dp-cart-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dp-cart-drawer__footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--pl-border, #e2e2de);
+  flex-shrink: 0;
+}
+
+/* =========================================================
+ * カートリスト
+ * ========================================================= */
+.dp-cart-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-cart-empty {
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--color_text-sub, #6b6b6b);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+ * カートアイテム（Phase 2）
+ * ========================================================= */
+.dp-cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--pl-border, #e2e2de);
+  transition: background 0.15s ease;
+}
+.dp-cart-item:last-child {
+  border-bottom: none;
+}
+.dp-cart-item__drag {
+  display: flex;
+  align-items: center;
+  color: var(--color_text-sub, #aaa);
+  cursor: grab;
+  flex-shrink: 0;
+}
+.dp-cart-item__drag:active {
+  cursor: grabbing;
+}
+.dp-cart-item__thumb {
+  width: 48px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.dp-cart-item__thumb--empty {
+  background: var(--pl-bg, #f5f5f3);
+  border: 1px solid var(--pl-border, #e2e2de);
+}
+.dp-cart-item__title {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color_text, #333);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.dp-cart-item__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--color_text-sub, #aaa);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.dp-cart-item__remove:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+.dp-cart-item--ghost {
+  opacity: 0.4;
+  background: var(--pl-bg, #f5f5f3);
+}
+
+/* =========================================================
+ * 一括コピーボタン
+ * ========================================================= */
+.dp-cart-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--color_main, #333);
+  color: #fff;
+  border: none;
+  border-radius: var(--dp-radius, 4px);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.dp-cart-copy-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.dp-cart-copy-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
+}
+.dp-cart-copy-btn:not(:disabled):hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+ * トースト通知（Phase 3）
+ * ========================================================= */
+.dp-cart-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  z-index: 400;
+  padding: 12px 20px;
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.dp-cart-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.dp-cart-toast.is-error {
+  background: #dc2626;
+}
+@media screen and (max-width: 959px) {
+  .dp-cart-toast {
+    bottom: 72px;
+    font-size: 13px;
+    white-space: normal;
+    max-width: calc(100% - 32px);
+    text-align: center;
+  }
+}
+
+/* LPビルダー（カート式一括コピー） */

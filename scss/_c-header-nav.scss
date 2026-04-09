@@ -87,16 +87,9 @@
     }
 
     @include mq(bp) {
-        position: relative;
-        top: auto;
-        transform: none;
-        width: auto;
-        transition: none; // SP は fixed でないため不要
-
-        // SP では is-footer-hidden を無効化
-        &.is-footer-hidden {
-            transform: none;
-        }
+        // ヘッダー外独立配置のため SP では非表示
+        // SP向けCTAはヘッダーナビ等で別途対応する
+        display: none;
     }
 
     a {
@@ -120,6 +113,23 @@
         @include mq(bp) {
             margin-bottom: 0;
         }
+    }
+}
+
+// エディタ内では fixed 配置を解除（コンテンツに重なるのを防ぐ）
+.editor-styles-wrapper .dp-vertical-right-ja {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    width: auto;
+    display: block; // SP の display:none を上書き
+}
+
+/* ヘッダーCTAボタンのアイコンのスペース調整 */
+.swl-inline-icon {
+    @include mq(bp) {
+        margin-right: 0.25em;
     }
 }
 
