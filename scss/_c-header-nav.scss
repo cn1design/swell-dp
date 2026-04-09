@@ -98,7 +98,7 @@
         padding: 1.5em 1em;
         text-orientation: upright;
         letter-spacing: 0.1em;
-        border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+        border-radius: calc(var(--dp-radius) * 0.5) 0 0 calc(var(--dp-radius) * 0.5);
 
         @include mq(bp) {
             writing-mode: horizontal-tb;

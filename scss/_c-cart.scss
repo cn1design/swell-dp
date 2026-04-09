@@ -1,0 +1,580 @@
+/*
+
+ LPビルダー（カート式一括コピー）
+ カードチェックボックス / フローティングトリガー / カートドロワー
+
+*/
+
+/* =========================================================
+ * ドロワー開放時の競合固定要素制御
+ * z-index では解決できない stacking context 問題を
+ * body クラスで対象要素を直接制御して解決する
+ * ========================================================= */
+
+body.dp-cart-is-open {
+    // 縦書きCTAボタン（dp-vertical-cta.js が生成する固定要素）
+    .dp-vertical-right-ja {
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    // SWELLのページトップボタン（PC/SP共通）
+    .p-fixBtnWrap {
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    // SWELLの固定ヘッダー（スクロール追従クローン含む）
+    // ドロワー・オーバーレイの背面に下げる
+    .l-fixHeader {
+        z-index: 1 !important;
+    }
+}
+
+/* =========================================================
+ * チェックボックス（カードサムネイル左上 / position: absolute）
+ * .pl-card-thumb は既に position: relative のため追加不要
+ * ========================================================= */
+
+.pl-card-select {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 3;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+
+    // 実体チェックボックス（不可視・クリック領域を全体に広げる）
+    &__input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        margin: 0;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    // カスタムチェックボックスUI
+    &__mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(4px);
+        transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+
+        // チェックマーク（チェック時に表示）
+        &::after {
+            content: "";
+            display: none;
+            width: 5px;
+            height: 10px;
+            border-right: 2.5px solid #fff;
+            border-bottom: 2.5px solid #fff;
+            transform: rotate(45deg) translate(-1px, -1px);
+        }
+    }
+
+    // チェック ON 状態
+    &__input:checked + &__mark {
+        background: var(--color_main, #333);
+        border-color: var(--color_main, #333);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+
+        &::after {
+            display: block;
+        }
+    }
+
+    // ホバー
+    &:hover &__mark {
+        border-color: #fff;
+        background: rgba(0, 0, 0, 0.45);
+    }
+}
+
+// カード選択中のハイライト枠
+.pl-card.is-selected .pl-card-thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 3px solid var(--color_main, #333);
+    border-radius: var(--pl-radius, 4px);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* =========================================================
+ * フローティングトリガーボタン
+ * PC: 画面上部 top:24px の固定ピル（ページトップと同タイミングでフェードイン）
+ * SP: 幅広の固定ピル（bottom配置）
+ * 初期状態は非表示。スクロールで .is-visible を付与してフェードイン。
+ * ========================================================= */
+
+.dp-cart-trigger {
+    position: fixed;
+    bottom: 40px; // 画面最下部から40px
+    right: 112px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 24px;
+    background: var(--color_main, #333);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+
+    // 初期状態：非表示（スクロールで .is-visible 付与）
+    opacity: 0;
+    transform: translateY(-4px);
+    pointer-events: none;
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        box-shadow 0.2s ease;
+
+    &.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    &:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        transform: translateY(2px); // 下に微動（hover時はis-visibleの0から+2px）
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+
+    &__label {
+        // PC ではラベル表示
+    }
+
+    // 選択件数バッジ（0件時は非表示）
+    &__count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 5px;
+        background: #fff;
+        color: var(--color_main, #333);
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+
+        &[data-count="0"] {
+            display: none;
+        }
+    }
+
+    // SP: 幅広ピル（bottom配置）+ 同じフェード挙動
+    @include mq(bp) {
+        top: auto;
+        right: auto;
+        left: 2em;
+        bottom: 16px;
+        width: calc(100% - 112px);
+        max-width: 100%;
+        border-radius: 8px;
+        justify-content: center;
+        padding: 14px 24px;
+        font-size: 15px;
+        gap: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(4px); // SP は下からフェードイン
+
+        &.is-visible {
+            transform: translateY(0);
+        }
+
+        &:hover {
+            transform: translateY(0); // SP はホバー移動なし
+        }
+
+        // SP でもラベル常に表示
+        &__label {
+            display: block;
+        }
+
+        // SP バッジ
+        &__count {
+            &[data-count="0"] {
+                display: none;
+            }
+        }
+    }
+}
+
+/* =========================================================
+ * オーバーレイ（ドロワー開放時の背面）
+ * ========================================================= */
+
+.dp-cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 299;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    &.is-open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* =========================================================
+ * カートドロワー本体
+ * PC: 右スライドイン / SP: 下スライドアップ
+ * ========================================================= */
+
+.dp-cart-drawer {
+    position: fixed;
+    top: 96px;
+    right: 24px;
+    width: 360px;
+    height: calc(100% - 120px);
+    background: var(--pl-surface, #fff);
+    box-shadow: -4px 0 32px rgba(0, 0, 0, 0.16);
+    border-radius: 16px;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(110%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+
+    &.is-open {
+        transform: translateX(0);
+    }
+
+    // SP: 下からスライドアップ
+    @include mq(bp) {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 80vh;
+        max-height: 80dvh; // dynamic viewport height（iOS Safari 対応）
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.16);
+        transform: translateY(110%);
+
+        &.is-open {
+            transform: translateY(0);
+        }
+    }
+
+    // ヘッダー
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--pl-border, #e2e2de);
+        flex-shrink: 0;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--color_text, #333);
+
+        svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+    }
+
+    &__badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 6px;
+        background: var(--color_main, #333);
+        color: #fff;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    &__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: transparent;
+        color: var(--color_text-sub, #6b6b6b);
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: var(--pl-bg, #f5f5f3);
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+/* =========================================================
+ * 全解除ボタン（ドロワーヘッダー内）
+ * ========================================================= */
+
+.dp-cart-clear-btn {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    border: 1px solid var(--pl-border, #e2e2de);
+    background: transparent;
+    color: var(--color_text-sub, #6b6b6b);
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 4px;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+
+    &:hover {
+        background: #fee2e2;
+        color: #dc2626;
+        border-color: #fca5a5;
+    }
+}
+
+// ドロワー ボディ・フッター（SCSSネスト外に出た分を補完）
+.dp-cart-drawer__body {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain; // 親スクロールへの伝播防止
+    -webkit-overflow-scrolling: touch;
+}
+
+.dp-cart-drawer__footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--pl-border, #e2e2de);
+    flex-shrink: 0;
+}
+
+/* =========================================================
+ * カートリスト
+ * ========================================================= */
+
+.dp-cart-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dp-cart-empty {
+    padding: 48px 20px;
+    text-align: center;
+    color: var(--color_text-sub, #6b6b6b);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================================================
+ * カートアイテム（Phase 2）
+ * ========================================================= */
+
+.dp-cart-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--pl-border, #e2e2de);
+    transition: background 0.15s ease;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    // ドラッグハンドル
+    &__drag {
+        display: flex;
+        align-items: center;
+        color: var(--color_text-sub, #aaa);
+        cursor: grab;
+        flex-shrink: 0;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    // サムネイル
+    &__thumb {
+        width: 48px;
+        height: 36px;
+        object-fit: cover;
+        border-radius: 3px;
+        flex-shrink: 0;
+
+        // 画像なし時のプレースホルダー
+        &--empty {
+            background: var(--pl-bg, #f5f5f3);
+            border: 1px solid var(--pl-border, #e2e2de);
+        }
+    }
+
+    // タイトル
+    &__title {
+        flex: 1;
+        font-size: 13px;
+        line-height: 1.4;
+        color: var(--color_text, #333);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    // 削除ボタン
+    &__remove {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+        border: none;
+        background: transparent;
+        color: var(--color_text-sub, #aaa);
+        cursor: pointer;
+        border-radius: 50%;
+        transition:
+            background 0.15s ease,
+            color 0.15s ease;
+
+        &:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+    }
+
+    // ドラッグ中のゴーストスタイル
+    &--ghost {
+        opacity: 0.4;
+        background: var(--pl-bg, #f5f5f3);
+    }
+}
+
+/* =========================================================
+ * 一括コピーボタン
+ * ========================================================= */
+
+.dp-cart-copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--color_main, #333);
+    color: #fff;
+    border: none;
+    border-radius: var(--dp-radius, 4px);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+
+    &:disabled {
+        opacity: 0.38;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    &:not(:disabled):hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+    }
+}
+
+/* =========================================================
+ * トースト通知（Phase 3）
+ * ========================================================= */
+
+.dp-cart-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    z-index: 400;
+    padding: 12px 20px;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    &.is-visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    &.is-error {
+        background: #dc2626;
+    }
+
+    @include mq(bp) {
+        bottom: 72px; // SP固定バーの上
+        font-size: 13px;
+        white-space: normal;
+        max-width: calc(100% - 32px);
+        text-align: center;
+    }
+}

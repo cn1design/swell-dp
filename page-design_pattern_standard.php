@@ -66,41 +66,6 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
             <div class="pl-wrap">
                 <?php dp_render_base_css_copy_area(); ?>
 
-                <!-- ===== ドロワーナビゲーション ===== -->
-                <!-- ハンバーガーボタン（画面右下固定） -->
-                <button class="pl-nav-toggle" aria-label="セクション一覧を開く" aria-expanded="false"
-                    aria-controls="pl-nav-drawer">
-                    <span class="pl-nav-toggle__label">構成メニュー</span>
-                    <span class="pl-nav-toggle__icon">
-                        <span class="pl-nav-toggle__bar"></span>
-                        <span class="pl-nav-toggle__bar"></span>
-                        <span class="pl-nav-toggle__bar"></span>
-                    </span>
-                </button>
-
-                <!-- オーバーレイ -->
-                <div class="pl-nav-overlay" aria-hidden="true"></div>
-
-                <!-- ドロワーパネル -->
-                <nav class="pl-nav-drawer" id="pl-nav-drawer" aria-label="セクション一覧" aria-hidden="true">
-                    <div class="pl-nav-drawer__header">
-                        <p class="pl-nav-title">よく使われるページ構成</p>
-                        <button class="pl-nav-drawer__close" aria-label="閉じる">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path
-                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="pl-nav-links">
-                        <?php foreach ( $active_sections as $slug => $name ) : ?>
-                        <a class="pl-nav-link" href="#pl-section-<?php echo esc_attr( $slug ); ?>">
-                            <?php echo esc_html( $name ); ?>
-                        </a>
-                        <?php endforeach; ?>
-                    </div>
-                </nav>
-
                 <!-- ===== カテゴリーセクション ===== -->
                 <?php foreach ( $active_sections as $slug => $name ) :
                     $section_query = new WP_Query([
@@ -141,6 +106,16 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
                             <!-- サムネイル -->
                             <div class="pl-card-thumb<?php echo $gif_url ? ' has-gif' : ''; ?>"
                                 <?php if ( $gif_url ) : ?>data-gif="<?php echo esc_url( $gif_url ); ?>" <?php endif; ?>>
+
+                                <?php /* LPビルダー 選択チェックボックス（左上 absolute）*/ ?>
+                                <label class="pl-card-select" title="LPビルダーに追加">
+                                    <input type="checkbox" class="pl-card-select__input"
+                                        data-post-id="<?php echo esc_attr( $post_id ); ?>"
+                                        data-title="<?php echo esc_attr( get_the_title() ); ?>"
+                                        data-thumb="<?php echo esc_url( $thumb_url ); ?>">
+                                    <span class="pl-card-select__mark" aria-hidden="true"></span>
+                                </label>
+
                                 <?php if ( $thumb_url ) : ?>
                                 <img class="pl-thumb-still" src="<?php echo esc_url( $thumb_url ); ?>"
                                     alt="<?php the_title_attribute(); ?>" loading="lazy">
@@ -269,40 +244,7 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
     }
 
     /* =========================================================
-     * 2. ドロワーナビゲーション
-     * ========================================================= */
-    const toggle = document.querySelector('.pl-nav-toggle');
-    const overlay = document.querySelector('.pl-nav-overlay');
-    const drawer = document.querySelector('.pl-nav-drawer');
-
-    if (toggle && overlay && drawer) {
-        const openDrawer = () => {
-            toggle.classList.add('is-open');
-            toggle.setAttribute('aria-expanded', 'true');
-            overlay.classList.add('is-open');
-            drawer.classList.add('is-open');
-            drawer.setAttribute('aria-hidden', 'false');
-        };
-        const closeDrawer = () => {
-            toggle.classList.remove('is-open');
-            toggle.setAttribute('aria-expanded', 'false');
-            overlay.classList.remove('is-open');
-            drawer.classList.remove('is-open');
-            drawer.setAttribute('aria-hidden', 'true');
-        };
-
-        toggle.addEventListener('click', () =>
-            toggle.classList.contains('is-open') ? closeDrawer() : openDrawer()
-        );
-        overlay.addEventListener('click', closeDrawer);
-        drawer.querySelector('.pl-nav-drawer__close').addEventListener('click', closeDrawer);
-        drawer.querySelectorAll('.pl-nav-link').forEach(link =>
-            link.addEventListener('click', closeDrawer)
-        );
-    }
-
-    /* =========================================================
-     * 3. スクロールヒント（960px以上・4枚以上のグリッド）
+     * 2. スクロールヒント（960px以上・4枚以上のグリッド）
      * ========================================================= */
     if (window.innerWidth >= 960) {
         wrapper.querySelectorAll('.pl-section-grid').forEach(grid => {
@@ -368,7 +310,7 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
     }
 
     /* =========================================================
-     * 4. コピーボタン（Event Delegation）
+     * 3. コピーボタン（Event Delegation）
      * ========================================================= */
     wrapper.addEventListener('click', (e) => {
         const btn = e.target.closest('.pl-btn--copy:not(.is-disabled)');
@@ -393,6 +335,42 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
     });
 })();
 </script>
+
+<?php /* ========================================================
+ * LPビルダー UI（カートドロワー + オーバーレイ + トリガー）
+ * page-design_pattern_standard.php 専用。JSは Phase 2 で実装。
+ * ======================================================== */ ?>
+
+<div id="dp-cart-drawer" class="dp-cart-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="LPビルダー">
+    <div class="dp-cart-drawer__header">
+        <div class="dp-cart-drawer__title">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+            LPビルダー
+            <span class="dp-cart-drawer__badge" id="dp-cart-badge">0</span>
+        </div>
+        <button class="dp-cart-drawer__close" id="dp-cart-close" aria-label="ドロワーを閉じる">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+    </div>
+    <div class="dp-cart-drawer__body">
+        <ul class="dp-cart-list" id="dp-cart-list"></ul>
+        <p class="dp-cart-empty" id="dp-cart-empty">パターンを選択してください</p>
+    </div>
+    <div class="dp-cart-drawer__footer">
+        <button class="dp-cart-copy-btn" id="dp-cart-copy-btn" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+            一括コピーしてSWELLに貼る
+        </button>
+    </div>
+</div>
+
+<div id="dp-cart-overlay" class="dp-cart-overlay" role="presentation"></div>
+
+<button id="dp-cart-trigger" class="dp-cart-trigger" aria-label="LPビルダーを開く（選択: 0件）">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+    <span class="dp-cart-trigger__label">LPビルダー</span>
+    <span class="dp-cart-trigger__count" id="dp-cart-trigger-count" data-count="0">0</span>
+</button>
 
 <?php
 get_footer();

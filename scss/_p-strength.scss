@@ -3,18 +3,3 @@
  私たちの強み (strength)
 
 */
-
-/* ===========================================
- .dp-strength-section
-=========================================== */
-.dp-strength-section {
-    // 各カード（wp:loos/column に直接付与）
-    .swell-block-column {
-        .wp-block-image {
-            img {
-                object-fit: contain;
-                height: 200px;
-            }
-        }
-    }
-}

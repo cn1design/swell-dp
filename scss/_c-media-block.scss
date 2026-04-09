@@ -613,7 +613,7 @@
     }
 }
 
-// 画像単体をコンテナ高さいっぱいに引き伸ばす
+// 画像単体をで使用: コンテナ高さいっぱいに引き伸ばす
 .dp-stretch-image {
     height: 100%;
 
@@ -623,7 +623,7 @@
     }
 
     @include mq(sp) {
-        height: 256px;
+        height: auto;
     }
 }
 

@@ -13,6 +13,7 @@
     "watch:all:poll": "node scripts/watch-dp.mjs"
   },
   "devDependencies": {
-    "sass": "^1.77.0"
+    "sass": "^1.77.0",
+    "sortablejs": "^1.15.7"
   }
 }

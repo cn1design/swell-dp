@@ -770,6 +770,14 @@ WP標準ボタン
 }
 
 /* ===========================================
+イラスト背景透過
+=========================================== */
+.dp-card-illust .wp-block-image img {
+  object-fit: contain;
+  height: 200px;
+}
+
+/* ===========================================
 カードリスト中央寄せ
 =========================================== */
 .dp-card-center > .swell-block-columns__inner {
@@ -1996,7 +2004,7 @@ WP標準ボタン
 }
 @media screen and (max-width: 599px) {
   .dp-stretch-image {
-    height: 256px;
+    height: auto;
   }
 }
 
@@ -2936,7 +2944,7 @@ Works スライダー（center mode, 1.2 slides visible）
   padding: 1.5em 1em;
   text-orientation: upright;
   letter-spacing: 0.1em;
-  border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+  border-radius: calc(var(--dp-radius) * 0.5) 0 0 calc(var(--dp-radius) * 0.5);
 }
 @media screen and (max-width: 959px) {
   .dp-vertical-right-ja a {
@@ -4101,14 +4109,6 @@ LP用メインビジュアル
  私たちの強み (strength)
 
 */
-/* ===========================================
- .dp-strength-section
-=========================================== */
-.dp-strength-section .swell-block-column .wp-block-image img {
-  object-fit: contain;
-  height: 200px;
-}
-
 /* ストレングス */
 /*
 
@@ -6084,6 +6084,23 @@ html.dp-loaded .dp-enter-up {
 
 */
 /* =========================================================
+ * ドロワー開放時の競合固定要素制御
+ * z-index では解決できない stacking context 問題を
+ * body クラスで対象要素を直接制御して解決する
+ * ========================================================= */
+body.dp-cart-is-open .dp-vertical-right-ja {
+  visibility: hidden;
+  pointer-events: none;
+}
+body.dp-cart-is-open .p-fixBtnWrap {
+  visibility: hidden;
+  pointer-events: none;
+}
+body.dp-cart-is-open .l-fixHeader {
+  z-index: 1 !important;
+}
+
+/* =========================================================
  * チェックボックス（カードサムネイル左上 / position: absolute）
  * .pl-card-thumb は既に position: relative のため追加不要
  * ========================================================= */
@@ -6150,33 +6167,42 @@ html.dp-loaded .dp-enter-up {
 
 /* =========================================================
  * フローティングトリガーボタン
- * PC: 右下固定ピル（SWELLページトップボタンの上）
- * SP: 幅いっぱいの固定バー（見つけやすさ優先）
+ * PC: 画面上部 top:24px の固定ピル（ページトップと同タイミングでフェードイン）
+ * SP: 幅広の固定ピル（bottom配置）
+ * 初期状態は非表示。スクロールで .is-visible を付与してフェードイン。
  * ========================================================= */
 .dp-cart-trigger {
   position: fixed;
-  bottom: 80px;
-  right: 16px;
+  bottom: 40px;
+  right: 112px;
   z-index: 200;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 14px 10px 12px;
+  padding: 14px 24px;
   background: var(--color_main, #333);
   color: #fff;
   border: none;
-  border-radius: 40px;
+  border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
   white-space: nowrap;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.2s ease;
+}
+.dp-cart-trigger.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .dp-cart-trigger:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(2px);
 }
 .dp-cart-trigger svg {
   width: 20px;
@@ -6202,21 +6228,25 @@ html.dp-loaded .dp-enter-up {
 }
 @media screen and (max-width: 959px) {
   .dp-cart-trigger {
+    top: auto;
     right: auto;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: calc(100% - 0px);
+    left: 2em;
+    bottom: 16px;
+    width: calc(100% - 112px);
     max-width: 100%;
-    border-radius: 12px 12px 0 0;
+    border-radius: 8px;
     justify-content: center;
     padding: 14px 24px;
     font-size: 15px;
     gap: 8px;
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(4px);
+  }
+  .dp-cart-trigger.is-visible {
+    transform: translateY(0);
   }
   .dp-cart-trigger:hover {
-    transform: translateX(-50%);
+    transform: translateY(0);
   }
   .dp-cart-trigger__label {
     display: block;
@@ -6249,12 +6279,13 @@ html.dp-loaded .dp-enter-up {
  * ========================================================= */
 .dp-cart-drawer {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 96px;
+  right: 24px;
   width: 360px;
-  height: 100%;
+  height: calc(100% - 120px);
   background: var(--pl-surface, #fff);
   box-shadow: -4px 0 32px rgba(0, 0, 0, 0.16);
+  border-radius: 16px;
   z-index: 300;
   display: flex;
   flex-direction: column;
