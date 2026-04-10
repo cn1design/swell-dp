@@ -81,7 +81,6 @@ CTAセクション (.dp-cta-section)
 
             img {
                 height: 100%;
-                width: 100%;
                 object-fit: cover;
 
                 @include mq(bp) {
@@ -139,6 +138,7 @@ CTAセクション (.dp-cta-section)
 
             @include mq(sp) {
                 max-width: 300px;
+                margin-bottom: var(--dp-space-inner-sp) !important;
             }
 
             &__link {
@@ -157,9 +157,14 @@ CTAセクション (.dp-cta-section)
     gap: var(--dp-space-inner-pc);
 
     @include mq(sp) {
-        gap: var(--dp-space-inner-sp);
+        flex-direction: column;
         flex-wrap: wrap !important;
         justify-content: center;
+        padding: 1em;
+        border: 1px solid #ffffff;
+        max-width: 300px;
+        width: 100%;
+        border-radius: var(--dp-radius);
     }
 
     a {
@@ -176,9 +181,18 @@ CTAセクション (.dp-cta-section)
         letter-spacing: 0;
         transition: transform 0.3s ease;
 
+        @include mq(sp) {
+            border-bottom: 1px solid var(--color_main_thin);
+            padding-bottom: 1em;
+        }
+
         span {
             height: 0.75em;
             font-size: var(--swl-fz--huge);
+
+            @include mq(sp) {
+                font-size: 2.5em !important;
+            }
         }
 
         &:hover {
@@ -206,10 +220,34 @@ CTAセクション (.dp-cta-section)
 
         @include mq(sp) {
             padding-left: 0;
-            font-size: 16px;
+            font-size: 18px;
 
             &::before {
                 display: none;
+            }
+        }
+    }
+
+    p:nth-of-type(2) {
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+
+        @include mq(sp) {
+            width: 100%;
+            padding: 1em 0 0;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 0;
+                height: 1px;
+                width: calc(100% - 2em);
+                background-color: #ffffff;
             }
         }
     }

@@ -1,3 +1,4 @@
+<!-- dp-deps: _c-button _c-card-list _c-cta-block -->
 <!-- wp:html -->
 <style>
 /* dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA */
@@ -24,7 +25,6 @@
 }
 .dp-cta--a .swell-block-column:nth-child(1) .wp-block-image img {
   height: 100%;
-  width: 100%;
   object-fit: cover;
 }
 @media screen and (max-width: 959px) {
@@ -69,25 +69,6 @@
   font-size: clamp(16px, 2vw, var(--dp-font-size-explanation));
   margin-bottom: 0;
 }
-.dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner {
-  gap: var(--dp-space-inner-sp);
-}
-.dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner p {
-  display: inline-block;
-  border: 2px solid white;
-  border-radius: 99px;
-  padding: 8px 24px;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 0;
-  line-height: 1.6;
-}
-@media screen and (max-width: 599px) {
-  .dp-cta--a .swell-block-column:nth-child(2) .dp-card-rounded-corner p {
-    font-size: 16px;
-    padding: 6px 16px;
-  }
-}
 .dp-cta--a .swell-block-column:nth-child(2) .swell-block-button {
   width: 100%;
   max-width: 400px;
@@ -100,51 +81,88 @@
 .dp-cta--a .swell-block-column:nth-child(2) .swell-block-button__link * {
   color: var(--color_main);
 }
-.dp-cta--a .swell-block-column:nth-child(2) .cta-other {
+/* dp-card-rounded-corner: 特徴キーワード 角丸ボーダー */
+.dp-card-rounded-corner {
+  gap: var(--dp-space-inner-sp);
+}
+.dp-card-rounded-corner p {
+  display: inline-block;
+  border: 2px solid;
+  border-radius: 99px;
+  padding: 8px 24px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+@media screen and (max-width: 599px) {
+  .dp-card-rounded-corner p {
+    font-size: 16px;
+    padding: 6px 16px;
+  }
+}
+/* button-white: 背景白抜きボタン */
+.button-white .swell-block-button__link {
+  background: var(--color_bg);
+  color: var(--color_main) !important;
+}
+/* dp-cta-other: 電話・チャット 横並びグループ */
+.dp-cta-other {
+  justify-content: center;
   align-items: center;
   gap: var(--dp-space-inner-pc);
 }
 @media screen and (max-width: 599px) {
-  .dp-cta--a .swell-block-column:nth-child(2) .cta-other {
+  .dp-cta-other {
     gap: var(--dp-space-inner-sp);
     flex-wrap: wrap !important;
     justify-content: center;
   }
 }
-.dp-cta--a .swell-block-column:nth-child(2) .cta-other a {
-  color: white;
+.dp-cta-other a {
+  color: #ffffff;
   text-decoration: none;
 }
-.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(1) {
+.dp-cta-other p:nth-of-type(1) {
   font-family: var(--dp-font-num);
   font-weight: 700;
   margin-bottom: 0;
   line-height: var(--dp-line-height-small);
+  letter-spacing: 0;
+  transition: transform 0.3s ease;
 }
-.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(1) span {
+.dp-cta-other p:nth-of-type(1) span {
   height: 0.75em;
   font-size: var(--swl-fz--huge);
 }
-.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2) {
+.dp-cta-other p:nth-of-type(1):hover {
+  transform: translateY(-3px);
+}
+.dp-cta-other .swell-block-button,
+.dp-cta-other p:nth-of-type(2) {
   position: relative;
   padding-left: var(--dp-space-inner-pc);
   margin-bottom: 0;
   line-height: var(--dp-line-height-small);
 }
-.dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2)::before {
+.dp-cta-other .swell-block-button::before,
+.dp-cta-other p:nth-of-type(2)::before {
   content: "";
   position: absolute;
   left: 0;
   top: 5%;
   height: 90%;
-  border-left: 1px solid var(--dp-color-sub);
+  border-left: 1px solid #ffffff;
+  opacity: 0.6;
 }
 @media screen and (max-width: 599px) {
-  .dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2) {
+  .dp-cta-other .swell-block-button,
+  .dp-cta-other p:nth-of-type(2) {
     padding-left: 0;
     font-size: 16px;
   }
-  .dp-cta--a .swell-block-column:nth-child(2) .cta-other p:nth-of-type(2)::before {
+  .dp-cta-other .swell-block-button::before,
+  .dp-cta-other p:nth-of-type(2)::before {
     display: none;
   }
 }
