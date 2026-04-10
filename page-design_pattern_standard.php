@@ -337,6 +337,29 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
 </script>
 
 <?php /* ========================================================
+ * スプラッシュ画面 + ヘルプボタン（チュートリアル）
+ * 初回訪問時のみ表示。JS: dp-tutorial.js / CSS: _c-tutorial.scss
+ * ======================================================== */ ?>
+
+<div id="dp-splash" class="dp-splash" role="dialog" aria-modal="true" aria-label="使い方ガイド">
+    <div class="dp-splash__inner">
+        <div class="dp-splash__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+        </div>
+        <p class="dp-splash__lead">Welcome</p>
+        <h2 class="dp-splash__title">SWELLデザインパターンへようこそ</h2>
+        <p class="dp-splash__desc">コピペするだけでプロ品質のLPが作れます。<br>はじめての方に、かんたんな使い方をご案内します（約1分）。</p>
+        <button id="dp-splash-start" class="dp-splash__btn">さっそく使ってみる</button>
+        <button id="dp-splash-skip" class="dp-splash__skip">スキップして使い始める</button>
+    </div>
+</div>
+
+<button id="dp-help-btn" class="dp-help-btn" aria-label="使い方を見る">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+    使い方
+</button>
+
+<?php /* ========================================================
  * LPビルダー UI（カートドロワー + オーバーレイ + トリガー）
  * page-design_pattern_standard.php 専用。JSは Phase 2 で実装。
  * ======================================================== */ ?>

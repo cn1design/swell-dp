@@ -32,6 +32,11 @@ function dp_render_base_css_copy_area() {
         最初にここをコピー
     </button>
     <p class="dp-copy-hint">※これを貼らないとデザインが反映されません</p>
+    <label class="dp-base-css-select" title="LPビルダーに追加してまとめてコピー">
+        <input type="checkbox" class="dp-base-css-select__input" aria-label="共通CSSをLPビルダーに追加">
+        <span class="dp-base-css-select__mark" aria-hidden="true"></span>
+        <span class="dp-base-css-select__label">LPビルダーに追加</span>
+    </label>
 </div>
 <textarea id="dp-base-style-data" style="display:none"
     aria-hidden="true"><?php echo esc_textarea( $base_code ); ?></textarea>

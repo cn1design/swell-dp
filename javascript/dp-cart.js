@@ -46,7 +46,7 @@
   const copyBtn = document.getElementById("dp-cart-copy-btn");
   const triggerCount = document.getElementById("dp-cart-trigger-count");
 
-  // トリガー表示同期関数（closeDrawer から参照するため外部スコープに置く）
+  // closeDrawer から参照するため外部スコープに置く（常時表示化後は未使用だが互換性のため残す）
   let triggerSync = null;
 
   /* =========================================================
@@ -134,13 +134,31 @@
     // 空メッセージ
     cartEmpty.style.display = count === 0 ? "" : "none";
 
-    // リスト描画
+    // リスト描画（共通CSS は常に先頭・専用レンダリング）
     cartList.innerHTML = "";
     cart.forEach((item) => {
       const li = document.createElement("li");
-      li.className = "dp-cart-item";
       li.dataset.postId = item.postId;
-      li.innerHTML = `
+
+      if (item.postId === "base-css") {
+        li.className = "dp-cart-item dp-cart-item--base-css";
+        li.innerHTML = `
+                <span class="dp-cart-item__pin" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                        <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
+                    </svg>
+                </span>
+                <span class="dp-cart-item__thumb dp-cart-item__thumb--empty"></span>
+                <span class="dp-cart-item__title">共通CSS</span>
+                <button class="dp-cart-item__remove" data-post-id="base-css" aria-label="共通CSSを削除">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            `;
+      } else {
+        li.className = "dp-cart-item";
+        li.innerHTML = `
                 <span class="dp-cart-item__drag" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
                         <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
@@ -158,6 +176,7 @@
                     </svg>
                 </button>
             `;
+      }
       cartList.appendChild(li);
     });
 
@@ -188,6 +207,28 @@
       const card = cb.closest(".pl-card");
       if (card) card.classList.toggle("is-selected", inCart);
     });
+    // 共通CSS チェックボックスも同期（blockCode が古い場合は再生成して修復）
+    const baseCb = document.querySelector(".dp-base-css-select__input");
+    if (baseCb) {
+      const inCart = cart.some((item) => item.postId === "base-css");
+      baseCb.checked = inCart;
+      if (inCart) {
+        const textarea = document.getElementById("dp-base-style-data");
+        if (textarea) {
+          const raw = textarea.value.trim();
+          const cssMatch = raw.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+          const css = cssMatch ? cssMatch[1].trim() : raw;
+          const blockCode = css
+            ? "<!-- wp:html -->\n<style>\n" + css + "\n</style>\n<!-- /wp:html -->"
+            : "";
+          const idx = cart.findIndex((item) => item.postId === "base-css");
+          if (idx !== -1 && blockCode) {
+            cart[idx].blockCode = blockCode;
+            saveCart();
+          }
+        }
+      }
+    }
   }
 
   /* =========================================================
@@ -196,6 +237,14 @@
   function addToCart(postId, title, thumb, blockCode) {
     if (cart.some((item) => item.postId === postId)) return;
     cart.push({ postId, title, thumb, blockCode: blockCode || "" });
+    saveCart();
+    renderCart();
+  }
+
+  // 共通CSS など常に先頭に置くアイテム用
+  function addToCartFirst(postId, title, thumb, blockCode) {
+    if (cart.some((item) => item.postId === postId)) return;
+    cart.unshift({ postId, title, thumb, blockCode: blockCode || "" });
     saveCart();
     renderCart();
   }
@@ -231,6 +280,29 @@
   });
 
   /* =========================================================
+   * 共通CSS チェックボックス
+   * ========================================================= */
+  document.addEventListener("change", function (e) {
+    const cb = e.target.closest(".dp-base-css-select__input");
+    if (!cb) return;
+
+    if (cb.checked) {
+      const textarea = document.getElementById("dp-base-style-data");
+      const raw = textarea ? textarea.value.trim() : "";
+      // textarea は <!-- wp:html --><style>...</style><!-- /wp:html --> 形式を含む場合があるため
+      // <style> タグ内の CSS のみを取り出してから blockCode を構築する（二重ラップ防止）
+      const cssMatch = raw.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+      const css = cssMatch ? cssMatch[1].trim() : raw;
+      const blockCode = css
+        ? "<!-- wp:html -->\n<style>\n" + css + "\n</style>\n<!-- /wp:html -->"
+        : "";
+      addToCartFirst("base-css", "共通CSS", "", blockCode);
+    } else {
+      removeFromCart("base-css");
+    }
+  });
+
+  /* =========================================================
    * 削除ボタン（Event Delegation）
    * ========================================================= */
   cartList.addEventListener("click", function (e) {
@@ -254,14 +326,20 @@
     sortableInstance = Sortable.create(cartList, {
       animation: 150,
       handle: ".dp-cart-item__drag",
+      filter: ".dp-cart-item--base-css", // 共通CSS はドラッグ不可
+      preventOnFilter: true,
       ghostClass: "dp-cart-item--ghost",
       onEnd: function () {
-        // DOM順にcart配列を更新
+        // 共通CSS を常に先頭、残りを DOM 順に並べ直す
         const newOrder = [];
-        cartList.querySelectorAll(".dp-cart-item").forEach((li) => {
-          const found = cart.find((item) => item.postId === li.dataset.postId);
-          if (found) newOrder.push(found);
-        });
+        const baseCssItem = cart.find((item) => item.postId === "base-css");
+        if (baseCssItem) newOrder.push(baseCssItem);
+        cartList
+          .querySelectorAll(".dp-cart-item:not(.dp-cart-item--base-css)")
+          .forEach((li) => {
+            const found = cart.find((item) => item.postId === li.dataset.postId);
+            if (found) newOrder.push(found);
+          });
         cart = newOrder;
         saveCart();
         // バッジ等の更新（リスト再描画は不要）
@@ -451,31 +529,20 @@
   }
 
   /* =========================================================
-   * トリガーのスクロール表示制御
-   * SWELLは html[data-scrolled="true/false"] でスクロール状態を管理する。
-   * .p-fixBtnWrap のクラス/スタイルは変化しないため監視対象にしない。
-   * document.documentElement の data-scrolled 変化を直接監視する。
+   * トリガーは常時表示（スクロール連動フェードを廃止）
+   * CSS 側でも opacity:1 / pointer-events:auto に固定済み
    * ========================================================= */
-  (function () {
-    const html = document.documentElement;
-
-    function sync() {
-      const scrolled = html.dataset.scrolled === "true";
-      trigger.classList.toggle("is-visible", scrolled);
-    }
-
-    triggerSync = sync;
-
-    new MutationObserver(sync).observe(html, {
-      attributes: true,
-      attributeFilter: ["data-scrolled"],
-    });
-
-    sync(); // 初期状態チェック
-  })();
 
   /* =========================================================
    * 初期レンダリング
    * ========================================================= */
   renderCart();
+
+  /* =========================================================
+   * 外部公開 API（dp-tutorial.js から利用）
+   * ========================================================= */
+  window.dpCart = {
+    openDrawer: openDrawer,
+    closeDrawer: closeDrawer,
+  };
 })();

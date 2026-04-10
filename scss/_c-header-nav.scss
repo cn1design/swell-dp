@@ -74,16 +74,16 @@
 
 .dp-vertical-right-ja {
     position: fixed;
-    right: 0;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 100;
-    width: 72px; // 縦書きボタンの幅を明示（未指定だとテキスト幅基準で崩れる）
+    width: 56px; // 縦書きボタンの幅を明示（未指定だとテキスト幅基準で崩れる）
     transition: transform 0.4s ease; // フッター回避スライドアウト用
 
     // フッターが viewport に入ったら右へ退避（JS: dp-vertical-cta.js が付与）
     &.is-footer-hidden {
-        transform: translateY(-50%) translateX(100%);
+        transform: translateY(-50%) translateX(calc(100% + 12px));
     }
 
     @include mq(bp) {
@@ -95,14 +95,14 @@
     a {
         writing-mode: vertical-rl;
         height: auto;
-        padding: 1.5em 1em;
+        padding: 1em 0.5em;
         text-orientation: upright;
         letter-spacing: 0.1em;
-        border-radius: calc(var(--dp-radius) * 0.5) 0 0 calc(var(--dp-radius) * 0.5);
+        border-radius: var(--dp-radius);
 
         @include mq(bp) {
             writing-mode: horizontal-tb;
-            border-radius: calc(var(--dp-radius) * 0.5);
+            border-radius: var(--dp-radius);
             padding: 8px 16px;
         }
     }

@@ -101,6 +101,69 @@ body.dp-cart-is-open {
     }
 }
 
+/* =========================================================
+ * 共通CSS エリアのLPビルダー追加チェックボックス
+ * ========================================================= */
+
+.dp-base-css-select {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+
+    &__input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    // カスタムチェックボックスUI（pl-card-select に準拠）
+    &__mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--pl-border, #c8c8c4);
+        border-radius: 4px;
+        background: #fff;
+        transition:
+            background 0.2s ease,
+            border-color 0.2s ease;
+
+        &::after {
+            content: "";
+            display: none;
+            width: 4px;
+            height: 8px;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            transform: rotate(45deg) translate(-1px, -1px);
+        }
+    }
+
+    &__input:checked + &__mark {
+        background: var(--color_main, #333);
+        border-color: var(--color_main, #333);
+
+        &::after {
+            display: block;
+        }
+    }
+
+    &__label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color_text-sub, #666);
+    }
+
+    &:hover &__mark {
+        border-color: var(--color_main, #333);
+    }
+}
+
 // カード選択中のハイライト枠
 .pl-card.is-selected .pl-card-thumb::after {
     content: "";
@@ -122,7 +185,7 @@ body.dp-cart-is-open {
 .dp-cart-trigger {
     position: fixed;
     bottom: 40px; // 画面最下部から40px
-    right: 112px;
+    right: 192px;
     z-index: 200;
     display: flex;
     align-items: center;
@@ -139,24 +202,14 @@ body.dp-cart-is-open {
     letter-spacing: 0.02em;
     white-space: nowrap;
 
-    // 初期状態：非表示（スクロールで .is-visible 付与）
-    opacity: 0;
-    transform: translateY(-4px);
-    pointer-events: none;
-    transition:
-        opacity 0.35s ease,
-        transform 0.35s ease,
-        box-shadow 0.2s ease;
-
-    &.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-    }
+    // 常時表示（スクロール連動フェードなし）
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: box-shadow 0.2s ease;
 
     &:hover {
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        transform: translateY(2px); // 下に微動（hover時はis-visibleの0から+2px）
     }
 
     svg {
@@ -203,14 +256,9 @@ body.dp-cart-is-open {
         font-size: 15px;
         gap: 8px;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        transform: translateY(4px); // SP は下からフェードイン
-
-        &.is-visible {
-            transform: translateY(0);
-        }
 
         &:hover {
-            transform: translateY(0); // SP はホバー移動なし
+            transform: none;
         }
 
         // SP でもラベル常に表示
@@ -494,6 +542,26 @@ body.dp-cart-is-open {
     &--ghost {
         opacity: 0.4;
         background: var(--pl-bg, #f5f5f3);
+    }
+
+    // 共通CSS アイテム（常に先頭・ドラッグ不可）
+    &--base-css {
+        background: color-mix(in srgb, var(--color_main, #4f46e5) 6%, #fff);
+        border-bottom: 1px solid var(--pl-border, #e2e2de);
+
+        .dp-cart-item__pin {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            flex-shrink: 0;
+            color: var(--color_main, #333);
+            opacity: 0.5;
+        }
+
+        .dp-cart-item__title {
+            font-weight: 600;
+        }
     }
 }
 

@@ -1,0 +1,534 @@
+/*
+
+ チュートリアル機能
+ スプラッシュ画面 / ウォークスルー / ヘルプボタン
+
+*/
+
+/* =========================================================
+ * スプラッシュ画面
+ * ========================================================= */
+
+.dp-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(6px);
+    transition: opacity 0.4s ease;
+
+    &.is-hiding {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &__inner {
+        max-width: 480px;
+        width: calc(100% - 48px);
+        padding: 40px 36px 36px;
+        background: #fff;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 16px;
+        background: var(--color_main, #333);
+        border-radius: 12px;
+
+        svg {
+            width: 28px;
+            height: 28px;
+            color: #fff;
+        }
+    }
+
+    &__lead {
+        margin: 0 0 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--color_main, #333);
+        text-transform: uppercase;
+    }
+
+    &__title {
+        margin: 0 0 12px;
+        font-size: 19px;
+        font-weight: 700;
+        line-height: 1.4;
+        color: var(--color_text, #1a1a1a);
+        // SWELLのh2リセットを上書き
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+
+        &::before,
+        &::after {
+            content: none !important;
+        }
+    }
+
+    &__desc {
+        margin: 0 0 28px;
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--color_text-sub, #666);
+    }
+
+    &__btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 12px;
+        background: var(--color_main, #333);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+
+    &__skip {
+        display: inline-block;
+        font-size: 13px;
+        color: var(--color_text-sub, #999);
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+
+        &:hover {
+            color: var(--color_text, #333);
+        }
+    }
+
+    @include mq(sp) {
+        align-items: flex-end;
+
+        &__inner {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 16px 16px 0 0;
+            padding: 32px 24px 40px;
+        }
+    }
+}
+
+/* =========================================================
+ * チュートリアル オーバーレイ（暗転）
+ * ========================================================= */
+
+.dp-tutorial-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0, 0, 0, 0.68);
+    pointer-events: none; // ハイライト要素上のクリックは通す
+    animation: dp-tut-fadein 0.3s ease forwards;
+}
+
+@keyframes dp-tut-fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* =========================================================
+ * スポットライト要素（JS で動的生成・position:fixed）
+ *
+ * outline / box-shadow は親の overflow:hidden にクリップされるため、
+ * position:fixed の独立要素でターゲット rect を覆う方式を採用する。
+ * これにより Step 2（pl-card / overflow:hidden 親）でも欠けない。
+ *
+ * 構成:
+ *   - border: ターゲット周囲のカラーリング
+ *   - background: ターゲット内側を薄く明るく見せる
+ *   - box-shadow: ターゲット外側を暗くするオーバーレイ代替
+ *   - pointer-events: none: クリックをターゲット要素に透過
+ * ========================================================= */
+
+#dp-tutorial-spotlight {
+    position: fixed;
+    z-index: 9001;
+    pointer-events: none;
+    border: 3px solid var(--color_main, #4f46e5);
+    border-radius: 8px;
+    // ターゲット周囲（padding 分）を薄く明るく見せる
+    background: rgba(255, 255, 255, 0.14);
+    // ターゲット輪郭のグロー（外側の暗転は .dp-tutorial-overlay が担当）
+    box-shadow: 0 0 20px 4px rgba(79, 70, 229, 0.45);
+    animation: dp-tut-spotlight-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dp-tut-spotlight-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 16px 4px rgba(79, 70, 229, 0.35);
+    }
+    50% {
+        box-shadow: 0 0 28px 8px rgba(79, 70, 229, 0.55);
+    }
+}
+
+// ハイライトされた要素: スポットライトの上（z-index: 9002）に浮かせてインタラクション可能にする
+// 視覚効果はスポットライト側が担うためクラス自体は z-index のみ
+.is-tutorial-highlight {
+    position: relative !important;
+    z-index: 9002 !important;
+    pointer-events: auto !important;
+}
+
+// Step 4: ドロワー全体を z-index 昇格（スポットライトの上に表示）
+.dp-cart-drawer.is-tutorial-active {
+    z-index: 9002 !important;
+}
+
+// Step 4: コピーボタンはドロワー内のため outline でハイライト（固定要素内なので欠けない）
+#dp-cart-copy-btn.is-tutorial-highlight {
+    outline: 3px solid var(--color_main, #4f46e5) !important;
+    outline-offset: 4px !important;
+}
+
+/* =========================================================
+ * ツールチップ（吹き出し）
+ * ========================================================= */
+
+.dp-tutorial-tooltip {
+    position: fixed;
+    z-index: 9002;
+    width: 300px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+
+    &.is-visible {
+        opacity: 1;
+    }
+
+    // Step 4 のみ表示: 「動画を見る」ボタン（GIFモーダルを開く）
+    &__gif-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 14px;
+        background: var(--pl-bg, #f5f5f3);
+        border: 1.5px dashed var(--pl-border, #c8c8c4);
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color_main, #333);
+        cursor: pointer;
+        transition: background 0.15s ease;
+
+        &[hidden] {
+            display: none;
+        }
+
+        &:hover {
+            background: color-mix(in srgb, var(--color_main, #4f46e5) 8%, #fff);
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+    }
+
+    &__text {
+        margin: 0 0 16px;
+        font-size: 14px;
+        line-height: 1.75;
+        color: var(--color_text, #1a1a1a);
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    &__step {
+        font-size: 12px;
+        color: var(--color_text-sub, #999);
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__skip {
+        background: none;
+        border: none;
+        font-size: 12px;
+        color: var(--color_text-sub, #aaa);
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        padding: 0;
+        white-space: nowrap;
+
+        &:hover {
+            color: var(--color_text, #333);
+        }
+    }
+
+    &__next {
+        padding: 8px 20px;
+        background: var(--color_main, #333);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+
+    // SP: 画面下部固定
+    @include mq(bp) {
+        width: calc(100% - 108px) !important;
+        max-width: 420px;
+        left: auto !important;
+        right: 16px !important;
+        top: auto !important;
+        bottom: 84px !important;
+        transform: translateX(0%) !important;
+    }
+}
+
+/* =========================================================
+ * ヘルプボタン（使い方再確認）
+ * 縦書き CTA（bottom:56px〜） の上に配置
+ * ========================================================= */
+
+.dp-help-btn {
+    position: fixed;
+    right: 112px;
+    bottom: 40px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: auto;
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid var(--color_main);
+    border-radius: calc(var(--dp-radius) * 2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color_text-sub, #666);
+    line-height: 1.3;
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+    }
+
+    svg {
+        width: 18px;
+        height: 18px;
+        color: var(--color_main, #333);
+        flex-shrink: 0;
+    }
+
+    @include mq(bp) {
+        top: auto;
+        bottom: 80px;
+        right: 14px;
+        width: 56px;
+        padding: 8px;
+    }
+}
+
+/* =========================================================
+ * GIF チュートリアルモーダル（Step 4 自動表示）
+ * ========================================================= */
+
+.dp-gif-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001; // スプラッシュ（10000）より上
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.72);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+
+    &.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &__inner {
+        position: relative;
+        width: calc(100% - 32px);
+        max-width: 500px;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.32);
+        transform: scale(0.95);
+        transition: transform 0.25s ease;
+    }
+
+    &.is-visible &__inner {
+        transform: scale(1);
+    }
+
+    // 閉じるボタン
+    &__close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: rgba(0, 0, 0, 0.55);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        color: #fff;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.78);
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    // GIF / 動画エリア
+    &__media {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        // GIF 未登録時のプレースホルダー
+        &--placeholder {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 13px;
+        }
+    }
+
+    // テキストエリア
+    &__body {
+        padding: 20px 24px 24px;
+    }
+
+    &__lead {
+        margin: 0 0 14px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--color_text-sub, #888);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    // ステップリスト
+    &__steps {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__step {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.65;
+        color: var(--color_text, #333);
+    }
+
+    &__step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        background: var(--color_main, #333);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 1px;
+    }
+
+    @include mq(bp) {
+        align-items: flex-end;
+
+        &__inner {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 16px 16px 0 0;
+        }
+    }
+}
