@@ -283,9 +283,10 @@
   gap: 6px;
   padding: 24px;
   background: var(--color_deep04);
+  color: #1b1800;
   border: none;
   border-radius: 99px;
-  font-size: clamp(16px, 1.2vw, 20px);
+  font-size: clamp(20px, 2vw, 24px);
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;

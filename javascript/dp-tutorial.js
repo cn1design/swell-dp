@@ -4,7 +4,7 @@
  *
  * 技術的注意事項（仕様書 §5 参照）:
  *  - scrollIntoView 後 500ms 待機してから getBoundingClientRect() を取得
- *  - ハイライトは box-shadow ハック（overflow:hidden の親の影響を受けない）
+ *  - ハイライトは clip-path: path(evenodd) 中抜き（overflow:hidden の影響を受けない）
  *  - Step 4: transitionend で drawer アニメーション完了を待機
  */
 (function () {
@@ -19,7 +19,6 @@
    * ========================================================= */
   const STORAGE_KEY = "dp_tutorial_done";
   const TOTAL_STEPS = 4;
-  const SCROLL_WAIT_MS = 520; // scrollIntoView 完了待機
   const DRAWER_ANIM_MS = 400; // drawer transition + バッファ
 
   const STEP_TEXTS = [
@@ -220,29 +219,28 @@
       return;
     }
 
-    // Step 3（#dp-cart-trigger）は position:fixed のためスクロール不要。
-    // highlight() は position:relative !important を付与するため fixed 要素に使用禁止。
-    // z-index のみインラインで昇格し、spotlight + tooltip を表示する。
+    // Step 3（#dp-cart-trigger）は position:fixed のためスクロール不要
     if (stepIndex === 2) {
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
-          // z-index のみ昇格（position:fixed を維持）
-          target.style.zIndex = "9002";
-          highlightedEls.push(target);
-          createSpotlight(target);
+          highlight(target);
           renderTooltip(stepIndex, target, false);
         });
       });
       return;
     }
 
-    // それ以外のステップ: ビューポートに収めてから位置計算（§5-1）
-    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    // それ以外のステップ: ビューポートに収めてから位置計算
+    // behavior:"instant" を使うことで getBoundingClientRect() が
+    // スクロール完了後の正確なビューポート座標を返す（smooth だと長距離時にズレる）
+    target.scrollIntoView({ behavior: "instant", block: "center" });
 
-    setTimeout(function () {
-      highlight(target);
-      renderTooltip(stepIndex, target, false);
-    }, SCROLL_WAIT_MS);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        highlight(target);
+        renderTooltip(stepIndex, target, false);
+      });
+    });
   }
 
   /* =========================================================
@@ -311,11 +309,8 @@
       copyBtn.dataset.tutorialDisabled = "1";
     }
 
-    // ドロワー全体を z-index 昇格（§3 z-index 体系）
-    drawer.classList.add("is-tutorial-active");
-
-    // Step 4: スポットライトはドロワー全体に合わせる（ドロワーが z-index 9002 で上に浮く）
-    // コピーボタンはドロワー内に収まるため outline でハイライト（CSS 定義済み）
+    // Step 4: スポットライトはドロワー全体に合わせる
+    // コピーボタンは outline でハイライト（CSS 定義済み）
     if (copyBtn) {
       createSpotlight(drawer);
       copyBtn.classList.add("is-tutorial-highlight");
@@ -374,7 +369,6 @@
     // ドロワーを閉じる
     const drawer = document.getElementById("dp-cart-drawer");
     if (drawer) {
-      drawer.classList.remove("is-tutorial-active");
       if (drawer.classList.contains("is-open")) {
         if (window.dpCart && window.dpCart.closeDrawer) {
           window.dpCart.closeDrawer();
@@ -387,28 +381,68 @@
   }
 
   /* =========================================================
-   * スポットライト（position:fixed でターゲット rect を覆う）
-   * overflow:hidden の親に依存しないため outline/box-shadow の切り取りが起きない
+   * スポットライト
+   *
+   * 【構成】
+   *  1. #dp-tutorial-spotlight（position:fixed）: ターゲット rect に重なる枠線/グロー
+   *  2. .dp-tutorial-overlay の clip-path: evenodd ルールで矩形を中抜き
+   *     外側パス（全画面・時計回り）+ 内側パス（スポットライト・時計回り）を
+   *     evenodd で描くと、内側領域が透明（穴）になる
+   *
+   * これにより overflow:hidden の親の影響を受けず、
+   * z-index の昇格なしにターゲットが本物の透明で見える。
    * ========================================================= */
   var SPOTLIGHT_PAD = 8; // ターゲット周囲の余白 (px)
+  var SPOTLIGHT_R   = 8; // 角丸半径（#dp-tutorial-spotlight の border-radius と合わせる）
 
   function createSpotlight(target) {
     clearSpotlight();
     var rect = target.getBoundingClientRect();
+    var pad  = SPOTLIGHT_PAD;
+    var x    = rect.left   - pad;
+    var y    = rect.top    - pad;
+    var w    = rect.width  + pad * 2;
+    var h    = rect.height + pad * 2;
+    var r    = SPOTLIGHT_R;
+
+    // 1. 枠線/グロー div
     var el = document.createElement("div");
     el.id = "dp-tutorial-spotlight";
-    el.style.top    = (rect.top    - SPOTLIGHT_PAD) + "px";
-    el.style.left   = (rect.left   - SPOTLIGHT_PAD) + "px";
-    el.style.width  = (rect.width  + SPOTLIGHT_PAD * 2) + "px";
-    el.style.height = (rect.height + SPOTLIGHT_PAD * 2) + "px";
+    el.style.top    = y + "px";
+    el.style.left   = x + "px";
+    el.style.width  = w + "px";
+    el.style.height = h + "px";
     document.body.appendChild(el);
     spotlight = el;
+
+    // 2. オーバーレイを clip-path: path(evenodd) で中抜き
+    if (tutorialOverlay) {
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+      // 外側: 全画面矩形（時計回り）
+      var outer = "M 0 0 H " + vw + " V " + vh + " H 0 Z";
+      // 内側: 角丸矩形（時計回り） → evenodd で穴になる
+      var inner =
+        "M " + (x + r) + " " + y +
+        " H " + (x + w - r) +
+        " A " + r + " " + r + " 0 0 1 " + (x + w) + " " + (y + r) +
+        " V " + (y + h - r) +
+        " A " + r + " " + r + " 0 0 1 " + (x + w - r) + " " + (y + h) +
+        " H " + (x + r) +
+        " A " + r + " " + r + " 0 0 1 " + x + " " + (y + h - r) +
+        " V " + (y + r) +
+        " A " + r + " " + r + " 0 0 1 " + (x + r) + " " + y + " Z";
+      tutorialOverlay.style.clipPath = "path(evenodd, '" + outer + " " + inner + "')";
+    }
   }
 
   function clearSpotlight() {
     if (spotlight) {
       spotlight.remove();
       spotlight = null;
+    }
+    if (tutorialOverlay) {
+      tutorialOverlay.style.clipPath = "";
     }
   }
 
@@ -498,14 +532,9 @@
   function clearHighlight() {
     highlightedEls.forEach(function (el) {
       el.classList.remove("is-tutorial-highlight");
-      el.style.zIndex = ""; // Step 3 trigger のインライン z-index をリセット
     });
     highlightedEls = [];
     clearSpotlight();
-
-    // Step 4 ドロワーのクラスもリセット
-    const drawer = document.getElementById("dp-cart-drawer");
-    if (drawer) drawer.classList.remove("is-tutorial-active");
   }
 
   /* =========================================================
