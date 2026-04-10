@@ -78,5 +78,182 @@
 .dp-step-list--c .swell-block-step__body .wp-block-image {
   margin-bottom: var(--dp-space-inner-pc);
 }
+
+/* dp-cta-section: CTAセクション背景コンテナ */
+.dp-cta-section .dp-container {
+  background-color: var(--color_main);
+  border-radius: var(--dp-radius);
+  padding: var(--dp-space-block-pc) var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-section .dp-container {
+    padding: var(--dp-space-block-sp) var(--dp-space-inner-pc);
+  }
+}
+/* dp-cta-other: 電話・チャット横並びグループ */
+.dp-cta-other {
+  justify-content: center;
+  align-items: center;
+  gap: var(--dp-space-inner-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-other {
+    flex-direction: column;
+    flex-wrap: wrap !important;
+    justify-content: center;
+    padding: 1em;
+    border: 1px solid #ffffff;
+    max-width: 300px;
+    width: 100%;
+    border-radius: var(--dp-radius);
+  }
+}
+.dp-cta-other a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.dp-cta-other p:nth-of-type(1) {
+  font-family: var(--dp-font-num);
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: var(--dp-line-height-small);
+  transition: transform 0.3s ease;
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-other p:nth-of-type(1) {
+    border-bottom: 1px solid var(--color_main_thin);
+    padding-bottom: 1em;
+  }
+}
+.dp-cta-other p:nth-of-type(1) span {
+  height: 0.75em;
+  font-size: var(--swl-fz--huge);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-other p:nth-of-type(1) span {
+    font-size: 2.5em !important;
+  }
+}
+.dp-cta-other p:nth-of-type(1):hover {
+  transform: translateY(-3px);
+}
+.dp-cta-other .swell-block-button,
+.dp-cta-other p:nth-of-type(2) {
+  position: relative;
+  padding-left: var(--dp-space-inner-pc);
+  margin-bottom: 0;
+  line-height: var(--dp-line-height-small);
+}
+.dp-cta-other .swell-block-button::before,
+.dp-cta-other p:nth-of-type(2)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5%;
+  height: 90%;
+  border-left: 1px solid #ffffff;
+  opacity: 0.6;
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-other .swell-block-button,
+  .dp-cta-other p:nth-of-type(2) {
+    padding-left: 0;
+    font-size: 18px;
+  }
+  .dp-cta-other .swell-block-button::before,
+  .dp-cta-other p:nth-of-type(2)::before {
+    display: none;
+  }
+}
+.dp-cta-other p:nth-of-type(2) {
+  transition: transform 0.3s ease;
+}
+.dp-cta-other p:nth-of-type(2):hover {
+  transform: translateY(-3px);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-other p:nth-of-type(2) {
+    width: 100%;
+    padding: 1em 0 0;
+  }
+  .dp-cta-other p:nth-of-type(2)::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    height: 1px;
+    width: calc(100% - 2em);
+    background-color: #ffffff;
+  }
+}
+/* dp-cta--b: 電話・チャット横並び + 人物画像 */
+.dp-cta--b {
+  position: relative;
+}
+.dp-cta--b .dp-cta-other {
+  gap: var(--dp-space-element-pc);
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--b .dp-cta-other {
+    flex-direction: column;
+  }
+}
+.dp-cta--b .dp-cta-other p:nth-of-type(1) {
+  text-align: right;
+  line-height: 0.7;
+  font-size: var(--dp-font-size-title-pc);
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--b .dp-cta-other p:nth-of-type(1) {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--b .dp-cta-other p:nth-of-type(1) {
+    font-size: var(--dp-font-size-title-sp);
+  }
+}
+.dp-cta--b .dp-cta-other p:nth-of-type(1) .swl-inline-icon {
+  font-size: 1em;
+}
+.dp-cta--b .dp-cta-other .swell-block-button {
+  width: 100%;
+  max-width: 360px;
+  padding-left: var(--dp-space-element-pc);
+}
+@media screen and (max-width: 959px) {
+  .dp-cta--b .dp-cta-other .swell-block-button {
+    max-width: 300px;
+    padding-left: 0;
+  }
+  .dp-cta--b .dp-cta-other .swell-block-button::before {
+    content: none;
+  }
+}
+.dp-cta--b .wp-block-image:last-child {
+  position: absolute;
+  bottom: 0;
+  left: -16px;
+  width: auto;
+  height: calc(100% - 48px);
+  margin-bottom: 0;
+  z-index: 1;
+}
+.dp-cta--b .wp-block-image:last-child img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+/* dp-button-right-arrow: 右矢印ホバーアニメーション */
+.dp-button-right-arrow .swell-block-button__link {
+  padding: 0.75em 1em;
+}
+.dp-button-right-arrow .-right {
+  transition: transform 0.3s ease;
+}
+.dp-button-right-arrow:hover .-right {
+  transform: translateX(5px);
+}
 </style>
 <!-- /wp:html -->

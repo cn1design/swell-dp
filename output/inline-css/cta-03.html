@@ -20,9 +20,14 @@
 }
 @media screen and (max-width: 599px) {
   .dp-cta-other {
-    gap: var(--dp-space-inner-sp);
+    flex-direction: column;
     flex-wrap: wrap !important;
     justify-content: center;
+    padding: 1em;
+    border: 1px solid #ffffff;
+    max-width: 300px;
+    width: 100%;
+    border-radius: var(--dp-radius);
   }
 }
 .dp-cta-other a {
@@ -36,9 +41,20 @@
   line-height: var(--dp-line-height-small);
   transition: transform 0.3s ease;
 }
+@media screen and (max-width: 599px) {
+  .dp-cta-other p:nth-of-type(1) {
+    border-bottom: 1px solid var(--color_main_thin);
+    padding-bottom: 1em;
+  }
+}
 .dp-cta-other p:nth-of-type(1) span {
   height: 0.75em;
   font-size: var(--swl-fz--huge);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-other p:nth-of-type(1) span {
+    font-size: 2.5em !important;
+  }
 }
 .dp-cta-other p:nth-of-type(1):hover {
   transform: translateY(-3px);
@@ -64,11 +80,33 @@
   .dp-cta-other .swell-block-button,
   .dp-cta-other p:nth-of-type(2) {
     padding-left: 0;
-    font-size: 16px;
+    font-size: 18px;
   }
   .dp-cta-other .swell-block-button::before,
   .dp-cta-other p:nth-of-type(2)::before {
     display: none;
+  }
+}
+.dp-cta-other p:nth-of-type(2) {
+  transition: transform 0.3s ease;
+}
+.dp-cta-other p:nth-of-type(2):hover {
+  transform: translateY(-3px);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta-other p:nth-of-type(2) {
+    width: 100%;
+    padding: 1em 0 0;
+  }
+  .dp-cta-other p:nth-of-type(2)::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    height: 1px;
+    width: calc(100% - 2em);
+    background-color: #ffffff;
   }
 }
 /* dp-cta--b: 電話・チャット横並び + 人物画像 */
