@@ -191,4 +191,59 @@
   margin-bottom: 0;
 }
 </style>
+<script>
+(function () {
+  'use strict';
+  function initWorksSlider(slider) {
+    if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
+    var allSlides = Array.from(slider.querySelectorAll('.js-works-slider-item'));
+    if (allSlides.length < 2) return;
+    var inner = allSlides[0].parentElement;
+    var slides = Array.from(inner.querySelectorAll(':scope > .js-works-slider-item'));
+    var outer = document.createElement('div');
+    outer.className = 'dp-works-slider-outer';
+    slider.parentNode.insertBefore(outer, slider);
+    outer.appendChild(slider);
+    var nav = document.createElement('div');
+    nav.className = 'dp-slider-nav';
+    var prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
+    prevBtn.setAttribute('aria-label', '前へ');
+    var prevIcon = document.createElement('span');
+    prevIcon.className = 'icon-chevron-left';
+    prevIcon.setAttribute('aria-hidden', 'true');
+    prevBtn.appendChild(prevIcon);
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
+    nextBtn.setAttribute('aria-label', '次へ');
+    var nextIcon = document.createElement('span');
+    nextIcon.className = 'icon-chevron-right';
+    nextIcon.setAttribute('aria-hidden', 'true');
+    nextBtn.appendChild(nextIcon);
+    nav.appendChild(prevBtn);
+    nav.appendChild(nextBtn);
+    outer.appendChild(nav);
+    function getScrollAmount() {
+      var r0 = slides[0].getBoundingClientRect();
+      var r1 = slides[1].getBoundingClientRect();
+      return Math.abs(r1.left - r0.left);
+    }
+    function updateButtons() {
+      prevBtn.classList.toggle('is-edge', inner.scrollLeft <= 1);
+      nextBtn.classList.toggle('is-edge', inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1);
+    }
+    prevBtn.addEventListener('click', function () { inner.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }); });
+    nextBtn.addEventListener('click', function () { inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); });
+    inner.addEventListener('scroll', updateButtons, { passive: true });
+    inner.classList.add('dp-works-slider-inner');
+    slider.classList.add('is-slider-active');
+    updateButtons();
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.js-works-slider').forEach(initWorksSlider);
+  });
+})();
+</script>
 <!-- /wp:html -->

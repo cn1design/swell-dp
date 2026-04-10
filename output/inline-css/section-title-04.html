@@ -1,5 +1,90 @@
 <!-- wp:html -->
 <style>
-/* section-title-04: パターン固有CSSなし（dp-section-title共通スタイルのみ使用） */
+/* section-title--d: 左右イラスト＋背景スライドテキスト */
+@keyframes dp-bg-text-slide {
+  from { transform: translateY(-50%) translateX(0); }
+  to   { transform: translateY(-50%) translateX(-50%); }
+}
+.dp-section-title--d {
+  position: relative;
+  max-width: var(--article_size);
+  margin-inline: auto;
+}
+.dp-section-title--d .bg-text-slide-loop {
+  position: absolute;
+  top: 48px;
+  left: calc(50% - 50vw);
+  margin-left: 0 !important;
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  max-width: none !important;
+  animation: dp-bg-text-slide 64s linear infinite;
+}
+.dp-section-title--d .bg-text-slide-loop p {
+  flex-shrink: 0;
+  margin: 0;
+  font-family: var(--dp-font-en, "Roboto", sans-serif);
+  font-size: clamp(128px, 22vw, 290px);
+  font-weight: bold;
+  color: var(--color_main_thin);
+  letter-spacing: 0.05em;
+  mix-blend-mode: overlay;
+  padding-right: 1em;
+}
+.dp-section-title--d .main-title-side-icon {
+  position: relative;
+  justify-content: center;
+  padding-top: 24px;
+  z-index: 1;
+}
+.dp-section-title--d .main-title-side-icon > .wp-block-image {
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+  width: 192px;
+  height: 192px;
+}
+.dp-section-title--d .main-title-side-icon > .wp-block-image img {
+  display: block;
+  height: 192px;
+  width: auto;
+}
+.dp-section-title--d .main-title-side-icon > .wp-block-image:first-child {
+  left: 0;
+}
+.dp-section-title--d .main-title-side-icon > .wp-block-image:first-child img {
+  margin-left: auto;
+}
+.dp-section-title--d .main-title-side-icon > .wp-block-image:last-child {
+  right: 0;
+}
+.dp-section-title--d .main-title-side-icon > .wp-block-group {
+  position: relative;
+  z-index: 1;
+}
+@media screen and (max-width: 959px) {
+  .dp-section-title--d .main-title-side-icon > .wp-block-image {
+    bottom: -8px;
+    width: 96px;
+    height: 96px;
+  }
+  .dp-section-title--d .main-title-side-icon > .wp-block-image img {
+    height: 96px;
+  }
+  .dp-section-title--d .main-title-side-icon > .wp-block-image:first-child {
+    left: -56px;
+  }
+  .dp-section-title--d .main-title-side-icon > .wp-block-image:last-child {
+    right: -56px;
+  }
+}
+@media screen and (max-width: 959px) {
+  .dp-section-title--d .c-lead {
+    text-align: left;
+  }
+}
 </style>
 <!-- /wp:html -->
