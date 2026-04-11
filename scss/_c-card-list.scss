@@ -530,6 +530,7 @@
 上下二分割カード（4つ横並び）
 =========================================== */
 .dp-card-splid-color {
+    align-items: flex-start;
     gap: 5px !important;
 
     > .wp-block-group {

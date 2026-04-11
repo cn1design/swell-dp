@@ -727,15 +727,24 @@ wp:loos/columns に付与（SWELLリッチカラム）
             padding: 0 var(--dp-space-element-sp);
             margin-bottom: var(--dp-space-inner-pc);
 
+            @include mq(sp) {
+                padding: 0 var(--dp-space-inner-sp);
+            }
+
             p {
                 margin: 0;
                 font-size: 1.125rem;
                 font-weight: var(--dp-font-weight-heading);
 
                 strong {
-                    font-size: 3rem;
+                    margin: 0 2px 0 8px;
+                    font-size: 2.3rem;
                     font-family: var(--dp-font-num);
                     letter-spacing: 0.025em;
+
+                    @include mq(bp) {
+                        font-size: 2rem;
+                    }
                 }
             }
         }
