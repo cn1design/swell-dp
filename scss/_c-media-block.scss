@@ -826,6 +826,96 @@ Works スライダー（center mode, 1.2 slides visible）
     }
 }
 
+/* ===========================================
+dp-works-slider-b: Works-03 スライダーコンテナ
+・fullWide（contentSize:full）内で使用
+・セクションタイトル（dp-section-title--f）と左端を揃える
+・注：このDPは原則スライドアイテムを4枚以上で使用すること
+  3枚以下の場合は自動的に3カラムグリッド表示になる
+=========================================== */
+.dp-works-slider-b {
+    position: relative;
+    margin: 0 auto;
+
+    // 3枚以下: スライダー不使用 → 3カラムグリッド表示
+    &:not(.is-slider-active) {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--dp-space-element-sp);
+        padding-right: var(--swl-fw_inner_pad, 0); // 3カラム時は両端にpadding
+
+        @include mq(bp) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mq(sp) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    // slider inner を帯の上に配置（layout:constrained時の inner container 対象）
+    .dp-works-slider-inner {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+/* ===========================================
+dp-media-text-block-works-b: Works事例カード型スライダー
+シンプルカード（画像＋タイトル）
+wp:group に付与（js-works-slider-item 兼用）
+=========================================== */
+.dp-media-text-block-works-b {
+    position: relative;
+    z-index: 1; // dp-works-slider-b の ::before 白帯より前面に配置
+    background-color: #ffffff;
+    border-radius: var(--dp-radius);
+    padding: 24px;
+
+    // 画像：5:6 アスペクト、角丸
+    .wp-block-image {
+        margin-bottom: 0;
+        border-radius: var(--dp-radius);
+        overflow: hidden;
+        aspect-ratio: 4/3;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    // タイトル h3
+    h3 {
+        margin-top: var(--dp-space-inner-pc);
+        margin-bottom: 0;
+        font-size: 18px;
+        font-weight: var(--dp-font-weight-heading);
+        line-height: var(--dp-line-height-medium);
+        color: var(--color_text);
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+
+// スライダーアイテム幅：複数枚同時表示（works-b 専用）
+// .js-works-slider-item との詳細度競合を避けるため 2クラス指定
+.dp-works-slider-inner > .dp-media-text-block-works-b.js-works-slider-item {
+    width: calc(100% / 3.5);
+
+    @include mq(bp) {
+        width: calc(100% / 2.2);
+    }
+
+    @include mq(sp) {
+        width: calc(100% / 1.2);
+    }
+}
+
 // JSが特定したinner containerに付与するクラス（SWELL/Gutenberg inner wrapper対策）
 .dp-works-slider-inner {
     display: flex !important;

@@ -1,0 +1,215 @@
+<!-- dp-deps: _c-media-block _c-section-title -->
+<!-- wp:html -->
+<style>
+/* dp-works-slider-b: スライダーコンテナ */
+/* タイトル(dp-section-title--f)と左端を揃え、右はscreen端まで伸ばす */
+/* 注: このDPは原則スライドアイテムを4枚以上で使用すること */
+.dp-works-slider-b {
+  position: relative;
+  padding-left: var(--swl-fw_inner_pad, 0);
+}
+/* 3枚以下: スライダー不使用 → 3カラムグリッド表示 */
+.dp-works-slider-b:not(.is-slider-active) {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--dp-space-element-sp);
+  padding-right: var(--swl-fw_inner_pad, 0);
+}
+@media screen and (max-width: 959px) {
+  .dp-works-slider-b:not(.is-slider-active) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-works-slider-b:not(.is-slider-active) {
+    grid-template-columns: 1fr;
+  }
+}
+/* カード下部に白い帯 */
+.dp-works-slider-b::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  background: #ffffff;
+  border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+  z-index: 0;
+  pointer-events: none;
+}
+/* slider inner を帯の上に配置 */
+.dp-works-slider-b .dp-works-slider-inner {
+  position: relative;
+  z-index: 1;
+}
+/* dp-media-text-block-works-b: Works事例カード型 */
+.dp-media-text-block-works-b {
+  position: relative;
+  z-index: 1;
+  background-color: #f8f8f8;
+  border-radius: var(--dp-radius);
+  box-shadow: 0 0 32px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+.dp-media-text-block-works-b .wp-block-image {
+  margin-bottom: 0;
+  border-radius: var(--dp-radius);
+  overflow: hidden;
+  aspect-ratio: 5/6;
+}
+.dp-media-text-block-works-b .wp-block-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dp-media-text-block-works-b h3 {
+  margin-top: var(--dp-space-inner-pc);
+  margin-bottom: 0;
+  font-size: var(--dp-font-size-heading-pc);
+  font-weight: var(--dp-font-weight-heading);
+  line-height: var(--dp-line-height-medium);
+  color: var(--color_text);
+}
+@media screen and (max-width: 599px) {
+  .dp-media-text-block-works-b h3 {
+    font-size: var(--dp-font-size-heading-sp);
+  }
+}
+/* スライダーアイテム幅（複数枚同時表示）*/
+/* 2クラス指定で .js-works-slider-item の幅指定より詳細度を上げる */
+.dp-works-slider-inner > .dp-media-text-block-works-b.js-works-slider-item {
+  width: 28.5714285714%;
+}
+@media screen and (max-width: 959px) {
+  .dp-works-slider-inner > .dp-media-text-block-works-b.js-works-slider-item {
+    width: 45.4545454545%;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-works-slider-inner > .dp-media-text-block-works-b.js-works-slider-item {
+    width: 83.3333333333%;
+  }
+}
+/* dp-works-slider-outer: スライダーラッパー */
+.dp-works-slider-outer {
+  position: relative;
+}
+.dp-works-slider-outer .dp-slider-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+.dp-works-slider-outer .dp-slider-nav__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color_bg);
+  border: 1px solid var(--color_text);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+.dp-works-slider-outer .dp-slider-nav__btn [class*="icon-"] {
+  font-size: 14px;
+  line-height: 1;
+  display: block;
+}
+.dp-works-slider-outer .dp-slider-nav__btn.is-edge {
+  opacity: 0.5;
+}
+.dp-works-slider-outer .dp-slider-nav__btn:not(.is-edge):hover {
+  background: var(--color_text);
+  color: var(--color_bg);
+}
+.dp-works-slider-outer .dp-slider-nav__prev { left: 0; }
+.dp-works-slider-outer .dp-slider-nav__next { right: 0; }
+/* dp-works-slider-inner: JSが付与するinner containerクラス */
+.dp-works-slider-inner {
+  display: flex !important;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: var(--dp-space-element-sp);
+}
+.dp-works-slider-inner::-webkit-scrollbar {
+  display: none;
+}
+.dp-works-slider-inner > .js-works-slider-item {
+  flex-shrink: 0;
+  width: 83.3333333333%;
+  scroll-snap-align: center;
+  max-width: none !important;
+  margin-bottom: 0;
+}
+</style>
+<script>
+(function () {
+  'use strict';
+  function initWorksSlider(slider) {
+    if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
+    var allSlides = Array.from(slider.querySelectorAll('.js-works-slider-item'));
+    // dp-works-slider-b は4枚以上のみスライダー起動（3枚以下は3カラムグリッド表示）
+    var minSlides = slider.classList.contains('dp-works-slider-b') ? 4 : 2;
+    if (allSlides.length < minSlides) return;
+    var inner = allSlides[0].parentElement;
+    var slides = Array.from(inner.querySelectorAll(':scope > .js-works-slider-item'));
+    var outer = document.createElement('div');
+    outer.className = 'dp-works-slider-outer';
+    slider.parentNode.insertBefore(outer, slider);
+    outer.appendChild(slider);
+    var nav = document.createElement('div');
+    nav.className = 'dp-slider-nav';
+    var prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
+    prevBtn.setAttribute('aria-label', '前へ');
+    var prevIcon = document.createElement('span');
+    prevIcon.className = 'icon-chevron-left';
+    prevIcon.setAttribute('aria-hidden', 'true');
+    prevBtn.appendChild(prevIcon);
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
+    nextBtn.setAttribute('aria-label', '次へ');
+    var nextIcon = document.createElement('span');
+    nextIcon.className = 'icon-chevron-right';
+    nextIcon.setAttribute('aria-hidden', 'true');
+    nextBtn.appendChild(nextIcon);
+    nav.appendChild(prevBtn);
+    nav.appendChild(nextBtn);
+    outer.appendChild(nav);
+    function getScrollAmount() {
+      var r0 = slides[0].getBoundingClientRect();
+      var r1 = slides[1].getBoundingClientRect();
+      return Math.abs(r1.left - r0.left);
+    }
+    function updateButtons() {
+      prevBtn.classList.toggle('is-edge', inner.scrollLeft <= 1);
+      nextBtn.classList.toggle('is-edge', inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 1);
+    }
+    prevBtn.addEventListener('click', function () { inner.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }); });
+    nextBtn.addEventListener('click', function () { inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); });
+    inner.addEventListener('scroll', updateButtons, { passive: true });
+    inner.classList.add('dp-works-slider-inner');
+    slider.classList.add('is-slider-active');
+    updateButtons();
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.js-works-slider').forEach(initWorksSlider);
+  });
+})();
+</script>
+<!-- /wp:html -->

@@ -14,3 +14,181 @@
         }
     }
 }
+
+/* -------------------------------------------
+ * dp-faq--b: 1カラム ボーダー区切りアコーディオン
+ * ------------------------------------------- */
+.dp-faq--b {
+    // FAQブロック上部ボーダー
+    .swell-block-faq {
+        border-top: 1px solid var(--color_border);
+    }
+
+    // 各アイテム下部ボーダー
+    .swell-block-faq__item {
+        margin-top: var(--dp-space-inner-pc);
+        padding-bottom: var(--dp-space-inner-pc);
+
+        @include mq(sp) {
+        }
+
+        border-bottom: 1px solid var(--color_border);
+    }
+
+    .faq_q,
+    .faq_a {
+        &:before {
+            box-shadow: 0 0 0 1px inset;
+
+            @include mq(sp) {
+                top: 0.25em;
+            }
+        }
+    }
+
+    // Q（質問）エリア
+    .faq_q {
+        cursor: pointer;
+        padding-top: var(--dp-space-inner-pc);
+        padding-bottom: var(--dp-space-inner-pc);
+        padding-right: 2.5em; // 矢印アイコン分の余白（left は SWELL の Q ラベル分を維持）
+        font-weight: var(--dp-font-weight-heading);
+
+        // 矢印アイコン（::before は SWELL の "Q" ラベルが使用中のため ::after を使用）
+        &::after {
+            content: "\e921";
+            font-family: icomoon;
+            font-style: normal;
+            font-weight: normal;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg); // デフォルト: 下向き
+            transition: transform 0.3s ease;
+        }
+
+        @include mq(sp) {
+            padding-top: var(--dp-space-inner-sp);
+            padding-bottom: var(--dp-space-inner-sp);
+        }
+    }
+
+    // 開いているアイテムの矢印: 上向きに反転
+    .swell-block-faq__item.is-open .faq_q::after {
+        transform: translateY(-50%) rotate(-90deg);
+    }
+
+    // A（回答）エリア: デフォルト非表示（SWELL は常時表示のため自前で制御）
+    .faq_a {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+            max-height 0.4s ease,
+            padding 0.4s ease;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        &:before {
+            top: 0.85em;
+        }
+    }
+
+    // is-open 時: スライド表示
+    .swell-block-faq__item.is-open .faq_a {
+        max-height: 500px;
+        padding-top: 1em !important;
+    }
+}
+
+/* -------------------------------------------
+ * dp-faq--c: 白カード式アコーディオン（セクション背景: #f8f8f8）
+ * ------------------------------------------- */
+.dp-faq--c {
+    background-color: #f8f8f8; // セクション背景
+
+    // 各アイテム: 白カード
+    .swell-block-faq__item {
+        background-color: #ffffff;
+        border-radius: var(--dp-radius);
+        padding: var(--dp-space-element-sp) var(--dp-space-element-pc);
+
+        // カード間の余白
+        & + .swell-block-faq__item {
+            margin-top: 16px;
+        }
+
+        @include mq(sp) {
+            padding: var(--dp-space-element-sp);
+        }
+    }
+
+    // Q/A アイコン: faq--b と同仕様（box-shadow + SP 縦位置）
+    .faq_q,
+    .faq_a {
+        &::before {
+            box-shadow: 0 0 0 1px inset;
+
+            @include mq(sp) {
+                top: 0.6em;
+            }
+        }
+    }
+
+    // Q（質問）エリア
+    .faq_q {
+        cursor: pointer;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-right: 2.5em; // 矢印アイコン分の余白
+        font-weight: var(--dp-font-weight-heading);
+
+        // 矢印アイコン（faq-02と同仕様）
+        &::after {
+            content: "\e921";
+            font-family: icomoon;
+            font-style: normal;
+            font-weight: normal;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg); // デフォルト: 下向き
+            transition: transform 0.3s ease;
+        }
+    }
+
+    // 開いているアイテムの矢印: 上向きに反転
+    .swell-block-faq__item.is-open .faq_q::after {
+        transform: translateY(-50%) rotate(-90deg);
+    }
+
+    // A（回答）エリア: デフォルト非表示
+    .faq_a {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+            max-height 0.4s ease,
+            padding 0.4s ease;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        &::before {
+            top: 0.85em; // faq--b と同様
+        }
+    }
+
+    // is-open 時: スライド表示
+    .swell-block-faq__item.is-open .faq_a {
+        max-height: 500px;
+        padding-top: 1em !important;
+    }
+}

@@ -71,16 +71,28 @@
 }
 .dp-cta--a .swell-block-column:nth-child(2) .swell-block-button {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
 }
 @media screen and (max-width: 599px) {
   .dp-cta--a .swell-block-column:nth-child(2) .swell-block-button {
-    max-width: 300px;
+    max-width: 340px;
     margin-bottom: var(--dp-space-inner-sp) !important;
   }
 }
 .dp-cta--a .swell-block-column:nth-child(2) .swell-block-button__link * {
   color: var(--color_main);
+}
+/* dp-cta--a内 dp-cta-other: padding・電話番号サイズ */
+.dp-cta--a .dp-cta-other {
+  padding: 1em;
+}
+.dp-cta--a .dp-cta-other p:nth-of-type(1) {
+  font-size: 28px !important;
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--a .dp-cta-other p:nth-of-type(1) span {
+    font-size: 28px !important;
+  }
 }
 /* dp-card-rounded-corner: 特徴キーワード 角丸ボーダー */
 .dp-card-rounded-corner {
@@ -118,9 +130,8 @@
     flex-direction: column;
     flex-wrap: wrap !important;
     justify-content: center;
-    padding: 1em;
     border: 1px solid #ffffff;
-    max-width: 300px;
+    max-width: 340px;
     width: 100%;
     border-radius: var(--dp-radius);
   }
@@ -143,7 +154,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-cta-other p:nth-of-type(1) span {
-    font-size: 32px !important;
+    margin: 0;
   }
 }
 .dp-cta-other p:nth-of-type(1):hover {

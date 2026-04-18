@@ -1,0 +1,95 @@
+<!-- dp-deps: _c-faq _c-section-title -->
+<!-- wp:html -->
+<style>
+/* dp-faq--b: 1カラム ボーダー区切りアコーディオン */
+.dp-faq--b .swell-block-faq {
+  border-top: 1px solid var(--color_border);
+}
+.dp-faq--b .swell-block-faq__item {
+  margin-top: var(--dp-space-inner-pc);
+  padding-bottom: var(--dp-space-inner-pc);
+  border-bottom: 1px solid var(--color_border);
+}
+/* Q/A アイコン: インセットボーダー */
+.dp-faq--b .faq_q::before,
+.dp-faq--b .faq_a::before {
+  box-shadow: 0 0 0 1px inset;
+}
+@media screen and (max-width: 599px) {
+  .dp-faq--b .faq_q::before,
+  .dp-faq--b .faq_a::before {
+    top: 0.25em;
+  }
+}
+/* Q（質問）エリア */
+.dp-faq--b .faq_q {
+  cursor: pointer;
+  padding-top: var(--dp-space-inner-pc);
+  padding-bottom: var(--dp-space-inner-pc);
+  padding-right: 2.5em;
+  font-weight: var(--dp-font-weight-heading);
+}
+/* 矢印アイコン（デフォルト: 下向き） */
+.dp-faq--b .faq_q::after {
+  content: "\e921";
+  font-family: icomoon;
+  font-style: normal;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transition: transform 0.3s ease;
+}
+@media screen and (max-width: 599px) {
+  .dp-faq--b .faq_q {
+    padding-top: var(--dp-space-inner-sp);
+    padding-bottom: var(--dp-space-inner-sp);
+  }
+}
+/* 開いているアイテムの矢印: 上向きに反転 */
+.dp-faq--b .swell-block-faq__item.is-open .faq_q::after {
+  transform: translateY(-50%) rotate(-90deg);
+}
+/* A（回答）エリア: デフォルト非表示 */
+.dp-faq--b .faq_a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.dp-faq--b .faq_a p:last-child {
+  margin-bottom: 0;
+}
+.dp-faq--b .faq_a::before {
+  top: 0.85em;
+}
+/* is-open 時: スライド表示 */
+.dp-faq--b .swell-block-faq__item.is-open .faq_a {
+  max-height: 500px;
+  padding-top: 1em !important;
+}
+</style>
+<script>
+(function () {
+  'use strict';
+  function initFaqB(faqEl) {
+    var items = Array.from(faqEl.querySelectorAll('.swell-block-faq__item'));
+    items.forEach(function (item) {
+      var q = item.querySelector('.faq_q');
+      if (!q) return;
+      q.addEventListener('click', function () {
+        var isOpen = item.classList.contains('is-open');
+        items.forEach(function (i) { i.classList.remove('is-open'); });
+        if (!isOpen) item.classList.add('is-open');
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.dp-faq--b .swell-block-faq').forEach(initFaqB);
+  });
+})();
+</script>
+<!-- /wp:html -->

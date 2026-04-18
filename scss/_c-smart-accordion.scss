@@ -1,0 +1,73 @@
+/*
+
+ スマートアコーディオン（タグクラウド型）
+ smart-accordion-01
+
+*/
+
+/* --- タグクラウド型アコーディオン --- */
+.dp-smart-accordion-section {
+
+    // 外側アコーディオン: Flexboxでタグクラウドレイアウト
+    // ※ is-style-simple（内側）は通常ブロック表示のまま維持する
+    .swell-block-accordion:not(.is-style-simple) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-start;
+        // SWELLデフォルトのアコーディオンborderをピルUI優先でリセット
+        border: none;
+        background: transparent;
+        padding: 0;
+
+        // 各デバイスカテゴリアイテム
+        > .swell-block-accordion__item {
+            flex: 0 0 auto; // 閉じている時: コンテンツ幅（タグサイズ）
+            border: none;
+            background: transparent;
+
+            // 開いている時: フルワイドに展開
+            &[open] {
+                flex: 0 0 100%;
+            }
+
+            // ピル型タイトルボタン
+            > .swell-block-accordion__title {
+                background: var(--dp-color-sub);
+                border-radius: 9999px;
+                padding: 10px 28px;
+                border: none;
+                font-weight: var(--dp-font-weight-heading);
+                white-space: nowrap;
+                cursor: pointer;
+
+                @include mq(sp) {
+                    padding: 10px 20px;
+                    font-size: var(--dp-font-size-heading-sp);
+                }
+            }
+
+            // 展開エリアの余白
+            > .swell-block-accordion__body {
+                padding-top: var(--dp-space-inner-pc);
+
+                @include mq(sp) {
+                    padding-top: var(--dp-space-inner-sp);
+                }
+            }
+        }
+    }
+
+    // 内側アコーディオン（is-style-simple）: 通常ブロック表示
+    .swell-block-accordion.is-style-simple {
+        display: block;
+    }
+
+    // テーブルのスマホ横スクロール対応
+    .wp-block-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+        width: 100%;
+    }
+}

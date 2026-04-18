@@ -189,7 +189,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
         }
 
         @include mq(sp) {
-            margin-bottom: calc(var(--dp-space-inner-sp));
+            margin-bottom: var(--dp-space-inner-pc);
         }
     }
 
@@ -341,3 +341,4 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "c-cart"; /* LPビルダー（カート式一括コピー） */
 @import "c-tutorial"; /* チュートリアル（スプラッシュ・ウォークスルー・ヘルプボタン） */
 @import "p-spmenu"; /* ドロワーメニュー デザインパターン */
+@import "c-smart-accordion"; /* タグクラウド型アコーディオン */

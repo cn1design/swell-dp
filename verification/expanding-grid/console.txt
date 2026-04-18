@@ -1,0 +1,362 @@
+[EG] initGrid: items found= 8
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initialized wrapper <div class=​"eg-wrapper dp-wrap" data-columns=​"4" style=​"display:​grid;​grid-template-columns:​repeat(4,1fr)​;​gap:​16px;​--eg-main-color:​#f61b92;​" data-depth=​"0" data-initialized=​"true">​…​</div>​grid
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-0 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-0" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-8 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-8" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-9 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-9" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-10 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-10" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 0px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-11 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-11" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-3 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-3" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-2 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-2" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-1 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-1" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-5 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 468.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-5" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-25 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 552.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-25" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-26 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 552.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-26" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-27 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 552.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-27" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-24 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 552.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-24" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-25 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 552.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-25" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-26 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 552.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-26" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-27 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 552.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-27" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-5 aria-expanded= true
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] toggle OFF (close)
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-5 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 468.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-5" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-4 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 468.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-4" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-0 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-0" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-1 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-1" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-2 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-2" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-1 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-1" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-0 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel" role=​"region" aria-labelledby=​"eg-btn-0" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 0px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-52 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-52" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-1 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-1" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-2 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-2" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-3 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-3" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-67 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-67" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-66 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-66" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-65 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-65" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-64 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-64" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-64 aria-expanded= true
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] toggle OFF (close)
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-64 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-64" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-0 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 400.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-0" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 88px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] initGrid: items found= 4
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 88
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] click: eg-btn-69 aria-expanded= false
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] openPanelFor start <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] row detected {top: 484.1875, items: Array(4)}
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] lastItem <div class=​"eg-item wp-block-expanding-grid-block-expanding-grid-item eg-item wp-block-expanding-grid-block-expanding-grid-item">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] content element <div class=​"eg-item__content" hidden>​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel created <div class=​"eg-panel is-open" role=​"region" aria-labelledby=​"eg-btn-69" style=​"display:​ block !important;​ grid-column:​ 1 /​ -1 !important;​ overflow:​ hidden !important;​ max-height:​ 424px !important;​ transition:​ max-height 0.35s !important;​">​…​</div>​
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] insert target: nextSibling= null
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] panel inserted into DOM
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] realHeight= 424
+view.js?ver=fdfd3db6a1bd7bffbf18:1 [EG] is-open added, max-height set to 424

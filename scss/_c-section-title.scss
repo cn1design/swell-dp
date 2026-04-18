@@ -250,3 +250,25 @@
         }
     }
 }
+
+/* --- 6. section-title--e 左寄せ（シンプル・アンダーラインなし） --- */
+.dp-section-title--e {
+    text-align: left;
+
+    .en-title {
+        font-size: 20px;
+        font-family: var(--dp-font-en);
+        font-weight: 300;
+        letter-spacing: 0.24em;
+    }
+}
+
+/* --- 7. section-title--f fullWide用（コンテナ幅+パディング・左寄せ） --- */
+.dp-section-title--f {
+    text-align: left;
+    max-width: calc(var(--container_size, 0px) + var(--swl-pad_container, 0px) * 2);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--swl-fw_inner_pad, 0);
+    padding: 0 var(--swl-pad_container, 0);
+}

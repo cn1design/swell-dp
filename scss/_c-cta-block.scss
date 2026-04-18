@@ -50,6 +50,111 @@ CTAセクション (.dp-cta-section)
 } // /.dp-cta-section
 
 /* -------------------------------------------
+ * 電話・チャット 横並びグループ
+ * ------------------------------------------- */
+
+.dp-cta-other {
+    justify-content: center;
+    align-items: center;
+    gap: var(--dp-space-inner-pc);
+
+    @include mq(sp) {
+        flex-direction: column;
+        flex-wrap: wrap !important;
+        justify-content: center;
+        border: 1px solid #ffffff;
+        max-width: 340px;
+        width: 100%;
+        border-radius: var(--dp-radius);
+    }
+
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    // 電話番号
+    p:nth-of-type(1) {
+        font-family: var(--dp-font-num);
+        font-weight: 700;
+        margin-bottom: 0;
+        line-height: var(--dp-line-height-small);
+        letter-spacing: 0;
+        transition: transform 0.3s ease;
+
+        span {
+            height: 0.75em;
+            font-size: var(--swl-fz--huge);
+
+            @include mq(sp) {
+                margin: 0;
+            }
+        }
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+    }
+
+    // チャット（縦線セパレーター + テキスト）
+    .swell-block-button,
+    p:nth-of-type(2) {
+        position: relative;
+        padding-left: var(--dp-space-inner-pc);
+        margin-bottom: 0;
+        line-height: var(--dp-line-height-small);
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5%;
+            height: 90%;
+            border-left: 1px solid #ffffff;
+            opacity: 0.6;
+        }
+
+        @include mq(sp) {
+            font-size: 18px;
+        }
+    }
+
+    .swell-block-button {
+        @include mq(sp) {
+            padding-left: 0;
+
+            &::before {
+                content: none;
+            }
+        }
+    }
+
+    p:nth-of-type(2) {
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+
+        @include mq(sp) {
+            width: 100%;
+            padding: 1em 0 0;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 0;
+                height: 1px;
+                width: calc(100% - 2em);
+                background-color: #ffffff;
+            }
+        }
+    }
+}
+
+/* -------------------------------------------
  * dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA
  * loos/columns に付与 / 左列:画像 / 右列:テキスト+ボタン
  * ------------------------------------------- */
@@ -134,10 +239,10 @@ CTAセクション (.dp-cta-section)
         // CTAボタン
         .swell-block-button {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
 
             @include mq(sp) {
-                max-width: 300px;
+                max-width: 340px;
                 margin-bottom: var(--dp-space-inner-sp) !important;
             }
 
@@ -148,106 +253,17 @@ CTAセクション (.dp-cta-section)
             }
         }
     }
-}
-
-// 電話・チャット 横並びグループ
-.dp-cta-other {
-    justify-content: center;
-    align-items: center;
-    gap: var(--dp-space-inner-pc);
-
-    @include mq(sp) {
-        flex-direction: column;
-        flex-wrap: wrap !important;
-        justify-content: center;
+    .dp-cta-other {
         padding: 1em;
-        border: 1px solid #ffffff;
-        max-width: 300px;
-        width: 100%;
-        border-radius: var(--dp-radius);
-    }
 
-    a {
-        color: #ffffff;
-        text-decoration: none;
-    }
+        // 電話番号
+        p:nth-of-type(1) {
+            font-size: 15px !important;
 
-    // 電話番号
-    p:nth-of-type(1) {
-        font-family: var(--dp-font-num);
-        font-weight: 700;
-        margin-bottom: 0;
-        line-height: var(--dp-line-height-small);
-        letter-spacing: 0;
-        transition: transform 0.3s ease;
-
-        span {
-            height: 0.75em;
-            font-size: var(--swl-fz--huge);
-
-            @include mq(sp) {
-                font-size: 32px !important;
-            }
-        }
-
-        &:hover {
-            transform: translateY(-3px);
-        }
-    }
-
-    // チャット（縦線セパレーター + テキスト）
-    .swell-block-button,
-    p:nth-of-type(2) {
-        position: relative;
-        padding-left: var(--dp-space-inner-pc);
-        margin-bottom: 0;
-        line-height: var(--dp-line-height-small);
-
-        &::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 5%;
-            height: 90%;
-            border-left: 1px solid #ffffff;
-            opacity: 0.6;
-        }
-
-        @include mq(sp) {
-            font-size: 18px;
-        }
-    }
-
-    .swell-block-button {
-        @include mq(sp) {
-            padding-left: 0;
-
-            &::before {
-                content: none;
-            }
-        }
-    }
-
-    p:nth-of-type(2) {
-        transition: transform 0.3s ease;
-
-        &:hover {
-            transform: translateY(-3px);
-        }
-
-        @include mq(sp) {
-            width: 100%;
-            padding: 1em 0 0;
-
-            &::before {
-                content: "";
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                top: 0;
-                height: 1px;
-                width: calc(100% - 2em);
-                background-color: #ffffff;
+            span {
+                @include mq(sp) {
+                    font-size: 28px !important;
+                }
             }
         }
     }
@@ -262,20 +278,30 @@ CTAセクション (.dp-cta-section)
 
         @include mq(bp) {
             flex-direction: column;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        @include mq(sp) {
+            gap: var(--dp-space-inner-pc);
+            border: none;
         }
 
         // 電話番号
         p:nth-of-type(1) {
             text-align: right;
-            line-height: 0.7;
-            font-size: calc(var(--dp-font-size-title-pc) * 0.9);
+            font-size: 28px;
 
             @include mq(bp) {
                 text-align: center;
             }
 
+            @include mq(sp) {
+                font-size: 20px;
+            }
+
             .swl-inline-icon {
-                font-size: 1em;
+                margin-right: 0 !important;
             }
         }
 
@@ -305,6 +331,10 @@ CTAセクション (.dp-cta-section)
         height: calc(100% - 48px);
         margin-bottom: 0;
         z-index: 1;
+
+        @include mq(bp) {
+            height: calc(100% - 96px);
+        }
 
         @include mq(sp) {
             left: -24px;

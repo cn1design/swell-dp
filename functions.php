@@ -194,6 +194,17 @@ add_action( 'template_redirect', 'dp_redirect_taxonomy_to_archive' );
 
 /* ======================================================== */
 
+/**
+ * クラシックブロック（core/freeform）をエディタから非表示にする
+ */
+add_action( 'enqueue_block_editor_assets', function () {
+    wp_add_inline_script( 'wp-blocks',
+        "wp.domReady(function() { if (wp.blocks.getBlockType('core/freeform')) { wp.blocks.unregisterBlockType('core/freeform'); } });"
+    );
+} );
+
+/* ======================================================== */
+
 //SVGをアップロード
 function add_file_types_to_uploads($file_types)
 {

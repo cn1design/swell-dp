@@ -203,7 +203,7 @@
 
 ---
 
-## TYPE-F: FAQアコーディオン（SWELLアコーディオンブロック）
+## TYPE-F-01: FAQアコーディオン（SWELLアコーディオンブロック）
 
 **使用場面:** よくある質問セクション。クリックで開閉するアコーディオン形式。
 **カスタマイズ可能箇所（GUI）:** Q&Aの追加削除、質問・回答テキストの編集
@@ -228,6 +228,47 @@
   <!-- ★ 同じ構造のaccordionをQ&A数分繰り返す -->
 </div>
 <!-- /wp:group -->
+```
+
+## TYPE-F-02: FAQ専用ブロック（SWELL標準FAQ機能）
+
+```html
+<!-- wp:loos/faq {"iconRadius":"circle","qIconStyle":"fill-main"} -->
+<dl class="swell-block-faq -icon-circle" data-q="fill-main" data-a="col-text">
+  <!-- wp:loos/faq-item -->
+  <div class="swell-block-faq__item">
+    <dt class="faq_q">ここに質問が入ります？</dt>
+    <dd class="faq_a">
+      <!-- wp:paragraph -->
+      <p>ここに回答が入ります。</p>
+      <!-- /wp:paragraph -->
+    </dd>
+  </div>
+  <!-- /wp:loos/faq-item -->
+
+  <!-- wp:loos/faq-item -->
+  <div class="swell-block-faq__item">
+    <dt class="faq_q">ここに質問が入ります？</dt>
+    <dd class="faq_a">
+      <!-- wp:paragraph -->
+      <p>ここに回答が入ります。</p>
+      <!-- /wp:paragraph -->
+    </dd>
+  </div>
+  <!-- /wp:loos/faq-item -->
+
+  <!-- wp:loos/faq-item -->
+  <div class="swell-block-faq__item">
+    <dt class="faq_q">ここに質問が入ります？</dt>
+    <dd class="faq_a">
+      <!-- wp:paragraph -->
+      <p>ここに回答が入ります。</p>
+      <!-- /wp:paragraph -->
+    </dd>
+  </div>
+  <!-- /wp:loos/faq-item -->
+</dl>
+<!-- /wp:loos/faq -->
 ```
 
 ---
@@ -262,6 +303,16 @@
 <!-- /wp:group -->
 ```
 
+###SWELLボタン単体
+
+```html
+<!-- wp:loos/button {"hrefUrl":"#","className":"is-style-btn_normal"} -->
+<div class="swell-block-button is-style-btn_normal">
+  <a href="#" class="swell-block-button__link"><span>7日間無料で試す</span></a>
+</div>
+<!-- /wp:loos/button -->
+```
+
 ---
 
 ## TYPE-H: 横並びフレックスレイアウト（左テキスト＋右コンテンツ）
@@ -293,7 +344,9 @@
 <!-- wp:group {"className":"dp-bridge-copy","layout":{"type":"constrained"}} -->
 <div class="wp-block-group dp-bridge-copy">
   <!-- wp:paragraph {"align":"center"} -->
-  <p class="has-text-align-center">そのお困りごと、<br>サンプルテンプレにお任せください</p>
+  <p class="has-text-align-center">
+    そのお困りごと、<br />サンプルテンプレにお任せください
+  </p>
   <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
@@ -311,29 +364,29 @@
 
 ```html
 <!-- wp:loos/columns {"className":"dp-〇〇-columns"} -->
-<div class="swell-block-columns dp-〇〇-columns"><div class="swell-block-columns__inner">
+<div class="swell-block-columns dp-〇〇-columns">
+  <div class="swell-block-columns__inner">
+    <!-- wp:loos/column -->
+    <div class="swell-block-column swl-has-mb--s">
+      <!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+      <figure class="wp-block-image size-large">
+        <img
+          src="http://localhost:10054/wp-content/uploads/2026/03/no-image_dammy.webp"
+          alt="画像の説明"
+          class="wp-image-dummy"
+        />
+      </figure>
+      <!-- /wp:image -->
+    </div>
+    <!-- /wp:loos/column -->
 
-  <!-- wp:loos/column -->
-  <div class="swell-block-column swl-has-mb--s">
-    <!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-    <figure class="wp-block-image size-large">
-      <img
-        src="http://localhost:10054/wp-content/uploads/2026/03/no-image_dammy.webp"
-        alt="画像の説明"
-        class="wp-image-dummy"
-      />
-    </figure>
-    <!-- /wp:image -->
+    <!-- wp:loos/column -->
+    <div class="swell-block-column swl-has-mb--s">
+      <!-- ★ ここにテキストコンテンツを入れる -->
+    </div>
+    <!-- /wp:loos/column -->
   </div>
-  <!-- /wp:loos/column -->
-
-  <!-- wp:loos/column -->
-  <div class="swell-block-column swl-has-mb--s">
-    <!-- ★ ここにテキストコンテンツを入れる -->
-  </div>
-  <!-- /wp:loos/column -->
-
-</div></div>
+</div>
 <!-- /wp:loos/columns -->
 ```
 
@@ -349,26 +402,37 @@
 
 ```html
 <!-- wp:list -->
-<ul class="wp-block-list"><!-- wp:list-item -->
-<li>サンプルのリストアイテムテキストです。サンプルのリストアイテムテキストです。</li>
-<!-- /wp:list-item -->
+<ul class="wp-block-list">
+  <!-- wp:list-item -->
+  <li>
+    サンプルのリストアイテムテキストです。サンプルのリストアイテムテキストです。
+  </li>
+  <!-- /wp:list-item -->
 
-<!-- wp:list-item -->
-<li>サンプルのリストアイテムテキストです。サンプルのリストアイテムテキストです。</li>
-<!-- /wp:list-item -->
+  <!-- wp:list-item -->
+  <li>
+    サンプルのリストアイテムテキストです。サンプルのリストアイテムテキストです。
+  </li>
+  <!-- /wp:list-item -->
 
-<!-- wp:list-item -->
-<li>サンプルのリストアイテムテキストです。サンプルのリストアイテムテキストです。</li>
-<!-- /wp:list-item --></ul>
+  <!-- wp:list-item -->
+  <li>
+    サンプルのリストアイテムテキストです。サンプルのリストアイテムテキストです。
+  </li>
+  <!-- /wp:list-item -->
+</ul>
 <!-- /wp:list -->
 ```
 
 **dp-クラスを付与する場合（例）:**
+
 ```html
 <!-- wp:list {"className":"dp-list-〇〇"} -->
-<ul class="wp-block-list dp-list-〇〇"><!-- wp:list-item -->
-<li>サンプルのリストアイテムテキストです。</li>
-<!-- /wp:list-item --></ul>
+<ul class="wp-block-list dp-list-〇〇">
+  <!-- wp:list-item -->
+  <li>サンプルのリストアイテムテキストです。</li>
+  <!-- /wp:list-item -->
+</ul>
 <!-- /wp:list -->
 ```
 
@@ -384,39 +448,62 @@
 
 **タブ種別とクラスの対応:**
 
-| タブ種別 | 自動付与クラス | `wp:loos/tab` の `className` |
-|---|---|---|
+| タブ種別     | 自動付与クラス     | `wp:loos/tab` の `className`      |
+| ------------ | ------------------ | --------------------------------- |
 | ノーマルタブ | `is-style-default` | `"dp-tab-block is-style-default"` |
-| 下線タブ | `is-style-bb` | `"dp-tab-block is-style-bb"` |
+| 下線タブ     | `is-style-bb`      | `"dp-tab-block is-style-bb"`      |
 
 **ノーマルタブ（3タブ構成の基本形）:**
+
 ```html
 <!-- wp:loos/tab {"tabId":"752a9db7","tabHeaders":["タブタイトル1","タブタイトル2","タブタイトル3"],"className":"dp-tab-block is-style-default"} -->
-<div class="c-tab is-style-default dp-tab-block"><div class="c-tab__inner">
-<div class="c-tab__head"><ul class="c-tab__nav"><li class="c-tab__navItem is-active">タブタイトル1</li><li class="c-tab__navItem">タブタイトル2</li><li class="c-tab__navItem">タブタイトル3</li></ul></div>
-<div class="c-tab__body">
-<!-- wp:loos/tab-body {"id":0,"tabId":"752a9db7"} -->
-<div id="tab-752a9db7-0" class="c-tabBody__item" aria-hidden="false"><!-- wp:paragraph -->
-<p>ここにタブコンテンツを入れる。標準機能でどのようなブロックでも適用可能。</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:loos/tab-body -->
+<div class="c-tab is-style-default dp-tab-block">
+  <div class="c-tab__inner">
+    <div class="c-tab__head">
+      <ul class="c-tab__nav">
+        <li class="c-tab__navItem is-active">タブタイトル1</li>
+        <li class="c-tab__navItem">タブタイトル2</li>
+        <li class="c-tab__navItem">タブタイトル3</li>
+      </ul>
+    </div>
+    <div class="c-tab__body">
+      <!-- wp:loos/tab-body {"id":0,"tabId":"752a9db7"} -->
+      <div id="tab-752a9db7-0" class="c-tabBody__item" aria-hidden="false">
+        <!-- wp:paragraph -->
+        <p>
+          ここにタブコンテンツを入れる。標準機能でどのようなブロックでも適用可能。
+        </p>
+        <!-- /wp:paragraph -->
+      </div>
+      <!-- /wp:loos/tab-body -->
 
-<!-- wp:loos/tab-body {"id":1,"tabId":"752a9db7"} -->
-<div id="tab-752a9db7-1" class="c-tabBody__item" aria-hidden="true"><!-- wp:paragraph -->
-<p>ここにタブコンテンツを入れる。標準機能でどのようなブロックでも適用可能。</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:loos/tab-body -->
+      <!-- wp:loos/tab-body {"id":1,"tabId":"752a9db7"} -->
+      <div id="tab-752a9db7-1" class="c-tabBody__item" aria-hidden="true">
+        <!-- wp:paragraph -->
+        <p>
+          ここにタブコンテンツを入れる。標準機能でどのようなブロックでも適用可能。
+        </p>
+        <!-- /wp:paragraph -->
+      </div>
+      <!-- /wp:loos/tab-body -->
 
-<!-- wp:loos/tab-body {"id":2,"tabId":"752a9db7"} -->
-<div id="tab-752a9db7-2" class="c-tabBody__item" aria-hidden="true"><!-- wp:paragraph -->
-<p>ここにタブコンテンツを入れる。標準機能でどのようなブロックでも適用可能。</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:loos/tab-body -->
-</div></div></div>
+      <!-- wp:loos/tab-body {"id":2,"tabId":"752a9db7"} -->
+      <div id="tab-752a9db7-2" class="c-tabBody__item" aria-hidden="true">
+        <!-- wp:paragraph -->
+        <p>
+          ここにタブコンテンツを入れる。標準機能でどのようなブロックでも適用可能。
+        </p>
+        <!-- /wp:paragraph -->
+      </div>
+      <!-- /wp:loos/tab-body -->
+    </div>
+  </div>
+</div>
 <!-- /wp:loos/tab -->
 ```
 
 **下線タブに変更する場合:** `is-style-default` → `is-style-bb` に差し替えるだけでよい。
+
 ```html
 <!-- wp:loos/tab {"tabId":"752a9db7","tabHeaders":["タブタイトル1","タブタイトル2","タブタイトル3"],"className":"dp-tab-block is-style-bb"} -->
 ```
@@ -434,42 +521,140 @@
 
 **ステップ数字スタイルの種類（`data-num-style` 属性）:**
 
-| スタイル | data-num-style 値 | 見た目 |
-|---|---|---|
-| サークル（デフォルト） | `circle` | 円形背景に番号 |
-| その他 | エディタで選択 | GUIパネルで切り替え可 |
+| スタイル               | data-num-style 値 | 見た目                |
+| ---------------------- | ----------------- | --------------------- |
+| サークル（デフォルト） | `circle`          | 円形背景に番号        |
+| その他                 | エディタで選択    | GUIパネルで切り替え可 |
 
 ```html
 <!-- wp:loos/step -->
-<div class="swell-block-step" data-num-style="circle"><!-- wp:loos/step-item {"stepLabel":"STEP"} -->
-<div class="swell-block-step__item"><div class="swell-block-step__number u-bg-main"><span class="__label">STEP</span></div><div class="swell-block-step__title u-fz-l">ここにタイトル</div><div class="swell-block-step__body"><!-- wp:paragraph -->
-<p>ここにステップコンテンツを入れる。実装イメージのデザインとSWELL標準HTML構造が適合しない場合は、このコンテンツ内の指定位置にH3タイトルを入れる。そもそもH3タイトルを入れないケースもある。</p>
-<!-- /wp:paragraph --></div></div>
-<!-- /wp:loos/step-item -->
+<div class="swell-block-step" data-num-style="circle">
+  <!-- wp:loos/step-item {"stepLabel":"STEP"} -->
+  <div class="swell-block-step__item">
+    <div class="swell-block-step__number u-bg-main">
+      <span class="__label">STEP</span>
+    </div>
+    <div class="swell-block-step__title u-fz-l">ここにタイトル</div>
+    <div class="swell-block-step__body">
+      <!-- wp:paragraph -->
+      <p>
+        ここにステップコンテンツを入れる。実装イメージのデザインとSWELL標準HTML構造が適合しない場合は、このコンテンツ内の指定位置にH3タイトルを入れる。そもそもH3タイトルを入れないケースもある。
+      </p>
+      <!-- /wp:paragraph -->
+    </div>
+  </div>
+  <!-- /wp:loos/step-item -->
 
-<!-- wp:loos/step-item {"stepLabel":"STEP"} -->
-<div class="swell-block-step__item"><div class="swell-block-step__number u-bg-main"><span class="__label">STEP</span></div><div class="swell-block-step__title u-fz-l">ここにタイトル</div><div class="swell-block-step__body"><!-- wp:paragraph -->
-<p>ここにステップコンテンツを入れる。ステップのスタイルは他に「ビッグ」「スモール」に切り替え可能。</p>
-<!-- /wp:paragraph --></div></div>
-<!-- /wp:loos/step-item -->
+  <!-- wp:loos/step-item {"stepLabel":"STEP"} -->
+  <div class="swell-block-step__item">
+    <div class="swell-block-step__number u-bg-main">
+      <span class="__label">STEP</span>
+    </div>
+    <div class="swell-block-step__title u-fz-l">ここにタイトル</div>
+    <div class="swell-block-step__body">
+      <!-- wp:paragraph -->
+      <p>
+        ここにステップコンテンツを入れる。ステップのスタイルは他に「ビッグ」「スモール」に切り替え可能。
+      </p>
+      <!-- /wp:paragraph -->
+    </div>
+  </div>
+  <!-- /wp:loos/step-item -->
 
-<!-- wp:loos/step-item {"stepLabel":"STEP"} -->
-<div class="swell-block-step__item"><div class="swell-block-step__number u-bg-main"><span class="__label">STEP</span></div><div class="swell-block-step__title u-fz-l">ここにタイトル</div><div class="swell-block-step__body"><!-- wp:paragraph -->
-<p>ここにステップコンテンツを入れる。ステップのアイテム数は追加削除でGUI編集可能。</p>
-<!-- /wp:paragraph --></div></div>
-<!-- /wp:loos/step-item --></div>
+  <!-- wp:loos/step-item {"stepLabel":"STEP"} -->
+  <div class="swell-block-step__item">
+    <div class="swell-block-step__number u-bg-main">
+      <span class="__label">STEP</span>
+    </div>
+    <div class="swell-block-step__title u-fz-l">ここにタイトル</div>
+    <div class="swell-block-step__body">
+      <!-- wp:paragraph -->
+      <p>
+        ここにステップコンテンツを入れる。ステップのアイテム数は追加削除でGUI編集可能。
+      </p>
+      <!-- /wp:paragraph -->
+    </div>
+  </div>
+  <!-- /wp:loos/step-item -->
+</div>
 <!-- /wp:loos/step -->
 ```
 
+---
+
+## TYPE-N: テーブルブロック（wp:table）
+
+```html
+<!-- wp:table {"hasFixedLayout":false} -->
+<figure class="wp-block-table">
+  <table>
+    <tbody>
+      <tr>
+        <td></td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+      <tr>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+      <tr>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+      <tr>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+      <tr>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+      <tr>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+      <tr>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<!-- /wp:table -->
+```
+
+---
+
 **HTML構造の要点:**
 
-| 要素 | クラス | 備考 |
-|---|---|---|
-| ステップ外枠 | `.swell-block-step` | `data-num-style` でナンバースタイルを指定 |
-| 各アイテム | `.swell-block-step__item` | ステップ1件分 |
-| ナンバー | `.swell-block-step__number u-bg-main` | `.__label` でラベルテキスト（"STEP"等） |
-| 標準タイトル | `.swell-block-step__title u-fz-l` | SCSSで非表示にするケースあり |
-| コンテンツ | `.swell-block-step__body` | 段落・H3・画像など自由に追加可 |
+| 要素         | クラス                                | 備考                                      |
+| ------------ | ------------------------------------- | ----------------------------------------- |
+| ステップ外枠 | `.swell-block-step`                   | `data-num-style` でナンバースタイルを指定 |
+| 各アイテム   | `.swell-block-step__item`             | ステップ1件分                             |
+| ナンバー     | `.swell-block-step__number u-bg-main` | `.__label` でラベルテキスト（"STEP"等）   |
+| 標準タイトル | `.swell-block-step__title u-fz-l`     | SCSSで非表示にするケースあり              |
+| コンテンツ   | `.swell-block-step__body`             | 段落・H3・画像など自由に追加可            |
 
 ---
 
