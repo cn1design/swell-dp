@@ -5,6 +5,7 @@
   { "slug": "hero-04",          "title": "【MV】サブ・メイン・リード・特徴（ブラー円背景）",                  "category": "swell-dp-hero",     "order": 40 },
   { "slug": "hero-05",          "title": "【MV】サブ・メイン・リード・特徴＋画像",                           "category": "swell-dp-hero",     "order": 50 },
   { "slug": "hero-06",          "title": "【MV｜1カラム】中央タイトル・背景画像2枚",                         "category": "swell-dp-hero",     "order": 60 },
+  { "slug": "hero-07",          "title": "【MV｜全画像】背景3レイヤー＋SVGコンテンツ（FC加盟店LP用）",            "category": "swell-dp-hero",     "order": 70 },
   { "slug": "solution-01",      "title": "【解決｜1カラム中央】テキスト・画像・コピー",                      "category": "swell-dp-solution", "order": 10 },
   { "slug": "solution-02",      "title": "【解決｜2カラム】画像＋タイトル・コピー",                          "category": "swell-dp-solution", "order": 20 },
   { "slug": "solution-03",      "title": "【解決｜2カラム】画像＋タイトル・リスト",                          "category": "swell-dp-solution", "order": 30 },

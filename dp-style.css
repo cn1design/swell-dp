@@ -55,11 +55,14 @@
   margin: 0 0 var(--dp-space-inner-pc);
   padding: 0;
   border: none;
-  background: transparent;
 }
 .dp-wrap h2::before,
 .dp-wrap h3::before {
   content: none;
+}
+.dp-wrap h2,
+.dp-wrap h3 {
+  background: transparent;
 }
 .dp-wrap h2::before, .dp-wrap h2::after,
 .dp-wrap h3::before,
@@ -162,7 +165,6 @@
   justify-content: flex-start;
   padding-left: 0 !important;
   gap: var(--dp-space-element-pc);
-  /* 横並び キーワードリスト */
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex {
@@ -171,6 +173,9 @@
 }
 .dp-wrap ul.-list-flex li {
   list-style: none;
+}
+.dp-wrap ul.-list-flex {
+  /* 横並び キーワードリスト */
 }
 .dp-wrap ul.-list-flex.list-keyword {
   gap: var(--dp-space-inner-pc);
@@ -656,7 +661,6 @@ WP標準ボタン
   margin-bottom: 0;
   background-color: var(--color_bg);
   border-radius: 50%;
-  z-index: 1;
 }
 .dp-card-circle .wp-block-image::before,
 .dp-card-circle i::before {
@@ -674,6 +678,10 @@ WP標準ボタン
     height: 112px;
     margin-bottom: var(--dp-space-inner-sp);
   }
+}
+.dp-card-circle .wp-block-image,
+.dp-card-circle i {
+  z-index: 1;
 }
 .dp-card-circle .wp-block-image img,
 .dp-card-circle i img {
@@ -3369,8 +3377,6 @@ LP用メインビジュアル
   }
 }
 .dp-lp-hero--b .hero-title-group {
-  position: relative;
-  z-index: 2;
   text-align: center;
 }
 .dp-lp-hero--b .hero-title-group > div {
@@ -3815,7 +3821,9 @@ LP用メインビジュアル
 
  -----------------------------------------------------*/
 .hero-split .hero-title-group {
+  position: relative;
   height: 100%;
+  z-index: 3;
 }
 .hero-split .hero-title-group > div {
   display: flex;
@@ -3937,6 +3945,152 @@ LP用メインビジュアル
     margin-top: -32px;
     margin-left: 16px;
     padding: 24px 0 0 24px;
+  }
+}
+
+/*--------------------------------------------
+ hero-full-wide
+ フルワイド設定前提: スライダー画像 右絶対配置
+ -------------------------------------------*/
+.hero-full-wide .text-block {
+  position: relative;
+  z-index: 2;
+}
+.hero-full-wide .text-block > div {
+  max-width: 780px;
+  width: 65%;
+}
+@media screen and (max-width: 959px) {
+  .hero-full-wide .text-block > div {
+    width: 100%;
+  }
+}
+.hero-full-wide .wp-block-group.hero-media.dp-fade-slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  z-index: 1;
+}
+.hero-full-wide .wp-block-group.hero-media.dp-fade-slider.__sp {
+  display: none !important;
+}
+@media screen and (max-width: 959px) {
+  .hero-full-wide .wp-block-group.hero-media.dp-fade-slider {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: var(--fic-inner-max-width-sp);
+    width: 100%;
+  }
+  .hero-full-wide .wp-block-group.hero-media.dp-fade-slider.__pc {
+    display: none !important;
+  }
+  .hero-full-wide .wp-block-group.hero-media.dp-fade-slider.__sp {
+    display: grid !important;
+  }
+}
+.hero-full-wide .wp-block-group.hero-media.dp-fade-slider .wp-block-image {
+  height: 100%;
+}
+.hero-full-wide .wp-block-group.hero-media.dp-fade-slider .wp-block-image img {
+  width: 100%;
+}
+@media screen and (max-width: 959px) {
+  .hero-full-wide .wp-block-group.hero-media.dp-fade-slider .wp-block-image img {
+    height: auto;
+  }
+}
+.hero-full-wide .wp-block-group.hero-media.dp-fade-slider .wp-block-image:nth-child(1) img {
+  object-position: 96px center;
+}
+@media screen and (max-width: 959px) {
+  .hero-full-wide .wp-block-group.hero-media.dp-fade-slider .wp-block-image:nth-child(1) img {
+    object-position: center;
+  }
+}
+
+/*--------------------------------------------
+ hero-lp-02
+ FC加盟店LP: 全素材画像組み込みヒーロー
+ 背景3レイヤー（JPG） × コンテンツSVG画像
+ -------------------------------------------*/
+.hero-lp-02 {
+  overflow: hidden;
+}
+.hero-lp-02 .swell-block-fullWide__inner {
+  position: relative;
+  padding-top: 112px !important;
+  padding-bottom: 96px !important;
+}
+@media screen and (max-width: 599px) {
+  .hero-lp-02 .swell-block-fullWide__inner {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+}
+.hero-lp-02 .wp-block-image.hero-lp-02-bg__layer {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-lp-02 .wp-block-image.hero-lp-02-bg__layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-lp-02 .hero-lp-02__inner {
+  position: relative;
+  z-index: 1;
+}
+.hero-lp-02 .hero-lp-02__text {
+  width: 63.5%;
+  max-width: 763px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+@media screen and (max-width: 959px) {
+  .hero-lp-02 .hero-lp-02__text {
+    width: 74%;
+  }
+}
+@media screen and (max-width: 599px) {
+  .hero-lp-02 .hero-lp-02__text {
+    width: 100%;
+    gap: 20px;
+  }
+}
+.hero-lp-02 .hero-lp-02__main-copy,
+.hero-lp-02 .hero-lp-02__badge,
+.hero-lp-02 .hero-lp-02__cta {
+  margin: 0;
+}
+.hero-lp-02 .hero-lp-02__main-copy img,
+.hero-lp-02 .hero-lp-02__badge img,
+.hero-lp-02 .hero-lp-02__cta img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.hero-lp-02 .hero-lp-02__main-copy img {
+  max-width: 741px;
+}
+.hero-lp-02 .hero-lp-02__badge img {
+  max-width: 732px;
+}
+.hero-lp-02 .hero-lp-02__cta a {
+  display: block;
+  max-width: 549px;
+}
+@media screen and (max-width: 599px) {
+  .hero-lp-02 .hero-lp-02-bg__layer--02,
+  .hero-lp-02 .hero-lp-02-bg__layer--03 {
+    display: none;
   }
 }
 
@@ -4490,6 +4644,8 @@ LP用メインビジュアル
 .dp-faq--b .swell-block-faq__item {
   margin-top: var(--dp-space-inner-pc);
   padding-bottom: var(--dp-space-inner-pc);
+}
+.dp-faq--b .swell-block-faq__item {
   border-bottom: 1px solid var(--color_border);
 }
 .dp-faq--b .faq_q:before,
@@ -4725,9 +4881,6 @@ LP用メインビジュアル
 /* -------------------------------------------
  * バナーリスト共通
  * ------------------------------------------- */
-.dp-banner-list {
-  /* バナーリストA テキスト左下 */
-}
 .dp-banner-list .c-bannerLink__title span {
   display: inline-block;
   transition: transform 0.3s ease;
@@ -4749,6 +4902,9 @@ LP用メインビジュアル
 }
 .dp-banner-list .c-bannerLink p {
   font-size: var(--dp-font-size-explanation);
+}
+.dp-banner-list {
+  /* バナーリストA テキスト左下 */
 }
 .dp-banner-list--a .c-bannerLink__text {
   top: auto;
@@ -6276,12 +6432,14 @@ video.is-active {
   opacity: 1;
   font-size: var(--dp-font-size-heading-pc);
   font-style: normal;
-  visibility: hidden;
 }
 @media screen and (max-width: 599px) {
   .dp-ttl--a .c-pageTitle__subTitle {
     font-size: var(--dp-font-size-heading-sp);
   }
+}
+.dp-ttl--a .c-pageTitle__subTitle {
+  visibility: hidden;
 }
 
 /* 固定ページ タイトルエリア */
