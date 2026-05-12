@@ -924,6 +924,9 @@ wp:group に付与（js-works-slider-item 兼用）
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: var(--dp-space-element-sp);
+    margin-top: -4em;
+    margin-bottom: -4em;
+    padding: 4em 0;
 
     &::-webkit-scrollbar {
         display: none;
@@ -937,4 +940,129 @@ wp:group に付与（js-works-slider-item 兼用）
         max-width: none !important;
         margin-bottom: 0;
     }
+}
+
+/* ===========================================
+dp-media-text-block-works-c
+センタリング左右見切れスライダー
+・PC 4.5枚 / BP 2.5枚 / SP 1.5枚
+・中央アイテム 1.1倍スケールアップ
+・wp:group に付与（js-works-slider-c と併用）
+・contentSize:full の fullWide 内で使用
+=========================================== */
+.dp-media-text-block-works-c {
+    // 非スライダー時: 4カラムグリッド表示
+    &:not(.is-slider-active) {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--dp-space-element-sp);
+
+        @include mq(bp) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mq(sp) {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+// アイテム幅・カードスタイル（詳細度優先でデフォルト幅を上書き）
+.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
+    width: calc(100% / 4.5);
+    background-color: var(--color_bg);
+    border-radius: var(--dp-radius);
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    transition: transform 0.3s ease;
+
+    @include mq(bp) {
+        width: calc(100% / 2.5);
+    }
+
+    @include mq(sp) {
+        width: calc(100% / 1.5);
+    }
+
+    // 中央アイテム: 1.1倍スケール
+    &.is-active {
+        transform: scale(1.1);
+    }
+
+    // 画像: 角丸・アスペクト比固定
+    .wp-block-image {
+        margin-bottom: 0;
+        border-radius: var(--dp-radius);
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            aspect-ratio: 5/6;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    // タイトル h3
+    h3 {
+        margin-top: var(--dp-space-inner-sp);
+        margin-bottom: 0;
+        font-size: 18px;
+        font-weight: var(--dp-font-weight-heading);
+        line-height: var(--dp-line-height-medium);
+        color: var(--color_text);
+
+        @include mq(sp) {
+            font-size: var(--dp-font-size-heading-sp);
+        }
+    }
+}
+
+// outer wrapper（JS生成）: 矢印ナビを下部フロー配置
+.dp-works-slider-c-outer {
+    .dp-slider-nav {
+        position: static;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        padding-top: var(--dp-space-element-sp);
+        pointer-events: auto;
+        height: auto;
+    }
+
+    .dp-slider-nav__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background: var(--color_main);
+        border: none;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        transition:
+            background-color 0.15s,
+            opacity 0.15s;
+
+        [class*="icon-"] {
+            font-size: 16px;
+            line-height: 1;
+            display: block;
+        }
+
+        &.is-edge {
+            opacity: 0.4;
+        }
+
+        &:not(.is-edge):hover {
+            background: color-mix(in srgb, var(--color_main) 80%, #000);
+        }
+    }
+}
+
+// gap override（works-04: Figma指定 40px）
+.dp-media-text-block-works-c .dp-works-slider-inner {
+    gap: 40px;
 }

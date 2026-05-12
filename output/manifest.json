@@ -39,6 +39,7 @@
   { "slug": "cta-05",           "title": "【CTA｜2カラム】見出し・テキスト左下（ボタン背景画像）",            "category": "swell-dp-cta",      "order": 50 },
   { "slug": "works-01",         "title": "【実績｜2カラム】見出し・画像＋見積条件・コメント",                 "category": "swell-dp-works",    "order": 10 },
   { "slug": "works-02",         "title": "【実績｜2カラム】見出し・画像＋見積条件・コメント（横スライダー）",  "category": "swell-dp-works",    "order": 20 },
+  { "slug": "works-04",         "title": "【実績｜全幅】センタリング左右見切れスライダー（画像＋タイトル）",  "category": "swell-dp-works",    "order": 40 },
   { "slug": "company-01",       "title": "【会社概要｜2カラム】表（下線）＋画像",                            "category": "swell-dp-company",  "order": 10 },
   { "slug": "company-02",       "title": "【会社概要｜2カラム】画像＋表（下線）",                            "category": "swell-dp-company",  "order": 20 },
   { "slug": "company-03",       "title": "【会社概要｜2カラム】表（下線）＋Googleマップ",                    "category": "swell-dp-company",  "order": 30 },

@@ -238,6 +238,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
         &.list-keyword {
             gap: var(--dp-space-inner-pc);
             margin-bottom: var(--dp-space-inner-pc);
+            margin: 0;
 
             @include mq(sp) {
                 gap: var(--dp-space-inner-sp);

@@ -1,0 +1,150 @@
+<!-- dp-deps: _c-media-block -->
+<!-- wp:html -->
+<style>
+/* dp-works-slider-c-outer: 下部中央ナビボタン（JS生成） */
+.dp-works-slider-c-outer .dp-slider-nav {
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding-top: var(--dp-space-element-sp);
+  height: auto;
+}
+.dp-works-slider-c-outer .dp-slider-nav__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--color_main);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+.dp-works-slider-c-outer .dp-slider-nav__btn [class*="icon-"] {
+  font-size: 16px;
+  line-height: 1;
+  display: block;
+}
+.dp-works-slider-c-outer .dp-slider-nav__btn.is-edge {
+  opacity: 0.4;
+}
+.dp-works-slider-c-outer .dp-slider-nav__btn:not(.is-edge):hover {
+  background: color-mix(in srgb, var(--color_main) 80%, #000);
+}
+</style>
+<script>
+(function () {
+  'use strict';
+  function initWorksSlider(slider) {
+    if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
+    var allSlides = Array.from(slider.querySelectorAll('.js-works-slider-item'));
+    var minSlides = slider.classList.contains('dp-works-slider-b') ? 4 : 2;
+    if (allSlides.length < minSlides) return;
+
+    var inner = allSlides[0].parentElement;
+    var slides = Array.from(inner.querySelectorAll(':scope > .js-works-slider-item'));
+    var count = slides.length;
+
+    // アウターラッパー生成
+    var outer = document.createElement('div');
+    outer.className = 'dp-works-slider-c-outer';
+    slider.parentNode.insertBefore(outer, slider);
+    outer.appendChild(slider);
+
+    // ナビゲーションボタン生成
+    var nav = document.createElement('div');
+    nav.className = 'dp-slider-nav';
+    var prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
+    prevBtn.setAttribute('aria-label', '前へ');
+    var prevIcon = document.createElement('span');
+    prevIcon.className = 'icon-chevron-left';
+    prevIcon.setAttribute('aria-hidden', 'true');
+    prevBtn.appendChild(prevIcon);
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
+    nextBtn.setAttribute('aria-label', '次へ');
+    var nextIcon = document.createElement('span');
+    nextIcon.className = 'icon-chevron-right';
+    nextIcon.setAttribute('aria-hidden', 'true');
+    nextBtn.appendChild(nextIcon);
+    nav.appendChild(prevBtn);
+    nav.appendChild(nextBtn);
+    outer.appendChild(nav);
+
+    // ループ用クローン: 末尾にコピーを追加、先頭にも逆順で追加
+    slides.forEach(function (s) {
+      var c = s.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      inner.appendChild(c);
+    });
+    slides.slice().reverse().forEach(function (s) {
+      var c = s.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      inner.insertBefore(c, inner.firstChild);
+    });
+
+    inner.classList.add('dp-works-slider-inner');
+    slider.classList.add('is-slider-active');
+
+    function getScrollAmount() {
+      var items = inner.querySelectorAll(':scope > .js-works-slider-item');
+      if (items.length < 2) return inner.clientWidth;
+      var r0 = items[0].getBoundingClientRect();
+      var r1 = items[1].getBoundingClientRect();
+      return Math.abs(r1.left - r0.left);
+    }
+
+    function updateActiveItem() {
+      var items = Array.from(inner.querySelectorAll(':scope > .js-works-slider-item'));
+      var center = inner.getBoundingClientRect().left + inner.clientWidth / 2;
+      var closest = null;
+      var minDist = Infinity;
+      items.forEach(function (s) {
+        var r = s.getBoundingClientRect();
+        var d = Math.abs(r.left + r.width / 2 - center);
+        if (d < minDist) { minDist = d; closest = s; }
+      });
+      items.forEach(function (s) { s.classList.toggle('is-active', s === closest); });
+    }
+
+    // スクロール停止後にループ位置を補正（ユーザーには見えない瞬時ジャンプ）
+    var loopTimer = null;
+    function checkLoop() {
+      var amount = getScrollAmount();
+      var loopWidth = amount * count;
+      if (inner.scrollLeft < loopWidth) {
+        inner.scrollLeft += loopWidth; // 先頭クローン域 → 末尾の実アイテムへジャンプ
+      } else if (inner.scrollLeft >= loopWidth * 2) {
+        inner.scrollLeft -= loopWidth; // 末尾クローン域 → 先頭の実アイテムへジャンプ
+      }
+    }
+
+    prevBtn.addEventListener('click', function () { inner.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }); });
+    nextBtn.addEventListener('click', function () { inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); });
+
+    inner.addEventListener('scroll', function () {
+      clearTimeout(loopTimer);
+      updateActiveItem();
+      loopTimer = setTimeout(checkLoop, 80); // スクロール停止後に補正
+    }, { passive: true });
+
+    // 初期スクロール位置: 先頭クローンをスキップして実アイテム先頭へ
+    requestAnimationFrame(function () {
+      inner.scrollLeft = getScrollAmount() * count;
+      updateActiveItem();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.js-works-slider-loop').forEach(initWorksSlider);
+  });
+})();
+</script>
+<!-- /wp:html -->
