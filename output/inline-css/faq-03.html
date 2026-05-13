@@ -74,24 +74,4 @@
   padding-top: 1em !important;
 }
 </style>
-<script>
-(function () {
-  'use strict';
-  function initFaqC(faqEl) {
-    var items = Array.from(faqEl.querySelectorAll('.swell-block-faq__item'));
-    items.forEach(function (item) {
-      var q = item.querySelector('.faq_q');
-      if (!q) return;
-      q.addEventListener('click', function () {
-        var isOpen = item.classList.contains('is-open');
-        items.forEach(function (i) { i.classList.remove('is-open'); });
-        if (!isOpen) item.classList.add('is-open');
-      });
-    });
-  }
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.dp-faq--c .swell-block-faq').forEach(initFaqC);
-  });
-})();
-</script>
 <!-- /wp:html -->

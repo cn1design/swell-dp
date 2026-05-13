@@ -1,0 +1,161 @@
+/*
+
+ フィーチャーボックス (feature-box)
+
+*/
+
+/* ===========================================
+dp-feature-box--a
+3カラム水平ボックス（タイトル＋バッジ｜アイコン列｜訴求コピー）
+・白背景・border-radius・box-shadow
+・左: タイトル文字 + 緑バッジ（h3）
+・中: 4アイコン + ラベル横並び
+・右: 短い訴求テキスト（カラーアクセントあり）
+=========================================== */
+.dp-feature-box--a {
+    background-color: var(--color_bg);
+    border-radius: 4px;
+    box-shadow: var(--dp-shadow);
+    padding: 24px 24px 16px;
+
+    @include mq(sp) {
+        padding: 20px 16px;
+    }
+
+    // ---- カラム外側コンテナ ----
+    > .swell-block-columns > .swell-block-columns__inner {
+        align-items: center;
+        gap: 0;
+
+        @include mq(sp) {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        // SWELLデフォルトの margin-bottom を全解除
+        > .swell-block-column {
+            margin-bottom: 0;
+        }
+    }
+
+    // ---- ① 左カラム: タイトル＋バッジ ----
+    .dp-feature-box__title {
+        flex: 0 0 20%;
+
+        @include mq(bp) {
+            flex: none;
+        }
+
+        // h3リセット + 縦並び
+        h3 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-size: inherit;
+
+            @include mq(bp) {
+                align-items: center;
+            }
+
+            // 緑ピルバッジ（例: "サブ収益のチャンス"）
+            .swl-bg-color {
+                border-radius: 99px;
+                padding: 4px 12px;
+                font-size: var(--dp-font-size-summary);
+
+                @include mq(bp) {
+                    padding: 4px 16px;
+                    font-size: var(--dp-font-size-heading-sp);
+                }
+            }
+        }
+    }
+
+    // ---- ② 中央カラム: アイコン列 ----
+    .dp-feature-box__icons {
+        flex: 1 1 auto;
+
+        @include mq(sp) {
+            flex: none;
+        }
+
+        // 内側の4列カラム
+        > .swell-block-columns > .swell-block-columns__inner {
+            align-items: flex-start;
+
+            > .swell-block-column {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // 各アイコン＋ラベルユニット
+    .dp-feature-box__icon-item {
+        text-align: center;
+
+        .wp-block-image {
+            margin: 0 auto 8px;
+
+            img {
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                display: block;
+                margin: 0 auto;
+
+                @include mq(bp) {
+                    height: auto;
+                }
+            }
+        }
+
+        p {
+            font-size: 12px;
+            line-height: 1.4;
+            color: var(--color_text);
+            margin-bottom: 0;
+        }
+    }
+
+    // ---- ③ 右カラム: 訴求コピー ----
+    .dp-feature-box__copy {
+        flex: 0 0 24%;
+        max-width: 100%;
+        padding-left: 0;
+
+        @include mq(bp) {
+            flex: none;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            max-width: 100%;
+            width: 100%;
+            padding: 0;
+        }
+
+        @include mq(sp) {
+            flex-direction: column;
+        }
+
+        p {
+            font-size: var(--dp-font-size-summary);
+            font-weight: var(--dp-font-weight-heading);
+            line-height: var(--dp-line-height-medium);
+            margin-bottom: 0;
+
+            @include mq(bp) {
+                padding-left: 16px;
+                border-left: 1px solid var(--color_text);
+            }
+
+            @include mq(sp) {
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+    }
+}
