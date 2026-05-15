@@ -154,10 +154,9 @@ CTAセクション (.dp-cta-section)
     }
 }
 
-/* -------------------------------------------
- * dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA
- * loos/columns に付与 / 左列:画像 / 右列:テキスト+ボタン
- * ------------------------------------------- */
+/* ===========================================
+dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA
+=========================================== */
 .dp-cta--a {
     // カラム間ギャップ無し・等高
     .swell-block-columns__inner {
@@ -269,6 +268,10 @@ CTAセクション (.dp-cta-section)
     }
 }
 
+/* ===========================================
+dp-cta--b: 画像＋メインカラー背景 リッチカラム型CTA
+=========================================== */
+
 .dp-cta--b {
     position: relative;
 
@@ -349,11 +352,38 @@ CTAセクション (.dp-cta-section)
     }
 }
 
-// スライダーアクティブ時: 初期アイテムを中央配置・次アイテムを右端に見せる
+/* スライダーアクティブ時: 初期アイテムを中央配置・次アイテムを右端に見せる */
 .js-swipe-slider.is-slider-active {
     @include mq(bp) {
         .swell-block-column {
             width: 95% !important;
+        }
+    }
+}
+
+/* ===========================================
+dp-cta--c: 画像＋メインカラー背景 リッチカラム型CTA
+=========================================== */
+.dp-cta--c {
+    a {
+        box-shadow: var(--dp-shadow);
+    }
+    .wp-block-group {
+        &.is-row {
+            @include mq(sp) {
+                flex-direction: column;
+            }
+        }
+
+        &.is-stack {
+            gap: calc(var(--dp-space-inner-sp) / 2);
+        }
+
+        p:first-child {
+            font-weight: 600;
+        }
+        p:not(:first-child) {
+            font-size: var(--dp-font-size-explanation);
         }
     }
 }

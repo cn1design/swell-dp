@@ -60,6 +60,44 @@ SWELL独自ボタン
     color: var(--color_main) !important;
 }
 
+/* 細ライン矢印ボタン */
+.button-thin-line-arrow {
+    a {
+        position: relative;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: var(--dp-space-inner-pc);
+            right: var(--dp-space-element-sp);
+            height: 1px;
+            background-color: var(--color_main);
+            transition: transform 0.3s ease;
+        }
+
+        &::before {
+            width: 80px;
+        }
+
+        &::after {
+            width: 10px;
+            transform: rotate(30deg);
+            transform-origin: right center;
+        }
+
+        &:hover {
+            &::before {
+                transform: translateX(4px);
+            }
+
+            &::after {
+                transform: rotate(30deg) translate(3px, -2px);
+            }
+        }
+    }
+}
+
 /* ===========================================
 WP標準ボタン
 =========================================== */

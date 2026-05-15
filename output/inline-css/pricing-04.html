@@ -1,0 +1,58 @@
+<!-- wp:html -->
+<style>
+/* dp-pricing--d: P&L形式テーブル */
+/* ⚠️ 幅・ボーダー等ルールは scss/_c-pricing-table.scss の .dp-pricing--d にも同内容を反映すること */
+.dp-pricing--d .wp-block-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.dp-pricing--d table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Roboto', sans-serif;
+}
+.dp-pricing--d thead th {
+  color: var(--color_white);
+  padding: 16px;
+  text-align: center;
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 600;
+}
+.dp-pricing--d thead th:first-child {
+  background-color: var(--color_text);
+}
+.dp-pricing--d thead th:last-child {
+  background-color: var(--color_main);
+}
+@media screen and (max-width: 599px) {
+  .dp-pricing--d thead th {
+    padding: 8px 16px;
+  }
+}
+.dp-pricing--d tbody td {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+@media screen and (max-width: 959px) {
+  .dp-pricing--d tbody td {
+    padding: 12px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-pricing--d tbody td {
+    padding: 6px 12px;
+  }
+}
+.dp-pricing--d tbody td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+/* ⚠️ 行を追加/削除した場合はこの番号も更新すること */
+.dp-pricing--d tbody tr:nth-child(2) {
+  border-bottom: 3px solid #ccc;
+}
+.dp-pricing--d tbody tr:nth-child(7) {
+  border-bottom: 3px solid var(--color_text);
+}
+</style>
+<!-- /wp:html -->

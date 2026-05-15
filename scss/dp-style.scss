@@ -75,7 +75,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 
     // UIコンポーネント（SaaS/クリニカル感の演出）
     --dp-radius: 4px; // シャープな角丸
-    --dp-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); // 薄く上品な影
+    --dp-shadow: 0 0 24px rgba(0, 0, 0, 0.05); // 薄く上品な影
     --dp-color-sub: var(--color_gray); // サブ背景色
     --dp-border-width: 3px; // ボーダー幅
 

@@ -22,6 +22,10 @@
 // =============================================
 #body_wrap.dp-spmenu--a,
 #body_wrap.dp-spmenu--b {
+    // ロゴ画像の高さ統一（メインヘッダーに影響しないよう .p-spMenu__body 内に限定）
+    .p-spMenu__body .c-headLogo__img {
+        height: 48px;
+    }
     // パネル幅: 88vw → 100%
     .p-spMenu__inner {
         width: 100% !important;
@@ -205,6 +209,7 @@ html[data-spmenu=opened] {
     .c-widget__title.-spmenu {
         margin-bottom: 2em;
         text-align: center;
+        background-color: transparent;
     }
 
     .p-spMenu__nav {
@@ -299,6 +304,7 @@ html[data-spmenu=opened] {
         align-items: center;
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
         box-sizing: border-box;
+        background-color: transparent;
     }
 
     .p-spMenu__nav {

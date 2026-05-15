@@ -132,7 +132,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             padding: 20px 24px;
             text-align: center;
             vertical-align: middle;
@@ -169,7 +170,7 @@
             }
 
             // 競合列
-            &:nth-child(n+3) {
+            &:nth-child(n + 3) {
                 background-color: #888888;
                 color: #ffffff;
                 font-weight: 500;
@@ -288,5 +289,75 @@
         li {
             margin-bottom: 4px;
         }
+    }
+}
+
+/* ===========================================
+P&L形式テーブル (.dp-pricing--d)
+・2カラム（項目名 | 金額）
+・thead: メインカラー背景・白文字
+・dp-row-border: 細区切り線
+・dp-row-border-thick: 太区切り線
+・金額列: 右揃え・SP nowrap
+⚠️ ルール変更時は output/inline-css/pricing-04.html の <style> にも反映すること
+=========================================== */
+.dp-pricing--d {
+    .wp-block-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Roboto", sans-serif;
+    }
+
+    thead th {
+        color: #ffffff;
+        padding: 16px;
+        text-align: center;
+        font-size: clamp(20px, 2vw, 24px);
+        font-weight: 600;
+
+        &:first-child {
+            background-color: var(--color_text);
+        }
+        &:last-child {
+            background-color: var(--color_main);
+        }
+
+        @include mq(sp) {
+            padding: 8px 16px;
+        }
+    }
+
+    tbody td {
+        padding: 12px 16px;
+        vertical-align: middle;
+
+        @include mq(tb) {
+            padding: 12px;
+        }
+
+        @include mq(sp) {
+            padding: 6px 12px;
+        }
+
+        &:last-child {
+            text-align: right;
+            white-space: nowrap; // SP: 金額列の折り返し防止
+        }
+    }
+
+    // 細区切り線: 粗利行（3行目）の下
+    tbody tr:nth-child(2) {
+        border-bottom: 3px solid #ccc;
+    }
+
+    // 太区切り線: ロイヤリティ行（7行目）の下
+    // ⚠️ 行を追加/削除した場合はこの番号も更新すること
+    tbody tr:nth-child(7) {
+        border-bottom: 3px solid var(--color_text);
     }
 }

@@ -33,7 +33,7 @@
   --dp-line-height-medium: 1.6;
   --dp-line-height-small: 1.4;
   --dp-radius: 4px;
-  --dp-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --dp-shadow: 0 0 24px rgba(0, 0, 0, 0.05);
   --dp-color-sub: var(--color_gray);
   --dp-border-width: 3px;
   --dp-font-size-page-title-pc: 48px;
@@ -613,6 +613,34 @@ SWELL独自ボタン
 .button-white .swell-block-button__link {
   background: var(--color_bg);
   color: var(--color_main) !important;
+}
+
+/* 細ライン矢印ボタン */
+.button-thin-line-arrow a {
+  position: relative;
+}
+.button-thin-line-arrow a::before, .button-thin-line-arrow a::after {
+  content: "";
+  position: absolute;
+  bottom: var(--dp-space-inner-pc);
+  right: var(--dp-space-element-sp);
+  height: 1px;
+  background-color: var(--color_main);
+  transition: transform 0.3s ease;
+}
+.button-thin-line-arrow a::before {
+  width: 80px;
+}
+.button-thin-line-arrow a::after {
+  width: 10px;
+  transform: rotate(30deg);
+  transform-origin: right center;
+}
+.button-thin-line-arrow a:hover::before {
+  transform: translateX(4px);
+}
+.button-thin-line-arrow a:hover::after {
+  transform: rotate(30deg) translate(3px, -2px);
 }
 
 /* ===========================================
@@ -2288,7 +2316,7 @@ wp:group に付与（js-works-slider-item 兼用）
   scrollbar-width: none;
   gap: var(--dp-space-element-sp);
   margin-top: -4em;
-  margin-bottom: -4em;
+  margin-bottom: -2em;
   padding: 4em 0;
 }
 .dp-works-slider-inner::-webkit-scrollbar {
@@ -2305,7 +2333,7 @@ wp:group に付与（js-works-slider-item 兼用）
 /* ===========================================
 dp-media-text-block-works-c
 センタリング左右見切れスライダー
-・PC 4.5枚 / BP 2.5枚 / SP 1.5枚
+・PC 4.5枚 / BP 2.5枚 / SP 1.25枚
 ・中央アイテム 1.1倍スケールアップ
 ・wp:group に付与（js-works-slider-c と併用）
 ・contentSize:full の fullWide 内で使用
@@ -2326,7 +2354,7 @@ dp-media-text-block-works-c
   }
 }
 
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
   width: 22.2222222222%;
   background-color: var(--color_bg);
   border-radius: var(--dp-radius);
@@ -2335,30 +2363,30 @@ dp-media-text-block-works-c
   transition: transform 0.3s ease;
 }
 @media screen and (max-width: 959px) {
-  .dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
+  .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
     width: 40%;
   }
 }
 @media screen and (max-width: 599px) {
-  .dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
-    width: 66.6666666667%;
+  .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+    width: 80%;
   }
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item.is-active {
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item.is-active {
   transform: scale(1.1);
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item .wp-block-image {
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image {
   margin-bottom: 0;
   border-radius: var(--dp-radius);
   overflow: hidden;
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item .wp-block-image img {
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image img {
   width: 100%;
   aspect-ratio: 5/6;
   object-fit: cover;
   display: block;
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item h3 {
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
   margin-top: var(--dp-space-inner-sp);
   margin-bottom: 0;
   font-size: 18px;
@@ -2367,7 +2395,7 @@ dp-media-text-block-works-c
   color: var(--color_text);
 }
 @media screen and (max-width: 599px) {
-  .dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item h3 {
+  .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
     font-size: var(--dp-font-size-heading-sp);
   }
 }
@@ -3119,12 +3147,21 @@ dp-media-text-block-works-c
 
 /* --- ヘッダーCTAボタン (.icon-bubble) --- */
 .dp-header-cta {
+  margin-left: 16px;
   gap: 16px;
+}
+.dp-header-cta::after {
+  content: none;
 }
 @media screen and (max-width: 959px) {
   .dp-header-cta {
     justify-content: center;
     align-items: center;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-header-cta {
+    padding: 16px;
   }
 }
 .dp-header-cta .dp-line-buttom a {
@@ -3151,6 +3188,39 @@ dp-media-text-block-works-c
     font-size: var(--dp-font-size-heading-pc);
   }
 }
+.dp-header-cta.dp-cf-button a {
+  padding: 4px 48px 4px 16px;
+  background-color: var(--color_main);
+  color: white;
+  border-radius: var(--dp-radius);
+  text-align: left;
+  transition: opacity 0.3s ease;
+}
+.dp-header-cta.dp-cf-button a:hover {
+  opacity: 0.7;
+}
+.dp-header-cta.dp-cf-button a::before {
+  content: "\e92c";
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: var(--color_white);
+  font-size: 1.5em;
+  font-weight: 600;
+  font-family: icomoon !important;
+}
+.dp-header-cta.dp-cf-button a::after {
+  content: none;
+}
+.dp-header-cta.dp-header-right a {
+  padding: 4px 48px 4px 16px;
+}
+.dp-header-cta.dp-header-right a::before {
+  left: auto;
+  right: 16px;
+}
+
 .dp-vertical-right-ja {
   position: fixed;
   right: 12px;
@@ -3208,8 +3278,27 @@ dp-media-text-block-works-c
   }
 }
 
+.-body-solid .l-fixHeader {
+  box-shadow: none;
+}
+
 .l-fixHeader .dp-line-buttom {
   display: none;
+}
+
+#body_wrap.dp-header--a .c-gnavWrap {
+  background-color: var(--color_bg);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  padding: 12px 12px 12px 16px;
+  border-radius: var(--dp-radius);
+}
+@media screen and (max-width: 959px) {
+  #body_wrap.dp-header--a .c-gnavWrap {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
 }
 
 /* ヘッダーナビゲーション */
@@ -4753,7 +4842,8 @@ dp-feature-box--a
   min-width: 720px;
   border-collapse: collapse;
 }
-.dp-pricing--b .wp-block-table th, .dp-pricing--b .wp-block-table td {
+.dp-pricing--b .wp-block-table th,
+.dp-pricing--b .wp-block-table td {
   padding: 20px 24px;
   text-align: center;
   vertical-align: middle;
@@ -4761,7 +4851,8 @@ dp-feature-box--a
   font-size: 18px;
 }
 @media screen and (max-width: 599px) {
-  .dp-pricing--b .wp-block-table th, .dp-pricing--b .wp-block-table td {
+  .dp-pricing--b .wp-block-table th,
+  .dp-pricing--b .wp-block-table td {
     padding: 12px 8px;
     font-size: var(--dp-font-size-explanation);
   }
@@ -4879,6 +4970,67 @@ dp-feature-box--a
 }
 .dp-pricing--c .pricing-annotation-list li {
   margin-bottom: 4px;
+}
+
+/* ===========================================
+P&L形式テーブル (.dp-pricing--d)
+・2カラム（項目名 | 金額）
+・thead: メインカラー背景・白文字
+・dp-row-border: 細区切り線
+・dp-row-border-thick: 太区切り線
+・金額列: 右揃え・SP nowrap
+⚠️ ルール変更時は output/inline-css/pricing-04.html の <style> にも反映すること
+=========================================== */
+.dp-pricing--d .wp-block-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.dp-pricing--d table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Roboto", sans-serif;
+}
+.dp-pricing--d thead th {
+  color: #ffffff;
+  padding: 16px;
+  text-align: center;
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 600;
+}
+.dp-pricing--d thead th:first-child {
+  background-color: var(--color_text);
+}
+.dp-pricing--d thead th:last-child {
+  background-color: var(--color_main);
+}
+@media screen and (max-width: 599px) {
+  .dp-pricing--d thead th {
+    padding: 8px 16px;
+  }
+}
+.dp-pricing--d tbody td {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+@media screen and (max-width: 768px) {
+  .dp-pricing--d tbody td {
+    padding: 12px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-pricing--d tbody td {
+    padding: 6px 12px;
+  }
+}
+.dp-pricing--d tbody td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+.dp-pricing--d tbody tr:nth-child(2) {
+  border-bottom: 3px solid #ccc;
+}
+.dp-pricing--d tbody tr:nth-child(7) {
+  border-bottom: 3px solid var(--color_text);
 }
 
 /* 料金表 */
@@ -5319,10 +5471,9 @@ CTAセクション (.dp-cta-section)
   }
 }
 
-/* -------------------------------------------
- * dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA
- * loos/columns に付与 / 左列:画像 / 右列:テキスト+ボタン
- * ------------------------------------------- */
+/* ===========================================
+dp-cta--a: 画像＋メインカラー背景 リッチカラム型CTA
+=========================================== */
 .dp-cta--a .swell-block-columns__inner {
   gap: 0;
   align-items: stretch;
@@ -5415,6 +5566,9 @@ CTAセクション (.dp-cta-section)
   }
 }
 
+/* ===========================================
+dp-cta--b: 画像＋メインカラー背景 リッチカラム型CTA
+=========================================== */
 .dp-cta--b {
   position: relative;
 }
@@ -5491,10 +5645,32 @@ CTAセクション (.dp-cta-section)
   object-fit: contain;
 }
 
+/* スライダーアクティブ時: 初期アイテムを中央配置・次アイテムを右端に見せる */
 @media screen and (max-width: 959px) {
   .js-swipe-slider.is-slider-active .swell-block-column {
     width: 95% !important;
   }
+}
+
+/* ===========================================
+dp-cta--c: 画像＋メインカラー背景 リッチカラム型CTA
+=========================================== */
+.dp-cta--c a {
+  box-shadow: var(--dp-shadow);
+}
+@media screen and (max-width: 599px) {
+  .dp-cta--c .wp-block-group.is-row {
+    flex-direction: column;
+  }
+}
+.dp-cta--c .wp-block-group.is-stack {
+  gap: calc(var(--dp-space-inner-sp) / 2);
+}
+.dp-cta--c .wp-block-group p:first-child {
+  font-weight: 600;
+}
+.dp-cta--c .wp-block-group p:not(:first-child) {
+  font-size: var(--dp-font-size-explanation);
 }
 
 /* CTAブロック */
@@ -8014,6 +8190,10 @@ body.dp-cart-is-open .l-fixHeader {
    CTA・電話番号・SNS → 「フッター 右カスタムエリア」等のウィジェットで設定
 
 */
+#body_wrap.dp-spmenu--a .p-spMenu__body .c-headLogo__img,
+#body_wrap.dp-spmenu--b .p-spMenu__body .c-headLogo__img {
+  height: 48px;
+}
 #body_wrap.dp-spmenu--a .p-spMenu__inner,
 #body_wrap.dp-spmenu--b .p-spMenu__inner {
   width: 100% !important;
@@ -8177,6 +8357,7 @@ html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(8) {
 #body_wrap.dp-spmenu--a .c-widget__title.-spmenu {
   margin-bottom: 2em;
   text-align: center;
+  background-color: transparent;
 }
 #body_wrap.dp-spmenu--a .p-spMenu__nav {
   width: 100%;
@@ -8250,6 +8431,7 @@ html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(8) {
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
+  background-color: transparent;
 }
 #body_wrap.dp-spmenu--b .p-spMenu__nav {
   margin-top: 0 !important;

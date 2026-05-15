@@ -925,7 +925,7 @@ wp:group に付与（js-works-slider-item 兼用）
     scrollbar-width: none;
     gap: var(--dp-space-element-sp);
     margin-top: -4em;
-    margin-bottom: -4em;
+    margin-bottom: -2em;
     padding: 4em 0;
 
     &::-webkit-scrollbar {
@@ -945,7 +945,7 @@ wp:group に付与（js-works-slider-item 兼用）
 /* ===========================================
 dp-media-text-block-works-c
 センタリング左右見切れスライダー
-・PC 4.5枚 / BP 2.5枚 / SP 1.5枚
+・PC 4.5枚 / BP 2.5枚 / SP 1.25枚
 ・中央アイテム 1.1倍スケールアップ
 ・wp:group に付与（js-works-slider-c と併用）
 ・contentSize:full の fullWide 内で使用
@@ -968,7 +968,8 @@ dp-media-text-block-works-c
 }
 
 // アイテム幅・カードスタイル（詳細度優先でデフォルト幅を上書き）
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
+// ⚠️ 幅のレスポンシブルールは output/inline-css/works-04.html の <style> にも同内容を反映すること
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
     width: calc(100% / 4.5);
     background-color: var(--color_bg);
     border-radius: var(--dp-radius);
@@ -981,7 +982,7 @@ dp-media-text-block-works-c
     }
 
     @include mq(sp) {
-        width: calc(100% / 1.5);
+        width: calc(100% / 1.25);
     }
 
     // 中央アイテム: 1.1倍スケール
