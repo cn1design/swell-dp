@@ -311,6 +311,7 @@ P&L形式テーブル (.dp-pricing--d)
     // （colspan=2のth1つ構成のため :first-child/:last-child では区別不可。カラム位置で制御）
     .swell-block-columns .swell-block-column:first-child thead th {
         background-color: var(--color_text);
+        color: #fff;
     }
     .swell-block-columns .swell-block-column:last-child thead th {
         background-color: var(--color_main);

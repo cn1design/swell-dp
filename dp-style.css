@@ -4986,6 +4986,7 @@ P&L形式テーブル (.dp-pricing--d)
 }
 .dp-pricing--d .swell-block-columns .swell-block-column:first-child thead th {
   background-color: var(--color_text);
+  color: #fff;
 }
 .dp-pricing--d .swell-block-columns .swell-block-column:last-child thead th {
   background-color: var(--color_main);
