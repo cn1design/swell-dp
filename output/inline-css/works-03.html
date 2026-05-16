@@ -108,10 +108,10 @@
   cursor: pointer;
   transition: background-color 0.15s, color 0.15s, opacity 0.15s;
 }
-.dp-works-slider-outer .dp-slider-nav__btn [class*="icon-"] {
-  font-size: 14px;
-  line-height: 1;
+.dp-works-slider-outer .dp-slider-nav__btn svg {
   display: block;
+  width: 8px;
+  height: 14px;
 }
 .dp-works-slider-outer .dp-slider-nav__btn.is-edge {
   opacity: 0.5;
@@ -166,18 +166,12 @@
     prevBtn.type = 'button';
     prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
     prevBtn.setAttribute('aria-label', '前へ');
-    const prevIcon = document.createElement('span');
-    prevIcon.className = 'icon-chevron-left';
-    prevIcon.setAttribute('aria-hidden', 'true');
-    prevBtn.appendChild(prevIcon);
+    prevBtn.insertAdjacentHTML('beforeend', '<svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
     const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
     nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
     nextBtn.setAttribute('aria-label', '次へ');
-    const nextIcon = document.createElement('span');
-    nextIcon.className = 'icon-chevron-right';
-    nextIcon.setAttribute('aria-hidden', 'true');
-    nextBtn.appendChild(nextIcon);
+    nextBtn.insertAdjacentHTML('beforeend', '<svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
     nav.appendChild(prevBtn);
     nav.appendChild(nextBtn);
     outer.appendChild(nav);

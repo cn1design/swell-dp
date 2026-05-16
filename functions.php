@@ -81,6 +81,10 @@ add_action('wp_enqueue_scripts', function() {
 			filemtime( get_stylesheet_directory() . '/javascript/cpt.js' ),
 			true
 		);
+		wp_localize_script( 'child-dp-cpt', 'dpConfig', [
+			'isLoggedIn' => is_user_logged_in(),
+			'isAdmin'    => current_user_can( 'administrator' ),
+		] );
 	}
 
 	// コピーボタン サンバーストアニメーション（アーカイブ + 標準構成 + シングル）
@@ -117,6 +121,41 @@ add_action('wp_enqueue_scripts', function() {
 	}
 
 }, 11);
+
+// 管理者向けデバッグトグル（design_pattern 関連ページのフッターに出力）
+add_action( 'wp_footer', function () {
+	if ( ! current_user_can( 'administrator' ) ) return;
+	if ( ! (
+		is_post_type_archive( 'design_pattern' ) ||
+		is_page_template( 'page-design_pattern_standard.php' ) ||
+		is_singular( 'design_pattern' )
+	) ) return;
+	?>
+	<div id="dp-admin-toggle" style="position:fixed;bottom:16px;left:16px;z-index:9999;background:#1e1e2e;color:#cdd6f4;padding:10px 16px;border-radius:8px;font-size:13px;font-family:sans-serif;display:flex;align-items:center;gap:10px;box-shadow:0 2px 12px rgba(0,0,0,.4);">
+		<span>インラインモード</span>
+		<label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+			<input type="checkbox" id="dp-inline-toggle" style="width:16px;height:16px;">
+			<span id="dp-inline-label">OFF</span>
+		</label>
+	</div>
+	<script>
+	(function () {
+		var toggle = document.getElementById('dp-inline-toggle');
+		var label  = document.getElementById('dp-inline-label');
+		var stored = localStorage.getItem('dp_inline_mode');
+		// 初期値: ON（管理者はデフォルトでインラインあり＝無料ユーザー目線でテスト）
+		var isOn = stored !== null ? stored === 'on' : true;
+		toggle.checked = isOn;
+		label.textContent = isOn ? 'ON' : 'OFF';
+		toggle.addEventListener('change', function () {
+			isOn = toggle.checked;
+			localStorage.setItem('dp_inline_mode', isOn ? 'on' : 'off');
+			label.textContent = isOn ? 'ON' : 'OFF';
+		});
+	})();
+	</script>
+	<?php
+} );
 
 //WordPressで自動更新メール通知を無効化 / fuunctions.php
 add_filter( 'auto_plugin_update_send_email', '__return_false' );

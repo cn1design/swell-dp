@@ -802,10 +802,10 @@ Works スライダー（center mode, 1.2 slides visible）
             color 0.15s,
             opacity 0.15s;
 
-        [class*="icon-"] {
-            font-size: 14px;
-            line-height: 1;
+        svg {
             display: block;
+            width: 8px;
+            height: 14px;
         }
 
         &.is-edge {
@@ -969,7 +969,8 @@ dp-media-text-block-works-c
 
 // アイテム幅・カードスタイル（詳細度優先でデフォルト幅を上書き）
 // ⚠️ 幅のレスポンシブルールは output/inline-css/works-04.html の <style> にも同内容を反映すること
-.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+// is-slider-active をスライダー外側要素で判定（旧SWELL/Gutenbergが __inner-container を追加する場合でも対応）
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item {
     width: calc(100% / 4.5);
     border-radius: var(--dp-radius);
     padding: 16px;
@@ -1046,10 +1047,10 @@ dp-media-text-block-works-c
             background-color 0.15s,
             opacity 0.15s;
 
-        [class*="icon-"] {
-            font-size: 16px;
-            line-height: 1;
+        svg {
             display: block;
+            width: 8px;
+            height: 14px;
         }
 
         &.is-edge {

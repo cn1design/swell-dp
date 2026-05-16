@@ -19,38 +19,38 @@
   }
 }
 /* ⚠️ 幅のレスポンシブルールはSCSSの同セレクターとも同期すること */
-.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item {
   width: calc(100% / 4.5);
   border-radius: var(--dp-radius);
   padding: 16px;
   transition: transform 0.3s ease;
 }
 @media screen and (max-width: 959px) {
-  .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+  .dp-media-text-block-works-c.is-slider-active .js-works-slider-item {
     width: calc(100% / 2.5);
   }
 }
 @media screen and (max-width: 599px) {
-  .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+  .dp-media-text-block-works-c.is-slider-active .js-works-slider-item {
     width: calc(100% / 1.25);
     padding: 4px;
   }
 }
-.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item.is-active {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item.is-active {
   transform: scale(1.1);
 }
-.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item .wp-block-image {
   margin-bottom: 0;
   border-radius: var(--dp-radius);
   overflow: hidden;
 }
-.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image img {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item .wp-block-image img {
   width: 100%;
   aspect-ratio: 5/6;
   object-fit: cover;
   display: block;
 }
-.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item h3 {
   margin-top: var(--dp-space-inner-sp);
   margin-bottom: 0;
   font-size: 18px;
@@ -59,7 +59,7 @@
   color: var(--color_text);
 }
 @media screen and (max-width: 599px) {
-  .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
+  .dp-media-text-block-works-c.is-slider-active .js-works-slider-item h3 {
     font-size: var(--dp-font-size-heading-sp);
   }
 }
@@ -87,10 +87,10 @@
   cursor: pointer;
   transition: background-color 0.15s, opacity 0.15s;
 }
-.dp-works-slider-c-outer .dp-slider-nav__btn [class*="icon-"] {
-  font-size: 16px;
-  line-height: 1;
+.dp-works-slider-c-outer .dp-slider-nav__btn svg {
   display: block;
+  width: 8px;
+  height: 14px;
 }
 .dp-works-slider-c-outer .dp-slider-nav__btn.is-edge {
   opacity: 0.4;
@@ -125,18 +125,12 @@
     prevBtn.type = 'button';
     prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
     prevBtn.setAttribute('aria-label', '前へ');
-    const prevIcon = document.createElement('span');
-    prevIcon.className = 'icon-chevron-left';
-    prevIcon.setAttribute('aria-hidden', 'true');
-    prevBtn.appendChild(prevIcon);
+    prevBtn.insertAdjacentHTML('beforeend', '<svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
     const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
     nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
     nextBtn.setAttribute('aria-label', '次へ');
-    const nextIcon = document.createElement('span');
-    nextIcon.className = 'icon-chevron-right';
-    nextIcon.setAttribute('aria-hidden', 'true');
-    nextBtn.appendChild(nextIcon);
+    nextBtn.insertAdjacentHTML('beforeend', '<svg width="8" height="14" viewBox="0 0 8 14" fill="none" aria-hidden="true"><path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
     nav.appendChild(prevBtn);
     nav.appendChild(nextBtn);
     outer.appendChild(nav);

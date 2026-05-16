@@ -11,6 +11,10 @@ while ( have_posts() ) : the_post();
     $post_id    = get_the_ID();
     // 生の投稿コンテンツ（ブロックエディタの最新データ）を取得する
     $raw_block_code = $post->post_content;
+    // インライン版（wp:html ブロック込み）= 無料ユーザー向け
+    $code_inline = $raw_block_code;
+    // クリーン版（wp:html ブロックをパージ）= 有料会員向け
+    $code_clean  = trim( preg_replace( '/\n*<!-- wp:html -->.*?<!-- \/wp:html -->\s*/s', '', $raw_block_code ) );
     $gif_data   = get_field( 'pattern_gif',$post_id );
     $gif_url    = $gif_data ? $gif_data['url'] : '';
     $gif_alt    = $gif_data ? $gif_data['alt'] : '';
@@ -78,7 +82,8 @@ while ( have_posts() ) : the_post();
                     </svg>
                 </button>
                 <button type="button" class="dp-single__copy-area dp-copy-btn"
-                    data-code="<?php echo htmlspecialchars( $raw_block_code, ENT_QUOTES, 'UTF-8' ); ?>">
+                    data-code-inline="<?php echo htmlspecialchars( $code_inline, ENT_QUOTES, 'UTF-8' ); ?>"
+                    data-code-clean="<?php echo htmlspecialchars( $code_clean, ENT_QUOTES, 'UTF-8' ); ?>">
                     <svg class="dp-copy-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path
                             d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />

@@ -1,0 +1,229 @@
+<style>
+    /* dp-media-text-block-works-c: センタリング左右見切れスライダー */
+    /* 非スライダー時: 4カラムグリッド表示 */
+    .dp-media-text-block-works-c:not(.is-slider-active) {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--dp-space-element-sp);
+    }
+    @media screen and (max-width: 959px) {
+      .dp-media-text-block-works-c:not(.is-slider-active) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media screen and (max-width: 599px) {
+      .dp-media-text-block-works-c:not(.is-slider-active) {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* &#x26a0;&#xfe0f; 幅のレスポンシブルールはSCSSの同セレクターとも同期すること */
+    .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+      width: calc(100% / 4.5);
+      border-radius: var(--dp-radius);
+      padding: 16px;
+      transition: transform 0.3s ease;
+    }
+    @media screen and (max-width: 959px) {
+      .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+        width: calc(100% / 2.5);
+      }
+    }
+    @media screen and (max-width: 599px) {
+      .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
+        width: calc(100% / 1.25);
+        padding: 4px;
+      }
+    }
+    .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item.is-active {
+      transform: scale(1.1);
+    }
+    .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image {
+      margin-bottom: 0;
+      border-radius: var(--dp-radius);
+      overflow: hidden;
+    }
+    .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image img {
+      width: 100%;
+      aspect-ratio: 5/6;
+      object-fit: cover;
+      display: block;
+    }
+    .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
+      margin-top: var(--dp-space-inner-sp);
+      margin-bottom: 0;
+      font-size: 18px;
+      font-weight: var(--dp-font-weight-heading);
+      line-height: var(--dp-line-height-medium);
+      color: var(--color_text);
+    }
+    @media screen and (max-width: 599px) {
+      .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
+        font-size: var(--dp-font-size-heading-sp);
+      }
+    }
+    /* dp-works-slider-c-outer: 下部中央ナビボタン（JS生成） */
+    .dp-works-slider-c-outer .dp-slider-nav {
+      position: static;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding-top: var(--dp-space-element-sp);
+      pointer-events: auto;
+      height: auto;
+    }
+    .dp-works-slider-c-outer .dp-slider-nav__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: var(--color_main);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.15s, opacity 0.15s;
+    }
+    .dp-works-slider-c-outer .dp-slider-nav__btn [class*="icon-"] {
+      font-size: 16px;
+      line-height: 1;
+      display: block;
+    }
+    .dp-works-slider-c-outer .dp-slider-nav__btn.is-edge {
+      opacity: 0.4;
+    }
+    .dp-works-slider-c-outer .dp-slider-nav__btn:not(.is-edge):hover {
+      background: color-mix(in srgb, var(--color_main) 80%, #000);
+    }
+    </style>
+    <script>
+    (function () {
+      'use strict';
+      function initWorksSlider(slider) {
+        if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
+        const allSlides = Array.from(slider.querySelectorAll('.js-works-slider-item'));
+        const minSlides = slider.classList.contains('dp-works-slider-b') ? 4 : 2;
+        if (allSlides.length < minSlides) return;
+    
+        const inner = allSlides[0].parentElement;
+        const slides = Array.from(inner.querySelectorAll(':scope > .js-works-slider-item'));
+        const count = slides.length;
+    
+        // アウターラッパー生成
+        const outer = document.createElement('div');
+        outer.className = 'dp-works-slider-c-outer';
+        slider.parentNode.insertBefore(outer, slider);
+        outer.appendChild(slider);
+    
+        // ナビゲーションボタン生成
+        const nav = document.createElement('div');
+        nav.className = 'dp-slider-nav';
+        const prevBtn = document.createElement('button');
+        prevBtn.type = 'button';
+        prevBtn.className = 'dp-slider-nav__btn dp-slider-nav__prev';
+        prevBtn.setAttribute('aria-label', '前へ');
+        const prevIcon = document.createElement('span');
+        prevIcon.className = 'icon-chevron-left';
+        prevIcon.setAttribute('aria-hidden', 'true');
+        prevBtn.appendChild(prevIcon);
+        const nextBtn = document.createElement('button');
+        nextBtn.type = 'button';
+        nextBtn.className = 'dp-slider-nav__btn dp-slider-nav__next';
+        nextBtn.setAttribute('aria-label', '次へ');
+        const nextIcon = document.createElement('span');
+        nextIcon.className = 'icon-chevron-right';
+        nextIcon.setAttribute('aria-hidden', 'true');
+        nextBtn.appendChild(nextIcon);
+        nav.appendChild(prevBtn);
+        nav.appendChild(nextBtn);
+        outer.appendChild(nav);
+    
+        // ループ用クローン: 末尾にコピーを追加、先頭にも逆順で追加
+        slides.forEach(function (s) {
+          const c = s.cloneNode(true);
+          c.setAttribute('aria-hidden', 'true');
+          inner.appendChild(c);
+        });
+        slides.slice().reverse().forEach(function (s) {
+          const c = s.cloneNode(true);
+          c.setAttribute('aria-hidden', 'true');
+          inner.insertBefore(c, inner.firstChild);
+        });
+    
+        inner.classList.add('dp-works-slider-inner');
+        slider.classList.add('is-slider-active');
+    
+        function getScrollAmount() {
+          const items = inner.querySelectorAll(':scope > .js-works-slider-item');
+          if (items.length < 2) return inner.clientWidth;
+          const r0 = items[0].getBoundingClientRect();
+          const r1 = items[1].getBoundingClientRect();
+          return Math.abs(r1.left - r0.left);
+        }
+    
+        function updateActiveItem() {
+          const items = Array.from(inner.querySelectorAll(':scope > .js-works-slider-item'));
+          const center = inner.getBoundingClientRect().left + inner.clientWidth / 2;
+          let closest = null;
+          let minDist = Infinity;
+          items.forEach(function (s) {
+            const r = s.getBoundingClientRect();
+            const d = Math.abs(r.left + r.width / 2 - center);
+            if (d < minDist) { minDist = d; closest = s; }
+          });
+          items.forEach(function (s) { s.classList.toggle('is-active', s === closest); });
+        }
+    
+        // スクロール停止後にループ位置を補正（ユーザーには見えない瞬時ジャンプ）
+        let loopTimer = null;
+        let isLoopJumping = false; // ジャンプ中フラグ（スクロールイベント二重発火防止）
+        function checkLoop() {
+          const amount = getScrollAmount();
+          const loopWidth = amount * count;
+          const needsJump = inner.scrollLeft < loopWidth || inner.scrollLeft >= loopWidth * 2;
+          if (!needsJump) return;
+    
+          // トランジションを無効化してジャンプ後の scale チラつきを防止
+          isLoopJumping = true;
+          const allItems = inner.querySelectorAll('.js-works-slider-item');
+          allItems.forEach(function (el) { el.style.transition = 'none'; });
+    
+          if (inner.scrollLeft < loopWidth) {
+            inner.scrollLeft += loopWidth; // 先頭クローン域 → 実アイテム先頭へジャンプ
+          } else {
+            inner.scrollLeft -= loopWidth; // 末尾クローン域 → 実アイテム末尾へジャンプ
+          }
+          updateActiveItem(); // ジャンプ先で即時アクティブ更新（トランジションなし）
+    
+          // 2フレーム後にトランジション復元・フラグ解除
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              allItems.forEach(function (el) { el.style.transition = ''; });
+              isLoopJumping = false;
+            });
+          });
+        }
+    
+        prevBtn.addEventListener('click', function () { inner.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }); });
+        nextBtn.addEventListener('click', function () { inner.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); });
+    
+        inner.addEventListener('scroll', function () {
+          if (isLoopJumping) return; // ジャンプ中のスクロールイベントは無視
+          clearTimeout(loopTimer);
+          updateActiveItem();
+          loopTimer = setTimeout(checkLoop, 80); // スクロール停止後に補正
+        }, { passive: true });
+    
+        // 初期スクロール位置: 先頭クローンをスキップして実アイテム先頭へ
+        requestAnimationFrame(function () {
+          inner.scrollLeft = getScrollAmount() * count;
+          updateActiveItem();
+        });
+      }
+    
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.js-works-slider-loop').forEach(initWorksSlider);
+      });
+    })();
+    </script>
