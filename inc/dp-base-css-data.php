@@ -29,9 +29,9 @@ function dp_render_base_css_copy_area() {
             <path
                 d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />
         </svg>
-        最初にここをコピー
+        単発利用の方：ベースCSSのみをコピー
     </button>
-    <p class="dp-copy-hint">※これを貼らないとデザインが反映されません</p>
+    <p class="dp-copy-hint">※LPビルダーを使う場合は左のチェックで一緒にコピーできます</p>
     <label class="dp-base-css-select" title="LPビルダーに追加してまとめてコピー">
         <input type="checkbox" class="dp-base-css-select__input" aria-label="共通CSSをLPビルダーに追加">
         <span class="dp-base-css-select__mark" aria-hidden="true"></span>

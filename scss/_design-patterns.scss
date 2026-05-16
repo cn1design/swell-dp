@@ -174,10 +174,8 @@
     margin: 0;
 
     &.top-hint {
-        color: var(--color_text);
-        opacity: 1;
-        letter-spacing: 0.5px;
-        font-weight: 600;
+        font-size: 12px;
+        opacity: 0.55;
     }
 }
 
