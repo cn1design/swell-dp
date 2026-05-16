@@ -7197,17 +7197,18 @@ body.dp-cart-is-open .l-fixHeader {
 }
 
 /* =========================================================
- * チェックボックス（カードサムネイル左上 / position: absolute）
+ * カード選択バッジ（サムネイル下部中央 / position: absolute）
+ * 「＋ LPに追加」ピル型バッジ。チェック ON で color_main に変化
  * .pl-card-thumb は既に position: relative のため追加不要
  * ========================================================= */
 .pl-card-select {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
-  width: 26px;
-  height: 26px;
   cursor: pointer;
+  white-space: nowrap;
 }
 .pl-card-select__input {
   position: absolute;
@@ -7218,37 +7219,35 @@ body.dp-cart-is-open .l-fixHeader {
   z-index: 1;
 }
 .pl-card-select__mark {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.28);
+  gap: 4px;
+  padding: 5px 12px 5px 8px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(4px);
-  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
-.pl-card-select__mark::after {
-  content: "";
-  display: none;
-  width: 5px;
-  height: 10px;
-  border-right: 2.5px solid #fff;
-  border-bottom: 2.5px solid #fff;
-  transform: rotate(45deg) translate(-1px, -1px);
+.pl-card-select__mark::before {
+  content: "+";
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 700;
 }
 .pl-card-select__input:checked + .pl-card-select__mark {
   background: var(--color_main, #333);
   border-color: var(--color_main, #333);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
-.pl-card-select__input:checked + .pl-card-select__mark::after {
-  display: block;
+.pl-card-select__input:checked + .pl-card-select__mark::before {
+  content: "✓";
 }
 .pl-card-select:hover .pl-card-select__mark {
+  background: rgba(0, 0, 0, 0.65);
   border-color: #fff;
-  background: rgba(0, 0, 0, 0.45);
 }
 
 /* =========================================================

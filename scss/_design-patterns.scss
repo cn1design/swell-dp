@@ -187,30 +187,33 @@
     align-items: center;
     width: 100%;
     gap: 6px;
-    padding: 24px;
-    background: var(--color_deep04);
-    color: #1b1800;
-    border: none;
-    border-radius: 99px;
-    font-size: clamp(20px, 2vw, 24px);
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--color_text, #333);
+    border: 1.5px solid var(--pl-border, #c8c8c4);
+    border-radius: 8px;
+    font-size: 14px;
     font-weight: 600;
     font-family: inherit;
     cursor: pointer;
-    transition: opacity 0.15s;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
 
     @include mq(sp) {
-        padding: 16px;
+        padding: 10px 16px;
     }
 
     svg {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
         fill: currentColor;
         flex-shrink: 0;
     }
 
     &:hover {
-        opacity: 0.85;
+        background: var(--pl-bg, #f5f5f3);
+        border-color: var(--color_text-sub, #999);
     }
 
     &.is-copied {
