@@ -120,7 +120,7 @@ $dp_lp_url = ! empty( $dp_lp_pages ) ? get_permalink( $dp_lp_pages[0] ) : '';
                                 data-post-id="<?php echo esc_attr( $post_id ); ?>"
                                 data-title="<?php echo esc_attr( get_the_title() ); ?>"
                                 data-thumb="<?php echo esc_url( $thumb_url ); ?>">
-                            <span class="pl-card-select__mark">LPに追加</span>
+                            <span class="pl-card-select__mark" aria-hidden="true"></span>
                         </label>
 
                         <?php if ( $thumb_url ) : ?>

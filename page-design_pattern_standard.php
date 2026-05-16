@@ -114,7 +114,7 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
                                         data-post-id="<?php echo esc_attr( $post_id ); ?>"
                                         data-title="<?php echo esc_attr( get_the_title() ); ?>"
                                         data-thumb="<?php echo esc_url( $thumb_url ); ?>">
-                                    <span class="pl-card-select__mark">LPに追加</span>
+                                    <span class="pl-card-select__mark" aria-hidden="true"></span>
                                 </label>
 
                                 <?php if ( $thumb_url ) : ?>

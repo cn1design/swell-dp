@@ -32,21 +32,20 @@ body.dp-cart-is-open {
 }
 
 /* =========================================================
- * カード選択バッジ（サムネイル下部中央 / position: absolute）
- * 「＋ LPに追加」ピル型バッジ。チェック ON で color_main に変化
+ * チェックボックス（カードサムネイル左上 / position: absolute）
  * .pl-card-thumb は既に position: relative のため追加不要
  * ========================================================= */
 
 .pl-card-select {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 8px;
+    left: 8px;
     z-index: 3;
+    width: 26px;
+    height: 26px;
     cursor: pointer;
-    white-space: nowrap;
 
-    // 実体チェックボックス（不可視・クリック領域はバッジ全体）
+    // 実体チェックボックス（不可視・クリック領域を全体に広げる）
     &__input {
         position: absolute;
         inset: 0;
@@ -56,29 +55,31 @@ body.dp-cart-is-open {
         z-index: 1;
     }
 
-    // ピル型バッジUI
+    // カスタムチェックボックスUI
     &__mark {
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        gap: 4px;
-        padding: 5px 12px 5px 8px;
-        border-radius: 99px;
-        font-size: 12px;
-        font-weight: 700;
-        color: #fff;
-        background: rgba(0, 0, 0, 0.45);
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.28);
         backdrop-filter: blur(4px);
-        border: 1.5px solid rgba(255, 255, 255, 0.6);
         transition:
             background 0.2s ease,
-            border-color 0.2s ease;
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
 
-        // 「＋」プレフィックス
-        &::before {
-            content: "+";
-            font-size: 15px;
-            line-height: 1;
-            font-weight: 700;
+        // チェックマーク（チェック時に表示）
+        &::after {
+            content: "";
+            display: none;
+            width: 5px;
+            height: 10px;
+            border-right: 2.5px solid #fff;
+            border-bottom: 2.5px solid #fff;
+            transform: rotate(45deg) translate(-1px, -1px);
         }
     }
 
@@ -86,16 +87,17 @@ body.dp-cart-is-open {
     &__input:checked + &__mark {
         background: var(--color_main, #333);
         border-color: var(--color_main, #333);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 
-        &::before {
-            content: "✓";
+        &::after {
+            display: block;
         }
     }
 
     // ホバー
     &:hover &__mark {
-        background: rgba(0, 0, 0, 0.65);
         border-color: #fff;
+        background: rgba(0, 0, 0, 0.45);
     }
 }
 
@@ -106,7 +108,7 @@ body.dp-cart-is-open {
 .dp-base-css-select {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     cursor: pointer;
 
     &__input {
@@ -116,35 +118,39 @@ body.dp-cart-is-open {
         height: 0;
     }
 
-    // カスタムチェックボックスUI（pl-card-select に準拠）
+    // カスタムチェックボックスUI
+    // pl-card-select と同一デザイン言語・約1.5倍サイズ（最重要アクション強調）
     &__mark {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        width: 20px;
-        height: 20px;
-        border: 2px solid var(--pl-border, #c8c8c4);
-        border-radius: 4px;
-        background: #fff;
+        width: 40px;
+        height: 40px;
+        border: 2.5px solid rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.04);
+        backdrop-filter: blur(4px);
         transition:
             background 0.2s ease,
-            border-color 0.2s ease;
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
 
         &::after {
             content: "";
             display: none;
-            width: 4px;
-            height: 8px;
-            border-right: 2px solid #fff;
-            border-bottom: 2px solid #fff;
-            transform: rotate(45deg) translate(-1px, -1px);
+            width: 8px;
+            height: 15px;
+            border-right: 3px solid #fff;
+            border-bottom: 3px solid #fff;
+            transform: rotate(45deg) translate(-1px, -2px);
         }
     }
 
     &__input:checked + &__mark {
         background: var(--color_main, #333);
         border-color: var(--color_main, #333);
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 
         &::after {
             display: block;
@@ -159,6 +165,7 @@ body.dp-cart-is-open {
 
     &:hover &__mark {
         border-color: var(--color_main, #333);
+        background: rgba(0, 0, 0, 0.08);
     }
 }
 
