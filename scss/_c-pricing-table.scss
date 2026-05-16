@@ -302,7 +302,7 @@ P&L形式テーブル (.dp-pricing--d)
 ⚠️ ルール変更時は output/inline-css/pricing-04.html の <style> にも反映すること
 =========================================== */
 .dp-pricing--d {
-    // リッチカラム
+    // リッチカラム背景色
     .swell-block-columns .swell-block-column {
         background-color: #ffffff;
     }
@@ -335,13 +335,6 @@ P&L形式テーブル (.dp-pricing--d)
         font-size: clamp(20px, 2vw, 24px);
         font-weight: 600;
         border-bottom: none;
-
-        &:first-child {
-            background-color: var(--color_text);
-        }
-        &:last-child {
-            background-color: var(--color_main);
-        }
 
         @include mq(sp) {
             padding: 8px 16px;

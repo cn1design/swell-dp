@@ -1,8 +1,29 @@
+<!-- dp-deps: _c-media-block -->
 <!-- wp:html -->
 <style>
-/* dp-media-text-block-works-c: スライダーアイテム幅（レスポンシブ） */
+/* dp-media-text-block-works-c: センタリング左右見切れスライダー */
+/* 非スライダー時: 4カラムグリッド表示 */
+.dp-media-text-block-works-c:not(.is-slider-active) {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--dp-space-element-sp);
+}
+@media screen and (max-width: 959px) {
+  .dp-media-text-block-works-c:not(.is-slider-active) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-media-text-block-works-c:not(.is-slider-active) {
+    grid-template-columns: 1fr;
+  }
+}
+/* ⚠️ 幅のレスポンシブルールはSCSSの同セレクターとも同期すること */
 .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
   width: calc(100% / 4.5);
+  border-radius: var(--dp-radius);
+  padding: 16px;
+  transition: transform 0.3s ease;
 }
 @media screen and (max-width: 959px) {
   .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
@@ -12,9 +33,36 @@
 @media screen and (max-width: 599px) {
   .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
     width: calc(100% / 1.25);
+    padding: 4px;
   }
 }
-
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item.is-active {
+  transform: scale(1.1);
+}
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image {
+  margin-bottom: 0;
+  border-radius: var(--dp-radius);
+  overflow: hidden;
+}
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item .wp-block-image img {
+  width: 100%;
+  aspect-ratio: 5/6;
+  object-fit: cover;
+  display: block;
+}
+.dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
+  margin-top: var(--dp-space-inner-sp);
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: var(--dp-font-weight-heading);
+  line-height: var(--dp-line-height-medium);
+  color: var(--color_text);
+}
+@media screen and (max-width: 599px) {
+  .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item h3 {
+    font-size: var(--dp-font-size-heading-sp);
+  }
+}
 /* dp-works-slider-c-outer: 下部中央ナビボタン（JS生成） */
 .dp-works-slider-c-outer .dp-slider-nav {
   position: static;
@@ -23,6 +71,7 @@
   align-items: center;
   gap: 24px;
   padding-top: var(--dp-space-element-sp);
+  pointer-events: auto;
   height: auto;
 }
 .dp-works-slider-c-outer .dp-slider-nav__btn {

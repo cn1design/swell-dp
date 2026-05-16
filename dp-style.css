@@ -2356,10 +2356,8 @@ dp-media-text-block-works-c
 
 .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
   width: 22.2222222222%;
-  background-color: var(--color_bg);
   border-radius: var(--dp-radius);
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.05);
-  padding: 20px;
+  padding: 16px;
   transition: transform 0.3s ease;
 }
 @media screen and (max-width: 959px) {
@@ -2370,6 +2368,7 @@ dp-media-text-block-works-c
 @media screen and (max-width: 599px) {
   .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item {
     width: 80%;
+    padding: 4px;
   }
 }
 .dp-media-text-block-works-c.dp-works-slider-inner > .js-works-slider-item.is-active {
@@ -5007,12 +5006,6 @@ P&L形式テーブル (.dp-pricing--d)
   font-size: clamp(20px, 2vw, 24px);
   font-weight: 600;
   border-bottom: none;
-}
-.dp-pricing--d thead th:first-child {
-  background-color: var(--color_text);
-}
-.dp-pricing--d thead th:last-child {
-  background-color: var(--color_main);
 }
 @media screen and (max-width: 599px) {
   .dp-pricing--d thead th {
