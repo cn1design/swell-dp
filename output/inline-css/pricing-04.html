@@ -24,6 +24,13 @@
 .dp-pricing--d thead th:last-child {
   background-color: var(--color_main);
 }
+/* カラム位置で thead 背景色を制御（colspan=2のth1つ構成のため） */
+.dp-pricing--d .swell-block-columns .swell-block-column:first-child thead th {
+  background-color: var(--color_text);
+}
+.dp-pricing--d .swell-block-columns .swell-block-column:last-child thead th {
+  background-color: var(--color_main);
+}
 @media screen and (max-width: 599px) {
   .dp-pricing--d thead th {
     padding: 8px 16px;

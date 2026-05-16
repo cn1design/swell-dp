@@ -4981,6 +4981,15 @@ P&L形式テーブル (.dp-pricing--d)
 ・金額列: 右揃え・SP nowrap
 ⚠️ ルール変更時は output/inline-css/pricing-04.html の <style> にも反映すること
 =========================================== */
+.dp-pricing--d .swell-block-columns .swell-block-column {
+  background-color: #ffffff;
+}
+.dp-pricing--d .swell-block-columns .swell-block-column:first-child thead th {
+  background-color: var(--color_text);
+}
+.dp-pricing--d .swell-block-columns .swell-block-column:last-child thead th {
+  background-color: var(--color_main);
+}
 .dp-pricing--d .wp-block-table {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -4996,6 +5005,7 @@ P&L形式テーブル (.dp-pricing--d)
   text-align: center;
   font-size: clamp(20px, 2vw, 24px);
   font-weight: 600;
+  border-bottom: none;
 }
 .dp-pricing--d thead th:first-child {
   background-color: var(--color_text);
