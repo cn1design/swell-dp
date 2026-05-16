@@ -200,6 +200,13 @@
         background 0.15s ease,
         border-color 0.15s ease;
 
+    // 非表示設定
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    pointer-events: none;
+    overflow: hidden;
+
     @include mq(sp) {
         padding: 10px 16px;
     }

@@ -291,6 +291,11 @@
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 @media screen and (max-width: 599px) {
   .dp-bace-css-btn {
