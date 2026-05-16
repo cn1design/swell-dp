@@ -218,7 +218,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn = e.target.closest('.pl-btn--copy:not(.is-disabled)');
         if (!btn) return;
 
-        const code   = btn.dataset.code;
+        const cfg = window.dpConfig || {};
+        const skipInline = cfg.isAdmin
+            ? localStorage.getItem('dp_inline_mode') === 'off'
+            : !!cfg.isLoggedIn;
+        const code = skipInline ? (btn.dataset.codeClean || btn.dataset.code) : btn.dataset.code;
         const copied = btn.dataset.labelCopied || 'コピー完了 ✓';
         const def    = btn.dataset.labelDefault || 'コピーする';
 

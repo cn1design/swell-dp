@@ -92,7 +92,8 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
 
                         <?php while ( $section_query->have_posts() ) : $section_query->the_post();
                             $post_id    = get_the_ID();
-                            $block_code = get_post_field( 'post_content', $post_id );
+                            $block_code       = get_post_field( 'post_content', $post_id );
+                            $block_code_clean = trim( preg_replace( '/\n*<!-- wp:html -->.*?<!-- \/wp:html -->\s*/s', '', $block_code ) );
                             $gif_data   = get_field( 'pattern_gif', $post_id );
                             $gif_url    = $gif_data ? $gif_data['url'] : '';
                             $gif_alt    = $gif_data ? $gif_data['alt'] : '';
@@ -166,6 +167,7 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
                                 <?php if ( $block_code ) : ?>
                                 <button class="pl-btn pl-btn--copy"
                                     data-code="<?php echo htmlspecialchars( $block_code, ENT_QUOTES, 'UTF-8' ); ?>"
+                                    data-code-clean="<?php echo htmlspecialchars( $block_code_clean, ENT_QUOTES, 'UTF-8' ); ?>"
                                     data-label-copied="コピー完了 ✓" data-label-default="コピーする">
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
                                         <path
@@ -316,7 +318,11 @@ $dp_archive_url = get_post_type_archive_link( 'design_pattern' );
         const btn = e.target.closest('.pl-btn--copy:not(.is-disabled)');
         if (!btn) return;
 
-        const code = btn.dataset.code;
+        const cfg = window.dpConfig || {};
+        const skipInline = cfg.isAdmin
+            ? localStorage.getItem('dp_inline_mode') === 'off'
+            : !!cfg.isLoggedIn;
+        const code = skipInline ? (btn.dataset.codeClean || btn.dataset.code) : btn.dataset.code;
         const copied = btn.dataset.labelCopied || 'コピー完了 ✓';
         const def = btn.dataset.labelDefault || 'コピーする';
 

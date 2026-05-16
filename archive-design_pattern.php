@@ -87,7 +87,8 @@ $dp_lp_url = ! empty( $dp_lp_pages ) ? get_permalink( $dp_lp_pages[0] ) : '';
 
                 <?php while ( $query->have_posts() ) : $query->the_post();
                     $post_id    = get_the_ID();
-                    $block_code = get_post_field( 'post_content', $post_id );
+                    $block_code       = get_post_field( 'post_content', $post_id );
+                    $block_code_clean = trim( preg_replace( '/\n*<!-- wp:html -->.*?<!-- \/wp:html -->\s*/s', '', $block_code ) );
                     $gif_data   = get_field( 'pattern_gif', $post_id );
                     $gif_url    = $gif_data ? $gif_data['url'] : '';
                     $gif_alt    = $gif_data ? $gif_data['alt'] : '';
@@ -166,6 +167,7 @@ $dp_lp_url = ! empty( $dp_lp_pages ) ? get_permalink( $dp_lp_pages[0] ) : '';
                         <?php if ( $block_code ) : ?>
                         <button class="pl-btn pl-btn--copy"
                             data-code="<?php echo htmlspecialchars( $block_code, ENT_QUOTES, 'UTF-8' ); ?>"
+                            data-code-clean="<?php echo htmlspecialchars( $block_code_clean, ENT_QUOTES, 'UTF-8' ); ?>"
                             data-label-copied="コピー完了 ✓" data-label-default="コピーする">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path
