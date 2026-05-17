@@ -1,5 +1,4 @@
-<!-- dp-deps: _c-media-block _c-section-title -->
-<!-- dp-reviewed: 2026-05-17 / _c-section-title margin-bottom変更は共通CSS管理のため影響なし -->
+<!-- dp-deps: _c-media-block -->
 <!-- wp:html -->
 <style>
 .dp-media-text-section .swell-block-fullWide__inner > .sp_only img {
@@ -76,6 +75,7 @@
   top: 0;
   left: var(--dp-space-element-pc);
   padding: var(--dp-space-inner-pc) calc(var(--dp-space-inner-pc) * 2);
+  background-color: var(--color_main);
   border-radius: calc(var(--dp-radius) / 2);
 }
 @media screen and (max-width: 599px) {
@@ -104,7 +104,7 @@
   padding: calc(var(--dp-space-element-pc) * 1.75) var(--dp-space-element-pc) var(--dp-space-element-pc) var(--dp-space-element-pc);
   background-color: var(--color_bg);
   border-radius: var(--dp-radius);
-  border-width: 3px;
+  border: var(--dp-border-width) solid var(--color_main);
 }
 @media screen and (max-width: 599px) {
   .cap_box.caption-sub-color .cap_box_content {
@@ -348,6 +348,7 @@
 @media screen and (max-width: 599px) {
   .dp-media-text-block--b .text-block {
     min-width: 0;
+    padding: 0 1em;
   }
 }
 .dp-media-text-block--b .dp-section-title {

@@ -37,7 +37,7 @@
   --dp-color-sub: var(--color_gray);
   --dp-border-width: 3px;
   --dp-font-size-page-title-pc: 48px;
-  --dp-font-size-page-title-sp: 36px;
+  --dp-font-size-page-title-sp: 40px;
   --dp-font-size-title-pc: 40px;
   --dp-font-size-title-sp: 32px;
   --dp-font-size-heading-pc: 24px;
@@ -185,8 +185,9 @@
 .dp-wrap ul.-list-flex.list-keyword li {
   list-style: none;
   padding: var(--dp-space-inner-sp) var(--dp-space-inner-pc);
-  background-color: #ffffff;
+  background-color: var(--color_main);
   border-radius: var(--dp-radius);
+  color: #fff;
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex.list-keyword li {
@@ -214,6 +215,10 @@
 .dp-wrap ul.-list-flex.list-hashtag li::before {
   content: "＃";
   left: 0;
+}
+
+.wp-block-group.is-row .wp-block-group.is-row.is-layout-constrained {
+  display: block;
 }
 
 /*--------------------------------------------------------
@@ -247,7 +252,7 @@
 */
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-  margin-bottom: var(--dp-space-block-pc);
+  margin-bottom: var(--dp-space-element-pc);
   text-align: center;
 }
 @media screen and (max-width: 599px) {
@@ -547,16 +552,35 @@
   margin-top: 2px;
 }
 
-/* --- dp-list-label-sub（ラベルサブタイトル） 横並びグループブロック使用 --- */
+/* --------------------------------------------------------
+ dp-list-label-sub（ラベルサブタイトル） 横並びグループブロック使用 
+ -------------------------------------------------------- */
 .dp-list-label-sub {
   justify-content: center;
-  margin-bottom: var(--dp-space-inner-sp);
+  align-items: center;
+  margin-bottom: var(--dp-space-inner-pc);
   gap: 8px;
   font-size: var(--dp-font-size-heading-pc);
 }
+@media screen and (max-width: 599px) {
+  .dp-list-label-sub {
+    margin-bottom: var(--dp-space-inner-sp);
+    gap: 6px;
+    font-size: var(--dp-font-size-heading-sp) !important;
+  }
+}
+.dp-list-label-sub p {
+  line-height: 1.2;
+}
 .dp-list-label-sub .swl-bg-color {
+  display: inline-block;
   padding: 4px 12px;
   border-radius: var(--dp-radius);
+}
+@media screen and (max-width: 599px) {
+  .dp-list-label-sub .swl-bg-color {
+    padding: 4px 8px;
+  }
 }
 
 /* リスト */
@@ -1102,7 +1126,6 @@ WP標準ボタン
   position: relative;
   aspect-ratio: 1;
   border-radius: 50%;
-  line-height: 1.3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1112,6 +1135,9 @@ WP標準ボタン
   font-feature-settings: "palt" 1;
   background: radial-gradient(ellipse at 38% 32%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 62%), var(--color_main_thin);
   box-shadow: 8px 12px 28px rgba(0, 0, 0, 0.13), -4px -6px 14px rgba(255, 255, 255, 0.9), inset 2px 3px 8px rgba(255, 255, 255, 0.55), inset -2px -3px 8px rgba(0, 0, 0, 0.08);
+}
+.dp-card-copy-blur p {
+  line-height: 1.3 !important;
 }
 
 /* ===========================================
@@ -2228,10 +2254,10 @@ Works スライダー（center mode, 1.2 slides visible）
   cursor: pointer;
   transition: background-color 0.15s, color 0.15s, opacity 0.15s;
 }
-.dp-works-slider-outer .dp-slider-nav__btn [class*=icon-] {
-  font-size: 14px;
-  line-height: 1;
+.dp-works-slider-outer .dp-slider-nav__btn svg {
   display: block;
+  width: 8px;
+  height: 14px;
 }
 .dp-works-slider-outer .dp-slider-nav__btn.is-edge {
   opacity: 0.5;
@@ -2287,9 +2313,6 @@ wp:group に付与（js-works-slider-item 兼用）
 .dp-media-text-block-works-b {
   position: relative;
   z-index: 1;
-  background-color: #ffffff;
-  border-radius: var(--dp-radius);
-  padding: 24px;
 }
 .dp-media-text-block-works-b .wp-block-image {
   margin-bottom: 0;
@@ -2303,6 +2326,9 @@ wp:group に付与（js-works-slider-item 兼用）
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
+}
+.dp-media-text-block-works-b .wp-block-group {
+  padding: 0 var(--dp-space-inner-pc);
 }
 .dp-media-text-block-works-b h3 {
   margin-top: var(--dp-space-inner-pc);
@@ -2340,7 +2366,7 @@ wp:group に付与（js-works-slider-item 兼用）
   scrollbar-width: none;
   gap: var(--dp-space-element-sp);
   margin-top: -4em;
-  margin-bottom: -4em;
+  margin-bottom: -2em;
   padding: 4em 0;
 }
 .dp-works-slider-inner::-webkit-scrollbar {
@@ -2357,7 +2383,7 @@ wp:group に付与（js-works-slider-item 兼用）
 /* ===========================================
 dp-media-text-block-works-c
 センタリング左右見切れスライダー
-・PC 4.5枚 / BP 2.5枚 / SP 1.5枚
+・PC 4.5枚 / BP 2.5枚 / SP 1.25枚
 ・中央アイテム 1.1倍スケールアップ
 ・wp:group に付与（js-works-slider-c と併用）
 ・contentSize:full の fullWide 内で使用
@@ -2378,40 +2404,39 @@ dp-media-text-block-works-c
   }
 }
 
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item {
   width: 22.2222222222%;
-  background-color: var(--color_bg);
   border-radius: var(--dp-radius);
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.05);
-  padding: 20px;
+  padding: 16px;
   transition: transform 0.3s ease;
 }
 @media screen and (max-width: 959px) {
-  .dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
+  .dp-media-text-block-works-c.is-slider-active .js-works-slider-item {
     width: 40%;
   }
 }
 @media screen and (max-width: 599px) {
-  .dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item {
-    width: 66.6666666667%;
+  .dp-media-text-block-works-c.is-slider-active .js-works-slider-item {
+    width: 80%;
+    padding: 4px;
   }
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item.is-active {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item.is-active {
   transform: scale(1.1);
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item .wp-block-image {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item .wp-block-image {
   margin-bottom: 0;
   border-radius: var(--dp-radius);
   overflow: hidden;
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item .wp-block-image img {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item .wp-block-image img {
   width: 100%;
   aspect-ratio: 5/6;
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
 }
-.dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item h3 {
+.dp-media-text-block-works-c.is-slider-active .js-works-slider-item h3 {
   margin-top: var(--dp-space-inner-sp);
   margin-bottom: 0;
   font-size: 18px;
@@ -2420,7 +2445,7 @@ dp-media-text-block-works-c
   color: var(--color_text);
 }
 @media screen and (max-width: 599px) {
-  .dp-media-text-block-works-c .dp-works-slider-inner > .js-works-slider-item h3 {
+  .dp-media-text-block-works-c.is-slider-active .js-works-slider-item h3 {
     font-size: var(--dp-font-size-heading-sp);
   }
 }
@@ -2448,10 +2473,10 @@ dp-media-text-block-works-c
   cursor: pointer;
   transition: background-color 0.15s, opacity 0.15s;
 }
-.dp-works-slider-c-outer .dp-slider-nav__btn [class*=icon-] {
-  font-size: 16px;
-  line-height: 1;
+.dp-works-slider-c-outer .dp-slider-nav__btn svg {
   display: block;
+  width: 8px;
+  height: 14px;
 }
 .dp-works-slider-c-outer .dp-slider-nav__btn.is-edge {
   opacity: 0.4;
@@ -3019,18 +3044,16 @@ dp-media-text-block-works-c
   max-width: 800px;
   margin: 0 auto;
   z-index: 1;
+  display: flex;
+  gap: 48px;
 }
 @media screen and (max-width: 1024px) {
   .dp-overview-section .text-block {
     max-width: 640px;
   }
 }
-.dp-overview-section .text-block > div {
-  display: flex;
-  gap: 48px;
-}
 @media screen and (max-width: 599px) {
-  .dp-overview-section .text-block > div {
+  .dp-overview-section .text-block {
     flex-direction: column;
   }
 }
@@ -3143,7 +3166,7 @@ dp-media-text-block-works-c
     margin-bottom: 64px;
   }
 }
-.dp-overview-section.overview-02 .text-block > div {
+.dp-overview-section.overview-02 .text-block {
   flex-direction: column;
   gap: 24px;
 }
@@ -3342,11 +3365,11 @@ dp-media-text-block-works-c
  メインビジュアル (hero)
 
 */
-/* 共通: メインビジュアルのタイトルグループ */
-.dp-hero-title > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 共通: メインビジュアルのタイトルグループ（中央揃え: hero-04専用） */
+/* WP 6.3+ で __inner-container 廃止。hero-04 外郭クラス .dp-hero-section 配下に限定スコープ化 */
+/* hero-05 は dp-lp-hero--a 配下で左揃えのため、ここには含めない */
+.dp-hero-section .dp-hero-title {
+  text-align: center;
 }
 
 /* 共通: メインビジュアルのコピー */
@@ -3630,6 +3653,17 @@ LP用メインビジュアル
   color: inherit; /* 文字の塗りつぶし色（白抜き風） */
   -webkit-text-fill-color: inherit; /* 塗りつぶし色を明示的に指定する場合 */
   paint-order: stroke fill;
+}
+
+/* --------------------------------------------------------
+ dp-lp-hero--c
+ --------------------------------------------------------*/
+.dp-lp-hero--c .dp-hero-main-copy {
+  margin-bottom: var(--dp-space-inner-pc);
+  line-height: 1.2;
+}
+.dp-lp-hero--c .c-lead {
+  margin-bottom: var(--dp-space-inner-pc);
 }
 
 /*--------------------------------------------------------
@@ -4081,17 +4115,14 @@ LP用メインビジュアル
  -----------------------------------------------------*/
 .hero-split .hero-title-group {
   position: relative;
-  height: 100%;
-  z-index: 3;
-}
-.hero-split .hero-title-group > div {
   display: flex;
   align-items: center;
   height: 100%;
   gap: 32px;
+  z-index: 3;
 }
 @media screen and (max-width: 959px) {
-  .hero-split .hero-title-group > div {
+  .hero-split .hero-title-group {
     flex-direction: column-reverse;
   }
 }
@@ -4179,7 +4210,7 @@ LP用メインビジュアル
   }
 }
 @media screen and (max-width: 959px) {
-  .hero-split.hero-split--b .hero-title-group > div {
+  .hero-split.hero-split--b .hero-title-group {
     gap: 0;
   }
 }
@@ -4223,6 +4254,14 @@ LP用メインビジュアル
 @media screen and (max-width: 959px) {
   .hero-full-wide .text-block > div {
     width: 100%;
+  }
+}
+.hero-full-wide .text-block .wp-block-image:last-child {
+  text-align: left;
+}
+@media screen and (max-width: 599px) {
+  .hero-full-wide .text-block .wp-block-image:last-child {
+    text-align: center;
   }
 }
 .hero-full-wide .wp-block-group.hero-media.dp-fade-slider {
@@ -4905,7 +4944,8 @@ dp-feature-box--a
   min-width: 720px;
   border-collapse: collapse;
 }
-.dp-pricing--b .wp-block-table th, .dp-pricing--b .wp-block-table td {
+.dp-pricing--b .wp-block-table th,
+.dp-pricing--b .wp-block-table td {
   padding: 20px 24px;
   text-align: center;
   vertical-align: middle;
@@ -4913,7 +4953,8 @@ dp-feature-box--a
   font-size: 18px;
 }
 @media screen and (max-width: 599px) {
-  .dp-pricing--b .wp-block-table th, .dp-pricing--b .wp-block-table td {
+  .dp-pricing--b .wp-block-table th,
+.dp-pricing--b .wp-block-table td {
     padding: 12px 8px;
     font-size: var(--dp-font-size-explanation);
   }
@@ -5031,6 +5072,72 @@ dp-feature-box--a
 }
 .dp-pricing--c .pricing-annotation-list li {
   margin-bottom: 4px;
+}
+
+/* ===========================================
+P&L形式テーブル (.dp-pricing--d)
+・2カラム（項目名 | 金額）
+・thead: メインカラー背景・白文字
+・dp-row-border: 細区切り線
+・dp-row-border-thick: 太区切り線
+・金額列: 右揃え・SP nowrap
+⚠️ ルール変更時は output/inline-css/pricing-04.html の <style> にも反映すること
+=========================================== */
+.dp-pricing--d .swell-block-columns .swell-block-column {
+  background-color: #ffffff;
+}
+.dp-pricing--d .swell-block-columns .swell-block-column:first-child thead th {
+  background-color: var(--color_text);
+  color: #fff;
+}
+.dp-pricing--d .swell-block-columns .swell-block-column:last-child thead th {
+  background-color: var(--color_main);
+}
+.dp-pricing--d .wp-block-table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.dp-pricing--d table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Roboto", sans-serif;
+}
+.dp-pricing--d thead th {
+  color: #ffffff;
+  padding: 16px;
+  text-align: center;
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 600;
+  border-bottom: none;
+}
+@media screen and (max-width: 599px) {
+  .dp-pricing--d thead th {
+    padding: 8px 16px;
+  }
+}
+.dp-pricing--d tbody td {
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+@media screen and (max-width: 768px) {
+  .dp-pricing--d tbody td {
+    padding: 12px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-pricing--d tbody td {
+    padding: 6px 12px;
+  }
+}
+.dp-pricing--d tbody td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+.dp-pricing--d tbody tr:nth-child(2) {
+  border-bottom: 3px solid #ccc;
+}
+.dp-pricing--d tbody tr:nth-child(7) {
+  border-bottom: 3px solid var(--color_text);
 }
 
 /* 料金表 */
@@ -5705,31 +5812,32 @@ body.js-fade-ready .js-fade.is-fade-in {
 /*--------------------------------------------------------
   PC： スクロール時に固定位置になる動画
 --------------------------------------------------------*/
-.fade-animation-wrap > div {
+/* WP 6.3+ で __inner-container 廃止。fade-animation-wrap 自体をflex化 */
+.fade-animation-wrap {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 64px;
 }
 @media screen and (max-width: 1024px) {
-  .fade-animation-wrap > div {
+  .fade-animation-wrap {
     flex-direction: column-reverse;
     gap: 32px;
   }
 }
-.fade-animation-wrap > div .text-block {
+.fade-animation-wrap .text-block {
   max-width: 640px;
   width: 50%;
 }
 @media screen and (max-width: 1024px) {
-  .fade-animation-wrap > div .text-block {
+  .fade-animation-wrap .text-block {
     max-width: 100%;
     width: 100%;
   }
 }
 
 /* 縦中央寄せ */
-.fade-animation-wrap.align-center > div {
+.fade-animation-wrap.align-center {
   align-items: center;
 }
 
@@ -7289,7 +7397,7 @@ body.dp-cart-is-open .l-fixHeader {
 .dp-base-css-select {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   cursor: pointer;
 }
 .dp-base-css-select__input {
@@ -7303,36 +7411,40 @@ body.dp-cart-is-open .l-fixHeader {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--pl-border, #c8c8c4);
-  border-radius: 4px;
-  background: #fff;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  width: 40px;
+  height: 40px;
+  border: 2.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .dp-base-css-select__mark::after {
   content: "";
   display: none;
-  width: 4px;
-  height: 8px;
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(45deg) translate(-1px, -1px);
+  width: 8px;
+  height: 15px;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  transform: rotate(45deg) translate(-1px, -2px);
 }
 .dp-base-css-select__input:checked + .dp-base-css-select__mark {
   background: var(--color_main, #333);
   border-color: var(--color_main, #333);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
 }
 .dp-base-css-select__input:checked + .dp-base-css-select__mark::after {
   display: block;
 }
 .dp-base-css-select__label {
-  font-size: 13px;
+  font-size: 2em;
   font-weight: 600;
-  color: var(--color_text-sub, #666);
+  color: var(--color_main);
 }
 .dp-base-css-select:hover .dp-base-css-select__mark {
-  border-color: var(--color_main, #333);
+  border-color: #fff;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .pl-card.is-selected .pl-card-thumb::after {

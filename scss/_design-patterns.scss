@@ -20,6 +20,11 @@
     &.post-type-archive-design_pattern {
         .site-main {
             overflow: visible;
+
+            .l-container {
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
     }
 }
@@ -27,6 +32,10 @@
 .pl-wrap {
     position: relative;
     padding: 48px 0;
+
+    @include mq(sp) {
+        padding: 24px 0;
+    }
 
     &::before {
         content: "";
@@ -103,8 +112,12 @@
 .pl-filter-group {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
+
+    @include mq(sp) {
+        gap: 4px;
+    }
 
     &:not(:last-child) {
         border-bottom: 1px solid #f7f7f7;

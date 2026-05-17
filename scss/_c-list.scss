@@ -59,16 +59,36 @@
     }
 }
 
-/* --- dp-list-label-sub（ラベルサブタイトル） 横並びグループブロック使用 --- */
+/* --------------------------------------------------------
+ dp-list-label-sub（ラベルサブタイトル） 横並びグループブロック使用 
+ -------------------------------------------------------- */
 .dp-list-label-sub {
     justify-content: center;
-    margin-bottom: var(--dp-space-inner-sp);
+    align-items: center;
+    margin-bottom: var(--dp-space-inner-pc);
     gap: 8px;
     font-size: var(--dp-font-size-heading-pc);
 
+    @include mq(sp) {
+        margin-bottom: var(--dp-space-inner-sp);
+        gap: 6px;
+        font-size: var(--dp-font-size-heading-sp) !important;
+    }
+
+    p {
+        line-height: 1.2;
+        @include mq(sp) {
+        }
+    }
+
     // 背景色の角丸
     .swl-bg-color {
+        display: inline-block;
         padding: 4px 12px;
         border-radius: var(--dp-radius);
+
+        @include mq(sp) {
+            padding: 4px 8px;
+        }
     }
 }

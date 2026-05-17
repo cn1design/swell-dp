@@ -37,7 +37,7 @@
   --dp-color-sub: var(--color_gray);
   --dp-border-width: 3px;
   --dp-font-size-page-title-pc: 48px;
-  --dp-font-size-page-title-sp: 36px;
+  --dp-font-size-page-title-sp: 40px;
   --dp-font-size-title-pc: 40px;
   --dp-font-size-title-sp: 32px;
   --dp-font-size-heading-pc: 24px;
@@ -190,8 +190,9 @@
 .dp-wrap ul.-list-flex.list-keyword li {
   list-style: none;
   padding: var(--dp-space-inner-sp) var(--dp-space-inner-pc);
-  background-color: #ffffff;
+  background-color: var(--color_main);
   border-radius: var(--dp-radius);
+  color: #fff;
 }
 @media screen and (max-width: 599px) {
   .dp-wrap ul.-list-flex.list-keyword li {
@@ -547,16 +548,35 @@
   margin-top: 2px;
 }
 
-/* --- dp-list-label-sub（ラベルサブタイトル） 横並びグループブロック使用 --- */
+/* --------------------------------------------------------
+ dp-list-label-sub（ラベルサブタイトル） 横並びグループブロック使用 
+ -------------------------------------------------------- */
 .dp-list-label-sub {
   justify-content: center;
-  margin-bottom: var(--dp-space-inner-sp);
+  align-items: center;
+  margin-bottom: var(--dp-space-inner-pc);
   gap: 8px;
   font-size: var(--dp-font-size-heading-pc);
 }
+@media screen and (max-width: 599px) {
+  .dp-list-label-sub {
+    margin-bottom: var(--dp-space-inner-sp);
+    gap: 6px;
+    font-size: var(--dp-font-size-heading-sp) !important;
+  }
+}
+.dp-list-label-sub p {
+  line-height: 1.2;
+}
 .dp-list-label-sub .swl-bg-color {
+  display: inline-block;
   padding: 4px 12px;
   border-radius: var(--dp-radius);
+}
+@media screen and (max-width: 599px) {
+  .dp-list-label-sub .swl-bg-color {
+    padding: 4px 8px;
+  }
 }
 
 /* リスト */
@@ -1098,7 +1118,6 @@ WP標準ボタン
   position: relative;
   aspect-ratio: 1;
   border-radius: 50%;
-  line-height: 1.3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1108,6 +1127,9 @@ WP標準ボタン
   font-feature-settings: "palt" 1;
   background: radial-gradient(ellipse at 38% 32%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 62%), var(--color_main_thin);
   box-shadow: 8px 12px 28px rgba(0, 0, 0, 0.13), -4px -6px 14px rgba(255, 255, 255, 0.9), inset 2px 3px 8px rgba(255, 255, 255, 0.55), inset -2px -3px 8px rgba(0, 0, 0, 0.08);
+}
+.dp-card-copy-blur p {
+  line-height: 1.3 !important;
 }
 
 /* ===========================================
@@ -1329,6 +1351,10 @@ WP標準ボタン
   line-height: var(--dp-line-height-small);
   letter-spacing: var(--dp-letter-spacing-text);
   margin: 0;
+}
+.dp-card-voice--a [class*=" icon-"]:before,
+.dp-card-voice--a [class^=icon-]:before {
+  font-size: 1.5em;
 }
 
 /* ----------------------------------------------
@@ -1645,7 +1671,7 @@ WP標準ボタン
 @media screen and (max-width: 599px) {
   .cap_box.caption-sub-color .wp-block-list li {
     margin: 0 0 calc(var(--dp-space-inner-sp) / 2);
-    font-size: 0.875em;
+    font-size: 1em;
   }
 }
 .cap_box.caption-sub-color .wp-block-list li:last-child {
@@ -1825,7 +1851,7 @@ WP標準ボタン
   color: var(--color_main);
   line-height: 1;
   font-size: calc(var(--dp-font-size-title-pc) * 1.5);
-  font-weight: 300;
+  font-weight: 500;
   font-family: var(--dp-font-num);
   mix-blend-mode: multiply;
 }
@@ -1849,6 +1875,7 @@ WP標準ボタン
 @media screen and (max-width: 599px) {
   .dp-media-text-block--b .text-block {
     min-width: 0;
+    padding: 0 1em;
   }
 }
 .dp-media-text-block--b .dp-section-title {
@@ -3598,6 +3625,17 @@ LP用メインビジュアル
   paint-order: stroke fill;
 }
 
+/* --------------------------------------------------------
+ dp-lp-hero--c
+ --------------------------------------------------------*/
+.dp-lp-hero--c .dp-hero-main-copy {
+  margin-bottom: var(--dp-space-inner-pc);
+  line-height: 1.2;
+}
+.dp-lp-hero--c .c-lead {
+  margin-bottom: var(--dp-space-inner-pc);
+}
+
 /*--------------------------------------------------------
 
  hero-lp-01 施工店LP用
@@ -4165,6 +4203,14 @@ LP用メインビジュアル
 @media screen and (max-width: 959px) {
   .hero-full-wide .text-block > div {
     width: 100%;
+  }
+}
+.hero-full-wide .text-block .wp-block-image:last-child {
+  text-align: left;
+}
+@media screen and (max-width: 599px) {
+  .hero-full-wide .text-block .wp-block-image:last-child {
+    text-align: center;
   }
 }
 .hero-full-wide .wp-block-group.hero-media.dp-fade-slider {
@@ -7302,6 +7348,11 @@ body.dp-cart-is-open .l-fixHeader {
   font-size: 2em;
   font-weight: 600;
   color: var(--color_main);
+}
+@media screen and (max-width: 599px) {
+  .dp-base-css-select__label {
+    font-size: 1.75em;
+  }
 }
 .dp-base-css-select:hover .dp-base-css-select__mark {
   border-color: #fff;

@@ -100,17 +100,24 @@
 }
 
 /* hero-full-wide: スライダー画像 右絶対配置（フルワイド設定前提） */
+/* WP 6.3+ __inner-container 廃止対応: > div 廃止、.text-block に直接適用 */
 .hero-full-wide .text-block {
   position: relative;
   z-index: 2;
-}
-.hero-full-wide .text-block > div {
   max-width: 780px;
   width: 65%;
 }
 @media screen and (max-width: 959px) {
-  .hero-full-wide .text-block > div {
+  .hero-full-wide .text-block {
     width: 100%;
+  }
+}
+.hero-full-wide .text-block .wp-block-image:last-child {
+  text-align: left;
+}
+@media screen and (max-width: 599px) {
+  .hero-full-wide .text-block .wp-block-image:last-child {
+    text-align: center;
   }
 }
 .hero-full-wide .wp-block-group.hero-media.dp-fade-slider {

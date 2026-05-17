@@ -316,6 +316,23 @@ LP用メインビジュアル
     }
 }
 
+/* --------------------------------------------------------
+ dp-lp-hero--c
+ --------------------------------------------------------*/
+.dp-lp-hero--c {
+    .dp-hero-main-copy {
+        margin-bottom: var(--dp-space-inner-pc);
+        line-height: 1.2;
+
+        @include mq(sp) {
+        }
+    }
+
+    .c-lead {
+        margin-bottom: var(--dp-space-inner-pc);
+    }
+}
+
 /*--------------------------------------------------------
 
  hero-lp-01 施工店LP用
@@ -915,6 +932,14 @@ LP用メインビジュアル
                 width: 100%;
             }
         }
+
+        .wp-block-image:last-child {
+            text-align: left;
+
+            @include mq(sp) {
+                text-align: center;
+            }
+        }
     }
     .wp-block-group.hero-media.dp-fade-slider {
         position: absolute;
@@ -946,6 +971,7 @@ LP用メインビジュアル
 
         .wp-block-image {
             height: 100%;
+
             img {
                 width: 100%;
 
@@ -953,6 +979,7 @@ LP用メインビジュアル
                     height: auto;
                 }
             }
+
             &:nth-child(1) img {
                 object-position: 96px center;
 

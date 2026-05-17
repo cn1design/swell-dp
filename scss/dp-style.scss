@@ -81,7 +81,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 
     // フォントサイズ
     --dp-font-size-page-title-pc: 48px;
-    --dp-font-size-page-title-sp: 36px;
+    --dp-font-size-page-title-sp: 40px;
     --dp-font-size-title-pc: 40px;
     --dp-font-size-title-sp: 32px;
     --dp-font-size-heading-pc: 24px;
@@ -247,8 +247,9 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
             li {
                 list-style: none;
                 padding: var(--dp-space-inner-sp) var(--dp-space-inner-pc);
-                background-color: #ffffff;
+                background-color: var(--color_main);
                 border-radius: var(--dp-radius);
+                color: #fff;
 
                 @include mq(sp) {
                     padding: calc(var(--dp-space-inner-sp) / 2) var(--dp-space-inner-sp);
@@ -280,7 +281,6 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
             }
         }
     }
-
 }
 
 // [Hotfix] SWELL is-row 誤伝播バグ対策（グローバル適用）

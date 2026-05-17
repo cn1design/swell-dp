@@ -167,7 +167,7 @@
 
             @include mq(sp) {
                 margin: 0 0 calc(var(--dp-space-inner-sp) / 2);
-                font-size: 0.875em;
+                font-size: 1em;
             }
             &:last-child {
                 margin-bottom: 0;
@@ -359,7 +359,7 @@
             color: var(--color_main);
             line-height: 1;
             font-size: calc(var(--dp-font-size-title-pc) * 1.5);
-            font-weight: 300;
+            font-weight: 500;
             font-family: var(--dp-font-num);
             mix-blend-mode: multiply;
         }
@@ -384,6 +384,7 @@
 
         @include mq(sp) {
             min-width: 0;
+            padding: 0 1em;
         }
     }
 

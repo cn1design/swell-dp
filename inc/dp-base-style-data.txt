@@ -18,7 +18,7 @@
 
   /* フォントサイズ */
   --dp-font-size-page-title-pc: 48px;
-  --dp-font-size-page-title-sp: 36px;
+  --dp-font-size-page-title-sp: 40px;
   --dp-font-size-title-pc: 40px;
   --dp-font-size-title-sp: 32px;
   --dp-font-size-heading-pc: 24px;

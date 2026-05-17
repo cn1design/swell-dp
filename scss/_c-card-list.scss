@@ -477,7 +477,6 @@
         position: relative;
         aspect-ratio: 1;
         border-radius: 50%;
-        line-height: 1.3;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -500,6 +499,10 @@
             inset 2px 3px 8px rgba(255, 255, 255, 0.55),
             // 内側上ハイライト
             inset -2px -3px 8px rgba(0, 0, 0, 0.08); // 内側下シャドウ
+    }
+
+    p {
+        line-height: 1.3 !important;
     }
 }
 
