@@ -103,7 +103,8 @@
 (function () {
   'use strict';
   function initWorksSlider(slider) {
-    if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
+    if (slider.dataset.dpWorksSliderInit) return; // 二重初期化防止
+    slider.dataset.dpWorksSliderInit = '1';
     const allSlides = Array.from(slider.querySelectorAll('.js-works-slider-item'));
     const minSlides = slider.classList.contains('dp-works-slider-b') ? 4 : 2;
     if (allSlides.length < minSlides) return;

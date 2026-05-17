@@ -186,7 +186,8 @@
             height: 192px;
 
             @include mq(sp) {
-                bottom: -8px;
+                top: -72px;
+                transform: translateX(-50%);
                 width: 96px;
                 height: 96px;
             }
@@ -209,7 +210,7 @@
                 }
 
                 @include mq(sp) {
-                    left: -56px;
+                    left: calc(50% - 72px);
                 }
 
                 img {
@@ -224,7 +225,8 @@
                 }
 
                 @include mq(sp) {
-                    right: -56px;
+                    right: auto;
+                    left: calc(50% + 72px);
                 }
             }
         }

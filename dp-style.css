@@ -420,7 +420,8 @@
 }
 @media screen and (max-width: 599px) {
   .dp-section-title--d .main-title-side-icon > .wp-block-image {
-    bottom: -8px;
+    top: -72px;
+    transform: translateX(-50%);
     width: 96px;
     height: 96px;
   }
@@ -445,7 +446,7 @@
 }
 @media screen and (max-width: 599px) {
   .dp-section-title--d .main-title-side-icon > .wp-block-image:first-child {
-    left: -56px;
+    left: calc(50% - 72px);
   }
 }
 .dp-section-title--d .main-title-side-icon > .wp-block-image:first-child img {
@@ -461,7 +462,8 @@
 }
 @media screen and (max-width: 599px) {
   .dp-section-title--d .main-title-side-icon > .wp-block-image:last-child {
-    right: -56px;
+    right: auto;
+    left: calc(50% + 72px);
   }
 }
 .dp-section-title--d .main-title-side-icon > .wp-block-group {
@@ -2348,7 +2350,7 @@ wp:group に付与（js-works-slider-item 兼用）
   gap: var(--dp-space-element-sp);
   margin-top: -4em;
   margin-bottom: -2em;
-  padding: 4em 0;
+  padding: 0;
 }
 .dp-works-slider-inner::-webkit-scrollbar {
   display: none;
