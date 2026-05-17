@@ -4,11 +4,11 @@
 
 */
 
-/* 共通: メインビジュアルのタイトルグループ */
-.dp-hero-title > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* 共通: メインビジュアルのタイトルグループ（中央揃え: hero-04専用） */
+/* WP 6.3+ で __inner-container 廃止。hero-04 外郭クラス .dp-hero-section 配下に限定スコープ化 */
+/* hero-05 は dp-lp-hero--a 配下で左揃えのため、ここには含めない */
+.dp-hero-section .dp-hero-title {
+    text-align: center;
 }
 
 /* 共通: メインビジュアルのコピー */
@@ -747,19 +747,16 @@ LP用メインビジュアル
 
 .hero-split {
     .hero-title-group {
+        // WP 6.3+ で __inner-container 廃止。> div から hero-title-group 自体をflex化
         position: relative;
+        display: flex;
+        align-items: center;
         height: 100%;
-        z-index: 3; // 画像より前面配置にするため
+        gap: 32px;
+        z-index: 3;
 
-        > div {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            gap: 32px;
-
-            @include mq(bp) {
-                flex-direction: column-reverse;
-            }
+        @include mq(bp) {
+            flex-direction: column-reverse;
         }
     }
 
@@ -866,8 +863,8 @@ LP用メインビジュアル
 
     // 分割パターンB： SP テキスト若干右寄り
     &.hero-split--b {
-        // タイトルグループ
-        .hero-title-group > div {
+        // タイトルグループ（WP 6.3+ で __inner-container 廃止。hero-title-group 自体に適用）
+        .hero-title-group {
             @include mq(bp) {
                 gap: 0;
             }

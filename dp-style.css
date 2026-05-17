@@ -221,6 +221,10 @@
   left: 0;
 }
 
+.wp-block-group.is-row .wp-block-group.is-row.is-layout-constrained {
+  display: block;
+}
+
 /*--------------------------------------------------------
  mainタグ
 --------------------------------------------------------*/
@@ -252,7 +256,7 @@
 */
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-  margin-bottom: var(--dp-space-block-pc);
+  margin-bottom: var(--dp-space-element-pc);
   text-align: center;
 }
 @media screen and (max-width: 599px) {
@@ -2264,9 +2268,6 @@ wp:group に付与（js-works-slider-item 兼用）
 .dp-media-text-block-works-b {
   position: relative;
   z-index: 1;
-  background-color: #ffffff;
-  border-radius: var(--dp-radius);
-  padding: 24px;
 }
 .dp-media-text-block-works-b .wp-block-image {
   margin-bottom: 0;
@@ -2279,6 +2280,9 @@ wp:group に付与（js-works-slider-item 兼用）
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.dp-media-text-block-works-b .wp-block-group {
+  padding: 0 var(--dp-space-inner-pc);
 }
 .dp-media-text-block-works-b h3 {
   margin-top: var(--dp-space-inner-pc);
@@ -2992,12 +2996,12 @@ dp-media-text-block-works-c
     max-width: 640px;
   }
 }
-.dp-overview-section .text-block > div {
+.dp-overview-section .text-block {
   display: flex;
   gap: 48px;
 }
 @media screen and (max-width: 599px) {
-  .dp-overview-section .text-block > div {
+  .dp-overview-section .text-block {
     flex-direction: column;
   }
 }
@@ -3107,7 +3111,7 @@ dp-media-text-block-works-c
     margin-bottom: 64px;
   }
 }
-.dp-overview-section.overview-02 .text-block > div {
+.dp-overview-section.overview-02 .text-block {
   flex-direction: column;
   gap: 24px;
 }
@@ -3306,11 +3310,11 @@ dp-media-text-block-works-c
  メインビジュアル (hero)
 
 */
-/* 共通: メインビジュアルのタイトルグループ */
-.dp-hero-title > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 共通: メインビジュアルのタイトルグループ（中央揃え: hero-04専用） */
+/* WP 6.3+ で __inner-container 廃止。hero-04 外郭クラス .dp-hero-section 配下に限定スコープ化 */
+/* hero-05 は dp-lp-hero--a 配下で左揃えのため、ここには含めない */
+.dp-hero-section .dp-hero-title {
+  text-align: center;
 }
 
 /* 共通: メインビジュアルのコピー */
@@ -4023,17 +4027,14 @@ LP用メインビジュアル
  -----------------------------------------------------*/
 .hero-split .hero-title-group {
   position: relative;
-  height: 100%;
-  z-index: 3;
-}
-.hero-split .hero-title-group > div {
   display: flex;
   align-items: center;
   height: 100%;
   gap: 32px;
+  z-index: 3;
 }
 @media screen and (max-width: 959px) {
-  .hero-split .hero-title-group > div {
+  .hero-split .hero-title-group {
     flex-direction: column-reverse;
   }
 }
@@ -4120,7 +4121,7 @@ LP用メインビジュアル
   }
 }
 @media screen and (max-width: 959px) {
-  .hero-split.hero-split--b .hero-title-group > div {
+  .hero-split.hero-split--b .hero-title-group {
     gap: 0;
   }
 }
@@ -5709,31 +5710,32 @@ body.js-fade-ready .js-fade.is-fade-in {
 /*--------------------------------------------------------
   PC： スクロール時に固定位置になる動画
 --------------------------------------------------------*/
-.fade-animation-wrap > div {
+/* WP 6.3+ で __inner-container 廃止。fade-animation-wrap 自体をflex化 */
+.fade-animation-wrap {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 64px;
 }
 @media screen and (max-width: 1024px) {
-  .fade-animation-wrap > div {
+  .fade-animation-wrap {
     flex-direction: column-reverse;
     gap: 32px;
   }
 }
-.fade-animation-wrap > div .text-block {
+.fade-animation-wrap .text-block {
   max-width: 640px;
   width: 50%;
 }
 @media screen and (max-width: 1024px) {
-  .fade-animation-wrap > div .text-block {
+  .fade-animation-wrap .text-block {
     max-width: 100%;
     width: 100%;
   }
 }
 
 /* 縦中央寄せ */
-.fade-animation-wrap.align-center > div {
+.fade-animation-wrap.align-center {
   align-items: center;
 }
 
@@ -7299,7 +7301,7 @@ body.dp-cart-is-open .l-fixHeader {
 .dp-base-css-select__label {
   font-size: 2em;
   font-weight: 600;
-  color: var(--color_text-sub, #666);
+  color: var(--color_main);
 }
 .dp-base-css-select:hover .dp-base-css-select__mark {
   border-color: #fff;

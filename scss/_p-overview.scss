@@ -189,14 +189,12 @@
             max-width: 640px;
         }
 
-        // コンテンツの親要素
-        > div {
-            display: flex;
-            gap: 48px;
+        // WP 6.3+ で __inner-container 廃止。text-block 自体をflex化
+        display: flex;
+        gap: 48px;
 
-            @include mq(sp) {
-                flex-direction: column;
-            }
+        @include mq(sp) {
+            flex-direction: column;
         }
     }
     // 見出しグループ
@@ -313,7 +311,7 @@
             }
         }
 
-        .text-block > div {
+        .text-block {
             flex-direction: column;
             gap: 24px;
         }

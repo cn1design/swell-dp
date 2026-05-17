@@ -280,6 +280,16 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
             }
         }
     }
+
+}
+
+// [Hotfix] SWELL is-row 誤伝播バグ対策（グローバル適用）
+// swell/lib/gutenberg.php の str_replace が flex-row 親グループの HTML 全体に
+// is-row クラスを付与するため、ネスト内の標準（縦並び）グループにも誤適用される。
+// is-row と is-layout-constrained の共存は SWELL バグによるもの以外にはあり得ないため
+// section-title-04 等 .dp-wrap 外のパターンを含めグローバルに適用する。
+.wp-block-group.is-row .wp-block-group.is-row.is-layout-constrained {
+    display: block;
 }
 
 /*--------------------------------------------------------

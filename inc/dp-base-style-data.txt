@@ -232,6 +232,12 @@
   left: 0;
 }
 
+/* [Hotfix] SWELL is-row 誤伝播バグ対策（グローバル適用）
+   SWELLのstr_replaceバグにより、横型グループ内の標準グループにもis-rowが伝播する問題を修正 */
+.wp-block-group.is-row .wp-block-group.is-row.is-layout-constrained {
+  display: block;
+}
+
 /* 表示切替ユーティリティ */
 .-sp {
   display: none;
@@ -252,7 +258,7 @@
  * ------------------------------------------- */
 /* デフォルト */
 .dp-section-title {
-  margin-bottom: var(--dp-space-block-pc);
+  margin-bottom: var(--dp-space-element-pc);
   text-align: center;
 }
 @media screen and (max-width: 599px) {

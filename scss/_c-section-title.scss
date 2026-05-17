@@ -6,7 +6,7 @@
 
 /* --- 1. section-title --default (H2) --- */
 .dp-section-title {
-    margin-bottom: var(--dp-space-block-pc);
+    margin-bottom: var(--dp-space-element-pc);
     text-align: center;
 
     @include mq(sp) {

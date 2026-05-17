@@ -161,7 +161,7 @@ body.dp-cart-is-open {
     &__label {
         font-size: 2em;
         font-weight: 600;
-        color: var(--color_text-sub, #666);
+        color: var(--color_main);
     }
 
     &:hover &__mark {

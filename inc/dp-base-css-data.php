@@ -23,13 +23,12 @@ function dp_render_base_css_copy_area() {
     if ( empty( trim( $base_code ) ) ) return;
     ?>
 <div class="dp-base-css-wrap">
-    <!-- <p class="dp-copy-hint top-hint">＼SWELL固定ページ編集画面にコピペ／</p> -->
     <label class="dp-base-css-select" title="LPビルダーに追加してまとめてコピー">
         <input type="checkbox" class="dp-base-css-select__input" aria-label="共通CSSをLPビルダーに追加">
         <span class="dp-base-css-select__mark" aria-hidden="true"></span>
-        <span class="dp-base-css-select__label">最後にここを必ずチェック</span>
+        <span class="dp-base-css-select__label">最初にここを必ずチェック</span>
     </label>
-    <p class="dp-copy-hint">※これを貼らないとデザインが反映されません</p>
+    <p class="dp-copy-hint">※これをチェックしないとデザインが反映されません</p>
     <button type="button" class="dp-bace-css-btn" data-target="dp-base-style-data">
         <svg viewBox="0 0 24 24" aria-hidden="true">
             <path

@@ -7,7 +7,6 @@
 .dp-works-slider-b {
   position: relative;
   margin: 0 auto;
-  padding-left: var(--swl-fw_inner_pad, 0); /* layout exception: セクションタイトル左端揃え */
 }
 /* 3枚以下: スライダー不使用 → 3カラムグリッド表示 */
 .dp-works-slider-b:not(.is-slider-active) {
@@ -35,9 +34,6 @@
 .dp-media-text-block-works-b {
   position: relative;
   z-index: 1;
-  background-color: #ffffff;
-  border-radius: var(--dp-radius);
-  padding: 24px;
 }
 .dp-media-text-block-works-b .wp-block-image {
   margin-bottom: 0;
@@ -50,6 +46,9 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.dp-media-text-block-works-b .wp-block-group {
+  padding: 0 var(--dp-space-inner-pc);
 }
 .dp-media-text-block-works-b h3 {
   margin-top: var(--dp-space-inner-pc);

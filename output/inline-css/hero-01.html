@@ -354,18 +354,15 @@
   }
 }
 .hero-split .hero-title-group {
-  position: relative;
-  height: 100%;
-  z-index: 3;
-}
-.hero-split .hero-title-group > div {
   display: flex;
   align-items: center;
   height: 100%;
   gap: 32px;
+  position: relative;
+  z-index: 3;
 }
 @media screen and (max-width: 959px) {
-  .hero-split .hero-title-group > div {
+  .hero-split .hero-title-group {
     flex-direction: column-reverse;
   }
 }
@@ -452,7 +449,7 @@
   }
 }
 @media screen and (max-width: 959px) {
-  .hero-split.hero-split--b .hero-title-group > div {
+  .hero-split.hero-split--b .hero-title-group {
     gap: 0;
   }
   .hero-split.hero-split--b .text-block {
