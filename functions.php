@@ -82,7 +82,7 @@ add_action('wp_enqueue_scripts', function() {
 			true
 		);
 		wp_localize_script( 'child-dp-cpt', 'dpConfig', [
-			'isLoggedIn' => is_user_logged_in(),
+			'isLoggedIn' => function_exists( 'swell_dp_is_pro_member' ) ? swell_dp_is_pro_member() : is_user_logged_in(),
 			'isAdmin'    => current_user_can( 'administrator' ),
 		] );
 	}
@@ -124,7 +124,9 @@ add_action('wp_enqueue_scripts', function() {
 
 // 管理者向けデバッグトグル（design_pattern 関連ページのフッターに出力）
 add_action( 'wp_footer', function () {
-	if ( ! current_user_can( 'administrator' ) ) return;
+	$is_admin    = current_user_can( 'administrator' );
+	$is_pro      = function_exists( 'swell_dp_is_pro_member' ) && swell_dp_is_pro_member();
+	if ( ! $is_admin && ! $is_pro ) return;
 	if ( ! (
 		is_post_type_archive( 'design_pattern' ) ||
 		is_page_template( 'page-design_pattern_standard.php' ) ||
