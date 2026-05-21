@@ -129,9 +129,7 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   gap: var(--dp-space-element-sp);
-  margin-top: -4em;
-  margin-bottom: -2em;
-  padding: 4em 0;
+  padding: 0;
 }
 .dp-works-slider-inner::-webkit-scrollbar {
   display: none;
@@ -148,7 +146,8 @@
 (function () {
   'use strict';
   function initWorksSlider(slider) {
-    if (slider.querySelector('.dp-slider-nav')) return; // 二重初期化防止
+    if (slider.dataset.dpWorksSliderInit) return; // 二重初期化防止
+    slider.dataset.dpWorksSliderInit = '1';
     const allSlides = Array.from(slider.querySelectorAll('.js-works-slider-item'));
     // dp-works-slider-b は4枚以上のみスライダー起動（3枚以下は3カラムグリッド表示）
     const minSlides = slider.classList.contains('dp-works-slider-b') ? 4 : 2;

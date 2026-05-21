@@ -180,14 +180,14 @@
         // 左右イラスト: 絶対配置（中央タイトルグループの左右8px外側）
         > .wp-block-image {
             position: absolute;
-            bottom: 0;
+            bottom: 1em;
+            transform: translateX(-50%);
             pointer-events: none;
             width: 192px;
             height: 192px;
 
             @include mq(sp) {
                 top: -72px;
-                transform: translateX(-50%);
                 width: 96px;
                 height: 96px;
             }
@@ -203,7 +203,7 @@
             }
 
             &:first-child {
-                left: 0;
+                left: calc(50% - 360px);
 
                 @include mq(bp) {
                     left: -32px;
@@ -218,9 +218,10 @@
                 }
             }
             &:last-child {
-                right: 0;
+                left: calc(50% + 360px);
 
                 @include mq(bp) {
+                    left: auto;
                     right: -32px;
                 }
 
@@ -235,14 +236,6 @@
         > .wp-block-group {
             position: relative;
             z-index: 1; //左右イラストより前面に配置
-        }
-
-        @include mq(sp) {
-            > .wp-block-image img {
-            }
-
-            > .wp-block-group {
-            }
         }
     }
 

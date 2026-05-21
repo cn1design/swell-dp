@@ -355,36 +355,6 @@
     overflow: hidden;
     background: #dde3ea;
 
-    @media (hover: hover) {
-        &:hover {
-            .pl-thumb-gif {
-                opacity: 1;
-            }
-
-            .pl-thumb-still {
-                opacity: 0;
-                transition: opacity 0.3s;
-            }
-
-            .pl-gif-badge {
-                opacity: 0;
-            }
-        }
-    }
-
-    &.is-gif-active {
-        .pl-thumb-gif {
-            opacity: 1;
-        }
-
-        .pl-thumb-still {
-            opacity: 0;
-        }
-
-        .pl-gif-badge {
-            opacity: 0;
-        }
-    }
 }
 
 .pl-thumb-still,

@@ -98,6 +98,31 @@
 .dp-works-slider-c-outer .dp-slider-nav__btn:not(.is-edge):hover {
   background: color-mix(in srgb, var(--color_main) 80%, #000);
 }
+/* dp-works-slider-inner: JS付与innerコンテナ共通スタイル */
+.dp-works-slider-inner {
+  display: flex !important;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: var(--dp-space-element-sp);
+  padding: 0;
+}
+.dp-works-slider-inner::-webkit-scrollbar {
+  display: none;
+}
+.dp-works-slider-inner > .js-works-slider-item {
+  flex-shrink: 0;
+  width: calc(100% / 1.2);
+  scroll-snap-align: center;
+  max-width: none !important;
+  margin-bottom: 0;
+}
+/* dp-media-text-block-works-c .dp-works-slider-inner: gap override（works-04専用） */
+.dp-media-text-block-works-c .dp-works-slider-inner {
+  gap: 40px;
+  padding: 16px 0;
+}
 </style>
 <script>
 (function () {

@@ -441,27 +441,6 @@
   overflow: hidden;
   background: #dde3ea;
 }
-@media (hover: hover) {
-  .pl-card-thumb:hover .pl-thumb-gif {
-    opacity: 1;
-  }
-  .pl-card-thumb:hover .pl-thumb-still {
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .pl-card-thumb:hover .pl-gif-badge {
-    opacity: 0;
-  }
-}
-.pl-card-thumb.is-gif-active .pl-thumb-gif {
-  opacity: 1;
-}
-.pl-card-thumb.is-gif-active .pl-thumb-still {
-  opacity: 0;
-}
-.pl-card-thumb.is-gif-active .pl-gif-badge {
-  opacity: 0;
-}
 
 .pl-thumb-still,
 .pl-thumb-gif {

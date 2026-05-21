@@ -464,6 +464,22 @@
         }
     }
 }
+/* ===========================================
+   カウンター右上＋画像＋説明 縦線で区切り
+   (前提: .dp-card--counter / .dp-card-verticle-line の付与が必要です)
+   背景カラー：メイン / バッジ名：POINT
+=========================================== */
+
+.dp-card-verticle-line--point-badge {
+    .swell-block-column {
+        // バッジ（POINT + カウンター番号）擬似要素で生成
+        &::before {
+            content: "POINT\A" counter(card-counter, decimal-leading-zero);
+            background-color: #ffffff;
+            color: var(--color_main);
+        }
+    }
+}
 
 /* ===========================================
  カード3つ並び＋円形背景

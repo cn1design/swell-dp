@@ -244,7 +244,30 @@ add_action( 'acf/init', function() {
 
 
 // ------------------------------------------------------------
-// 6. 一覧ショートコード：[pattern_list]
+// 6. タクソノミー③：プランフラグ（pattern_plan）
+// ------------------------------------------------------------
+function register_pattern_plan_taxonomy() {
+    register_taxonomy( 'pattern_plan', 'design_pattern', [
+        'labels' => [
+            'name'          => 'プランフラグ',
+            'singular_name' => 'プランフラグ',
+            'all_items'     => 'すべてのプラン',
+            'edit_item'     => 'プランを編集',
+            'add_new_item'  => 'プランを追加',
+        ],
+        'public'            => false,
+        'show_ui'           => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'hierarchical'      => false,
+        'rewrite'           => false,
+    ]);
+}
+add_action( 'init', 'register_pattern_plan_taxonomy' );
+
+
+// ------------------------------------------------------------
+// 7. 一覧ショートコード：[pattern_list]
 //    オプション:
 //      section="slug"    設置箇所で絞り込み
 //      industry="slug"   ジャンルで絞り込み
@@ -296,6 +319,7 @@ function pattern_list_shortcode( $atts ) {
     $all_sections   = get_terms([ 'taxonomy' => 'pattern_section',  'hide_empty' => true ]);
     $all_industries = get_terms([ 'taxonomy' => 'pattern_industry', 'hide_empty' => true ]);
 
+    $is_pro_member = function_exists( 'swell_dp_is_pro_member' ) && swell_dp_is_pro_member();
     $cols = max( 1, min( 4, intval( $atts['columns'] ) ) );
 
     ob_start();
@@ -350,7 +374,8 @@ function pattern_list_shortcode( $atts ) {
         <?php while ( $query->have_posts() ) : $query->the_post();
                 $post_id    = get_the_ID();
                 // 変更前： $block_code = get_field( 'pattern_block_code', $post_id );
-                $block_code = get_post_field( 'post_content', $post_id );
+                $block_code       = get_post_field( 'post_content', $post_id );
+                $block_code_clean = trim( preg_replace( '/\n*<!-- wp:html -->.*?<!-- \/wp:html -->\s*/s', '', $block_code ) );
                 $gif_data   = get_field( 'pattern_gif',        $post_id );  // array: url, alt, width, height
                 $gif_url    = $gif_data ? $gif_data['url'] : '';
                 $gif_alt    = $gif_data ? $gif_data['alt'] : '';
@@ -371,8 +396,12 @@ function pattern_list_shortcode( $atts ) {
                 if ( $industries && ! is_wp_error( $industries ) ) {
                     $data_industry = implode( ' ', wp_list_pluck( $industries, 'slug' ) );
                 }
+                $is_pro_pattern = function_exists( 'swell_dp_is_pro_pattern' ) && swell_dp_is_pro_pattern( $post_id );
+                $is_pro_locked  = $is_pro_pattern && ! $is_pro_member;
+                $output_code    = $is_pro_member ? $block_code_clean : $block_code;
+                $pro_cta_url    = esc_url( apply_filters( 'swell_dp_pro_cta_url', home_url( '/pro/' ) ) );
             ?>
-        <div class="pl-card" data-section="<?php echo esc_attr( $data_section ); ?>"
+        <div class="pl-card<?php echo $is_pro_locked ? ' is-pro-locked' : ''; ?>" data-section="<?php echo esc_attr( $data_section ); ?>"
             data-industry="<?php echo esc_attr( $data_industry ); ?>">
             <!-- サムネイル -->
             <div class="pl-card-thumb<?php echo $gif_url ? ' has-gif' : ''; ?>"
@@ -425,15 +454,21 @@ function pattern_list_shortcode( $atts ) {
             <div class="pl-card-actions">
 
                 <?php if ( $block_code ) : ?>
-                <button class="pl-btn pl-btn--copy"
-                    data-code="<?php echo htmlspecialchars( $block_code, ENT_QUOTES, 'UTF-8' ); ?>"
-                    data-label-copied="コピー完了 ✓" data-label-default="コピーする">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />
-                    </svg>
-                    コピーする
-                </button>
+                    <?php if ( $is_pro_locked ) : ?>
+                    <a class="pl-btn pl-btn--pro-locked" href="<?php echo $pro_cta_url; ?>">
+                        🔒 PRO限定（詳細を見る）
+                    </a>
+                    <?php else : ?>
+                    <button class="pl-btn pl-btn--copy"
+                        data-code="<?php echo htmlspecialchars( $output_code, ENT_QUOTES, 'UTF-8' ); ?>"
+                        data-label-copied="コピー完了 ✓" data-label-default="コピーする">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                        コピーする
+                    </button>
+                    <?php endif; ?>
                 <?php else : ?>
                 <button class="pl-btn pl-btn--copy is-disabled" disabled>
                     <svg viewBox="0 0 24 24" aria-hidden="true">

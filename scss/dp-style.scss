@@ -236,16 +236,13 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 
         /* 横並び キーワードリスト */
         &.list-keyword {
-            gap: var(--dp-space-inner-pc);
+            gap: var(--dp-space-inner-sp);
             margin-bottom: var(--dp-space-inner-pc);
             margin: 0;
 
-            @include mq(sp) {
-                gap: var(--dp-space-inner-sp);
-            }
-
             li {
                 list-style: none;
+                margin-right: 0;
                 padding: var(--dp-space-inner-sp) var(--dp-space-inner-pc);
                 background-color: var(--color_main);
                 border-radius: var(--dp-radius);
@@ -279,6 +276,36 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
                     left: 0;
                 }
             }
+        }
+    }
+
+    // 背景カラー&テキストカラー
+    &.dp-section-main-color {
+        background-color: var(--color_main);
+
+        h2,
+        h3,
+        p,
+        a {
+            color: #fff;
+        }
+    }
+    &.dp-section-bg-color {
+        background-color: var(--color_bg);
+
+        h2,
+        h3,
+        p,
+        a {
+            color: var(--color_text);
+        }
+    }
+
+    // 16em = 256px
+    &.dp-padding-top-16em {
+        padding-top: 16em !important;
+        @include mq(sp) {
+            padding-top: 10em !important;
         }
     }
 }

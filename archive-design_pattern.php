@@ -85,6 +85,8 @@ $dp_lp_url = ! empty( $dp_lp_pages ) ? get_permalink( $dp_lp_pages[0] ) : '';
             <?php if ( $query->have_posts() ) : ?>
             <div class="pl-grid pl-cols-3">
 
+                <?php $is_pro_member = function_exists( 'swell_dp_is_pro_member' ) && swell_dp_is_pro_member(); ?>
+
                 <?php while ( $query->have_posts() ) : $query->the_post();
                     $post_id    = get_the_ID();
                     $block_code       = get_post_field( 'post_content', $post_id );
@@ -107,8 +109,12 @@ $dp_lp_url = ! empty( $dp_lp_pages ) ? get_permalink( $dp_lp_pages[0] ) : '';
                     if ( $industries && ! is_wp_error( $industries ) ) {
                         $data_industry = implode( ' ', wp_list_pluck( $industries, 'slug' ) );
                     }
+                    $is_pro_pattern = function_exists( 'swell_dp_is_pro_pattern' ) && swell_dp_is_pro_pattern( $post_id );
+                    $is_pro_locked  = $is_pro_pattern && ! $is_pro_member;
+                    $output_code    = $is_pro_member ? $block_code_clean : $block_code;
+                    $pro_cta_url    = esc_url( apply_filters( 'swell_dp_pro_cta_url', home_url( '/pro/' ) ) );
                 ?>
-                <div class="pl-card" data-section="<?php echo esc_attr( $data_section ); ?>"
+                <div class="pl-card<?php echo $is_pro_locked ? ' is-pro-locked' : ''; ?>" data-section="<?php echo esc_attr( $data_section ); ?>"
                     data-industry="<?php echo esc_attr( $data_industry ); ?>">
 
                     <div class="pl-card-thumb<?php echo $gif_url ? ' has-gif' : ''; ?>"
@@ -165,16 +171,21 @@ $dp_lp_url = ! empty( $dp_lp_pages ) ? get_permalink( $dp_lp_pages[0] ) : '';
 
                     <div class="pl-card-actions">
                         <?php if ( $block_code ) : ?>
-                        <button class="pl-btn pl-btn--copy"
-                            data-code="<?php echo htmlspecialchars( $block_code, ENT_QUOTES, 'UTF-8' ); ?>"
-                            data-code-clean="<?php echo htmlspecialchars( $block_code_clean, ENT_QUOTES, 'UTF-8' ); ?>"
-                            data-label-copied="コピー完了 ✓" data-label-default="コピーする">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path
-                                    d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />
-                            </svg>
-                            コピーする
-                        </button>
+                            <?php if ( $is_pro_locked ) : ?>
+                            <a class="pl-btn pl-btn--pro-locked" href="<?php echo $pro_cta_url; ?>">
+                                🔒 PRO限定（詳細を見る）
+                            </a>
+                            <?php else : ?>
+                            <button class="pl-btn pl-btn--copy"
+                                data-code="<?php echo htmlspecialchars( $output_code, ENT_QUOTES, 'UTF-8' ); ?>"
+                                data-label-copied="コピー完了 ✓" data-label-default="コピーする">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" />
+                                </svg>
+                                コピーする
+                            </button>
+                            <?php endif; ?>
                         <?php else : ?>
                         <button class="pl-btn pl-btn--copy is-disabled" disabled>
                             <svg viewBox="0 0 24 24" aria-hidden="true">

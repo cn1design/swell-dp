@@ -8,7 +8,30 @@
 /* ===========================================
  .dp-problem-section
 =========================================== */
-.dp-problem-section {
+.dp-problem-section-bottom-arrow {
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: -199px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: 200px;
+        background-color: color-mix(in srgb, var(--color_bg) 0%, var(--color_main));
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        z-index: -1;
+
+        @include mq(bp) {
+            bottom: -95px;
+            height: 96px;
+        }
+
+        @include mq(sp) {
+            bottom: -47px;
+            height: 48px;
+        }
+    }
 }
 
 .dp-problem-section-band {

@@ -163,7 +163,7 @@
   position: relative;
   margin-bottom: var(--dp-space-inner-pc);
   letter-spacing: var(--dp-letter-spacing-text);
-  font-size: clamp(20px, 1.2vw, 24px);
+  font-size: clamp(20px, 2vw, 24px);
   font-weight: 600;
 }
 @media screen and (max-width: 599px) {
@@ -189,6 +189,18 @@
   margin-bottom: 0;
   line-height: var(--dp-line-height-medium);
   letter-spacing: var(--dp-letter-spacing-text);
+}
+
+/* post_content内での上書き */
+@media screen and (max-width: 768px) {
+  .post_content .dp-media-text-block--a .text-block {
+    margin-top: -4em !important;
+  }
+}
+@media screen and (max-width: 599px) {
+  .post_content .dp-media-text-block--a .text-block {
+    margin-top: -1.5em !important;
+  }
 }
 </style>
 <!-- /wp:html -->

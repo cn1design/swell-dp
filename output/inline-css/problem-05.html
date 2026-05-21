@@ -1,0 +1,153 @@
+<!-- dp-deps: _p-problem _c-card-list -->
+<!-- wp:html -->
+<style>
+/* dp-problem-section: 下矢印装飾 */
+.dp-problem-section-bottom-arrow {
+  position: relative;
+}
+.dp-problem-section-bottom-arrow::before {
+  content: "";
+  position: absolute;
+  bottom: -199px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 200px;
+  background-color: color-mix(in srgb, var(--color_bg) 0%, var(--color_main));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: -1;
+}
+@media screen and (max-width: 959px) {
+  .dp-problem-section-bottom-arrow::before {
+    bottom: -95px;
+    height: 96px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-problem-section-bottom-arrow::before {
+    bottom: -47px;
+    height: 48px;
+  }
+}
+
+/* dp-problem-section: 下余白・パディングなし */
+.dp-problem-section-bottom-nospace {
+  margin-bottom: 0;
+  padding-bottom: 0 !important;
+  background-color: color-mix(in srgb, var(--color_main) 5%, white);
+}
+
+/* dp-section-main-color: メインカラー背景＋白テキスト */
+.dp-wrap.dp-section-main-color {
+  background-color: var(--color_main);
+}
+.dp-wrap.dp-section-main-color h2,
+.dp-wrap.dp-section-main-color h3,
+.dp-wrap.dp-section-main-color p,
+.dp-wrap.dp-section-main-color a {
+  color: #fff;
+}
+
+/* dp-card-counter: カウンター設定 */
+.dp-card-counter .swell-block-columns__inner {
+  counter-reset: card-counter;
+}
+.dp-card-counter .swell-block-column {
+  counter-increment: card-counter;
+}
+.dp-card-counter .swell-block-column::before {
+  content: counter(card-counter, decimal-leading-zero);
+}
+
+/* dp-card-center: カラム中央寄せ */
+.dp-card-center > .swell-block-columns__inner {
+  justify-content: center;
+}
+
+/* dp-card-verticle-line: 縦線区切りカード */
+.dp-card-verticle-line {
+  margin-bottom: var(--dp-space-block-pc);
+}
+@media screen and (max-width: 599px) {
+  .dp-card-verticle-line {
+    margin-bottom: var(--dp-space-block-sp);
+  }
+}
+.dp-card-verticle-line .swell-block-columns__inner {
+  counter-reset: card-counter;
+}
+.dp-card-verticle-line .swell-block-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  counter-increment: card-counter;
+}
+.dp-card-verticle-line .swell-block-column::before {
+  content: "ISSUE\A" counter(card-counter, decimal-leading-zero);
+  white-space: pre;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color_text);
+  border-radius: 50%;
+  font-family: var(--dp-font-en);
+  font-size: 13px;
+  font-weight: var(--dp-font-weight-heading);
+  color: var(--color_bg);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+  z-index: 1;
+}
+.dp-card-verticle-line .swell-block-column:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -1.5rem;
+  width: 1px;
+  height: calc(100% - 2rem);
+  background-color: var(--color_text);
+}
+@media screen and (max-width: 959px) {
+  .dp-card-verticle-line .swell-block-column:not(:last-child)::after {
+    display: none;
+  }
+}
+.dp-card-verticle-line .swell-block-column .wp-block-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: var(--dp-space-inner-pc);
+  padding: 2rem 2rem 0;
+}
+.dp-card-verticle-line .swell-block-column .wp-block-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media screen and (max-width: 599px) {
+  .dp-card-verticle-line .swell-block-column .wp-block-image {
+    margin-bottom: var(--dp-space-inner-sp);
+  }
+}
+.dp-card-verticle-line .swell-block-column p {
+  font-size: var(--dp-font-size-summary);
+  line-height: var(--dp-line-height-medium);
+  text-align: center;
+}
+
+/* dp-card-verticle-line--point-badge: バッジをPOINT＋メインカラーに上書き */
+.dp-card-verticle-line--point-badge .swell-block-column::before {
+  content: "POINT\A" counter(card-counter, decimal-leading-zero);
+  background-color: #ffffff;
+  color: var(--color_main);
+}
+</style>
+<!-- /wp:html -->
