@@ -133,8 +133,45 @@ add_action( 'wp_footer', function () {
 		is_singular( 'design_pattern' )
 	) ) return;
 	?>
-	<div id="dp-admin-toggle" style="position:fixed;bottom:16px;left:16px;z-index:9999;background:#1e1e2e;color:#cdd6f4;padding:10px 16px;border-radius:8px;font-size:13px;font-family:sans-serif;display:flex;align-items:center;gap:10px;box-shadow:0 2px 12px rgba(0,0,0,.4);">
-		<span>インラインモード</span>
+	<style>
+	#dp-admin-toggle {
+		position: fixed;
+		bottom: 40px;
+		left: 32px;
+		z-index: 9999;
+		background: #1e1e2e;
+		color: #cdd6f4;
+		padding: 10px 16px;
+		border-radius: 8px;
+		font-size: 13px;
+		font-family: sans-serif;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		box-shadow: 0 2px 12px rgba(0,0,0,.4);
+	}
+	@media screen and (max-width: 959px) {
+		#dp-admin-toggle {
+			top: 10px;
+			right: 56px;
+			bottom: auto;
+			left: auto;
+			height: calc(var(--dp-sp-header-h, 60px) - 20px);
+			padding: 0 12px;
+			border-radius: 4px;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.2s ease;
+		}
+		#dp-admin-toggle.is-floating {
+			opacity: 1;
+			pointer-events: auto;
+			font-size: 12px;
+		}
+	}
+	</style>
+	<div id="dp-admin-toggle">
+		<span>インラインCSS</span>
 		<label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
 			<input type="checkbox" id="dp-inline-toggle" style="width:16px;height:16px;">
 			<span id="dp-inline-label">OFF</span>
@@ -154,6 +191,30 @@ add_action( 'wp_footer', function () {
 			localStorage.setItem('dp_inline_mode', isOn ? 'on' : 'off');
 			label.textContent = isOn ? 'ON' : 'OFF';
 		});
+	})();
+
+	// SP: c-infoBar がスクロールで隠れたタイミングでフローティング表示
+	(function () {
+		if (window.innerWidth > 959) return;
+		var el = document.getElementById('dp-admin-toggle');
+		if (!el) return;
+
+		// ヘッダー高さをCSS変数にセット（ロゴ位置に合わせた天地中央配置用）
+		var header = document.querySelector('.l-header');
+		if (header) {
+			document.documentElement.style.setProperty('--dp-sp-header-h', header.offsetHeight + 'px');
+		}
+
+		var infoBar = document.querySelector('.c-infoBar__link');
+		if (!infoBar) {
+			el.classList.add('is-floating');
+			return;
+		}
+
+		var observer = new IntersectionObserver(function (entries) {
+			el.classList.toggle('is-floating', !entries[0].isIntersecting);
+		}, { threshold: 0 });
+		observer.observe(infoBar);
 	})();
 	</script>
 	<?php

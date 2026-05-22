@@ -354,7 +354,6 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #dde3ea;
-
 }
 
 .pl-thumb-still,
@@ -1030,11 +1029,15 @@
 
         .pl-section-title {
             margin: 0 0 16px;
-            padding: 0 0 8px;
+            padding: 8px 16px;
             color: var(--color_main);
-            border-bottom: 3px solid var(--color_main);
-            font-size: 20px;
+            background-color: var(--color_gray);
+            font-size: 24px;
             font-weight: 700;
+
+            @include mq(sp) {
+                font-size: 20px;
+            }
 
             &::before {
                 content: counter(pl-section-counter) ". ";

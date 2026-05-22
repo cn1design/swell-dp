@@ -112,6 +112,40 @@
             }
         }
     }
+
+    &.dp-login-button {
+        a {
+            width: 24px;
+            margin-right: 16px;
+            padding: 0;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+                opacity: 0.7;
+            }
+
+            &::before {
+                content: "\e7fd";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                color: var(--color_main);
+                font-size: 1.75em;
+                font-weight: 600;
+                font-family: icomoon !important;
+            }
+
+            // 下線アニメーション非表示
+            &::after {
+                content: none;
+            }
+
+            .ttl {
+                display: none;
+            }
+        }
+    }
     &.dp-header-right {
         a {
             padding: 4px 48px 4px 16px;

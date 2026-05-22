@@ -616,6 +616,56 @@ body.dp-cart-is-open {
 }
 
 /* =========================================================
+ * Claude AI 連携ボタン（Phase 4）
+ * dp-cart-copy-btn と同サイズ・白抜きスタイル
+ * ========================================================= */
+
+.dp-claude-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+    padding: 14px 20px;
+    background: #fff;
+    color: var(--color_main, #333);
+    border: 2px solid var(--color_main, #333);
+    border-radius: var(--dp-radius, 4px);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+    &:hover {
+        background: var(--color_main, #333);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    // 非PRO: ロック表示
+    &.dp-claude-btn--locked {
+        opacity: 0.55;
+        cursor: default;
+
+        &:hover {
+            background: #fff;
+            color: var(--color_main, #333);
+            transform: none;
+        }
+    }
+}
+
+// ドロワー展開中はフローティングCTAを隠す（重なり防止）
+body.dp-cart-is-open .dp-floating-cta {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* =========================================================
  * トースト通知（Phase 3）
  * ========================================================= */
 
