@@ -243,6 +243,9 @@
     padding-top: 10em !important;
   }
 }
+.dp-wrap.dp-padding-bottom-0 {
+  padding-bottom: 0 !important;
+}
 
 .wp-block-group.is-row .wp-block-group.is-row.is-layout-constrained {
   display: block;
@@ -1128,7 +1131,6 @@ WP標準ボタン
 .dp-card-verticle-line .swell-block-column p {
   font-size: var(--dp-font-size-summary);
   line-height: var(--dp-line-height-medium);
-  text-align: center;
 }
 
 /* ===========================================

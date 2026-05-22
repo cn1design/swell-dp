@@ -308,6 +308,10 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
             padding-top: 10em !important;
         }
     }
+
+    &.dp-padding-bottom-0 {
+        padding-bottom: 0 !important;
+    }
 }
 
 // [Hotfix] SWELL is-row 誤伝播バグ対策（グローバル適用）

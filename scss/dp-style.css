@@ -238,6 +238,9 @@
     padding-top: 10em !important;
   }
 }
+.dp-wrap.dp-padding-bottom-0 {
+  padding-bottom: 0 !important;
+}
 
 .wp-block-group.is-row .wp-block-group.is-row.is-layout-constrained {
   display: block;
@@ -1136,7 +1139,6 @@ WP標準ボタン
 .dp-card-verticle-line .swell-block-column p {
   font-size: var(--dp-font-size-summary);
   line-height: var(--dp-line-height-medium);
-  text-align: center;
 }
 
 /* ===========================================
@@ -3325,6 +3327,32 @@ dp-media-text-block-works-c
 }
 .dp-header-cta.dp-cf-button a::after {
   content: none;
+}
+.dp-header-cta.dp-login-button a {
+  width: 24px;
+  margin-right: 16px;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+.dp-header-cta.dp-login-button a:hover {
+  opacity: 0.7;
+}
+.dp-header-cta.dp-login-button a::before {
+  content: "\e7fd";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color: var(--color_main);
+  font-size: 1.75em;
+  font-weight: 600;
+  font-family: icomoon !important;
+}
+.dp-header-cta.dp-login-button a::after {
+  content: none;
+}
+.dp-header-cta.dp-login-button a .ttl {
+  display: none;
 }
 .dp-header-cta.dp-header-right a {
   padding: 4px 48px 4px 16px;
@@ -7910,6 +7938,47 @@ body.dp-cart-is-open .l-fixHeader {
 .dp-cart-copy-btn:not(:disabled):hover {
   opacity: 0.85;
   transform: translateY(-1px);
+}
+
+/* =========================================================
+ * Claude AI 連携ボタン（Phase 4）
+ * dp-cart-copy-btn と同サイズ・白抜きスタイル
+ * ========================================================= */
+.dp-claude-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 4px;
+  padding: 14px 20px;
+  background: #fff;
+  color: var(--color_main, #333);
+  border: 2px solid var(--color_main, #333);
+  border-radius: var(--dp-radius, 4px);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.dp-claude-btn:hover {
+  background: var(--color_main, #333);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.dp-claude-btn.dp-claude-btn--locked {
+  opacity: 0.55;
+  cursor: default;
+}
+.dp-claude-btn.dp-claude-btn--locked:hover {
+  background: #fff;
+  color: var(--color_main, #333);
+  transform: none;
+}
+
+body.dp-cart-is-open .dp-floating-cta {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* =========================================================
