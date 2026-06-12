@@ -1,0 +1,33 @@
+/*
+ * editor-style.css
+ * ブロックエディタ専用スタイル（フロントエンドには影響しない）
+ * enqueue_block_editor_assets + wp_enqueue_style() で登録（functions.php）
+ *
+ * 詳細度ルール：
+ *   SWELL gutenberg.css は同フック priority:20 で後から読み込む。
+ *   同一詳細度では SWELL が勝つため、このファイルは必ず body スコープを付けて
+ *   詳細度を 0,1,0 → 0,1,1 に上げること。
+ */
+
+/* ============================================================
+   ブロック最大幅の上書き
+   SWELL: .wp-block { max-width: var(--block_max_width, 900px) }  詳細度 0,1,0
+   Child: body .wp-block { max-width: 100%; }                     詳細度 0,1,1 → 勝つ
+   --block_max_width は article_size カスタマイザー設定から生成され、
+   フロントの .l-article / .alignfull 内コンテナ幅にも影響するため
+   カスタマイザー変更は厳禁。エディター専用でここで上書きする。
+   ============================================================ */
+body .wp-block {
+    max-width: 100%;
+}
+
+/* ============================================================
+   works-03: 3カラムグリッド
+   ============================================================ */
+/* エディタではグループブロックが .dp-works-slider-b 自体に block-editor-block-list__layout が合体する。
+   wp-block-group__inner-container はフロントエンドのみ存在するため、ここでは対象外。 */
+.wp-block-group.dp-works-slider-b {
+   display: grid !important;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 8px;
+}

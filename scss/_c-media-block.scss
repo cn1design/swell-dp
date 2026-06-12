@@ -653,6 +653,15 @@
     }
 }
 
+/* tb: 768px */
+@include mq(tb) {
+    .dp-reverse--tb {
+        > div {
+            flex-direction: column-reverse;
+        }
+    }
+}
+
 /* sp: 599px */
 @include mq(sp) {
     .dp-reverse--sp {
@@ -934,6 +943,7 @@ wp:group に付与（js-works-slider-item 兼用）
 .dp-works-slider-inner {
     display: flex !important;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -1084,5 +1094,257 @@ dp-media-text-block-works-c
 .dp-media-text-block-works-d {
     .dp-works-slider-inner {
         padding: 0;
+    }
+}
+
+// 収益表
+
+.dp-pricing-column {
+    h3 {
+        padding: 16px;
+    }
+}
+
+/* ===========================================
+左カラム画像をビューポート左端まで拡張
+loos/column または wp:group に付与する（最右カラム想定）
+=========================================== */
+.dp-bg-thin-left {
+    &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
+        z-index: -1;
+
+        @include mq(tb) {
+            content: none;
+        }
+    }
+
+    .dp-section-title--h {
+        @include mq(sp) {
+            width: 100%;
+            background-color: transparent;
+            padding-top: 0;
+            border-radius: 0;
+        }
+        h2 {
+            @include mq(tb) {
+                position: relative;
+                z-index: 1;
+            }
+        }
+    }
+
+    .swell-block-columns {
+        position: relative;
+        margin-bottom: 0;
+
+        &__inner {
+            flex-wrap: nowrap;
+            align-items: stretch !important;
+
+            @include mq(tb) {
+                flex-wrap: inherit;
+            }
+        }
+    }
+    .media-block {
+        position: absolute;
+        height: auto;
+        left: calc(50% - 24px);
+        width: 50vw;
+
+        @include mq(pc) {
+            right: 0;
+            left: auto;
+            position: relative;
+        }
+
+        @include mq(bp) {
+            position: relative;
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        @include mq(tb) {
+            right: auto;
+            width: calc(var(--clmn-w) - var(--swl-clmn-mrgn--x));
+        }
+
+        .wp-block-image {
+            height: 100%;
+        }
+
+        img {
+            object-fit: cover;
+            border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+
+            @include mq(pc) {
+                height: 100% !important;
+                border-radius: var(--dp-radius);
+            }
+
+            @media screen and (max-width: 1512px) and (min-width: 960px) {
+                aspect-ratio: unset !important;
+            }
+
+            @include mq(bp) {
+                border-radius: var(--dp-radius);
+                height: 100% !important;
+            }
+
+            @include mq(tb) {
+                aspect-ratio: unset !important;
+                width: 100% !important;
+                height: 320px !important;
+            }
+        }
+    }
+    .text-block {
+        position: relative;
+        padding: 4em 0;
+        z-index: 1;
+
+        @include mq(tb) {
+            padding: 0;
+        }
+
+        .c-lead {
+            font-size: var(--dp-font-size-heading-pc);
+            font-weight: 600;
+
+            @include mq(tb) {
+                width: calc(100% - 32px);
+                padding: 16px 16px 16px 0;
+                background-color: var(--color_bg);
+                border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
+                margin-top: -3em !important;
+            }
+
+            @include mq(sp) {
+                width: calc(100% - 16px);
+                font-size: var(--dp-font-size-heading-sp);
+            }
+        }
+    }
+}
+
+/* ===========================================
+右カラム画像をビューポート右端まで拡張
+loos/column または wp:group に付与する（最右カラム想定）
+=========================================== */
+.dp-bg-thin-right {
+    &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100%;
+        background-color: var(--color_bg);
+        border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+        z-index: -1;
+
+        @include mq(tb) {
+            content: none;
+        }
+    }
+    .swell-block-columns {
+        position: relative;
+        margin-bottom: 0;
+
+        &__inner {
+            flex-wrap: nowrap;
+            align-items: stretch !important;
+
+            @include mq(tb) {
+                flex-wrap: wrap;
+            }
+        }
+    }
+    .media-block {
+        position: absolute;
+        height: auto;
+        right: 52%;
+        width: 52vw;
+
+        @include mq(pc) {
+            position: relative;
+            right: 80px;
+        }
+
+        @include mq(bp) {
+            position: relative;
+            left: auto;
+            right: 0;
+            width: 80%;
+        }
+
+        @include mq(tb) {
+            right: auto;
+            width: 100%;
+            margin-bottom: -5em;
+        }
+
+        .wp-block-image {
+            height: 100%;
+        }
+
+        img {
+            object-fit: cover;
+            border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
+
+            @include mq(pc) {
+                height: 100% !important;
+                border-radius: var(--dp-radius);
+            }
+
+            @media screen and (max-width: 1512px) and (min-width: 960px) {
+                aspect-ratio: unset !important;
+            }
+
+            @include mq(bp) {
+                border-radius: var(--dp-radius);
+                height: 100% !important;
+            }
+
+            @include mq(tb) {
+                aspect-ratio: unset !important;
+                height: 320px !important;
+            }
+        }
+    }
+    .text-block {
+        position: relative;
+        right: 0;
+        margin-left: auto;
+        padding: 3em 0;
+
+        @include mq(pc) {
+            right: 0;
+        }
+
+        @include mq(bp) {
+            right: 0;
+            margin: 0 0 0 var(--swl-clmn-mrgn--x);
+        }
+
+        @include mq(tb) {
+            padding: 0;
+        }
+    }
+    .dp-section-title {
+        @include mq(tb) {
+            width: calc(100% - 64px);
+            padding: 16px 0 0;
+            background-color: var(--color_bg);
+            border-radius: 0 var(--dp-radius) 0 0;
+        }
     }
 }

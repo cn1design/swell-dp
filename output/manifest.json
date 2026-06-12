@@ -11,6 +11,7 @@
   { "slug": "solution-03",      "title": "【解決｜2カラム】画像＋タイトル・リスト",                          "category": "swell-dp-solution", "order": 30 },
   { "slug": "solution-04",      "title": "【解決｜2カラム】画像2枚＋見出し・テキスト・アイコン3・キャプション", "category": "swell-dp-solution", "order": 40 },
   { "slug": "solution-05",      "title": "【解決｜3カラム】画像＋（見出し・テキスト・アイコン・詳細キャプション）＋画像", "category": "swell-dp-solution", "order": 50 },
+  { "slug": "solution-06",      "title": "【解決｜2カラム】大見出し＋テキスト・画像右全幅",                             "category": "swell-dp-solution", "order": 60 },
   { "slug": "strength-01",      "title": "【理由｜3カラム】見出し白背景・画像・説明",                        "category": "swell-dp-strength", "order": 10 },
   { "slug": "strength-02",      "title": "【理由｜3カラム】カウンター・アイコン・見出し・テキスト",           "category": "swell-dp-strength", "order": 20 },
   { "slug": "strength-03",      "title": "【理由｜2カラム】画像＋見出し・テキスト",                          "category": "swell-dp-strength", "order": 30 },

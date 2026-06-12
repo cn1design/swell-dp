@@ -15,6 +15,7 @@
 ========================================================= */
 
 $breakpoints: (
+    pc: 1513px,
     ipad: 1024px,
     bp: 959px,
     tb: 768px,
@@ -28,8 +29,14 @@ $breakpoints: (
         @error "Unknown breakpoint `#{$key}`. Available: #{map.keys($breakpoints)}";
     }
 
-    @media screen and (max-width: $bp) {
-        @content;
+    @if $key == pc {
+        @media screen and (min-width: $bp) {
+            @content;
+        }
+    } @else {
+        @media screen and (max-width: $bp) {
+            @content;
+        }
     }
 }
 @mixin heading-reset {
@@ -344,6 +351,11 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
     }
 }
 
+/* Instagram フィード 画像角丸（Smash Balloon Social Photo Feed） */
+#sb_instagram .sbi_photo img {
+    border-radius: var(--dp-radius);
+}
+
 /*--------------------------------------------------------
 分割セクション デザインパターン
 --------------------------------------------------------*/
@@ -356,6 +368,7 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "c-step-list"; /* ステップ */
 @import "p-overview"; /* 概要・コンセプト */
 @import "c-header-nav"; /* ヘッダーナビゲーション */
+@import "dp-btn-fill"; /* ボタン スライドフィルアニメーション */
 @import "p-main-visual"; /* メインビジュアル */
 @import "c-split-column"; /* 4:6分割カラム */
 @import "c-bridge-copy"; /* ブリッジコピー */
@@ -385,3 +398,4 @@ $num-family: "Roboto", "Noto Sans JP", sans-serif !default;
 @import "c-tutorial"; /* チュートリアル（スプラッシュ・ウォークスルー・ヘルプボタン） */
 @import "p-spmenu"; /* ドロワーメニュー デザインパターン */
 @import "c-smart-accordion"; /* タグクラウド型アコーディオン */
+@import "p-profile"; /* プロフィールセクション */

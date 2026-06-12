@@ -5,12 +5,12 @@
     if (faqEl.dataset.dpFaqInit) return; // 二重初期化防止
     faqEl.dataset.dpFaqInit = '1';
 
-    var items = Array.from(faqEl.querySelectorAll('.swell-block-faq__item'));
+    const items = Array.from(faqEl.querySelectorAll('.swell-block-faq__item'));
     items.forEach(function (item) {
-      var q = item.querySelector('.faq_q');
+      const q = item.querySelector('.faq_q');
       if (!q) return;
       q.addEventListener('click', function () {
-        var isOpen = item.classList.contains('is-open');
+        const isOpen = item.classList.contains('is-open');
         items.forEach(function (i) { i.classList.remove('is-open'); });
         if (!isOpen) item.classList.add('is-open');
       });

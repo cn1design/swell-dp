@@ -133,91 +133,95 @@ add_action( 'wp_footer', function () {
 		is_singular( 'design_pattern' )
 	) ) return;
 	?>
-	<style>
-	#dp-admin-toggle {
-		position: fixed;
-		bottom: 40px;
-		left: 32px;
-		z-index: 9999;
-		background: #1e1e2e;
-		color: #cdd6f4;
-		padding: 10px 16px;
-		border-radius: 8px;
-		font-size: 13px;
-		font-family: sans-serif;
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		box-shadow: 0 2px 12px rgba(0,0,0,.4);
-	}
-	@media screen and (max-width: 959px) {
-		#dp-admin-toggle {
-			top: 10px;
-			right: 56px;
-			bottom: auto;
-			left: auto;
-			height: calc(var(--dp-sp-header-h, 60px) - 20px);
-			padding: 0 12px;
-			border-radius: 4px;
-			opacity: 0;
-			pointer-events: none;
-			transition: opacity 0.2s ease;
-		}
-		#dp-admin-toggle.is-floating {
-			opacity: 1;
-			pointer-events: auto;
-			font-size: 12px;
-		}
-	}
-	</style>
-	<div id="dp-admin-toggle">
-		<span>インラインCSS</span>
-		<label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-			<input type="checkbox" id="dp-inline-toggle" style="width:16px;height:16px;">
-			<span id="dp-inline-label">OFF</span>
-		</label>
-	</div>
-	<script>
-	(function () {
-		var toggle = document.getElementById('dp-inline-toggle');
-		var label  = document.getElementById('dp-inline-label');
-		var stored = localStorage.getItem('dp_inline_mode');
-		// 初期値: ON（管理者はデフォルトでインラインあり＝無料ユーザー目線でテスト）
-		var isOn = stored !== null ? stored === 'on' : true;
-		toggle.checked = isOn;
-		label.textContent = isOn ? 'ON' : 'OFF';
-		toggle.addEventListener('change', function () {
-			isOn = toggle.checked;
-			localStorage.setItem('dp_inline_mode', isOn ? 'on' : 'off');
-			label.textContent = isOn ? 'ON' : 'OFF';
-		});
-	})();
+<style>
+#dp-admin-toggle {
+    position: fixed;
+    bottom: 40px;
+    left: 32px;
+    z-index: 9999;
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .4);
+}
 
-	// SP: c-infoBar がスクロールで隠れたタイミングでフローティング表示
-	(function () {
-		if (window.innerWidth > 959) return;
-		var el = document.getElementById('dp-admin-toggle');
-		if (!el) return;
+@media screen and (max-width: 959px) {
+    #dp-admin-toggle {
+        top: 10px;
+        right: 56px;
+        bottom: auto;
+        left: auto;
+        height: calc(var(--dp-sp-header-h, 60px) - 20px);
+        padding: 0 12px;
+        border-radius: 4px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
 
-		// ヘッダー高さをCSS変数にセット（ロゴ位置に合わせた天地中央配置用）
-		var header = document.querySelector('.l-header');
-		if (header) {
-			document.documentElement.style.setProperty('--dp-sp-header-h', header.offsetHeight + 'px');
-		}
+    #dp-admin-toggle.is-floating {
+        opacity: 1;
+        pointer-events: auto;
+        font-size: 12px;
+    }
+}
+</style>
+<div id="dp-admin-toggle">
+    <span>インラインCSS</span>
+    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" id="dp-inline-toggle" style="width:16px;height:16px;">
+        <span id="dp-inline-label">OFF</span>
+    </label>
+</div>
+<script>
+(function() {
+    var toggle = document.getElementById('dp-inline-toggle');
+    var label = document.getElementById('dp-inline-label');
+    var stored = localStorage.getItem('dp_inline_mode');
+    // 初期値: ON（管理者はデフォルトでインラインあり＝無料ユーザー目線でテスト）
+    var isOn = stored !== null ? stored === 'on' : true;
+    toggle.checked = isOn;
+    label.textContent = isOn ? 'ON' : 'OFF';
+    toggle.addEventListener('change', function() {
+        isOn = toggle.checked;
+        localStorage.setItem('dp_inline_mode', isOn ? 'on' : 'off');
+        label.textContent = isOn ? 'ON' : 'OFF';
+    });
+})();
 
-		var infoBar = document.querySelector('.c-infoBar__link');
-		if (!infoBar) {
-			el.classList.add('is-floating');
-			return;
-		}
+// SP: c-infoBar がスクロールで隠れたタイミングでフローティング表示
+(function() {
+    if (window.innerWidth > 959) return;
+    var el = document.getElementById('dp-admin-toggle');
+    if (!el) return;
 
-		var observer = new IntersectionObserver(function (entries) {
-			el.classList.toggle('is-floating', !entries[0].isIntersecting);
-		}, { threshold: 0 });
-		observer.observe(infoBar);
-	})();
-	</script>
-	<?php
+    // ヘッダー高さをCSS変数にセット（ロゴ位置に合わせた天地中央配置用）
+    var header = document.querySelector('.l-header');
+    if (header) {
+        document.documentElement.style.setProperty('--dp-sp-header-h', header.offsetHeight + 'px');
+    }
+
+    var infoBar = document.querySelector('.c-infoBar__link');
+    if (!infoBar) {
+        el.classList.add('is-floating');
+        return;
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+        el.classList.toggle('is-floating', !entries[0].isIntersecting);
+    }, {
+        threshold: 0
+    });
+    observer.observe(infoBar);
+})();
+</script>
+<?php
 } );
 
 //WordPressで自動更新メール通知を無効化 / fuunctions.php
@@ -297,6 +301,22 @@ add_action( 'template_redirect', 'dp_redirect_taxonomy_to_archive' );
 /* ======================================================== */
 
 /**
+ * エディタ専用スタイルを登録
+ * SWELL と同じ enqueue_block_editor_assets + wp_enqueue_style() 方式で注入する
+ */
+add_action( 'enqueue_block_editor_assets', function () {
+    $ver = filemtime( get_stylesheet_directory() . '/editor-style.css' );
+    wp_enqueue_style(
+        'swell-child-editor-style',
+        get_stylesheet_directory_uri() . '/editor-style.css',
+        [],
+        $ver
+    );
+} );
+
+/* ======================================================== */
+
+/**
  * クラシックブロック（core/freeform）をエディタから非表示にする
  */
 add_action( 'enqueue_block_editor_assets', function () {
@@ -320,3 +340,9 @@ function add_file_types_to_uploads($file_types)
 add_action('upload_mimes', 'add_file_types_to_uploads');
 
 /* ======================================================== */
+
+add_filter( 'sbi_settings_pages_capability', 'custom_sbi_access_capability' );
+function custom_sbi_access_capability( $cap ) {
+    // デフォルトの 'manage_options' (管理者) から 'read' (購読者以上) に条件を緩める
+    return 'read'; 
+}

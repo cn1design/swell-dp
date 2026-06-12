@@ -1,0 +1,264 @@
+/*
+
+ プロフィール
+
+*/
+
+/* ===========================================
+プロフィール（2カラム：画像フェード2枚＋テキスト）
+=========================================== */
+.dp-profile-section--a {
+    // sticky が機能するために flex-start が必要（stretcだとsticky無効）
+    .swell-block-columns__inner {
+        align-items: flex-start !important;
+    }
+
+    // 画像列: ビューポートに sticky 固定
+    .media-block {
+        position: sticky;
+        top: 15vh;
+
+        .wp-block-image {
+            transition: opacity 0.8s ease;
+            margin-bottom: 0 !important;
+
+            img {
+                border-radius: var(--dp-radius);
+            }
+        }
+
+        // 2枚目: 1枚目に絶対配置でオーバーレイ（初期は非表示）
+        .wp-block-image:nth-child(2) {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            margin: 0 !important;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    // JS が .show-second を付与したとき → 2枚目にフェードイン
+    &.show-second .media-block {
+        .wp-block-image:nth-child(1) {
+            opacity: 0;
+        }
+        .wp-block-image:nth-child(2) {
+            opacity: 1;
+        }
+    }
+
+    // SP（bp: 959px）: sticky解除・2枚縦並び
+    @include mq(bp) {
+        .swell-block-columns__inner {
+            align-items: stretch !important;
+        }
+
+        .media-block {
+            position: relative !important;
+            top: auto;
+
+            .wp-block-image:nth-child(2) {
+                position: relative;
+                inset: auto;
+                opacity: 1;
+            }
+        }
+
+        &.show-second .media-block {
+            .wp-block-image:nth-child(1) {
+                opacity: 1;
+            }
+        }
+    }
+
+    .dp-section-title {
+        // プロフィールネーム
+        .profile-name {
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 4px;
+
+            p:nth-child(1) {
+                position: relative;
+                font-size: 24px;
+
+                // 区切り線
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: -16px;
+                    transform: translateY(-50%);
+                    width: 1px;
+                    height: 70%;
+                    background-color: rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+
+        // プロフィールの特徴リスト
+        .profile-feature-list {
+            flex-wrap: wrap;
+            gap: 8px;
+            p {
+                width: fit-content;
+                padding: 0 8px;
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                border-radius: calc(var(--dp-radius) / 2);
+                font-size: clamp(13px, 1.2vw, 16px);
+            }
+        }
+    }
+
+    .profile-description {
+        p {
+            margin-bottom: 2em !important;
+            line-height: 2;
+            letter-spacing: 1px;
+        }
+    }
+}
+
+/* ===========================================
+プロフィール（2カラム：画像3枚パララックス＋テキスト）
+=========================================== */
+.dp-profile-section--b {
+    .swell-block-columns__inner {
+        @include mq(sp) {
+            gap: 0;
+        }
+    }
+    .media-block {
+        @include mq(bp) {
+            position: relative; //画像エリアを相対配置
+            height: 500px;
+        }
+
+        @include mq(sp) {
+            height: 280px;
+        }
+
+        .wp-block-image {
+            img {
+                position: absolute;
+                object-fit: cover;
+            }
+            &:nth-child(1) {
+                img {
+                    top: 0;
+                    right: 75%;
+                    width: 400px;
+                    height: 700px;
+
+                    @include mq(bp) {
+                        right: 30%;
+                        width: 80%;
+                        height: 95%;
+                    }
+                }
+            }
+            &:nth-child(2) {
+                img {
+                    top: 20px;
+                    left: calc(25% + 24px);
+                    width: 260px;
+                    height: 330px;
+                    z-index: 1;
+
+                    @include mq(bp) {
+                        top: 70%;
+                        left: 52%;
+                        width: 30%;
+                        height: 30%;
+                    }
+                }
+            }
+            &:nth-child(3) {
+                img {
+                    top: 374px;
+                    left: calc(25% - 48px);
+                    width: 308px;
+                    height: 350px;
+
+                    @include mq(bp) {
+                        top: 10%;
+                        left: 75%;
+                        width: 30%;
+                        height: 70%;
+                    }
+                }
+            }
+        }
+    }
+
+    .text-block {
+        margin-left: auto;
+
+        @include mq(bp) {
+            margin: 0 0 0 var(--swl-clmn-mrgn--x);
+        }
+    }
+
+    .dp-section-title {
+        h2 {
+            @include mq(sp) {
+                font-size: 36px;
+                margin: 0;
+            }
+        }
+        // プロフィールネーム
+        .profile-name {
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 4px;
+
+            p:nth-child(1) {
+                position: relative;
+                font-size: clamp(20px, 1.8vw, 24px);
+
+                // 区切り線
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    right: -16px;
+                    transform: translateY(-50%);
+                    width: 1px;
+                    height: 70%;
+                    background-color: rgba(#ffffff, 0.5);
+                }
+            }
+        }
+
+        // プロフィールの特徴リスト
+        .profile-feature-list {
+            flex-wrap: wrap;
+            gap: 8px;
+            p {
+                width: fit-content;
+                padding: 0 8px;
+                border: 1px solid rgba(#ffffff, 0.5);
+                border-radius: calc(var(--dp-radius) / 2);
+                font-size: clamp(13px, 1.2vw, 16px);
+            }
+        }
+    }
+
+    .profile-description {
+        p {
+            margin-bottom: 1.5em;
+
+            @include mq(sp) {
+                margin-bottom: 0.5em;
+            }
+        }
+        .c-lead {
+            letter-spacing: clamp(1px, 0.5vw, 3px);
+        }
+    }
+}

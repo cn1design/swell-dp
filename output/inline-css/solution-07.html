@@ -1,0 +1,177 @@
+<!-- dp-deps: _c-media-block _c-section-title -->
+<!-- wp:html -->
+<style>
+/* dp-section-title--h: 大見出し左寄せ（72px・太字・字間8px） */
+.dp-section-title--h {
+  margin-bottom: var(--dp-space-block-pc);
+  text-align: left;
+}
+@media screen and (max-width: 768px) {
+  .dp-section-title--h {
+    margin-bottom: calc(var(--dp-space-element-pc) * -1) !important;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-section-title--h {
+    position: relative;
+    filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.3));
+    z-index: 1;
+  }
+}
+.dp-section-title--h h2 {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: bold;
+  letter-spacing: 8px;
+  line-height: 1.4;
+}
+@media screen and (max-width: 768px) {
+  .dp-section-title--h h2 {
+    letter-spacing: 2px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-section-title--h h2 {
+    letter-spacing: 0;
+    font-feature-settings: "palt";
+  }
+}
+
+/* dp-reverse--tb: タブレット時にカラム順逆転 */
+@media screen and (max-width: 768px) {
+  .dp-reverse--tb > div {
+    flex-direction: column-reverse;
+  }
+}
+
+/* dp-bg-thin-left: 左カラム背景色帯（::before 疑似要素） */
+.dp-bg-thin-left::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+  border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
+  z-index: -1;
+}
+@media screen and (max-width: 768px) {
+  .dp-bg-thin-left::before {
+    content: none;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-bg-thin-left .dp-section-title--h {
+    width: 100%;
+    background-color: transparent;
+    padding-top: 0;
+    border-radius: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .dp-bg-thin-left .dp-section-title--h h2 {
+    position: relative;
+    z-index: 1;
+  }
+}
+.dp-bg-thin-left .swell-block-columns {
+  position: relative;
+  margin-bottom: 0;
+}
+.dp-bg-thin-left .swell-block-columns__inner {
+  flex-wrap: nowrap;
+  align-items: stretch !important;
+}
+@media screen and (max-width: 768px) {
+  .dp-bg-thin-left .swell-block-columns__inner {
+    flex-wrap: inherit;
+  }
+}
+.dp-bg-thin-left .media-block {
+  position: absolute;
+  height: auto;
+  left: calc(50% - 24px);
+  width: 50vw;
+}
+@media screen and (min-width: 1513px) {
+  .dp-bg-thin-left .media-block {
+    right: 0;
+    left: auto;
+    position: relative;
+  }
+}
+@media screen and (max-width: 959px) {
+  .dp-bg-thin-left .media-block {
+    position: relative;
+    left: auto;
+    right: 0;
+    width: 80%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .dp-bg-thin-left .media-block {
+    right: auto;
+    width: calc(var(--clmn-w) - var(--swl-clmn-mrgn--x));
+  }
+}
+.dp-bg-thin-left .media-block .wp-block-image {
+  height: 100%;
+}
+.dp-bg-thin-left .media-block img {
+  object-fit: cover;
+  border-radius: var(--dp-radius) 0 0 var(--dp-radius);
+}
+@media screen and (min-width: 1513px) {
+  .dp-bg-thin-left .media-block img {
+    height: 100% !important;
+    border-radius: var(--dp-radius);
+  }
+}
+@media screen and (max-width: 1512px) and (min-width: 960px) {
+  .dp-bg-thin-left .media-block img {
+    aspect-ratio: unset !important;
+  }
+}
+@media screen and (max-width: 959px) {
+  .dp-bg-thin-left .media-block img {
+    border-radius: var(--dp-radius);
+    height: 100% !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .dp-bg-thin-left .media-block img {
+    aspect-ratio: unset !important;
+    width: 100% !important;
+    height: 320px !important;
+  }
+}
+.dp-bg-thin-left .text-block {
+  position: relative;
+  padding: 4em 0;
+  z-index: 1;
+}
+@media screen and (max-width: 768px) {
+  .dp-bg-thin-left .text-block {
+    padding: 0;
+  }
+}
+.dp-bg-thin-left .text-block .c-lead {
+  font-size: var(--dp-font-size-heading-pc);
+  font-weight: 600;
+}
+@media screen and (max-width: 768px) {
+  .dp-bg-thin-left .text-block .c-lead {
+    width: calc(100% - 32px);
+    padding: 16px 16px 16px 0;
+    background-color: var(--color_bg);
+    border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
+    margin-top: -3em !important;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-bg-thin-left .text-block .c-lead {
+    width: calc(100% - 16px);
+    font-size: var(--dp-font-size-heading-sp);
+  }
+}
+</style>
+<!-- /wp:html -->

@@ -93,7 +93,7 @@
       dotsWrap.innerHTML = '';
       dotItems = [];
 
-      for (var i = 0; i < pageCount; i++) {
+      for (let i = 0; i < pageCount; i++) {
         (function (index) {
           const dot = document.createElement('button');
           dot.type = 'button';

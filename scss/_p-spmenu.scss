@@ -337,3 +337,92 @@ html[data-spmenu=opened] {
         text-align: center;
     }
 }
+
+// =============================================
+// アコーディオン: サブメニュー開閉（Pattern A / B 共通）
+// dp-spmenu-accordion.js が is-dp-spmenu-accordion-ready を付与してから有効化
+// =============================================
+
+// ① ロゴ二重表示の解消
+#sp_menu .dp-spmenu-logo img:not(:first-child) {
+    display: none;
+}
+
+// ② 左側プレフィックス矢印の削除（SWELLデフォルトの icomoon chevron-right）
+#sp_menu .c-listMenu a::before,
+#sp_menu .c-spnav .sub-menu a::before {
+    content: none !important;
+    display: none !important;
+}
+
+// ③ サブメニュー: JS ready クラスが付いてから初期非表示を適用
+//    （JS 未実行時はデフォルト展開表示にフォールバック）
+#sp_menu.is-dp-spmenu-accordion-ready
+    .c-spnav
+    .menu-item-has-children
+    > .sub-menu {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        height 0.3s ease,
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+// .is-submenu-open 付与時に表示を戻す
+#sp_menu.is-dp-spmenu-accordion-ready
+    .c-spnav
+    .menu-item-has-children.is-submenu-open
+    > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+// ④ 右端開閉ボタンの配置基準
+#sp_menu .c-spnav .menu-item-has-children {
+    position: relative;
+}
+
+// メインリンクの右余白（ボタンと重ならないよう）
+#sp_menu .c-spnav .menu-item-has-children > a {
+    padding-right: 52px !important;
+}
+
+// 開閉ボタン
+#sp_menu .c-spnav .dp-spmenu-subtoggle {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
+
+    // 下矢印アイコン（CSS のみで描画）
+    &::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg);
+        transition: transform 0.2s ease;
+    }
+}
+
+// 開いた状態で上向きに回転
+#sp_menu .c-spnav .menu-item-has-children.is-submenu-open > .dp-spmenu-subtoggle::before {
+    transform: rotate(-135deg);
+}

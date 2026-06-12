@@ -392,21 +392,21 @@
    * これにより overflow:hidden の親の影響を受けず、
    * z-index の昇格なしにターゲットが本物の透明で見える。
    * ========================================================= */
-  var SPOTLIGHT_PAD = 8; // ターゲット周囲の余白 (px)
-  var SPOTLIGHT_R   = 8; // 角丸半径（#dp-tutorial-spotlight の border-radius と合わせる）
+  const SPOTLIGHT_PAD = 8; // ターゲット周囲の余白 (px)
+  const SPOTLIGHT_R   = 8; // 角丸半径（#dp-tutorial-spotlight の border-radius と合わせる）
 
   function createSpotlight(target) {
     clearSpotlight();
-    var rect = target.getBoundingClientRect();
-    var pad  = SPOTLIGHT_PAD;
-    var x    = rect.left   - pad;
-    var y    = rect.top    - pad;
-    var w    = rect.width  + pad * 2;
-    var h    = rect.height + pad * 2;
-    var r    = SPOTLIGHT_R;
+    const rect = target.getBoundingClientRect();
+    const pad  = SPOTLIGHT_PAD;
+    const x    = rect.left   - pad;
+    const y    = rect.top    - pad;
+    const w    = rect.width  + pad * 2;
+    const h    = rect.height + pad * 2;
+    const r    = SPOTLIGHT_R;
 
     // 1. 枠線/グロー div
-    var el = document.createElement("div");
+    const el = document.createElement("div");
     el.id = "dp-tutorial-spotlight";
     el.style.top    = y + "px";
     el.style.left   = x + "px";
@@ -417,12 +417,12 @@
 
     // 2. オーバーレイを clip-path: path(evenodd) で中抜き
     if (tutorialOverlay) {
-      var vw = window.innerWidth;
-      var vh = window.innerHeight;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
       // 外側: 全画面矩形（時計回り）
-      var outer = "M 0 0 H " + vw + " V " + vh + " H 0 Z";
+      const outer = "M 0 0 H " + vw + " V " + vh + " H 0 Z";
       // 内側: 角丸矩形（時計回り） → evenodd で穴になる
-      var inner =
+      const inner =
         "M " + (x + r) + " " + y +
         " H " + (x + w - r) +
         " A " + r + " " + r + " 0 0 1 " + (x + w) + " " + (y + r) +
@@ -449,8 +449,8 @@
   /* =========================================================
    * GIF チュートリアルモーダル
    * ========================================================= */
-  var GIF_SRC = ""; // GIF ファイルが決まったら URL を入れる
-  var GIF_STEPS = [
+  const GIF_SRC = ""; // GIF ファイルが決まったら URL を入れる
+  const GIF_STEPS = [
     "共通CSSにチェックを入れ、LPビルダーに追加します",
     "使いたいデザインパターンにチェックを入れて追加します",
     "LPビルダーで順番を整えたら「一括コピー」を押します",
@@ -460,13 +460,13 @@
   function openGifModal() {
     closeGifModal(); // 二重生成防止
 
-    var modal = document.createElement("div");
+    const modal = document.createElement("div");
     modal.className = "dp-gif-modal";
     modal.setAttribute("role", "dialog");
     modal.setAttribute("aria-modal", "true");
     modal.setAttribute("aria-label", "使い方チュートリアル動画");
 
-    var stepsHtml = GIF_STEPS.map(function (text, i) {
+    const stepsHtml = GIF_STEPS.map(function (text, i) {
       return (
         '<li class="dp-gif-modal__step">' +
         '<span class="dp-gif-modal__step-num">' + (i + 1) + "</span>" +
@@ -475,7 +475,7 @@
       );
     }).join("\n");
 
-    var mediaHtml = GIF_SRC
+    const mediaHtml = GIF_SRC
       ? '<img src="' + GIF_SRC + '" alt="使い方チュートリアル">'
       : '<span class="dp-gif-modal__media--placeholder">GIF 動画を準備中</span>';
 
@@ -510,7 +510,7 @@
 
   function closeGifModal() {
     if (!gifModal) return;
-    var modal = gifModal;
+    const modal = gifModal;
     gifModal = null;
     modal.classList.remove("is-visible");
     modal.addEventListener(

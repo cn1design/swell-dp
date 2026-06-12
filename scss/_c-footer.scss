@@ -6,6 +6,17 @@
 
 /*フッター*/
 
+// 親テーマの .l-footer__inner に設定された background-color・border-radius を無効化
+.l-footer__inner {
+    background-color: unset;
+    border-radius: unset;
+}
+
+// l-footer__foot + copyright をグループ化するラッパー
+.l-footer__content {
+    border-radius: 8px;
+}
+
 .l-footer {
     width: 100%;
     margin-top: 0;
@@ -145,8 +156,14 @@
     // 1段目ナビ
     .footer-first-nav {
         display: flex;
-        align-items: center;
-        gap: 32px;
+        align-items: flex-end;
+        gap: 0;
+        flex-direction: column;
+
+        @include mq(bp) {
+            align-items: center;
+        }
+
         ul.l-footer__nav {
             display: flex;
             justify-content: flex-end;
@@ -255,6 +272,95 @@
             width: calc(100% - 32px);
         }
     }
+}
+
+// ================================================================
+// フッターCTAナビ（footer_cta_menu 割り当て時のみ表示）
+// フッターナビ直上にボタン横並び
+// ================================================================
+.dp-footer-cta {
+    &__list {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 12px;
+        list-style: none;
+        margin: 0 0 24px;
+        padding: 0;
+
+        @include mq(bp) {
+            justify-content: center;
+        }
+
+        > .menu-item > a {
+            display: inline-block;
+            border: 1px solid var(--color_main);
+            border-radius: 4px;
+            color: var(--color_main);
+            padding: 8px 24px;
+            font-size: 1em;
+            white-space: nowrap;
+        }
+
+        // footer-nav-white / header-nav-white: 白ボーダー・白テキスト（暗い背景向け）
+        > .menu-item.footer-nav-white > a,
+        > .menu-item.header-nav-white > a {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        // footer-cta-fill: 塗りつぶしボタン
+        > .menu-item.footer-cta-fill > a {
+            background-color: var(--color_main);
+            color: #fff;
+            border-color: var(--color_main);
+        }
+
+        // header-cta-icon-left: アイコンをリンク左端に配置（セカンダリナビと同一挙動）
+        > .menu-item.header-cta-icon-left {
+            position: relative;
+
+            > a {
+                position: relative;
+                padding: 12px 16px 12px 40px;
+            }
+
+            &::before {
+                position: absolute;
+                top: 50%;
+                left: 16px;
+                transform: translateY(-50%);
+                font-size: 1.1em;
+                color: var(--color_main);
+                pointer-events: none;
+                z-index: 1;
+                transition: color 0.5s ease;
+            }
+
+            &:hover::before {
+                color: #fff;
+            }
+        }
+
+        // header-cta-icon-left + header-nav-white 併用: アイコン初期値 #fff / ホバー時 --color_main
+        > .menu-item.header-cta-icon-left.header-nav-white {
+            &::before {
+                color: #fff;
+            }
+
+            &:hover::before {
+                color: var(--color_main);
+            }
+        }
+    }
+}
+
+// .footer-nav-wrap 内の下線アニメーション（::before）を
+// フッターCTAボタンに限定して無効化
+// fill アニメーションは ::after を使用するため競合しない
+// 詳細度: (0,3,5) — 上書き対象 .l-footer .footer-nav-wrap nav ul li a::before (0,2,5) より高い
+.l-footer .footer-nav-wrap nav.dp-footer-cta ul li a::before {
+    content: none;
 }
 
 @keyframes lineAnime {

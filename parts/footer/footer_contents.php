@@ -7,15 +7,27 @@ if (!defined('ABSPATH')) exit;
 
     <?php SWELL_Theme::get_parts('parts/footer/foot_widget'); ?>
 
+    <div class="l-footer__content">
     <div class="l-footer__foot">
         <div class="l-container l-inner">
 
             <!-- ===== 左カラム: ロゴ・住所 ===== -->
             <div class="footer-address">
                 <div class="footer-address__logo-wrap">
-                    <!-- ロゴ（ヘッダーロゴ流用: SWELLカスタマイザー > ロゴ設定と共通） -->
+                    <!-- ロゴ: カスタマイザー > フッター設定 > フッターロゴ で差し替え可 -->
                     <div class="footer-logo">
-                        <?php echo SWELL_PARTS::head_logo(); ?>
+                        <?php
+                        $dp_footer_logo_url = get_theme_mod( 'dp_footer_logo', '' );
+                        if ( $dp_footer_logo_url ) :
+                        ?>
+                            <a href="<?= esc_url( home_url( '/' ) ) ?>" class="c-headLogo__link footer-logo__link" rel="home">
+                                <img src="<?= esc_url( $dp_footer_logo_url ) ?>" alt="<?= esc_attr( SWELL_Theme::site_data( 'title' ) ) ?>" class="c-headLogo__img footer-logo__img" loading="lazy">
+                            </a>
+                        <?php
+                        else :
+                            echo SWELL_PARTS::head_logo();
+                        endif;
+                        ?>
                     </div>
                     <!-- SNS アイコン（LINEなど: SWELLカスタマイザーで設定） -->
                     <?php
@@ -78,4 +90,5 @@ if (!defined('ABSPATH')) exit;
         <?= wp_kses(SWELL_Theme::get_setting('copyright'), SWELL_Theme::$allowed_text_html) ?>
     </div>
     <?php do_action('swell_after_copyright'); ?>
+    </div><!-- /.l-footer__content -->
 </div>

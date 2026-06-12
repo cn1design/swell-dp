@@ -1,0 +1,123 @@
+<!-- dp-deps: _p-profile -->
+<!-- wp:html -->
+<style>
+/* dp-profile-section--b: プロフィール（2カラム: 画像3枚パララックス＋テキスト） */
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .swell-block-columns__inner {
+    gap: 0;
+  }
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block {
+    position: relative;
+    height: 500px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .media-block {
+    height: 280px;
+  }
+}
+.dp-profile-section--b .media-block .wp-block-image img {
+  position: absolute;
+  object-fit: cover;
+}
+.dp-profile-section--b .media-block .wp-block-image:nth-child(1) img {
+  top: 0;
+  right: 75%;
+  width: 400px;
+  height: 700px;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block .wp-block-image:nth-child(1) img {
+    right: 30%;
+    width: 80%;
+    height: 95%;
+  }
+}
+.dp-profile-section--b .media-block .wp-block-image:nth-child(2) img {
+  top: 20px;
+  left: calc(25% + 24px);
+  width: 260px;
+  height: 330px;
+  z-index: 1;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block .wp-block-image:nth-child(2) img {
+    top: 70%;
+    left: 52%;
+    width: 30%;
+    height: 30%;
+  }
+}
+.dp-profile-section--b .media-block .wp-block-image:nth-child(3) img {
+  top: 374px;
+  left: calc(25% - 48px);
+  width: 308px;
+  height: 350px;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block .wp-block-image:nth-child(3) img {
+    top: 10%;
+    left: 75%;
+    width: 30%;
+    height: 70%;
+  }
+}
+.dp-profile-section--b .text-block {
+  margin-left: auto;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .text-block {
+    margin: 0 0 0 var(--swl-clmn-mrgn--x);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .dp-section-title h2 {
+    font-size: 36px;
+    margin: 0;
+  }
+}
+.dp-profile-section--b .dp-section-title .profile-name {
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 4px;
+}
+.dp-profile-section--b .dp-section-title .profile-name p:nth-child(1) {
+  position: relative;
+  font-size: clamp(20px, 1.8vw, 24px);
+}
+.dp-profile-section--b .dp-section-title .profile-name p:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -16px;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 70%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.dp-profile-section--b .dp-section-title .profile-feature-list {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dp-profile-section--b .dp-section-title .profile-feature-list p {
+  width: fit-content;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: calc(var(--dp-radius) / 2);
+  font-size: clamp(13px, 1.2vw, 16px);
+}
+.dp-profile-section--b .profile-description p {
+  margin-bottom: 1.5em;
+}
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .profile-description p {
+    margin-bottom: 0.5em;
+  }
+}
+.dp-profile-section--b .profile-description .c-lead {
+  letter-spacing: clamp(1px, 0.5vw, 3px);
+}
+</style>
+<!-- /wp:html -->

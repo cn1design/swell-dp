@@ -1,0 +1,131 @@
+// ================================================================
+// dp-btn-fill: ホバー時 左→右 スライドフィルアニメーション
+//
+// 【使い方】
+//   SWELLボタン: ブロックの「追加CSSクラス」に dp-btn-fill を追加
+//   セカンダリナビ: .dp-secondary-nav__list > .menu-item > a に自動適用
+//
+// 【対象ボタンスタイル】
+//   is-style-btn_line（アウトラインボタン）を想定
+//   fill-color: var(--color_main) / hover-text: #fff
+//   セカンダリナビ（白ボーダー版）: fill-color: #fff / hover-text: var(--color_main)
+// ================================================================
+
+// fill アニメーション ミックスイン（::before 版）
+@mixin dp-fill-hover($fill-color, $text-hover) {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s ease;
+
+    // fill レイヤー（背景スライド）
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: $fill-color;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s ease;
+    }
+
+    // テキスト・アイコンを fill より前面に
+    span,
+    svg {
+        position: relative;
+    }
+
+    &:hover {
+        color: $text-hover;
+
+        &::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    }
+}
+
+// fill アニメーション ミックスイン（::after 版）
+// ::before に既存スタイルが競合する場合（フッターCTA等）に使用
+@mixin dp-fill-hover-after($fill-color, $text-hover) {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.5s ease;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: $fill-color;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s ease;
+        z-index: 0;
+    }
+
+    span,
+    svg {
+        position: relative;
+        z-index: 1;
+    }
+
+    &:hover {
+        color: $text-hover;
+
+        &::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    }
+}
+
+// ================================================================
+// ① SWELL ブロックボタン用（追加CSSクラス: dp-btn-fill）
+// ================================================================
+.swell-block-button.dp-btn-fill {
+    .swell-block-button__link {
+        @include dp-fill-hover(var(--color_main), #fff);
+
+        // SWELL 標準の is-style-btn_line:hover が
+        // background-color を即時適用してスライドアニメーションを打ち消すため上書き
+        &:hover {
+            background-color: transparent !important; // 即時塗りつぶしを無効化
+            border-color: var(--the-btn-color, var(--color_main)) !important; // border を維持
+        }
+    }
+}
+
+// ================================================================
+// ② セカンダリナビ
+//    デフォルト: --color_main ボーダー → --color_main 塗り / テキスト #fff
+//    header-nav-white: 白ボーダー → 白塗り / テキスト --color_text
+// ================================================================
+.dp-secondary-nav .dp-secondary-nav__list > .menu-item > a {
+    @include dp-fill-hover(var(--color_main), #fff);
+}
+
+.dp-secondary-nav .dp-secondary-nav__list > .menu-item.header-nav-white > a {
+    @include dp-fill-hover(#fff, var(--color_main));
+}
+
+// ================================================================
+// ③ フッターCTAナビ（::after 版を使用 — ::before 競合回避）
+//    デフォルト: --color_main 塗り / テキスト #fff
+//    footer-nav-white / header-nav-white: 白塗り / テキスト --color_main
+//    footer-cta-fill: 初期値から塗りつぶし（fill アニメーションなし）
+// ================================================================
+.dp-footer-cta .dp-footer-cta__list > .menu-item:not(.footer-cta-fill) > a {
+    @include dp-fill-hover-after(var(--color_main), #fff);
+}
+
+.dp-footer-cta .dp-footer-cta__list > .menu-item.footer-nav-white > a,
+.dp-footer-cta .dp-footer-cta__list > .menu-item.header-nav-white > a {
+    @include dp-fill-hover-after(#fff, var(--color_main));
+}

@@ -1,0 +1,116 @@
+<!-- dp-deps: _p-profile -->
+<!-- wp:html -->
+<style>
+/* dp-profile-section--a: プロフィール（2カラム: 画像フェード2枚＋テキスト） */
+.dp-profile-section--a .swell-block-columns__inner {
+  align-items: flex-start !important;
+}
+.dp-profile-section--a .media-block {
+  position: sticky;
+  top: 15vh;
+}
+.dp-profile-section--a .media-block .wp-block-image {
+  transition: opacity 0.8s ease;
+  margin-bottom: 0 !important;
+}
+.dp-profile-section--a .media-block .wp-block-image img {
+  border-radius: var(--dp-radius);
+}
+.dp-profile-section--a .media-block .wp-block-image:nth-child(2) {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0 !important;
+}
+.dp-profile-section--a .media-block .wp-block-image:nth-child(2) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dp-profile-section--a.show-second .media-block .wp-block-image:nth-child(1) {
+  opacity: 0;
+}
+.dp-profile-section--a.show-second .media-block .wp-block-image:nth-child(2) {
+  opacity: 1;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--a .swell-block-columns__inner {
+    align-items: stretch !important;
+  }
+  .dp-profile-section--a .media-block {
+    position: relative !important;
+    top: auto;
+  }
+  .dp-profile-section--a .media-block .wp-block-image:nth-child(2) {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+  }
+  .dp-profile-section--a.show-second .media-block .wp-block-image:nth-child(1) {
+    opacity: 1;
+  }
+}
+.dp-profile-section--a .dp-section-title .profile-name {
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 4px;
+}
+.dp-profile-section--a .dp-section-title .profile-name p:nth-child(1) {
+  position: relative;
+  font-size: 24px;
+}
+.dp-profile-section--a .dp-section-title .profile-name p:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -16px;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 70%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.dp-profile-section--a .dp-section-title .profile-feature-list {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dp-profile-section--a .dp-section-title .profile-feature-list p {
+  width: fit-content;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: calc(var(--dp-radius) / 2);
+  font-size: clamp(13px, 1.2vw, 16px);
+}
+.dp-profile-section--a .profile-description p {
+  margin-bottom: 2em !important;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const section = document.querySelector(".dp-profile-section--a");
+  if (!section) return;
+
+  const textBlock = section.querySelector(".text-block");
+  if (!textBlock) return;
+
+  const isMobile = () => window.innerWidth <= 959;
+
+  function onScroll() {
+    if (isMobile()) {
+      section.classList.remove("show-second");
+      return;
+    }
+
+    const rect = textBlock.getBoundingClientRect();
+    // text-block の90%地点がビューポート下端に達したら2枚目へ
+    const point90 = rect.top + textBlock.offsetHeight * 0.9;
+    section.classList.toggle("show-second", point90 <= window.innerHeight);
+  }
+
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+});
+</script>
+<!-- /wp:html -->

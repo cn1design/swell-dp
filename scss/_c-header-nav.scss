@@ -4,6 +4,12 @@
 
 */
 
+@media screen and (max-width: 959px) {
+    .l-header__inner {
+        padding-top: 16px;
+    }
+}
+
 /* ヘッダーの最大幅を1440pxに調整 */
 .-series .l-header__inner,
 .l-footer .l-container,
@@ -148,7 +154,8 @@
     }
     &.dp-header-right {
         a {
-            padding: 4px 48px 4px 16px;
+            padding: 16px 48px 16px 16px;
+            height: auto;
             &::before {
                 left: auto;
                 right: 16px;
@@ -180,10 +187,17 @@
     a {
         writing-mode: vertical-rl;
         height: auto;
-        padding: 1em 0.5em;
+        padding: 1em 0.65em;
         text-orientation: upright;
         letter-spacing: 0.1em;
+        font-weight: 600;
+        background-color: #fff;
+        border: 3px solid;
         border-radius: var(--dp-radius);
+
+        &:hover {
+            opacity: 1;
+        }
 
         @include mq(bp) {
             writing-mode: horizontal-tb;
@@ -192,12 +206,24 @@
         }
     }
 
+    .__icon:not(.-right) {
+        margin-left: 0;
+    }
+
     .swl-inline-icon {
         margin-bottom: 0.25em;
 
         @include mq(bp) {
             margin-bottom: 0;
         }
+    }
+
+    a .swl-inline-color {
+        letter-spacing: -4px;
+    }
+
+    a strong {
+        letter-spacing: -4px;
     }
 }
 
@@ -228,6 +254,17 @@
     }
 }
 
+// 追従ヘッダー スクロール方向連動（JS: dp-fix-header-scroll.js が有効なとき）
+// SWELLは .l-fixHeader[data-ready] に transition: all .5s を持つ。
+// #fix_header { transition: ... } を独自定義すると IDセレクターの高 specificity で
+// SWELLの all .5s を上書きしてしまい、opacity/visibility がトランジションなしで
+// 即時変化（パッと消え）する。
+// → transition は SWELL の all .5s に委ねる（独自定義しない）
+// → is-hidden の transform !important のみ定義する
+#fix_header.is-hidden {
+    transform: translateY(-100%) !important;
+}
+
 // ================================================================
 // ヘッダー デザインパターン
 // カスタマイザー「外観 > ヘッダー デザイン」で選択
@@ -253,5 +290,298 @@
                 padding: 0;
             }
         }
+    }
+}
+
+// ================================================================
+// PCグローバルナビ メガメニュー（リッチサブメニュー）
+// 対象: PCのみ（min-width: 960px）
+// SWELLの標準サブメニューを5カラムグリッドのメガメニューに拡張
+// ================================================================
+
+@media (min-width: 960px) {
+    .c-gnavWrap .c-gnav {
+        height: 56px;
+        gap: 24px;
+    }
+
+    // dp-header-right クラス付き gnav メニューアイテムの高さを内容に合わせる
+    .c-gnav > .menu-item.dp-header-right {
+        height: auto;
+        margin: auto 0 auto 16px;
+    }
+
+    .c-gnav {
+        position: static; // メガメニューの配置基準
+
+        > .menu-item {
+            position: static; // relative → static（右見切れ対策）
+
+            > a {
+                padding: 0;
+
+                .ttl {
+                    font-size: 16px;
+                }
+            }
+
+            > a:after {
+                bottom: 16px;
+            }
+
+            > .sub-menu {
+                top: calc(100% - 18px);
+                left: 50%;
+                transform: translateX(-50%);
+
+                display: grid;
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: 12px;
+
+                max-width: calc(1512px + var(--swl-pad_container, 0px) * 2);
+                width: calc(100% - 96px);
+                padding: 18px;
+
+                color: #333;
+                background: #fff;
+                border: 1px solid rgba(0, 0, 0, 0.08);
+                border-radius: 8px;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+
+                transition:
+                    opacity 0.2s ease,
+                    visibility 0.2s ease,
+                    transform 0.2s ease;
+
+                z-index: 100;
+            }
+
+            &:hover,
+            &:focus-within {
+                > .sub-menu {
+                    opacity: 1;
+                    visibility: visible;
+                    pointer-events: auto;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+        }
+
+        // 2階層目: カード型レイアウト
+        > .menu-item > .sub-menu {
+            > .menu-item {
+                position: relative; // 孫メニューの絶対配置基準
+                margin: 0;
+                min-width: 0;
+
+                > a {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    min-height: 56px;
+                    padding: 12px 14px;
+
+                    color: inherit;
+                    text-decoration: none;
+                    background: color-mix(in srgb, var(--color_main) 4%, transparent);
+                    border: 1px solid color-mix(in srgb, var(--color_main) 12%, transparent);
+                    border-radius: 6px;
+
+                    line-height: 1.5;
+                    transition:
+                        background-color 0.2s ease,
+                        border-color 0.2s ease,
+                        transform 0.2s ease;
+                }
+
+                > a:hover,
+                > a:focus-visible {
+                    background: color-mix(in srgb, var(--color_main) 8%, transparent);
+                    border-color: color-mix(in srgb, var(--color_main) 28%, transparent);
+                    transform: translateY(-1px);
+                }
+
+                .ttl {
+                    font-size: 14px;
+                    font-weight: 700;
+                    line-height: 1.5;
+                }
+
+                .desc,
+                .c-smallNavTitle {
+                    margin-top: 2px;
+                    font-size: 11px;
+                    line-height: 1.4;
+                    opacity: 0.7;
+                }
+            }
+        }
+
+        // 矢印装飾を無効化（メガメニュー内スコープ限定）
+        > .menu-item > .sub-menu > .menu-item > a::before,
+        > .menu-item > .sub-menu > .menu-item > a::after,
+        > .menu-item > .sub-menu > .menu-item > .sub-menu > .menu-item > a::before,
+        > .menu-item > .sub-menu > .menu-item > .sub-menu > .menu-item > a::after {
+            display: none;
+            content: none;
+        }
+
+        // 3階層目: ホバー時ドロップダウン
+        > .menu-item > .sub-menu > .menu-item > .sub-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 2;
+
+            display: block;
+            width: max-content;
+            min-width: 220px;
+            max-width: 280px;
+
+            padding: 8px;
+            margin: 0;
+
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transform: translateY(6px);
+            transition:
+                opacity 0.2s ease,
+                visibility 0.2s ease,
+                transform 0.2s ease;
+
+            > .menu-item {
+                margin: 0;
+
+                > a {
+                    display: block;
+                    min-height: auto;
+                    padding: 8px 10px;
+                    background: transparent;
+                    border: 0;
+                    border-radius: 4px;
+                    font-size: 13px;
+                    line-height: 1.5;
+                    transform: none;
+                }
+
+                > a:hover,
+                > a:focus-visible {
+                    background: color-mix(in srgb, var(--color_main) 6%, transparent);
+                    text-decoration: none;
+                }
+            }
+        }
+
+        // 3階層目: 親カードhover / focus-within 時のみ表示
+        > .menu-item > .sub-menu > .menu-item:hover > .sub-menu,
+        > .menu-item > .sub-menu > .menu-item:focus-within > .sub-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+    }
+}
+
+// ================================================================
+// ヘッダー セカンダリメニュー
+// has_nav_menu('header_secondary_menu') 設定時のみ出力（PC 限定）
+// 未設定時は .dp-secondary-nav 自体が生成されないため以下の CSS は無効
+// ================================================================
+
+// セカンダリナビが存在するとき c-gnavWrap を縦積みレイアウトに変更
+.c-gnavWrap:has(.dp-secondary-nav) {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.dp-secondary-nav.pc_ {
+    margin-top: 32px;
+}
+
+.dp-secondary-nav {
+    .dp-secondary-nav__list {
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        > .menu-item > a {
+            display: block;
+            border: 1px solid var(--color_main);
+            border-radius: 4px;
+            color: var(--color_main);
+            padding: 8px 16px;
+            white-space: nowrap;
+            font-size: 1em;
+
+            // SWELL デフォルトの下線アニメーション非表示
+            &::after {
+                content: none;
+            }
+        }
+
+        // header-cta-icon-left: アイコンをリンク左端に配置
+        // icomoon 等の ::before アイコンを持つメニューアイテムに付与
+        > .menu-item.header-cta-icon-left {
+            position: relative;
+
+            > a {
+                position: relative;
+                padding: 12px 16px 12px 40px;
+            }
+
+            &::before {
+                position: absolute;
+                top: 50%;
+                left: 16px;
+                transform: translateY(-50%);
+                font-size: 1.1em;
+                color: var(--color_main);
+                pointer-events: none;
+                z-index: 1;
+                transition: color 0.5s ease;
+            }
+
+            &:hover::before {
+                color: #fff;
+            }
+        }
+    }
+}
+
+// header-nav-white 修飾クラス: ボーダー・テキスト白 / ホバー時 白塗り・--color_text
+// 外観 > メニュー の CSS クラス欄でメニューアイテム個別に付与可能
+.dp-secondary-nav .dp-secondary-nav__list > .menu-item.header-nav-white > a {
+    border-color: #fff;
+    color: #fff;
+}
+
+.dp-secondary-nav .dp-secondary-nav__list > .menu-item.header-nav-white > a:hover {
+    opacity: 1;
+}
+
+// header-cta-icon-left + header-nav-white 併用時: アイコン初期値 #fff / ホバー時 --color_main
+.dp-secondary-nav .dp-secondary-nav__list > .menu-item.header-cta-icon-left.header-nav-white {
+    &::before {
+        color: #fff;
+    }
+
+    &:hover::before {
+        color: var(--color_main);
     }
 }

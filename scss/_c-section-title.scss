@@ -11,7 +11,7 @@
 
     @include mq(sp) {
         justify-content: center;
-        margin-bottom: var(--dp-space-block-sp);
+        margin-bottom: var(--dp-space-element-sp);
     }
 
     // セクションタイトル
@@ -67,9 +67,8 @@
         font-family: var(--dp-font-en);
 
         @include mq(sp) {
-            letter-spacing: var(--dp-letter-spacing-text);
             margin-bottom: 0;
-            font-size: 20px;
+            font-size: 1em;
         }
     }
 }
@@ -266,4 +265,36 @@
     margin-right: auto;
     padding: 0 var(--swl-fw_inner_pad, 0);
     padding: 0 var(--swl-pad_container, 0);
+}
+
+/* --- 8. section-title--h 大見出し左寄せ（56px・太字・字間4px） --- */
+.dp-section-title--h {
+    margin-bottom: var(--dp-space-block-pc);
+    text-align: left;
+
+    @include mq(tb) {
+        margin-bottom: calc(var(--dp-space-element-pc) * -1) !important;
+    }
+
+    @include mq(sp) {
+        position: relative;
+        filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.3));
+        z-index: 1;
+    }
+
+    h2 {
+        font-size: clamp(40px, 6vw, 72px);
+        font-weight: bold;
+        letter-spacing: 8px;
+        line-height: 1.4;
+
+        @include mq(tb) {
+            letter-spacing: 2px;
+        }
+
+        @include mq(sp) {
+            letter-spacing: 0;
+            font-feature-settings: "palt";
+        }
+    }
 }

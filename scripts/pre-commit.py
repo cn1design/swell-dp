@@ -95,7 +95,10 @@ def main():
             continue  # すでにステージ済み → OK
 
         # inline-css の内容に影響クラスが含まれるか確認
-        if any(f'.{cls}' in content for cls in affected_selectors):
+        # 部分一致を避けるため、クラス名の後に識別子文字（-_a-zA-Z0-9）が続かないことを確認
+        # 例: .dp-solution-section が .dp-solution-section__img に誤マッチしないよう防止
+        if any(re.search(r'\.' + re.escape(cls) + r'(?![a-zA-Z0-9_-])', content)
+               for cls in affected_selectors):
             stale_slugs.append(slug)
 
     if not stale_slugs:

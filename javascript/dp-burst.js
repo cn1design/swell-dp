@@ -57,7 +57,7 @@
 
     // Document レベル Event Delegation — 全ページ共通で動作
     document.addEventListener('click', function (e) {
-        var btn = e.target.closest(
+        const btn = e.target.closest(
             '.pl-btn--copy:not(.is-disabled), .dp-bace-css-btn, .dp-copy-btn'
         );
         if (btn) triggerBurst(btn);

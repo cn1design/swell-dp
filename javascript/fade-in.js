@@ -1,9 +1,9 @@
 (function () {
   'use strict';
 
-  var STAGGER = 0.12; // 子要素の時差（秒）
+  const STAGGER = 0.12; // 子要素の時差（秒）
 
-  var observer = new IntersectionObserver(function (entries) {
+  const observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-fade-in');
@@ -45,11 +45,11 @@
     // dp-before-load が付いていないページ（ローディング無効 or 対象外ページ）で
     // dp-enter-up / dp-enter-left / dp-enter-right をスクロール監視で表示する
     // =====================================================
-    var html = document.documentElement;
+    const html = document.documentElement;
     if (!html.classList.contains('dp-before-load') && !html.classList.contains('dp-loaded')) {
       html.classList.add('dp-scroll-ready');
 
-      var enterObserver = new IntersectionObserver(function (entries) {
+      const enterObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           entry.target.classList.add('is-visible');

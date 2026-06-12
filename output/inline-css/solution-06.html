@@ -1,0 +1,60 @@
+<!-- dp-deps: _c-section-title _p-solution -->
+<!-- wp:html -->
+<style>
+/* dp-section-title--h: 大見出し左寄せ（56px） */
+.dp-section-title--h {
+  margin-bottom: var(--dp-space-block-pc);
+  text-align: left;
+}
+@media screen and (max-width: 768px) {
+  .dp-section-title--h {
+    margin-bottom: var(--dp-space-element-sp);
+  }
+}
+.dp-section-title--h h2 {
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: bold;
+  letter-spacing: 4px;
+  line-height: 1.4;
+}
+@media screen and (max-width: 768px) {
+  .dp-section-title--h h2 {
+    font-size: clamp(32px, 5vw, 40px);
+    letter-spacing: 2px;
+  }
+}
+
+/* dp-solution-section__columns: 大見出し＋テキスト左・画像右 2カラム */
+.dp-solution-section__columns {
+  margin-top: var(--dp-space-element-pc);
+}
+.dp-solution-section__columns .swell-block-columns__inner {
+  align-items: center;
+}
+.dp-solution-section__columns .text-col {
+  --clmn-w--pc: 44%;
+}
+.dp-solution-section__columns .text-col p {
+  line-height: var(--dp-line-height-large);
+  letter-spacing: var(--dp-letter-spacing-text);
+  margin-bottom: var(--dp-space-inner-pc);
+}
+.dp-solution-section__columns .text-col p:last-child {
+  margin-bottom: 0;
+}
+.dp-solution-section__columns .image-col .wp-block-image {
+  border-radius: var(--dp-radius);
+  overflow: hidden;
+}
+.dp-solution-section__columns .image-col .wp-block-image img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+@media screen and (max-width: 959px) {
+  .dp-solution-section__columns {
+    margin-top: var(--dp-space-element-sp);
+  }
+}
+</style>
+<!-- /wp:html -->

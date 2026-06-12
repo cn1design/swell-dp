@@ -53,6 +53,117 @@
     }
 }
 
+// ================================================================
+// loop-slider 投稿カード（contentMode: post）
+// レイアウト: [更新日 | カテゴリー] ← 横並び左寄せ
+//             [記事タイトル]
+// .dp-wrap でネストして詳細度を上げる
+// ================================================================
+.dp-wrap {
+    .cndp-post-card__meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .cndp-post-card__cat {
+        margin: 0;
+        font-size: 12px;
+        color: #fff;
+        background-color: var(--color_main, #2b2b2b);
+        padding: 0 0.5em;
+        border-radius: 2px;
+    }
+
+    .cndp-post-card__date {
+        font-size: 12px;
+    }
+
+    .cndp-post-card__title {
+        margin: 4px 0 0;
+        font-size: clamp(14px, 1.2vw, 16px);
+    }
+
+}
+
+// ================================================================
+// icon-posted: 時計アイコン（更新日の左に表示）
+// icon-folder: フォルダアイコン（カテゴリーの左に表示）
+// 使い方: time / p 要素に付与するだけ
+// ================================================================
+.icon-posted,
+.icon-folder {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    &::before {
+        content: '';
+        display: block;
+        flex-shrink: 0;
+        width: 1em;
+        height: 1em;
+        background-color: #fff;
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+    }
+}
+
+.icon-posted::before {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z'/%3E%3C/svg%3E");
+}
+
+.icon-folder::before {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z'/%3E%3C/svg%3E");
+}
+
+// ================================================================
+// SWELL 標準投稿一覧（p-postList）レイアウト上書き
+// レイアウト: [更新日 | カテゴリー] ← 上段・横並び
+//             [記事タイトル]         ← 下段
+// column-reverse で HTML順（title→meta）を視覚的に反転
+// ================================================================
+.p-postList {
+    &__body {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 4px;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 0;
+    }
+
+    &__times {
+        margin-bottom: 0;
+
+        // 日付アイコン: グローバル #fff を currentColor で上書き（白背景でも見える）
+        .icon-posted::before {
+            background-color: currentColor;
+        }
+    }
+
+    &__cat {
+        font-size: 12px;
+        color: #fff;
+        background-color: var(--color_main, #2b2b2b);
+        padding: 0 0.5em;
+        border-radius: 2px;
+        opacity: 1; // u-thin の opacity を無効化
+    }
+
+    // SWELL の u-thin（opacity 低下）を無効化
+    .u-thin {
+        opacity: 1;
+    }
+}
+
 .dp-news-section--b {
     // 投稿リスト
     .p-postList {

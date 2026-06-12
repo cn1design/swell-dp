@@ -4,9 +4,6 @@
  * スコープ: .dp-solution-section
  */
 
-.dp-solution-section {
-}
-
 // 解決画像ブロック（solution-01）
 .dp-solution-section__img {
     max-width: 100%;
@@ -16,5 +13,52 @@
 @media (max-width: 767px) {
     .dp-sp-reverse-column .swell-block-columns__inner {
         flex-direction: column-reverse;
+    }
+}
+
+/* ===========================================
+solution-06: 大見出し＋テキスト左・画像右 2カラムレイアウト
+fullWide contentSize: container（l-container あり）
+=========================================== */
+
+.dp-solution-section__columns {
+    margin-top: var(--dp-space-element-pc);
+
+    // カラムを縦中央揃え
+    .swell-block-columns__inner {
+        align-items: center;
+    }
+
+    // 左: テキストカラム
+    .text-col {
+        --clmn-w--pc: 44%;
+
+        p {
+            line-height: var(--dp-line-height-large);
+            letter-spacing: var(--dp-letter-spacing-text);
+            margin-bottom: var(--dp-space-inner-pc);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // 右: 画像カラム（残り幅を自動取得）
+    .image-col {
+        .wp-block-image {
+            border-radius: var(--dp-radius);
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                display: block;
+                object-fit: cover;
+            }
+        }
+    }
+
+    @include mq(bp) {
+        margin-top: var(--dp-space-element-sp);
     }
 }

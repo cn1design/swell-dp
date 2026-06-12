@@ -52,3 +52,41 @@
         }
     }
 } // /.dp-banner-list
+
+// ================================================================
+// dp-icon-arrow-right: 右矢印アイコンをバナー右下に表示
+//
+// 【使い方】
+//   swell-block-bannerLink（ラッパー div）に dp-icon-arrow-right を付与するだけ。
+//   アイコン色は color プロパティで制御（currentColor 継承）。
+//
+// 【サイズ・位置の調整】
+//   width / height: アイコンサイズ
+//   bottom / right: バナー内の位置
+// ================================================================
+.dp-icon-arrow-right {
+    position: relative;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        width: 2em;
+        height: 2em;
+        background-color: var(--dp-icon-color, currentColor);
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M44 27H4v-3h36.7l-5.8-6.5 2.2-2 8 9z'/%3E%3C/svg%3E");
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        z-index: 3; // c-bannerLink__text より前面
+        pointer-events: none;
+        transition: transform 0.3s ease;
+    }
+
+    // ホバー時に右へスライド
+    &:hover::after {
+        transform: translateX(4px);
+    }
+}
