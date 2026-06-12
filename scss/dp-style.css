@@ -538,19 +538,31 @@
 }
 @media screen and (max-width: 768px) {
   .dp-section-title--h {
-    margin-bottom: var(--dp-space-element-sp);
+    margin-bottom: calc(var(--dp-space-element-pc) * -1) !important;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-section-title--h {
+    position: relative;
+    filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.3));
+    z-index: 1;
   }
 }
 .dp-section-title--h h2 {
-  font-size: clamp(40px, 5vw, 56px);
+  font-size: clamp(40px, 6vw, 72px);
   font-weight: bold;
-  letter-spacing: 4px;
+  letter-spacing: 8px;
   line-height: 1.4;
 }
 @media screen and (max-width: 768px) {
   .dp-section-title--h h2 {
-    font-size: clamp(32px, 5vw, 40px);
     letter-spacing: 2px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-section-title--h h2 {
+    letter-spacing: 0;
+    font-feature-settings: "palt";
   }
 }
 
@@ -2603,10 +2615,17 @@ loos/column または wp:group に付与する（最右カラム想定）
     content: none;
   }
 }
+@media screen and (max-width: 599px) {
+  .dp-bg-thin-left .dp-section-title--h {
+    width: 100%;
+    background-color: transparent;
+    padding-top: 0;
+    border-radius: 0;
+  }
+}
 @media screen and (max-width: 768px) {
   .dp-bg-thin-left .dp-section-title--h h2 {
     position: relative;
-    margin-bottom: -1.5em;
     z-index: 1;
   }
 }
@@ -2620,7 +2639,7 @@ loos/column または wp:group に付与する（最右カラム想定）
 }
 @media screen and (max-width: 768px) {
   .dp-bg-thin-left .swell-block-columns__inner {
-    flex-wrap: wrap;
+    flex-wrap: inherit;
   }
 }
 .dp-bg-thin-left .media-block {
@@ -2647,8 +2666,7 @@ loos/column または wp:group に付与する（最右カラム想定）
 @media screen and (max-width: 768px) {
   .dp-bg-thin-left .media-block {
     right: auto;
-    width: 100%;
-    margin-bottom: -5em;
+    width: calc(var(--clmn-w) - var(--swl-clmn-mrgn--x));
   }
 }
 .dp-bg-thin-left .media-block .wp-block-image {
@@ -2667,6 +2685,7 @@ loos/column または wp:group に付与する（最右カラム想定）
 }
 @media screen and (max-width: 1512px) and (min-width: 960px) {
   .dp-bg-thin-left .media-block img {
+    width: 100% !important;
     aspect-ratio: unset !important;
   }
 }
@@ -2679,6 +2698,7 @@ loos/column または wp:group に付与する（最右カラム想定）
 @media screen and (max-width: 768px) {
   .dp-bg-thin-left .media-block img {
     aspect-ratio: unset !important;
+    width: 100% !important;
     height: 320px !important;
   }
 }
@@ -2699,13 +2719,16 @@ loos/column または wp:group に付与する（最右カラム想定）
 @media screen and (max-width: 768px) {
   .dp-bg-thin-left .text-block .c-lead {
     width: calc(100% - 32px);
-    padding: 16px 0 0;
+    padding: 16px 16px 16px 0;
     background-color: var(--color_bg);
-    border-radius: 0 var(--dp-radius) 0 0;
+    border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
+    margin-top: -3em !important;
+    margin-bottom: 0 !important;
   }
 }
 @media screen and (max-width: 599px) {
   .dp-bg-thin-left .text-block .c-lead {
+    width: calc(100% - 16px);
     font-size: var(--dp-font-size-heading-sp);
   }
 }
@@ -5169,7 +5192,7 @@ LP用メインビジュアル
 }
 
 /* メインビジュアル */
-/* 4:6分割カラム */
+/* 画像分散ブロック */
 /*
 
  ブリッジコピー (bridge-copy)
@@ -9850,5 +9873,225 @@ html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(8) {
 }
 
 /* タグクラウド型アコーディオン */
+/*
+
+ プロフィール
+
+*/
+/* ===========================================
+プロフィール（2カラム：画像フェード2枚＋テキスト）
+=========================================== */
+.dp-profile-section--a .swell-block-columns__inner {
+  align-items: flex-start !important;
+}
+.dp-profile-section--a .media-block {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 15vh;
+}
+.dp-profile-section--a .media-block .wp-block-image {
+  transition: opacity 0.8s ease;
+  margin-bottom: 0 !important;
+}
+.dp-profile-section--a .media-block .wp-block-image img {
+  border-radius: var(--dp-radius);
+}
+.dp-profile-section--a .media-block .wp-block-image:nth-child(2) {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0 !important;
+}
+.dp-profile-section--a .media-block .wp-block-image:nth-child(2) img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.dp-profile-section--a.show-second .media-block .wp-block-image:nth-child(1) {
+  opacity: 0;
+}
+.dp-profile-section--a.show-second .media-block .wp-block-image:nth-child(2) {
+  opacity: 1;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--a .swell-block-columns__inner {
+    align-items: stretch !important;
+  }
+  .dp-profile-section--a .media-block {
+    position: relative !important;
+    top: auto;
+  }
+  .dp-profile-section--a .media-block .wp-block-image:nth-child(2) {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+  }
+  .dp-profile-section--a.show-second .media-block .wp-block-image:nth-child(1) {
+    opacity: 1;
+  }
+}
+.dp-profile-section--a .dp-section-title .profile-name {
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 8px;
+}
+.dp-profile-section--a .dp-section-title .profile-name p:nth-child(1) {
+  position: relative;
+  font-size: 24px;
+}
+.dp-profile-section--a .dp-section-title .profile-name p:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -16px;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 70%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.dp-profile-section--a .dp-section-title .profile-feature-list {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dp-profile-section--a .dp-section-title .profile-feature-list p {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: calc(var(--dp-radius) / 2);
+  font-size: clamp(13px, 1.2vw, 16px);
+}
+.dp-profile-section--a .profile-description p {
+  margin-bottom: 2em !important;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+/* ===========================================
+プロフィール（2カラム：画像3枚パララックス＋テキスト）
+=========================================== */
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .swell-block-columns__inner {
+    gap: 0;
+  }
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block {
+    position: relative;
+    height: 500px;
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .media-block {
+    height: 280px;
+  }
+}
+.dp-profile-section--b .media-block .wp-block-image img {
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.dp-profile-section--b .media-block .wp-block-image:nth-child(1) img {
+  top: 0;
+  right: 75%;
+  width: 400px;
+  height: 700px;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block .wp-block-image:nth-child(1) img {
+    right: 30%;
+    width: 80%;
+    height: 95%;
+  }
+}
+.dp-profile-section--b .media-block .wp-block-image:nth-child(2) img {
+  top: 20px;
+  left: calc(25% + 24px);
+  width: 260px;
+  height: 330px;
+  z-index: 1;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block .wp-block-image:nth-child(2) img {
+    top: 70%;
+    left: 52%;
+    width: 30%;
+    height: 30%;
+  }
+}
+.dp-profile-section--b .media-block .wp-block-image:nth-child(3) img {
+  top: 374px;
+  left: calc(25% - 48px);
+  width: 308px;
+  height: 350px;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .media-block .wp-block-image:nth-child(3) img {
+    top: 10%;
+    left: 75%;
+    width: 30%;
+    height: 70%;
+  }
+}
+.dp-profile-section--b .text-block {
+  margin-left: auto;
+}
+@media screen and (max-width: 959px) {
+  .dp-profile-section--b .text-block {
+    margin: 0 0 0 var(--swl-clmn-mrgn--x);
+  }
+}
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .dp-section-title h2 {
+    font-size: 36px;
+    margin: 0;
+  }
+}
+.dp-profile-section--b .dp-section-title .profile-name {
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 8px;
+}
+.dp-profile-section--b .dp-section-title .profile-name p:nth-child(1) {
+  position: relative;
+  font-size: clamp(20px, 1.8vw, 24px);
+}
+.dp-profile-section--b .dp-section-title .profile-name p:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -16px;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 70%;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.dp-profile-section--b .dp-section-title .profile-feature-list {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dp-profile-section--b .dp-section-title .profile-feature-list p {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: calc(var(--dp-radius) / 2);
+  font-size: clamp(13px, 1.2vw, 16px);
+}
+.dp-profile-section--b .profile-description p {
+  margin-bottom: 1.5em;
+}
+@media screen and (max-width: 599px) {
+  .dp-profile-section--b .profile-description p {
+    margin-bottom: 0.5em;
+  }
+}
+.dp-profile-section--b .profile-description .c-lead {
+  letter-spacing: clamp(1px, 0.5vw, 3px);
+}
+
 /* プロフィールセクション */
 /*# sourceMappingURL=dp-style.css.map */

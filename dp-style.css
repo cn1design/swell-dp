@@ -2659,6 +2659,7 @@ loos/column または wp:group に付与する（最右カラム想定）
 }
 @media screen and (max-width: 1512px) and (min-width: 960px) {
   .dp-bg-thin-left .media-block img {
+    width: 100% !important;
     aspect-ratio: unset !important;
   }
 }
@@ -2696,6 +2697,7 @@ loos/column または wp:group に付与する（最右カラム想定）
     background-color: var(--color_bg);
     border-radius: 0 var(--dp-radius) var(--dp-radius) 0;
     margin-top: -3em !important;
+    margin-bottom: 0 !important;
   }
 }
 @media screen and (max-width: 599px) {
@@ -5127,7 +5129,13 @@ LP用メインビジュアル
 }
 
 /* メインビジュアル */
-/* 4:6分割カラム */
+.dp-split-media-section .text-block {
+  max-width: 580px;
+  width: 100%;
+  padding: 0 3em;
+}
+
+/* 画像分散ブロック */
 /*
 
  ブリッジコピー (bridge-copy)
@@ -9772,7 +9780,7 @@ html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(8) {
 .dp-profile-section--a .dp-section-title .profile-name {
   align-items: center;
   gap: 32px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .dp-profile-section--a .dp-section-title .profile-name p:nth-child(1) {
   position: relative;
@@ -9887,7 +9895,7 @@ html[data-spmenu=opened] #body_wrap.dp-spmenu--b .c-spnav > li:nth-child(8) {
 .dp-profile-section--b .dp-section-title .profile-name {
   align-items: center;
   gap: 32px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .dp-profile-section--b .dp-section-title .profile-name p:nth-child(1) {
   position: relative;
